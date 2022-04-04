@@ -1,6 +1,6 @@
-# hen
+# colibri
 ---
-name: hen
+name: colibri
 description: >-
   desktop xfce4 plus all that I need to develop eggs, firmwares and anydesk
   repos
@@ -35,9 +35,8 @@ sequence:
         /etc/apt/sources.list.d/anydesk-stable.list > /dev/null
     update: true
     full-upgrade: true
-  dependencies:
-    - null
   packages:
+    - anydesk
     - firefox-esr
   accessories:
     - base
