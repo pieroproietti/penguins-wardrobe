@@ -42,9 +42,9 @@ sequence:
     - firefox-esr
   accessories:
     - base
-    - eggs-dev
-    - firmwares
     - cinnamon
+    - firmwares
+    - office
   debs: false
   dirs: true
   customizations:
