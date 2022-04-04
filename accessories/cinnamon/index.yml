@@ -1,0 +1,21 @@
+# cinnamon
+---
+name: cinnamon
+description: "install minimal cinnamon desktop"
+author: artisan
+distributions: 
+# Debian
+- buster
+- bullseye
+- bookworm
+# Devuan
+- chimaera
+# Ubuntu
+- focal
+- groovy
+- hirsute
+- impish
+- jammy
+sequence:
+  packages:
+    - cinnamon

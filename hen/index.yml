@@ -1,0 +1,50 @@
+# hen
+---
+name: hen
+description: >-
+  desktop xfce4 plus all that I need to develop eggs, firmwares and anydesk
+  repos
+author: artisan
+release: 0.0.3
+distributions: 
+# Debian
+- buster
+- bullseye
+- bookworm
+# Devuan
+- chimaera
+# Ubuntu
+- focal
+- groovy
+- hirsute
+- impish
+- jammy
+sequence:
+  repositories:
+    sourcesList:
+      main: true
+      contrib: true
+      nonFree: true
+    sourcesListD:
+      - >-
+        curl -fsSL "https://keys.anydesk.com/repos/DEB-GPG-KEY" | gpg --dearmor
+        -o /usr/share/keyrings/anydesk-stable.gpg
+      - >-
+        echo "deb [signed-by=/usr/share/keyrings/anydesk-stable.gpg]
+        http://deb.anydesk.com/ all main" | tee
+        /etc/apt/sources.list.d/anydesk-stable.list > /dev/null
+    update: true
+    full-upgrade: true
+  dependencies:
+    - null
+  packages:
+    - firefox-esr
+  accessories:
+    - base
+    - eggs-dev
+    - firmwares
+    - xfce4
+  debs: false
+  dirs: true
+  hostname: true
+  reboot: true

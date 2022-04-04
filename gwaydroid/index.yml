@@ -1,0 +1,48 @@
+# gwaydroid
+---
+name: gwaydroid
+description: gnome waydroid installation
+author: artisan
+release: 0.0.5
+distributions: 
+# Debian
+- buster
+- bullseye
+- bookworm
+# Devuan
+- chimaera
+# Ubuntu
+- focal
+- groovy
+- hirsute
+- impish
+- jammy
+sequence:
+  repositories:
+    sourcesList:
+      main: true
+      contrib: true
+      nonFree: true
+    update: true
+    full-upgrade: true
+  packages:
+    - firefox-esr
+  noInstallRecommends:
+    - gdm3
+    - gnome-control-center
+    - gnome-session
+    - gnome-shell
+    - gnome-terminal
+  accessories:
+    - base
+    # eggs-dev
+    # firmwares
+    - waydroid
+  debs: false
+  dirs: true
+  hostname: true
+customizations:
+    scripts:
+      - gnome_background_set.sh
+  reboot: true
+
