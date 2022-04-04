@@ -1,1 +1,0 @@
-gsettings set org.gnome.desktop.background picture-uri "file:///usr/share/backgrounds/waydroid/BG_1.png"

@@ -150,6 +150,7 @@ sequence:
   debs: false
   packagesPip:
     - pyclip
+    - gbinder-python
   dirs: false
   hostname: false
   customizations:
