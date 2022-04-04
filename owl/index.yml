@@ -43,6 +43,6 @@ sequence:
   hostname: true
 customizations:
     scripts:
-      - gnome_background_set.sh
+    - gnome_background_set.sh
   reboot: true
 
