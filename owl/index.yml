@@ -44,5 +44,4 @@ sequence:
 customizations:
     scripts:
     - gnome_background_set.sh
-  reboot: true
-
+reboot: true
