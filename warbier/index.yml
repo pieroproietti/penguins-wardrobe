@@ -1,6 +1,6 @@
-# warbler
+# warbier
 ---
-name: warbler
+name: warbier
 description: KDE waydroid installation using accessories.
 author: artisan
 release: 0.0.4
@@ -40,4 +40,7 @@ sequence:
   debs: false
   dirs: true
   hostname: true
+  customizations:
+    scripts:
+    - gnome_background_set.sh
   reboot: true

@@ -41,7 +41,7 @@ sequence:
   debs: false
   dirs: true
   hostname: true
-customizations:
+  customizations:
     scripts:
     - gnome_background_set.sh
-reboot: true
+  reboot: true
