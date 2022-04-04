@@ -1,1 +1,1 @@
-gsettings set org.gnome.desktop.background picture-uri "file:///usr/share/backgrounds/wagtail/50014314876_01f0cfd8e2_k.jpg"
+gsettings set org.gnome.desktop.background picture-uri "file:///usr/share/backgrounds/warbier/18283197110_3a5ff7d6dd_k.jpg"
