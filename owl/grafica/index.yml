@@ -23,7 +23,7 @@ sequence:
   - gimp
   - converseen
   - dia
-  # imagemagik
+  - imagemagick
   - okular
   - pinta
   - ristretto
