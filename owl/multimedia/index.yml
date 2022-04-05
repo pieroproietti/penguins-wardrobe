@@ -19,7 +19,6 @@ distributions:
 - impish
 - jammy
 sequence:
-  repositories:
   packages:
     - audacity
     - brasero
