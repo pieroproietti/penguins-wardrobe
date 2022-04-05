@@ -1,0 +1,63 @@
+# owl
+---
+name: owl
+description: >-
+  Owl is a clone of quirinux by Charlie Martínez
+author: artisan
+release: 0.0.1
+distributions: 
+# Debian
+- buster
+- bullseye
+- bookworm
+# Devuan
+- chimaera
+# Ubuntu
+- focal
+- groovy
+- hirsute
+- impish
+- jammy
+sequence:
+  repositories:
+    sourcesList:
+    - main
+    - contrib
+    - non-free
+    sourcesListD:
+    - echo "deb [trusted=yes]deb https://quirinux.ga/repo/ quirinux main" | tee /etc/apt/sources.list.d/quirinux-ga.list > /dev/null
+    update: true
+    full-upgrade: true
+  packages:
+    - firefox-esr
+    # grafica
+    - gimp
+    - converseen
+    - dia
+    # imagemagik
+    - okular
+    - pinta
+    - ristretto
+    - shotwell
+    # multimedia
+    - audacity
+    - brasero
+    # ex falso
+    - kazam
+    - kdenlive
+    - mediainfo
+    # Quod Libet
+    - vlc
+    - xfburn
+    #internet
+    - mutt
+    - thunderbird
+  accessories:
+    - base
+    - eggs-dev
+    - firmwares
+    - xfce4
+  debs: false
+  dirs: true
+  hostname: true
+  reboot: true
