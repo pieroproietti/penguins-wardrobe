@@ -20,9 +20,9 @@ distributions:
 sequence:
   repositories:
     sourcesList:
-      main: true
-      contrib: true
-      nonFree: true
+    - main
+    - contrib
+    - non-free
     sourcesListD:
       - >-
         curl -fsSL  "https://repo.waydro.id/waydroid.gpg" | gpg --dearmor -o

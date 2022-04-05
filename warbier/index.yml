@@ -20,9 +20,9 @@ distributions:
 sequence:
   repositories:
     sourcesList:
-      main: true
-      contrib: true
-      nonFree: true
+    - main
+    - contrib
+    - non-free
     update: true
     full-upgrade: true
   packages:
