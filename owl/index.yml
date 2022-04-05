@@ -25,7 +25,7 @@ sequence:
     - contrib
     - non-free
     sourcesListD:
-    - echo "deb [trusted=yes]deb https://quirinux.ga/repo/ quirinux main" | tee /etc/apt/sources.list.d/quirinux-ga.list > /dev/null
+    - echo "deb [trusted=yes] http://quirinux.ga/repo/ quirinux main" | tee /etc/apt/sources.list.d/quirinux-ga.list > /dev/null
     update: true
     full-upgrade: true
   packages:
