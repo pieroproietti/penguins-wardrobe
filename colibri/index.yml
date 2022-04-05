@@ -40,8 +40,8 @@ sequence:
     - firefox-esr
   accessories:
     - base
-    # eggs-dev
-    # firmwares
+    - eggs-dev
+    - firmwares
     - xfce4
   debs: false
   dirs: true
