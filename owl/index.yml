@@ -30,29 +30,12 @@ sequence:
     full-upgrade: true
   packages:
     - firefox-esr
-    # grafica
-    - gimp
-    - converseen
-    - dia
-    # imagemagik
-    - okular
-    - pinta
-    - ristretto
-    - shotwell
-    # multimedia
-    - audacity
-    - brasero
-    # ex falso
-    - kazam
-    - kdenlive
-    - mediainfo
-    # Quod Libet
-    - vlc
-    - xfburn
     #internet
     - mutt
     - thunderbird
   accessories:
+    - ./multimedia
+    - ./grafica
     - base
     - eggs-dev
     - firmwares

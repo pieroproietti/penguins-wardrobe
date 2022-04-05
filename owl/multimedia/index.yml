@@ -1,0 +1,33 @@
+# multimedia
+---
+name: multimedia
+description: >-
+  Owl is a clone of quirinux by Charlie Martínez multimedia packafes
+author: artisan
+release: 0.0.1
+distributions: 
+# Debian
+- buster
+- bullseye
+- bookworm
+# Devuan
+- chimaera
+# Ubuntu
+- focal
+- groovy
+- hirsute
+- impish
+- jammy
+sequence:
+  repositories:
+  packages:
+    - audacity
+    - brasero
+    # ex falso
+    - kazam
+    - kdenlive
+    - mediainfo
+    # Quod Libet
+    - vlc
+    - xfburn
+  
