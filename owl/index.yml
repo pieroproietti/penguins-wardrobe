@@ -33,9 +33,9 @@ sequence:
     - yad
   accessories:
     - ./grafica
-    - ./liquorix
+    #- ./liquorix
     - ./multimedia
-    - ./office
+    #- ./office
     - base
     - eggs-dev
     - firmwares
