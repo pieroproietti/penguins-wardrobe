@@ -13,8 +13,6 @@ distributions:
 - chimaera
 # Ubuntu
 - focal
-- groovy
-- hirsute
 - impish
 - jammy
 sequence:

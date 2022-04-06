@@ -10,8 +10,6 @@ distributions:
   - buster
   - chimaera
   - focal
-  - groovy
-  - hirsute
   - impish
   - jammy
 sequence:
