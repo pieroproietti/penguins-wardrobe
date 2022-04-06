@@ -4,25 +4,22 @@ name: waydroid
 description: waydroid installer
 author: Jon West
 release: 0.0.1
-distributions: 
-# Debian
-- buster
-- bullseye
-- bookworm
-# Devuan
-- chimaera
-# Ubuntu
-- focal
-- groovy
-- hirsute
-- impish
-- jammy
+distributions:
+  - bookworm
+  - bullseye
+  - buster
+  - chimaera
+  - focal
+  - groovy
+  - hirsute
+  - impish
+  - jammy
 sequence:
   repositories:
     sourcesList:
-    - main
-    - contrib
-    - non-free
+      - main
+      - contrib
+      - non-free
     sourcesListD:
       - >-
         curl -fsSL  "https://repo.waydro.id/waydroid.gpg" | gpg --dearmor -o
@@ -144,13 +141,13 @@ sequence:
     - python3-xdg
     - python3-yaml
     - waydroid
-    - xclip  
+    - xclip
   noInstallRecommends:
     - gdm3
   debs: false
   packagesPip:
-    - pyclip
     - gbinder-python
+    - pyclip
   dirs: false
   hostname: false
   customizations:
@@ -158,4 +155,4 @@ sequence:
       - install_waydroid_settings.sh
       - install_image_from_local.sh
       - no_hw_accelleration.sh
-  reboot: false
+

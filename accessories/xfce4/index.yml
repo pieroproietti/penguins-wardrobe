@@ -1,23 +1,19 @@
 # xfce4
 ---
 name: xfce4
-description: >-
-  desktop xfce4
+description: desktop xfce4
 author: artisan
 release: 0.0.1
-distributions: 
-# Debian
-- buster
-- bullseye
-- bookworm
-# Devuan
-- chimaera
-# Ubuntu
-- focal
-- groovy
-- hirsute
-- impish
-- jammy
+distributions:
+  - bookworm
+  - bullseye
+  - buster
+  - chimaera
+  - focal
+  - groovy
+  - hirsute
+  - impish
+  - jammy
 sequence:
   packages:
     - adwaita-qt

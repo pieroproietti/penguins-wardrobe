@@ -1,27 +1,24 @@
 # eggs-dev
 ---
 name: eggs-dev
-description: "add repositories: nodesource, code, install: nodejs, code"
+description: 'add repositories: nodesource, code, install: nodejs, code'
 author: artisan
-distributions: 
-# Debian
-- buster
-- bullseye
-- bookworm
-# Devuan
-- chimaera
-# Ubuntu
-- focal
-- groovy
-- hirsute
-- impish
-- jammy
+distributions:
+  - bookworm
+  - bullseye
+  - buster
+  - chimaera
+  - focal
+  - groovy
+  - hirsute
+  - impish
+  - jammy
 sequence:
   repositories:
     sourcesList:
-    - main
-    - contrib
-    - non-free
+      - main
+      - contrib
+      - non-free
     sourcesListD:
       - >-
         curl -fsSL "https://packages.microsoft.com/keys/microsoft.asc" | gpg

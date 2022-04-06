@@ -6,25 +6,22 @@ description: >-
   repos
 author: artisan
 release: 0.0.3
-distributions: 
-# Debian
-- buster
-- bullseye
-- bookworm
-# Devuan
-- chimaera
-# Ubuntu
-- focal
-- groovy
-- hirsute
-- impish
-- jammy
+distributions:
+  - bookworm
+  - bullseye
+  - buster
+  - chimaera
+  - focal
+  - groovy
+  - hirsute
+  - impish
+  - jammy
 sequence:
   repositories:
     sourcesList:
-    - main
-    - contrib
-    - non-free
+      - main
+      - contrib
+      - non-free
     sourcesListD:
       - >-
         curl -fsSL "https://keys.anydesk.com/repos/DEB-GPG-KEY" | gpg --dearmor

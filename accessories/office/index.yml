@@ -1,24 +1,20 @@
 # office
 ---
 name: office
-description: "install libreoffice, gimp, vlc"
+description: install libreoffice, gimp, vlc
 author: artisan
-distributions: 
-# Debian
-- buster
-- bullseye
-- bookworm
-# Devuan
-- chimaera
-# Ubuntu
-- focal
-- groovy
-- hirsute
-- impish
-- jammy
+distributions:
+  - bookworm
+  - bullseye
+  - buster
+  - chimaera
+  - focal
+  - groovy
+  - hirsute
+  - impish
+  - jammy
 sequence:
   packages:
-    - libreoffice
     - gimp
+    - libreoffice
     - vlc
-
