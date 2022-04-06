@@ -30,12 +30,14 @@ sequence:
     full-upgrade: true
   packages:
     - firefox-esr
-    #internet
+    - yad
     - mutt
     - thunderbird
   accessories:
     - ./multimedia
     - ./grafica
+    - ./office
+    - ./liquorix
     - base
     - eggs-dev
     - firmwares

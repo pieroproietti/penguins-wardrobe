@@ -1,0 +1,32 @@
+# liquorix
+---
+name: liquorix
+description: "install liquorix kernel"
+author: artisan
+distributions: 
+# Debian
+- buster
+- bullseye
+- bookworm
+# Devuan
+- chimaera
+# Ubuntu
+- focal
+- groovy
+- hirsute
+- impish
+- jammy
+sequence:
+  repositories:
+    sourcesList:
+    - main
+    - contrib
+    - non-free
+    sourcesListD:
+    - echo "deb [trusted=yes] http://liquorix.net/debian $codename main" | tee /etc/apt/sources.list.d/quirinux-ga.list > /dev/null
+    - echo "deb-src [trusted=yes] http://liquorix.net/debian $codename main" | tee /etc/apt/sources.list.d/quirinux-ga.list > /dev/null
+    update: true
+    full-upgrade: true
+  packages:
+    - linux-image-liquorix-amd64 
+    - linux-headers-liquorix-amd64
