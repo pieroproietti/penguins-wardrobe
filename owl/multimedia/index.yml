@@ -22,11 +22,11 @@ sequence:
   packages:
     - audacity
     - brasero
-    # ex falso
+    - exfalso
     - kazam
     - kdenlive
     - mediainfo
-    # Quod Libet
+    - quodlibet
     - vlc
     - xfburn
   
