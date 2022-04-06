@@ -30,12 +30,12 @@ sequence:
     - thunderbird
     - yad
   accessories:
-    - ./grafica
+    # ./grafica
     #- ./liquorix
-    - ./multimedia
+    # ./multimedia
     #- ./office
     - base
-    - eggs-dev
+    # eggs-dev
     - firmwares
     - xfce4
   debs: false
