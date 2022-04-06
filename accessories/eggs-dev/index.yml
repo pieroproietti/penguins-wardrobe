@@ -35,7 +35,7 @@ sequence:
         --dearmor | sudo tee /usr/share/keyrings/nodesource.gpg > /dev/null
       - >-
         echo "deb [signed-by=/usr/share/keyrings/nodesource.gpg]
-        https://deb.nodesource.com/node_16.x bookworm main" | tee
+        https://deb.nodesource.com/node_16.x `lsb_release -cs` main" | tee
         /etc/apt/sources.list.d/nodesource.list > /dev/null
     update: true
     full-upgrade: true
