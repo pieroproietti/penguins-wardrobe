@@ -47,38 +47,45 @@ eggs wardrobe list --wardrobe ./penguins-wardrobe
 
 ## show costume
 ```
-eggs wardrobe show --wardrobe ./penguins-wardrobe --costume gwaydroid
+eggs wardrobe show --wardrobe ./penguins-wardrobe --costume colibri
 ```
 
 ## wear costume
 ```
-eggs wardrobe wear --wardrobe ./penguins-wardrobe --costume gwaydroid
+eggs wardrobe wear --wardrobe ./penguins-wardrobe --costume colibri
 ```
 
 ## ironing costume
 ironing put in alphabetic order most of the sections of costumes. You can use it to get a screenshot of ordered costume and use it to put order in your costume.
 
 ```
-eggs wardrobe ironing --wardrobe ./penguins-wardrobe --costume gwaydroid
+eggs wardrobe ironing --wardrobe ./penguins-wardrobe --costume colibri
 ```
-
-
 
 # Costumes
 
-## Hen
-XFCE4 desktop, complete to build eggs.
+## colibri
+colibri is a light XFC4 for developers you can easily start to improve eggs.
 
-## kwaydroid
-Light KDE configuration and waydroid
+## duck
+duck come with cinnamon - probably is the right desktop for peoples coming from windows - here complete plus office, gimp and vlc
 
-## kwaydroid
-Light GNOME configuration and waydroid
+## owl
+owl is a XFCE4 for graphics designers, this a simple/experimental bird, based on the work of Clarlie Martinez quirinux
+
+## wagtail
+GNOME waydroid installation.
+
+## warbier
+KDE waydroid installation
 
 # Accessories
 
 ## base
+## cinnamon
 ## eggs-dev
 ## firmwares
+## office
 ## waydroid
+## XFCE4
 
