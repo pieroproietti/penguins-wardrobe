@@ -1,21 +1,18 @@
-# drivers-video-amd
+# firmwares/video-amd
 ---
-name: firmwares
-description: "install drivers-video-amd"
+name: firmwares/video-amd
+description: install drivers video-amd
 author: artisan
-distributions: 
-# Debian
-- buster
-- bullseye
-- bookworm
-# Devuan
-- chimaera
-# Ubuntu
-- focal
-- groovy
-- hirsute
-- impish
-- jammy
+distributions:
+  - bookworm
+  - bullseye
+  - buster
+  - chimaera
+  - focal
+  - groovy
+  - hirsute
+  - impish
+  - jammy
 sequence:
   drivers_video_amd:
     - libdrm-amdgpu1

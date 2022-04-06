@@ -1,22 +1,19 @@
 # codecs
 ---
 name: codecs
-description: "install codecs"
+description: install codecs
 author: artisan
 release: 0.0.1
-distributions: 
-# Debian
-- buster
-- bullseye
-- bookworm
-# Devuan
-- chimaera
-# Ubuntu
-- focal
-- groovy
-- hirsute
-- impish
-- jammy
+distributions:
+  - bookworm
+  - bullseye
+  - buster
+  - chimaera
+  - focal
+  - groovy
+  - hirsute
+  - impish
+  - jammy
 sequence:
   packages:
     - unace-nonfree

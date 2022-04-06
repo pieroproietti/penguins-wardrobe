@@ -1,22 +1,19 @@
-# driver-nvidia
+# /accessories/firmware/video-nvidia
 ---
-name: driver-nvidia
-description: "install driver-nvidia"
+name: video-nvidia
+description: install driver video-nvidia
 author: artisan
 release: 0.0.1
-distributions: 
-# Debian
-- buster
-- bullseye
-- bookworm
-# Devuan
-- chimaera
-# Ubuntu
-- focal
-- groovy
-- hirsute
-- impish
-- jammy
+distributions:
+  - bookworm
+  - bullseye
+  - buster
+  - chimaera
+  - focal
+  - groovy
+  - hirsute
+  - impish
+  - jammy
 sequence:
   package:
-  - bumblebee
+    - bumblebee
