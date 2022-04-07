@@ -54,7 +54,7 @@ sequence:
     - xfwm4
   accessories:
     - base
-    - xfce4
+    - eggs-dev
   debs: false
   dirs: true
   customizations:
