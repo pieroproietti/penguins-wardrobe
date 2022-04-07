@@ -1,3 +1,4 @@
+# wardrobe: penguins-wardrobe
 # costume: /eagle
 ---
 name: eagle
@@ -29,12 +30,28 @@ sequence:
     update: true
     full-upgrade: true
   packages:
+    - adwaita-qt
     - firefox-esr
+    - libxfce4ui-utils
+    - lightdm
     - open-iscsi
     - postfix
     - proxmox-ve
     - spice-vdagent
+    - tango-icon-theme
+    - thunar
     - virt-viewer
+    - xarchiver
+    - xfce4-appfinder
+    - xfce4-panel
+    - xfce4-pulseaudio-plugin
+    - xfce4-session
+    - xfce4-settings
+    - xfce4-terminal
+    - xfce4-whiskermenu-plugin
+    - xfconf
+    - xfdesktop4
+    - xfwm4
   accessories:
     - base
     - xfce4
