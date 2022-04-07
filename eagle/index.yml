@@ -1,8 +1,7 @@
-# eagle - just building it
+# costume: /eagle
 ---
 name: eagle
-description: >-
-  desktop xfce4 plus proxmox-ve
+description: desktop xfce4 plus proxmox-ve
 author: artisan
 release: 0.0.1
 distributions:
@@ -15,21 +14,35 @@ sequence:
       - non-free
     sourcesListD:
       - >-
-        curl -fsSL "http://download.proxmox.com/debian/proxmox-ve-release-6.x.gpg" | gpg --dearmor
-        -o /usr/share/keyrings/pve-no-subscription.gpg
+        echo "#deb https://enterprise.proxmox.com/debian/pve `lsb_release -cs`
+        pve-enterprise"| tee /etc/apt/sources.list.d/pve-enterprise.list >
+        /dev/null
       - >-
-        echo "deb [signed-by=/usr/share/keyrings/pve-no-subscription.gpg arch=amd64] http://download.proxmox.com/debian/pve `lsb_release -cs` pve-no-subscription" | tee
-        /etc/apt/sources.list.d/pve-no-subscription > /dev/null
+        curl -fsSL
+        "http://download.proxmox.com/debian/proxmox-release-bullseye.gpg" | gpg
+        --dearmor -o /usr/share/keyrings/proxmox-release-bullseye.gpg
+      - >-
+        echo "deb [signed-by=/usr/share/keyrings/proxmox-release-bullseye.gpg]
+        http://download.proxmox.com/debian/pve `lsb_release -cs`
+        pve-no-subscription" | tee
+        /etc/apt/sources.list.d/pve-no-subscription.list > /dev/null
     update: true
     full-upgrade: true
   packages:
+    - firefox-esr
+    - open-iscsi
+    - postfix
+    - proxmox-ve
     - spice-vdagent
     - virt-viewer
-    - firefox-esr
   accessories:
     - base
     - xfce4
   debs: false
   dirs: true
+  customizations:
+    scripts:
+      - xfconf_background_set.sh
+      - desktop_link.sh
   hostname: true
   reboot: true
