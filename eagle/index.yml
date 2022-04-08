@@ -30,7 +30,7 @@ atom:
     update: true
     upgrade: true
   preinst: 
-    - insert_pvelocalhost.shs
+    - insert_pvelocalhost.sh
   packages:
     - adwaita-qt
     - firefox-esr
