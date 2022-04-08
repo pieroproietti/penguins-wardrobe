@@ -29,7 +29,8 @@ atom:
         /etc/apt/sources.list.d/pve-no-subscription.list > /dev/null
     update: true
     upgrade: true
-  preinst: /usr/lib/penguins_eggs/scripts/pve-live.sh
+  preinst: 
+    - /usr/lib/penguins_eggs/scripts/pve-live.sh
   packages:
     - adwaita-qt
     - firefox-esr
