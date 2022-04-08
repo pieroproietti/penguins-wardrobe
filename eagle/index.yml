@@ -58,10 +58,10 @@ atom:
   accessories:
     # base
     # eggs-dev
-  customize:
-    dirs: true
-    scripts:
-      - xfconf_background_set.sh
-      - desktop_link.sh
-    hostname: true
+customize:
+  dirs: true
+  scripts:
+    - xfconf_background_set.sh
+    - desktop_link.sh
+  hostname: true
 reboot: true
