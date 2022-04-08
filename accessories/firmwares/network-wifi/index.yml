@@ -16,7 +16,7 @@ sequence:
   packages:
     - dahdi-firmware-nonfree
     - dns323-firmware-tools
-    - firmware-adi
+    - firmware-misc-nonfree
     - firmware-amd-graphics
     - firmware-atheros
     - firmware-b43-installer
@@ -39,7 +39,6 @@ sequence:
     - firmware-netxen
     - firmware-qcom-media
     - firmware-qlogic
-    - firmware-ralink
     - firmware-realtek
     - firmware-samsung
     - firmware-siano
