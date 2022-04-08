@@ -54,14 +54,14 @@ atom:
     - xfconf
     - xfdesktop4
     - xfwm4
+  debs: false
   accessories:
     # base
     # eggs-dev
-  debs: false
   customize:
-  dirs: true
-  scripts:
-    - xfconf_background_set.sh
-    - desktop_link.sh
-  hostname: true
+    dirs: true
+    scripts:
+      - xfconf_background_set.sh
+      - desktop_link.sh
+    hostname: true
 reboot: true
