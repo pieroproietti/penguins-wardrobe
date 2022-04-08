@@ -30,7 +30,7 @@ atom:
     update: true
     upgrade: true
   preinst: 
-    - /usr/lib/penguins_eggs/scripts/pve-live.sh
+    - insert_pvelocalhost.shs
   packages:
     - adwaita-qt
     - firefox-esr
