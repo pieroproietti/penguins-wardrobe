@@ -14,31 +14,34 @@ distributions:
   - jammy
 sequence:
   repositories:
-    sourcesList:
+    sources_list:
       - main
       - contrib
       - non-free
-    sourcesListD:
+    sources_list_d:
       - >-
         echo "deb [trusted=yes] http://quirinux.ga/repo/ quirinux main" | tee
         /etc/apt/sources.list.d/quirinux-ga.list > /dev/null
     update: true
-    full-upgrade: true
+    upgrade: true
   packages:
     - firefox-esr
     - mutt
     - thunderbird
     - yad
   accessories:
-    # ./grafica
-    #- ./liquorix
-    # ./multimedia
-    #- ./office
+    - ./grafica
+    - ./liquorix
+    - ./multimedia
+    - ./office
     - base
-    # eggs-dev
+    - eggs-dev
     - firmwares
     - xfce4
-  debs: false
+customize:
   dirs: true
+  scripts:
+    - xfconf_background_set.sh
+    - desktop_link.sh
   hostname: true
-  reboot: true
+reboot: true

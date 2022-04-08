@@ -1,4 +1,5 @@
-# colibri
+# wardrobe: .
+# costume: /colibri
 ---
 name: colibri
 description: >-
@@ -16,11 +17,11 @@ distributions:
   - jammy
 sequence:
   repositories:
-    sourcesList:
+    sources_list:
       - main
       - contrib
       - non-free
-    sourcesListD:
+    sources_list_d:
       - >-
         curl -fsSL "https://keys.anydesk.com/repos/DEB-GPG-KEY" | gpg --dearmor
         -o /usr/share/keyrings/anydesk-stable.gpg
@@ -29,7 +30,7 @@ sequence:
         http://deb.anydesk.com/ all main" | tee
         /etc/apt/sources.list.d/anydesk-stable.list > /dev/null
     update: true
-    full-upgrade: true
+    upgrade: true
   packages:
     - anydesk
     - firefox-esr
@@ -38,7 +39,10 @@ sequence:
     - eggs-dev
     - firmwares
     - xfce4
-  debs: false
+customize:
   dirs: true
+  scripts:
+    - xfconf_background_set.sh
+    - desktop_link.sh
   hostname: true
-  reboot: true
+reboot: true

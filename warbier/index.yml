@@ -5,40 +5,34 @@ description: KDE waydroid installation using accessories.
 author: artisan
 release: 0.0.4
 distributions: 
-# Debian
-- buster
 - bullseye
 - bookworm
-# Devuan
 - chimaera
-# Ubuntu
 - focal
-- impish
 - jammy
 sequence:
   repositories:
-    sourcesList:
+    sources_list:
     - main
     - contrib
     - non-free
     update: true
-    full-upgrade: true
+    upgrade: true
   packages:
     - firefox-esr
-  noInstallRecommends:
+  packages_no_install_recommends:
     - gdm3
     - plasma-nm
     - plasma-workspace-wayland
     - kde-plasma-desktop
   accessories:
     - base
-    # eggs-dev
-    # firmwares
+    - eggs-dev
+    - firmwares
     - waydroid
-  debs: false
+customize:
   dirs: true
-  hostname: true
-  customizations:
-    scripts:
+  scripts:
     - gnome_background_set.sh
-  reboot: true
+  hostname: true
+reboot: true

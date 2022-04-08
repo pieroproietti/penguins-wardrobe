@@ -3,29 +3,24 @@
 name: wagtail
 description: gome waydroid installation. Wagtails are a group of passerine.
 author: artisan
-release: 0.0.5
+release: 0.0.6
 distributions: 
-# Debian
-- buster
 - bullseye
 - bookworm
-# Devuan
 - chimaera
-# Ubuntu
 - focal
-- impish
 - jammy
 sequence:
   repositories:
-    sourcesList:
+    source_list:
     - main
     - contrib
     - non-free
     update: true
-    full-upgrade: true
+    upgrade: true
   packages:
     - firefox-esr
-  noInstallRecommends:
+  packages_no_install_recommends:
     - gdm3
     - gnome-control-center
     - gnome-session
@@ -33,13 +28,12 @@ sequence:
     - gnome-terminal
   accessories:
     - base
-    # eggs-dev
+    - eggs-dev
     - firmwares
     - waydroid
-  debs: false
+customize:
   dirs: true
-  hostname: true
-  customizations:
-    scripts:
+  scripts:
     - gnome_background_set.sh
-  reboot: true
+  hostname: true
+reboot: true

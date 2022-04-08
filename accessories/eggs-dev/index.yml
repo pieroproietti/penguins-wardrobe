@@ -13,11 +13,11 @@ distributions:
   - jammy
 sequence:
   repositories:
-    sourcesList:
+    sources_list:
       - main
       - contrib
       - non-free
-    sourcesListD:
+    sources_list_d:
       - >-
         curl -fsSL "https://packages.microsoft.com/keys/microsoft.asc" | gpg
         --dearmor -o /usr/share/keyrings/packages.microsoft.gpg
@@ -33,7 +33,7 @@ sequence:
         https://deb.nodesource.com/node_16.x `lsb_release -cs` main" | tee
         /etc/apt/sources.list.d/nodesource.list > /dev/null
     update: true
-    full-upgrade: true
+    upgrade: true
   packages:
     - code
     - nodejs
