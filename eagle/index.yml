@@ -7,13 +7,13 @@ author: artisan
 release: 0.0.1
 distributions:
   - bullseye
-sequence:
+atom:
   repositories:
-    sourcesList:
+    sources_list:
       - main
       - contrib
       - non-free
-    sourcesListD:
+    sources_list_d:
       - >-
         echo "#deb https://enterprise.proxmox.com/debian/pve `lsb_release -cs`
         pve-enterprise"| tee /etc/apt/sources.list.d/pve-enterprise.list >
@@ -28,7 +28,8 @@ sequence:
         pve-no-subscription" | tee
         /etc/apt/sources.list.d/pve-no-subscription.list > /dev/null
     update: true
-    full-upgrade: true
+    upgrade: true
+  preinst: /usr/lib/penguins_eggs/scripts/pve-live.sh
   packages:
     - adwaita-qt
     - firefox-esr
@@ -53,13 +54,13 @@ sequence:
     - xfdesktop4
     - xfwm4
   accessories:
-    - base
-    - eggs-dev
+    # base
+    # eggs-dev
   debs: false
+  customize:
   dirs: true
-  customizations:
-    scripts:
-      - xfconf_background_set.sh
-      - desktop_link.sh
+  scripts:
+    - xfconf_background_set.sh
+    - desktop_link.sh
   hostname: true
-  reboot: true
+reboot: true
