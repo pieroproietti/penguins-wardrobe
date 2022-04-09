@@ -46,4 +46,4 @@ sequence:
     - firmware-zd1211
     - grub-firmware-qemu
     - hdmi2usb-fx2-firmware
-    - sigrok-firmware-fx2lafws    
+

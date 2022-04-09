@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 BACKGROUND="/usr/share/backgrounds/colibri-wallpapers/3794764350_2839ca0b26_b.jpg"
 xfconf-query --channel xfce4-desktop \
 -p /backdrop/screen0/monitor0/last-image \
