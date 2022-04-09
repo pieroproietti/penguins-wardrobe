@@ -1,13 +1,12 @@
 # owl
 ---
 name: owl
-description: Owl is a clone of quirinux by Charlie Martínez
+description: Owl is a clone of quirinux by Charlie Mart��nez
 author: artisan
 release: 0.0.1
 distributions:
   - bookworm
   - bullseye
-  - buster
   - chimaera
   - focal
   - impish
@@ -25,54 +24,20 @@ sequence:
     update: true
     upgrade: true
   packages:
-    - firefox-esr
-    - mutt
-    - thunderbird
-    - yad
-# colibri
----
-name: colibri
-description: >-
-  desktop xfce4 plus all that I need to develop eggs, firmwares and anydesk
-  repos
-author: artisan
-release: 0.0.3
-distributions:
-  - bookworm
-  - bullseye
-  - buster
-  - chimaera
-  - focal
-  - impish
-  - jammy
-sequence:
-  repositories:
-    sources_list:
-      - main
-      - contrib
-      - non-free
-    sources_list_d:
-      - >-
-        curl -fsSL "https://keys.anydesk.com/repos/DEB-GPG-KEY" | gpg --dearmor
-        -o /usr/share/keyrings/anydesk-stable.gpg
-      - >-
-        echo "deb [signed-by=/usr/share/keyrings/anydesk-stable.gpg]
-        http://deb.anydesk.com/ all main" | tee
-        /etc/apt/sources.list.d/anydesk-stable.list > /dev/null
-    update: true
-    upgrade: true
-  packages:
     - adwaita-qt
     - anydesk
     - firefox-esr
+    - firefox-esr
     - libxfce4ui-utils
     - lightdm
+    - mutt
     - network-manager-gnome
     - network-manager-openvpn
     - network-manager-openvpn-gnome
     - qt5ct
     - tango-icon-theme
     - thunar
+    - thunderbird
     - xarchiver
     - xfce4-appfinder
     - xfce4-panel
@@ -84,17 +49,7 @@ sequence:
     - xfconf
     - xfdesktop4
     - xfwm4
-  accessories:
-    - base
-    - eggs-dev
-    - firmwares
-customize:
-  dirs: true
-  scripts:
-    - desktop_link_set.sh
-  hostname: true
-reboot: true
-
+    - yad
   accessories:
     - ./grafica
     - ./liquorix
@@ -106,7 +61,6 @@ reboot: true
 customize:
   dirs: true
   scripts:
-    - xfconf_background_set.sh
     - desktop_link.sh
   hostname: true
 reboot: true
