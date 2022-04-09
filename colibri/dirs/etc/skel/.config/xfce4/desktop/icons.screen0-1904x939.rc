@@ -1,8 +1,12 @@
 [xfdesktop-version-4.10.3+-rcfile_format]
 4.10.3+=true
 
-[2022-03-20-11-29-16-00]
-row=0
+[/home/artisan/Desktop/eggs-adapt.desktop]
+row=4
+col=0
+
+[/home/artisan/Desktop/penguins-eggs.desktop]
+row=5
 col=0
 
 [Trash]
