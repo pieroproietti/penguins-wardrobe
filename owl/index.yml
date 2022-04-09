@@ -25,7 +25,6 @@ sequence:
     upgrade: true
   packages:
     - adwaita-qt
-    - anydesk
     - firefox-esr
     - firefox-esr
     - libxfce4ui-utils
