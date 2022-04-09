@@ -2,9 +2,141 @@
 
 A more complete costumes wardrobe for penguin's eggs
 
-# Costumes
+## Costumes
 
 A costume consist in a directory named after the costume and an index.yml file. 
+
+It is defined in i-materis.ts from eggs:
+```
+export interface IMateria {
+   name: string
+   author: string
+   description: string
+   release: string
+   distributions: string []
+   sequence: {
+       repositories: {
+           sources_list: string []
+           sources_list_d: string []
+           update: boolean
+           upgrade: boolean
+       },
+       preinst: string[]
+       packages: string []
+       packages_no_install_recommends: string []
+       debs: boolean
+       packages_python: string []
+       accessories: string[]
+  }
+  customize: {
+    dirs: boolean
+    hostname: boolean
+    scripts: string []
+  }
+  reboot: boolean
+}
+```
+
+this is an example from colibri:
+```
+# wardrobe: .
+# costume: /colibri
+---
+name: colibri
+description: >-
+  desktop xfce4 plus all that I need to develop eggs, firmwares and anydesk
+  repos
+author: artisan
+release: 0.0.3
+distributions:
+  - bookworm
+  - bullseye
+  - buster
+  - chimaera
+  - focal
+  - impish
+  - jammy
+sequence:
+  repositories:
+    sources_list:
+      - main
+      - contrib
+      - non-free
+    sources_list_d:
+      - >-
+        curl -fsSL "https://keys.anydesk.com/repos/DEB-GPG-KEY" | gpg --dearmor
+        -o /usr/share/keyrings/anydesk-stable.gpg
+      - >-
+        echo "deb [signed-by=/usr/share/keyrings/anydesk-stable.gpg]
+        http://deb.anydesk.com/ all main" | tee
+        /etc/apt/sources.list.d/anydesk-stable.list > /dev/null
+    update: true
+    upgrade: true
+  packages:
+    - anydesk
+    - firefox-esr
+  accessories:
+    - base
+    - eggs-dev
+    - firmwares
+    - xfce4
+customize:
+  dirs: true
+  scripts:
+    # desktop_background_set.sh
+    - desktop_link_set.sh
+  hostname: true
+reboot: true
+
+```
+
+### General informations
+```
+name: colibri
+description: >-
+  desktop xfce4 plus all that I need to develop eggs, firmwares and anydesk
+  repos
+author: artisan
+release: 0.0.3
+```
+
+### sequence
+sequence is the crucial part of costumes, this is executed in that sequence and the idea is to make it the more possible atomic. Can contain:
+
+* repositories
+  * sources_list
+  * sources_list_d
+* preinst
+* packages
+* packages_no_install_recommends
+* debs
+* packages_python
+* accessories
+
+the idea back sequence is it to make it the more possible atomic.
+
+#### repositories
+That you need to add / change your .list file in /etc/aot/surces.list and /etc/aot/surces.list.d
+
+repositories consist in two item:
+
+* ```sources_list``` component to be used: main, contrub, non-free 
+* ```sources_list_d``` commands to add other repositories in /etc/apt/sources.list.d
+
+#### preinst
+
+
+### customize
+costomize contain the final actions to finalize the installation and customize the result. Can contain:
+* dirs
+* scripts
+
+
+
+
+
+
+
 
 You can add others scripts and directories inside:
 
