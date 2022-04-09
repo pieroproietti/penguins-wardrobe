@@ -9,8 +9,6 @@ distributions:
   - buster
   - chimaera
   - focal
-  
-  
   - impish
   - jammy
 sequence:

@@ -56,8 +56,8 @@ atom:
     - xfwm4
   debs: false
   accessories:
-    # base
-    # eggs-dev
+    - base
+    - eggs-dev
 customize:
   dirs: true
   scripts:

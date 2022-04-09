@@ -32,17 +32,35 @@ sequence:
     update: true
     upgrade: true
   packages:
+    - adwaita-qt
     - anydesk
     - firefox-esr
+    - libxfce4ui-utils
+    - lightdm
+    - network-manager-gnome
+    - network-manager-openvpn
+    - network-manager-openvpn-gnome
+    - qt5ct
+    - tango-icon-theme
+    - thunar
+    - xarchiver
+    - xfce4-appfinder
+    - xfce4-panel
+    - xfce4-pulseaudio-plugin
+    - xfce4-session
+    - xfce4-settings
+    - xfce4-terminal
+    - xfce4-whiskermenu-plugin
+    - xfconf
+    - xfdesktop4
+    - xfwm4
   accessories:
     - base
     - eggs-dev
     - firmwares
-    - xfce4
 customize:
   dirs: true
   scripts:
-    # desktop_background_set.sh
     - desktop_link_set.sh
   hostname: true
 reboot: true
