@@ -6,7 +6,7 @@ A more complete costumes wardrobe for penguin's eggs
 
 A costume consist in a directory named after the costume and an index.yml file. 
 
-It is defined in i-materis.ts from eggs:
+The king of content of costumes is actually defined in i-materia.ts from eggs:
 ```
 export interface IMateria {
    name: string
@@ -124,13 +124,53 @@ repositories consist in two item:
 * ```sources_list_d``` commands to add other repositories in /etc/apt/sources.list.d
 
 #### preinst
+Sometime we need to make same action before to install packages, we can add here one or more scripts to do that actions.
+
+#### packages
+A simple array of packages to be installed
+
+#### packages_no_install_recommenfs
+A simple array of packages to be installed with option no-install-recommenfs
+
+#### debs
+This is a boolean field, if it's true, the content of ./debs with be installed via a ```dpkg -i ./debs/*.deb``` command
+
+#### packages_python
+A simple array of python packages to be installed with pip
+
+#### accessories
+accessories are accesspries, can be internal or external. External accessories live in ./aceessories, internal accessories live inside the costume o accossory who declare it.
+
+They have the same structure of costume and are called recursively from the costume.
 
 
 ### customize
 costomize contain the final actions to finalize the installation and customize the result. Can contain:
 * dirs
+* hostname
 * scripts
 
+
+
+
+##### dirs
+dirs is boolean, if true, directory ./dirs inside the costume will be copied to / of the system,
+
+example: 
+You need to copy something in ```/etc/skel```, in ```/usr/share/applications``` and your background on ```/usr/share/background```. You can 
+put all in ```dirs```:
+
+```
+- dirs   + etc   + skel  
+         + usr   + share   + applications + install-to-waydroid.desktop
+                           + backgrounds  + waydroid
+```
+
+##### hostname
+is boolean too, and if present hostname will take the name of the costume and hosts will be changed in accord
+
+##### scripts
+cripts contain an array of one or more scripts to be used to customize the result
 
 
 
@@ -140,17 +180,6 @@ costomize contain the final actions to finalize the installation and customize t
 
 You can add others scripts and directories inside:
 
-- dirs (contain all file and directories you want to be copied to your /)
-
-## Directories example: 
-You need to copy something in ```/etc/skel```, in ```/usr/share/applications``` and your background on ```/usr/share/background```. You can 
-put all in ```dirs```:
-
-```
-- dirs   + etc   + skel  
-         + usr   + share   + applications + install-to-waydroid.desktop
-                           + backgrounds  + waydroid
-```
 
 ## Scripts examples:
 
