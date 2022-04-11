@@ -60,6 +60,6 @@ sequence:
 customize:
   dirs: true
   scripts:
-    - desktop_link.sh
+    - desktop_link_set.sh
   hostname: true
 reboot: true
