@@ -14,10 +14,7 @@ atom:
       - contrib
       - non-free
     sources_list_d:
-      - >-
-        echo "#deb https://enterprise.proxmox.com/debian/pve `lsb_release -cs`
-        pve-enterprise"| tee /etc/apt/sources.list.d/pve-enterprise.list >
-        /dev/null
+      - rm -f /usr/share/keyrings/proxmox-release-bullseye.gpg
       - >-
         curl -fsSL
         "http://download.proxmox.com/debian/proxmox-release-bullseye.gpg" | gpg

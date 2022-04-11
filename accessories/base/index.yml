@@ -19,7 +19,7 @@ sequence:
       - contrib
       - non-free
     sources_list_d:
-      - rm /usr/share/keyrings/penguins-eggs-ppa.gpg
+      - rm -f /usr/share/keyrings/penguins-eggs-ppa.gpg
       - >-
         curl -fsSL "https://pieroproietti.github.io/penguins-eggs-ppa/KEY.gpg" |
         gpg --dearmor -o /usr/share/keyrings/penguins-eggs-ppa.gpg

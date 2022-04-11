@@ -20,7 +20,7 @@ sequence:
       - contrib
       - non-free
     sources_list_d:
-      - rm /usr/share/keyrings/anydesk-stable.gpg
+      - rm -f /usr/share/keyrings/anydesk-stable.gpg
       - >-
         curl -fsSL "https://keys.anydesk.com/repos/DEB-GPG-KEY" | gpg --dearmor
         -o /usr/share/keyrings/anydesk-stable.gpg
