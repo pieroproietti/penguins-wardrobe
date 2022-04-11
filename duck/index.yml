@@ -1,8 +1,8 @@
-# duck
+# wardrobe: penguins-wardrobe
+# costume: /duck
 ---
 name: duck
-description: >-
-  desktop cinnamon plus all that I need to develop eggs and firmwares
+description: desktop cinnamon plus all that I need to develop eggs and firmwares
 author: artisan
 release: 0.0.3
 distributions:
@@ -22,16 +22,17 @@ sequence:
     update: true
     upgrade: true
   packages:
-    - anydesk
     - cinnamon
     - firefox-esr
   accessories:
     - base
     - firmwares
+    - liquorix
+    - multimedia
     - office
 customize:
   dirs: true
   scripts:
-      - gnome_background_set.sh
+    - desktop_link_set.sh
   hostname: true
 reboot: true
