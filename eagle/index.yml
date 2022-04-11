@@ -7,7 +7,7 @@ author: artisan
 release: 0.0.1
 distributions:
   - bullseye
-atom:
+sequence:
   repositories:
     sources_list:
       - main
