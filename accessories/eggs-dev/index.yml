@@ -18,6 +18,7 @@ sequence:
       - contrib
       - non-free
     sources_list_d:
+      - rm /usr/share/keyrings/packages.microsoft.gpg
       - >-
         curl -fsSL "https://packages.microsoft.com/keys/microsoft.asc" | gpg
         --dearmor -o /usr/share/keyrings/packages.microsoft.gpg
@@ -25,9 +26,11 @@ sequence:
         echo "deb [signed-by=/usr/share/keyrings/packages.microsoft.gpg
         arch=amd64] http://packages.microsoft.com/repos/code stable main" | tee
         /etc/apt/sources.list.d/vscode.list > /dev/null
+
+      - rm /usr/share/keyrings/nodesource.gpg
       - >-
         curl -fsSL https://deb.nodesource.com/gpgkey/nodesource.gpg.key | gpg
-        --dearmor | sudo tee /usr/share/keyrings/nodesource.gpg > /dev/null
+        --dearmor -o /usr/share/keyrings/nodesource.gpg > /dev/null
       - >-
         echo "deb [signed-by=/usr/share/keyrings/nodesource.gpg]
         https://deb.nodesource.com/node_16.x `lsb_release -cs` main" | tee
