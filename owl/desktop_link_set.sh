@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# $1 user
+# $2 desktop
+
 # copy icons
 cp /usr/lib/penguins-eggs/assets/eggs.png /usr/share/icons
 
