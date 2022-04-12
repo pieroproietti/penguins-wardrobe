@@ -21,7 +21,6 @@ sequence:
   packages:
     - firefox-esr
   packages_no_install_recommends:
-    - gdm3
     - plasma-nm
     - plasma-workspace-wayland
     - kde-plasma-desktop
