@@ -29,7 +29,7 @@ sequence:
     #- base
     #- eggs-dev
     #- firmwares
-    - ./waydroid
+    - /waydroid
 customize:
   dirs: true
   hostname: true
