@@ -1,7 +1,7 @@
 # grafica
 ---
 name: grafica
-description: Owl is a clone of quirinux by Charlie Martínez grafica packafes
+description: grafics packages
 author: artisan
 release: 0.0.1
 distributions:
@@ -10,8 +10,6 @@ distributions:
   - buster
   - chimaera
   - focal
-  
-  
   - impish
   - jammy
 sequence:
@@ -22,6 +20,6 @@ sequence:
     - imagemagick
     - kde-config-tablet
     - okular
-    - pinta
+    # pinta need quirinux
     - ristretto
     - shotwell
