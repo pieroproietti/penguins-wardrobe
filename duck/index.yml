@@ -2,7 +2,7 @@
 # costume: /duck
 ---
 name: duck
-description: desktop cinnamon plus all that I need to develop eggs and firmwares
+description: desktop cinnamon plus all that we need to enjoy at home and office
 author: artisan
 release: 0.0.3
 distributions:
@@ -27,6 +27,7 @@ sequence:
   accessories:
     - base
     - firmwares
+    - grafica
     - liquorix
     - multimedia
     - office
