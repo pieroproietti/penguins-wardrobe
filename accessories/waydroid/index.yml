@@ -7,18 +7,18 @@ release: 0.0.1
 distributions:
   - bookworm
   - bullseye
-  - buster
   - chimaera
   - focal
   - impish
   - jammy
 sequence:
   repositories:
-    sourcesList:
+    sources_list:
       - main
       - contrib
       - non-free
-    sourcesListD:
+    sources_list_d:
+      - rm -f /usr/share/keyrings/waydroid.gpg
       - >-
         curl -fsSL  "https://repo.waydro.id/waydroid.gpg" | gpg --dearmor -o
         /usr/share/keyrings/waydroid.gpg
@@ -27,7 +27,7 @@ sequence:
         https://repo.waydro.id/ `lsb_release -cs` main" | tee
         /etc/apt/sources.list.d/waydroid-ppa.list > /dev/null
     update: true
-    full-upgrade: true
+    upgrade: true
   dependencies:
     - git
     - iptables
@@ -146,6 +146,13 @@ sequence:
   packagesPip:
     - gbinder-python
     - pyclip
+customize:
+  dirs: false
+  scripts:
+    - get_system_image_from_host.sh
+  hostname: true
+reboot: true
+
   dirs: false
   hostname: false
   customizations:
@@ -153,4 +160,3 @@ sequence:
       - install_waydroid_settings.sh
       - install_image_from_local.sh
       - no_hw_accelleration.sh
-

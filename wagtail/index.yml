@@ -33,7 +33,5 @@ sequence:
     - waydroid
 customize:
   dirs: true
-  scripts:
-    - get_system_image_from_host.sh
   hostname: true
 reboot: true
