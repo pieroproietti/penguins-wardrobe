@@ -1,7 +1,7 @@
 # warbier
 ---
 name: warbier
-description: KDE waydroid installation using accessories.
+description: KDE waydroid installation using internal waydroid bookworm
 author: artisan
 release: 0.0.4
 distributions: 
@@ -29,7 +29,7 @@ sequence:
     #- base
     #- eggs-dev
     #- firmwares
-    - /waydroid
+    - ./waydroid
 customize:
   dirs: true
   hostname: true
