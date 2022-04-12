@@ -27,13 +27,13 @@ sequence:
     - gnome-shell
     - gnome-terminal
   accessories:
-    - base
-    - eggs-dev
-    - firmwares
+    # base
+    # eggs-dev
+    # firmwares
     - waydroid
 customize:
   dirs: true
   scripts:
-    - gnome_background_set.sh
+    - null
   hostname: true
 reboot: true
