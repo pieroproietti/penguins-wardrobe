@@ -29,8 +29,8 @@ sequence:
     - lxc
     - wget
   packages:
-    - python
-    - python-pip
+    - python3
+    - python3-pip
     - waydroid
     - xclip
   noInstallRecommends:
