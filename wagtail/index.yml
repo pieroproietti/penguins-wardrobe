@@ -34,6 +34,6 @@ sequence:
 customize:
   dirs: true
   scripts:
-    - null
+    - get_system_image_from_host.sh
   hostname: true
 reboot: true
