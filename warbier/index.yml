@@ -26,13 +26,11 @@ sequence:
     - plasma-workspace-wayland
     - kde-plasma-desktop
   accessories:
-    - base
-    - eggs-dev
-    - firmwares
+    #- base
+    #- eggs-dev
+    #- firmwares
     - waydroid
 customize:
   dirs: true
-  scripts:
-    - gnome_background_set.sh
   hostname: true
 reboot: true
