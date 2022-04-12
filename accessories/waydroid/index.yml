@@ -147,16 +147,9 @@ sequence:
     - gbinder-python
     - pyclip
 customize:
-  dirs: false
   scripts:
-    - get_system_image_from_host.sh
-  hostname: true
-reboot: true
-
-  dirs: false
-  hostname: false
-  customizations:
     scripts:
       - install_waydroid_settings.sh
       - install_image_from_local.sh
       - no_hw_accelleration.sh
+reboot: true
