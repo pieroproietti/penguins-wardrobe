@@ -24,7 +24,6 @@ sequence:
     - plasma-nm
     - plasma-workspace-wayland
     - sddm
-    - kde-plasma-desktop
   accessories:
     #- base
     #- eggs-dev
