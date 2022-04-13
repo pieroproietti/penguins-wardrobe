@@ -1,6 +1,6 @@
 # warbier
 ---
-name: warbier
+name: warbler
 description: KDE waydroid installation using internal waydroid bookworm
 author: artisan
 release: 0.0.4
@@ -22,6 +22,7 @@ sequence:
     - firefox-esr
   packages_no_install_recommends:
     - konsole
+    - kde-plasma-desktop
     - plasma-nm
     - plasma-workspace-wayland
     - sddm
