@@ -1,7 +1,7 @@
 # wagtail
 ---
 name: wagtail
-sdescription: GNOME waydroid installation. Wagtails are a group of passerine.
+description: GNOME waydroid installation
 author: artisan
 release: 0.0.6
 distributions: 
