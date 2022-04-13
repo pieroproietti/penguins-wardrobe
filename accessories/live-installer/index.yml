@@ -1,0 +1,26 @@
+# live-installer
+---
+name: live-installer
+description: Linux Mint live-installer
+author: clefevre
+release: 0.0.1
+distributions:
+  - bullseye
+sequence:
+  repositories:
+    sources_list:
+      - main
+      - contrib
+      - non-free
+    sources_list_d:
+      - rm -f /usr/share/keyrings/waydroid.gpg
+      - >-
+        curl -fsSL  "https://repo.waydro.id/waydroid.gpg" | gpg --dearmor -o
+        /usr/share/keyrings/waydroid.gpg
+      - >-
+        echo "deb http://packages.linuxmint.com elsie main upstream import backport #id:linuxmint_main" | tee
+        /etc/apt/sources.list.d/elsie.list > /dev/null
+    update: true
+    upgrade: true
+  packages:
+    . live-installer
