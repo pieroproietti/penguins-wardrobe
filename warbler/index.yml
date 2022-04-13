@@ -21,6 +21,7 @@ sequence:
   packages:
     - firefox-esr
   packages_no_install_recommends:
+    - konsole
     - plasma-nm
     - plasma-workspace-wayland
     - sddm
