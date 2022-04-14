@@ -1,16 +1,15 @@
 # wardrobe: .
-# costume: /colibri
+# costume: /colibri-helenae
 ---
-name: colibri
+name: colibri-helenae
 description: >-
-  desktop xfce4 plus all that I need to develop eggs, firmwares and anydesk
+  desktop xfce4 plus all that I need to develop eggs just for VMs
   repos
 author: artisan
 release: 0.0.3
 distributions:
   - bookworm
   - bullseye
-  - buster
   - chimaera
   - focal
   - impish
@@ -21,20 +20,10 @@ sequence:
       - main
       - contrib
       - non-free
-    sources_list_d:
-      - rm -f /usr/share/keyrings/anydesk-stable.gpg
-      - >-
-        curl -fsSL "https://keys.anydesk.com/repos/DEB-GPG-KEY" | gpg --dearmor
-        -o /usr/share/keyrings/anydesk-stable.gpg
-      - >-
-        echo "deb [signed-by=/usr/share/keyrings/anydesk-stable.gpg]
-        http://deb.anydesk.com/ all main" | tee
-        /etc/apt/sources.list.d/anydesk-stable.list > /dev/null    
     update: true
     upgrade: true
   packages:
     - adwaita-qt
-    - anydesk
     - firefox-esr
     - libxfce4ui-utils
     - lightdm
@@ -59,6 +48,7 @@ sequence:
     - base
     - eggs-dev
     - firmwares
+    - live-installer
 customize:
   dirs: true
   scripts:
