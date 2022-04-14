@@ -8,7 +8,6 @@ distributions:
   - bullseye
 sequence:
   packages:
-  - circle-flags-svg
   - gparted 
   - gparted-common 
   - imagemagick 
