@@ -57,8 +57,9 @@ sequence:
     - xfwm4
   accessories:
     - base
-    - eggs-dev
-    - firmwares
+    #- eggs-dev
+    #- firmwares
+    - live-installer
 customize:
   dirs: true
   scripts:
