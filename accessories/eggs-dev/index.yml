@@ -33,7 +33,7 @@ sequence:
         --dearmor -o /usr/share/keyrings/nodesource.gpg > /dev/null
       - >-
         echo "deb [signed-by=/usr/share/keyrings/nodesource.gpg]
-        https://deb.nodesource.com/node_16.x `lsb_release -cs` main" | tee
+        https://deb.nodesource.com/node_16.x bullseye main" | tee
         /etc/apt/sources.list.d/nodesource.list > /dev/null
     update: true
     upgrade: true
