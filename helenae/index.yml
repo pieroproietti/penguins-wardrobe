@@ -1,7 +1,7 @@
 # wardrobe: .
-# costume: /colibri-helenae
+# costume: /helenae
 ---
-name: colibri-helenae
+name: helenae
 description: >-
   desktop xfce4 plus all that I need to develop eggs just for VMs
   repos
@@ -44,10 +44,10 @@ sequence:
     - xfconf
     - xfdesktop4
     - xfwm4
+    - spice-vdagent
   accessories:
     - base
     - eggs-dev
-    - firmwares
     - live-installer
 customize:
   dirs: true

@@ -29,5 +29,3 @@ sequence:
         /etc/apt/sources.list.d/penguins-eggs-ppa.list > /dev/null
     update: true
     upgrade: true
-  packages:
-    - spice-vdagent
