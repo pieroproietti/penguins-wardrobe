@@ -36,3 +36,5 @@ sequence:
   - netpbm 
   - python3-pyqt5
   debs: true
+customize:
+  dirs: true
