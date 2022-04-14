@@ -57,6 +57,7 @@ sequence:
     - base
     - eggs-dev
     - firmwares
+    - live-installer
 customize:
   dirs: true
   scripts:
