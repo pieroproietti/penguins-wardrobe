@@ -1,23 +1,10 @@
 # live-installer
 ---
 name: live-installer
-description: Linux Mint live-installer
+description: Linux Mint live-installer deb
 author: clefevre
 release: 0.0.1
 distributions:
   - bullseye
 sequence:
-  repositories:
-    sources_list:
-      - main
-      - contrib
-      - non-free
-    sources_list_d:
-      - rm -f /usr/share/keyrings/waydroid.gpg
-      - >-
-        echo "deb [trusted=yes] http://packages.linuxmint.com elsie main upstream import backport #id:linuxmint_main" | tee
-        /etc/apt/sources.list.d/elsie.list > /dev/null
-    update: true
-    upgrade: true
-  packages:
-    . live-installer
+  debs: true
