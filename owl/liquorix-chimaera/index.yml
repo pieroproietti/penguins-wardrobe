@@ -4,7 +4,12 @@ name: liquorix-chimaera
 description: install liquorix kernel
 author: artisan
 distributions:
+  - bookworm
+  - bullseye
   - chimaera
+  - focal
+  - impish
+  - jammy
 ssequence:
   repositories:
     sources_list:
