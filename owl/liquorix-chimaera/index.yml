@@ -11,7 +11,7 @@ distributions:
   - focal
   - impish
   - jammy
-ssequence:
+sequence:
   repositories:
     sources_list:
       - main
