@@ -51,7 +51,7 @@ sequence:
     - yad
   accessories:
     - ./grafica
-    - ./liquorix
+    - ./liquorix-chimaera
     - ./multimedia
     - ./office
     - base
