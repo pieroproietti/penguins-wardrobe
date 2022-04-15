@@ -7,7 +7,6 @@ distributions:
   - bookworm
   - bullseye
   - buster
-  - chimaera
   - focal
   - impish
   - jammy
@@ -18,9 +17,13 @@ sequence:
       - contrib
       - non-free
     sources_list_d:
+      - rm -f /etc/apt/trusted.gpg.d/liquorix-keyring.gpg
       - >-
-        echo -e "deb [trusted=yes] http://liquorix.net/debian `lsb_release -cs`
-        main\ndeb-src [trusted=yes] http://liquorix.net/debian `lsb_release -cs`
+        curl -o /etc/apt/trusted.gpg.d/liquorix-keyring.gpg
+        'https://liquorix.net/liquorix-keyring.gpg'
+      - >-
+        echo -e "deb http://liquorix.net/debian `lsb_release -cs`
+        main\ndeb-src http://liquorix.net/debian `lsb_release -cs`
         main" | tee /etc/apt/sources.list.d/liquorix.list > /dev/null
     update: true
     upgrade: true
