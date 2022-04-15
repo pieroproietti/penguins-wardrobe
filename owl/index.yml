@@ -66,5 +66,6 @@ customize:
   dirs: true
   scripts:
     - desktop_link_set.sh
+    - lightdm_autologin_set.sh 
   hostname: true
 reboot: true
