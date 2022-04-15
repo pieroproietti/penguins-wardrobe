@@ -18,13 +18,14 @@ sequence:
       - contrib
       - non-free
     sources_list_d:
-      - rm -f https://liquorix.net/liquorix-keyring.gpg
-      - >- 
-        curl -o /etc/apt/trusted.gpg.d/liquorix-keyring.gpg 'https://liquorix.net/liquorix-keyring.gpg'
-      - >-
-        echo -e "deb http://liquorix.net/debian bullseye
-        main\ndeb-src http://liquorix.net/debian bullseye
-        main" | tee /etc/apt/sources.list.d/liquorix.list > /dev/null
+      - curl 'https://liquorix.net/add-liquorix-repo.sh' | sudo bash
+      #- rm -f https://liquorix.net/liquorix-keyring.gpg
+      #- >- 
+      #  curl -o /etc/apt/trusted.gpg.d/liquorix-keyring.gpg 'https://liquorix.net/liquorix-keyring.gpg'
+      #- >-
+      #  echo -e "deb http://liquorix.net/debian bullseye
+      #  main\ndeb-src http://liquorix.net/debian bullseye
+      #  main" | tee /etc/apt/sources.list.d/liquorix.list > /dev/null
     update: true
     upgrade: true
   packages:
