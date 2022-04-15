@@ -54,5 +54,6 @@ customize:
   scripts:
     - desktop_link_set.sh
     - lightdm_background_set.sh
+    - eggs dad -d
   hostname: true
 reboot: true
