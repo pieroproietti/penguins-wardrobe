@@ -54,14 +54,14 @@ sequence:
     - xfwm4
     - yad
   accessories:
-    - ./grafica
     - ./liquorix-chimaera
-    - ./multimedia
-    - ./office
-    - base
+    - ./live-installer
+    #- ./grafica
+    #- ./multimedia
+    #- ./office
+    #- base
     - eggs-dev
-    - firmwares
-    - live-installer
+    #- firmwares
 customize:
   dirs: true
   scripts:
