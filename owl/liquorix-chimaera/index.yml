@@ -17,7 +17,7 @@ ssequence:
       - contrib
       - non-free
     sources_list_d:
-      - rm -f https://liquorix.net/liquorix-keyring.gpg
+      - rm -f /etc/apt/trusted.gpg.d/liquorix-keyring.gpg
       - >- 
         curl -o /etc/apt/trusted.gpg.d/liquorix-keyring.gpg 'https://liquorix.net/liquorix-keyring.gpg'
       - >-
