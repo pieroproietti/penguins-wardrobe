@@ -6,7 +6,8 @@ BACKGROUND="/usr/share/backgrounds/owl/37161836845_af56317fda_h.jpg"
 
 
 # set autologin
-echo autologin-user=${USER} >> /etc/lightdm/lightdm.conf
+# We need some different to just append 
+# echo autologin-user=${USER} >> /etc/lightdm/lightdm.conf
 
 # set background
 echo background=${BACKGROUND} >> /etc/lightdm/lightdm-gtk-greeter.conf
