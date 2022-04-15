@@ -37,6 +37,7 @@ sequence:
     - network-manager-gnome
     - network-manager-openvpn
     - network-manager-openvpn-gnome
+    - spice-vdagent
     - qt5ct
     - tango-icon-theme
     - thunar
@@ -54,14 +55,14 @@ sequence:
     - xfwm4
     - yad
   accessories:
-    #- ./liquorix-chimaera
+    - firmwares
+    - ./liquorix-chimaera
     - ./live-installer
-    #- ./grafica
-    #- ./multimedia
-    #- ./office
-    #- base
+    - ./grafica
+    - ./multimedia
+    - ./office
+    - base
     - eggs-dev
-    #- firmwares
 customize:
   dirs: true
   scripts:
