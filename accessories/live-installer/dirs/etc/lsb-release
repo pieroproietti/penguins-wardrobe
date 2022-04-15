@@ -1,5 +1,5 @@
-# accessories/live-installer/dirs/etc/lsb_release
+# owl/live-installer/dirs/etc/lsb_release
 DISTRIB_ID=Devuan
 DISTRIB_RELEASE=4
 DISTRIB_CODENAME=chimaera
-DISTRIB_DESCRIPTION="Devuan GNU/Linux 4 (chimaera) mint"
+DISTRIB_DESCRIPTION="Devuan GNU/Linux 4 (chimaera) [mint]"
