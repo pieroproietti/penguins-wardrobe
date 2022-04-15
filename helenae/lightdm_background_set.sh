@@ -2,7 +2,7 @@
 
 USER=$1
 DESKTOP=$2
-BACKGROUND="/usr/share/backgrounds/owl/37161836845_af56317fda_h.jpg"
+BACKGROUND="/usr/share/backgrounds/helenae/25759889846_911ba6c1fd_o.jpg"
 
 
 # set autologin

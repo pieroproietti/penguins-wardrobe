@@ -1,0 +1,2 @@
+# accessories/live-installer/dirs/etc/sudoers.d/live-installer
+ALL ALL=NOPASSWD: /usr/bin/live-installer
