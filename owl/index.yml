@@ -54,7 +54,7 @@ sequence:
     - xfwm4
     - yad
   accessories:
-    - ./liquorix-chimaera
+    #- ./liquorix-chimaera
     - ./live-installer
     #- ./grafica
     #- ./multimedia
