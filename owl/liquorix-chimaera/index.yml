@@ -1,4 +1,5 @@
-# liquorix-chimaera
+# wardrobe: penguins-wardrobe
+# costume: /owl/liquorix-chimaera
 ---
 name: liquorix-chimaera
 description: install liquorix kernel
@@ -18,12 +19,13 @@ ssequence:
       - non-free
     sources_list_d:
       - rm -f /etc/apt/trusted.gpg.d/liquorix-keyring.gpg
-      - >- 
-        curl -o /etc/apt/trusted.gpg.d/liquorix-keyring.gpg 'https://liquorix.net/liquorix-keyring.gpg'
       - >-
-        echo -e "deb http://liquorix.net/debian bullseye
-        main\ndeb-src http://liquorix.net/debian bullseye
-        main" | tee /etc/apt/sources.list.d/liquorix.list > /dev/null
+        curl -o /etc/apt/trusted.gpg.d/liquorix-keyring.gpg
+        'https://liquorix.net/liquorix-keyring.gpg'
+      - >-
+        echo -e "deb http://liquorix.net/debian bullseye main\ndeb-src
+        http://liquorix.net/debian bullseye main" | tee
+        /etc/apt/sources.list.d/liquorix.list > /dev/null
     update: true
     upgrade: true
   packages:
