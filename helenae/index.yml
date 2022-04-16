@@ -24,12 +24,12 @@ sequence:
     upgrade: true
   packages:
     - adwaita-qt
-    - firefox-esr
+    # firefox-esr
     - libxfce4ui-utils
     - lightdm
-    - network-manager-gnome
-    - network-manager-openvpn
-    - network-manager-openvpn-gnome
+    #- network-manager-gnome
+    #- network-manager-openvpn
+    #- network-manager-openvpn-gnome
     - qt5ct
     - tango-icon-theme
     - thunar
