@@ -3,52 +3,12 @@
       xmlns:bookmark="http://www.freedesktop.org/standards/desktop-bookmarks"
       xmlns:mime="http://www.freedesktop.org/standards/shared-mime-info"
 >
-  <bookmark href="file:///home/artisan/penguins-wardrobe/colibri/xfconf_background_set.sh" added="2022-04-09T06:52:19.114733Z" modified="2022-04-09T06:52:19.114737Z" visited="2022-04-09T06:52:19.114734Z">
-    <info>
-      <metadata owner="http://freedesktop.org">
-        <mime:mime-type type="application/x-shellscript"/>
-        <bookmark:applications>
-          <bookmark:application name="code" exec="&apos;code %u&apos;" modified="2022-04-09T06:52:19.114735Z" count="1"/>
-        </bookmark:applications>
-      </metadata>
-    </info>
-  </bookmark>
-  <bookmark href="file:///usr/share/backgrounds/colibri-wallpapers" added="2022-04-09T06:53:59.913213Z" modified="2022-04-09T06:53:59.913216Z" visited="2022-04-09T06:53:59.913213Z">
+  <bookmark href="file:///usr/share/backgrounds/colibri" added="2022-04-16T10:07:13.099997Z" modified="2022-04-16T10:07:13.100001Z" visited="2022-04-16T10:07:13.099997Z">
     <info>
       <metadata owner="http://freedesktop.org">
         <mime:mime-type type="inode/directory"/>
         <bookmark:applications>
-          <bookmark:application name="xfdesktop-settings" exec="&apos;xfdesktop-settings %u&apos;" modified="2022-04-09T06:53:59.913214Z" count="1"/>
-        </bookmark:applications>
-      </metadata>
-    </info>
-  </bookmark>
-  <bookmark href="file:///home/artisan/penguins-wardrobe/colibri/dirs/usr/share/backgrounds/colibri" added="2022-04-09T06:59:02.157496Z" modified="2022-04-09T06:59:02.157499Z" visited="2022-04-09T06:59:02.157496Z">
-    <info>
-      <metadata owner="http://freedesktop.org">
-        <mime:mime-type type="inode/directory"/>
-        <bookmark:applications>
-          <bookmark:application name="xfdesktop-settings" exec="&apos;xfdesktop-settings %u&apos;" modified="2022-04-09T06:59:02.157497Z" count="1"/>
-        </bookmark:applications>
-      </metadata>
-    </info>
-  </bookmark>
-  <bookmark href="file:///home/artisan/penguins-wardrobe/duck/dirs/usr/share/backgrounds/duck-wallpapers" added="2022-04-09T07:03:00.890113Z" modified="2022-04-09T07:03:00.890116Z" visited="2022-04-09T07:03:00.890113Z">
-    <info>
-      <metadata owner="http://freedesktop.org">
-        <mime:mime-type type="inode/directory"/>
-        <bookmark:applications>
-          <bookmark:application name="xfdesktop-settings" exec="&apos;xfdesktop-settings %u&apos;" modified="2022-04-09T07:03:00.890114Z" count="1"/>
-        </bookmark:applications>
-      </metadata>
-    </info>
-  </bookmark>
-  <bookmark href="file:///home/artisan/penguins-eggs/src/interfaces/i-materia.ts" added="2022-04-09T08:20:23.321911Z" modified="2022-04-09T08:20:23.321915Z" visited="2022-04-09T08:20:23.321912Z">
-    <info>
-      <metadata owner="http://freedesktop.org">
-        <mime:mime-type type="text/vnd.qt.linguist"/>
-        <bookmark:applications>
-          <bookmark:application name="code" exec="&apos;code %u&apos;" modified="2022-04-09T08:20:23.321913Z" count="1"/>
+          <bookmark:application name="xfdesktop-settings" exec="&apos;xfdesktop-settings %u&apos;" modified="2022-04-16T10:07:13.099999Z" count="1"/>
         </bookmark:applications>
       </metadata>
     </info>
