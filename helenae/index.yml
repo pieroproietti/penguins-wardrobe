@@ -24,17 +24,12 @@ sequence:
     upgrade: true
   packages:
     - adwaita-qt
-    # firefox-esr
     - libxfce4ui-utils
     - lightdm
-    #- network-manager-gnome
-    #- network-manager-openvpn
-    #- network-manager-openvpn-gnome
     - qt5ct
     - tango-icon-theme
     - thunar
     - xarchiver
-    # xinit
     - xfce4-appfinder
     - xfce4-panel
     - xfce4-pulseaudio-plugin
@@ -55,6 +50,9 @@ customize:
   scripts:
     - desktop_link_set.sh
     - lightdm_background_set.sh
+    #
+    # insert command g4artisan
+    #
     - rm -f /usr/local/bin/g4*
     - curl -fsSL "https://raw.githubusercontent.com/pieroproietti/penguins-eggs/master/g4/g4artisan" -o /usr/local/bin/g4artisan
     - chmod +x /usr/local/bin/g4artisan
