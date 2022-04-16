@@ -34,6 +34,7 @@ sequence:
     - tango-icon-theme
     - thunar
     - xarchiver
+    - xinit
     - xfce4-appfinder
     - xfce4-panel
     - xfce4-pulseaudio-plugin
