@@ -1,33 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <channel name="xfce4-desktop" version="1.0">
+  <property name="desktop-icons" type="empty">
+    <property name="style" type="empty"/>
+    <property name="file-icons" type="empty">
+      <property name="show-home" type="empty"/>
+      <property name="show-filesystem" type="empty"/>
+      <property name="show-removable" type="empty"/>
+      <property name="show-trash" type="empty"/>
+    </property>
+    <property name="icon-size" type="empty"/>
+    <property name="tooltip-size" type="empty"/>
+  </property>
   <property name="backdrop" type="empty">
     <property name="screen0" type="empty">
       <property name="monitor0" type="empty">
+        <property name="image-path" type="empty"/>
+        <property name="image-style" type="empty"/>
+        <property name="image-show" type="empty"/>
         <property name="brightness" type="empty"/>
         <property name="color1" type="empty"/>
         <property name="color2" type="empty"/>
         <property name="color-style" type="empty"/>
-        <property name="image-path" type="empty"/>
-        <property name="image-show" type="empty"/>
         <property name="last-image" type="string" value="/usr/share/backgrounds/colibri-wallpapers/3794764350_2839ca0b26_b.jpg"/>
         <property name="last-single-image" type="empty"/>
       </property>
       <property name="monitor1" type="empty">
+        <property name="image-path" type="empty"/>
+        <property name="image-style" type="empty"/>
+        <property name="image-show" type="empty"/>
         <property name="brightness" type="empty"/>
         <property name="color1" type="empty"/>
         <property name="color2" type="empty"/>
         <property name="color-style" type="empty"/>
-        <property name="image-path" type="empty"/>
-        <property name="image-show" type="empty"/>
         <property name="last-image" type="string" value="/usr/share/backgrounds/colibri-wallpapers/3794764350_2839ca0b26_b.jpg"/>
         <property name="last-single-image" type="empty"/>
+      </property>
+      <property name="monitor2" type="empty">
+        <property name="image-path" type="empty"/>
+        <property name="image-style" type="empty"/>
+        <property name="image-show" type="empty"/>
+      </property>
+      <property name="monitor3" type="empty">
+        <property name="image-path" type="empty"/>
+        <property name="image-style" type="empty"/>
+        <property name="image-show" type="empty"/>
       </property>
       <property name="monitorVirtual-1" type="empty">
         <property name="workspace0" type="empty">
           <property name="color-style" type="int" value="1"/>
           <property name="image-style" type="int" value="5"/>
-          <property name="last-image" type="string" value="/usr/share/backgrounds/colibri-wallpapers/3794764350_2839ca0b26_b.jpg"/>
+          <property name="last-image" type="string" value="/usr/share/backgrounds/helenae/25759889846_911ba6c1fd_o.jpg"/>
         </property>
         <property name="workspace1" type="empty">
           <property name="color-style" type="int" value="1"/>
@@ -46,6 +69,9 @@
         </property>
       </property>
     </property>
+  </property>
+  <property name="desktop-menu" type="empty">
+    <property name="show" type="empty"/>
   </property>
   <property name="last" type="empty">
     <property name="window-width" type="int" value="653"/>
