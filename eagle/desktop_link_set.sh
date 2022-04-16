@@ -4,7 +4,7 @@ USER=$1
 DESKTOP=$2
 
 # create DESKTOP
-if [ !-d "$DESKTOP" ]; then
+if [ ! -d "$DESKTOP" ]; then
     mkdir $DESKTOP -p
 fi
 
