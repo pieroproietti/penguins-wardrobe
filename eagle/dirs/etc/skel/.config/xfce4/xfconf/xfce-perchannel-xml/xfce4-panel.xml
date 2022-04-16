@@ -6,9 +6,9 @@
     <value type="int" value="1"/>
     <property name="dark-mode" type="bool" value="true"/>
     <property name="panel-1" type="empty">
-      <property name="position" type="string" value="p=8;x=512;y=753"/>
+      <property name="position" type="string" value="p=8;x=512;y=754"/>
       <property name="length" type="uint" value="100"/>
-      <property name="position-locked" type="bool" value="true"/>
+      <property name="position-locked" type="bool" value="false"/>
       <property name="icon-size" type="uint" value="16"/>
       <property name="size" type="uint" value="26"/>
       <property name="plugin-ids" type="array">
@@ -40,9 +40,6 @@
     </property>
     <property name="plugin-6" type="string" value="systray">
       <property name="square-icons" type="bool" value="true"/>
-      <property name="known-legacy-items" type="array">
-        <value type="string" value="networkmanager applet"/>
-      </property>
     </property>
     <property name="plugin-8" type="string" value="pulseaudio">
       <property name="enable-keyboard-shortcuts" type="bool" value="true"/>

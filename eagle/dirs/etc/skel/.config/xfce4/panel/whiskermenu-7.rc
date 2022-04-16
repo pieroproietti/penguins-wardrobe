@@ -1,5 +1,5 @@
 favorites=xfce4-web-browser.desktop,xfce4-mail-reader.desktop,xfce4-file-manager.desktop,xfce4-terminal-emulator.desktop
-recent=xfce4-terminal-emulator.desktop,xfce-ui-settings.desktop,xfce4-web-browser.desktop,xfce4-color-settings.desktop
+recent=xfce4-terminal-emulator.desktop
 button-icon=xfce4-whiskermenu
 button-single-row=false
 show-button-title=true
