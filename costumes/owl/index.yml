@@ -57,7 +57,7 @@ sequence:
   accessories:
     - firmwares
     - ./liquorix-chimaera
-    - ./live-installer
+    # ./live-installer
     - ./grafica
     - ./multimedia
     - ./office
