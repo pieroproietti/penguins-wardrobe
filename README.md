@@ -189,9 +189,9 @@ Accessories are used alone or from costumes, for example: waydroid is an accesso
 
 # wardrobe get
 
-´´´
+```
 eggs wardrobe get
-´´´
+```
 
 Clone the communyty wardrobe https://github.com/pieroproietti/penguins-wardrobe, of course you can fork it and work on your own.
 
