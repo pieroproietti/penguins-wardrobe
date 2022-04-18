@@ -187,40 +187,43 @@ An accessory it'a costume who live under accessories directory. You can see it a
 Accessories are used alone or from costumes, for example: waydroid is an accessoru and it's used gwaydroid, kwaydrois, the same for firmware who is added in hen, gwaydroid, kwaydroid and all future costumes who need a good hardware compatibility.
 
 
-# clone wardrobe
+# wardrobe get
 
-Cloning wardrobe let you to change the size and materials of the costumes to better fit your need.
+´´´
+eggs wardrobe get
+´´´
 
-```
-git clone https://github.com/pieroproietti/penguins-wardrobe
-```
+Clone the communyty wardrobe https://github.com/pieroproietti/penguins-wardrobe, of course you can fork it and work on your own.
 
-## list costumes
+## wardrobe list
 ```
-eggs wardrobe list --wardrobe ./penguins-wardrobe
-```
-
-## show costume
-```
-eggs wardrobe show --wardrobe ./penguins-wardrobe --costume colibri
+eggs wardrobe list 
 ```
 
-## wear costume
+## wardrobe show COSTUME
 ```
-eggs wardrobe wear --wardrobe ./penguins-wardrobe --costume colibri
+eggs wardrobe show colibri --wardrobe ../my-own-wardrobe
 ```
 
-## ironing costume
+## wardrobe wear COSTUME
+```
+eggs wardrobe wear colibri 
+```
+
+## wardrobe iroring COSTUME
 ironing put in alphabetic order most of the sections of costumes. You can use it to get a screenshot of ordered costume and use it to put order in your costume.
 
 ```
-eggs wardrobe ironing --wardrobe ./penguins-wardrobe --costume colibri
+eggs wardrobe ironing colibri --wardrobe ./my-own-wardrobe 
 ```
 
 # Costumes
 
 * colibri
 colibri is a light XFC4 for developers you can easily start to improve eggs.
+
+* colibri-helenae
+helenae is a reduct form of colibri without firmwares, is the most light colibri, in natura live in Cuba, here live on Virtual Machines.
 
 * duck
 duck come with cinnamon - probably is the right desktop for peoples coming from windows - here complete plus office, gimp and vlc
@@ -238,7 +241,9 @@ KDE waydroid installation
 * base
 * eggs-dev
 * firmwares
+* graphics
 * liquorix
 * liquorix-chimaera
+* multimedia
 * office
 * waydroid
