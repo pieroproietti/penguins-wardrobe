@@ -209,7 +209,6 @@ eggs wardrobe show colibri --wardrobe ../my-own-wardrobe
 ```
 eggs wardrobe wear colibri 
 ```
-
 ## wardrobe iroring COSTUME
 ironing put in alphabetic order most of the sections of costumes. You can use it to get a screenshot of ordered costume and use it to put order in your costume.
 
