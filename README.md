@@ -219,23 +219,12 @@ eggs wardrobe ironing colibri --wardrobe ./my-own-wardrobe
 
 # Costumes
 
-* colibri
-colibri is a light XFC4 for developers you can easily start to improve eggs.
-
-* colibri-helenae
-helenae is a reduct form of colibri without firmwares, is the most light colibri, in natura live in Cuba, here live on Virtual Machines.
-
-* duck
-duck come with cinnamon - probably is the right desktop for peoples coming from windows - here complete plus office, gimp and vlc
-
-* owl
-owl is a XFCE4 for graphics designers, this a simple/experimental bird, based on the work of Clarlie Martinez quirinux
-
-* wagtail
-GNOME waydroid installation.
-
-* warbier
-KDE waydroid installation
+* **colibri** is a light XFC4 for developers you can easily start to improve eggs.
+* **colibri-helenae** is a reduct form of colibri without firmwares, is the most light colibri, in natura live in Cuba, here live on Virtual Machines.
+* **duck** come with cinnamon - probably is the right desktop for peoples coming from windows - here complete plus office, gimp and vlc
+* **owl** is a XFCE4 for graphics designers, this a simple/experimental bird, based on the work of Clarlie Martinez quirinux
+* **wagtail**, a GNOME waydroid installation.
+* **warbier**, a KDE waydroid installation
 
 # Accessories
 * base
