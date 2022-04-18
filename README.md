@@ -1,8 +1,12 @@
 # penguins-wardrobe
 
-A more complete costumes wardrobe for penguin's eggs
+A wardrobe can organize your costumes to wear your naked penguins. Using eggs wardrobe can help you to develop, organize and consolidate your Linux customization.
 
-## Costumes
+Of course you can dress your CLI system with a beatiful GUI interface, but it is also possible to wear it as LAMP server and so on.
+
+The methafora consist in a wardrobe, your default wardobe live .wardrobe, costumes and accessories.
+
+## Costumes and accessories
 
 A costume consist in a directory named after the costume and an index.yml file. 
 
@@ -37,7 +41,7 @@ export interface IMateria {
 }
 ```
 
-this is an example from colibri:
+this is an example from my colibri, the configuration of my developer working station:
 ```
 # wardrobe: .
 # costume: /colibri
@@ -150,9 +154,6 @@ costomize contain the final actions to finalize the installation and customize t
 * hostname
 * scripts
 
-
-
-
 ##### dirs
 dirs is boolean, if true, directory ./dirs inside the costume will be copied to / of the system,
 
@@ -170,25 +171,18 @@ put all in ```dirs```:
 is boolean too, and if present hostname will take the name of the costume and hosts will be changed in accord
 
 ##### scripts
-cripts contain an array of one or more scripts to be used to customize the result
-
-
-
-
-
-
+scripts contain an array of one or more scripts to be used to customize the result
 
 You can add others scripts and directories inside:
 
+**Scripts examples**
 
-## Scripts examples:
-
-Scripts are called from customizations.scripts and executed on the specific order.
+Scripts are called from customize/scripts and executed on the specific order.
 
 - install-image-from-local.sh (a script to copy sustem.img and vendor.img from local)
 - no-hw-accelleration.sh (script to set waydroid with no-hw-accelleration)
 
-# Accessories
+**Accessories**
 An accessory it'a costume who live under accessories directory. You can see it as a belt to dress with your pants or a bag associated to your chotches.
 Accessories are used alone or from costumes, for example: waydroid is an accessoru and it's used gwaydroid, kwaydrois, the same for firmware who is added in hen, gwaydroid, kwaydroid and all future costumes who need a good hardware compatibility.
 
@@ -225,28 +219,26 @@ eggs wardrobe ironing --wardrobe ./penguins-wardrobe --costume colibri
 
 # Costumes
 
-## colibri
+* colibri
 colibri is a light XFC4 for developers you can easily start to improve eggs.
 
-## duck
+* duck
 duck come with cinnamon - probably is the right desktop for peoples coming from windows - here complete plus office, gimp and vlc
 
-## owl
+* owl
 owl is a XFCE4 for graphics designers, this a simple/experimental bird, based on the work of Clarlie Martinez quirinux
 
-## wagtail
+* wagtail
 GNOME waydroid installation.
 
-## warbier
+* warbier
 KDE waydroid installation
 
 # Accessories
-
-## base
-## cinnamon
-## eggs-dev
-## firmwares
-## office
-## waydroid
-## XFCE4
-
+* base
+* eggs-dev
+* firmwares
+* liquorix
+* liquorix-chimaera
+* office
+* waydroid
