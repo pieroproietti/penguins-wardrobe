@@ -56,7 +56,7 @@ sequence:
     - yad
   accessories:
     - firmwares
-    - ./liquorix-chimaera
+    - liquorix-chimaera
     # ./live-installer
     - ./grafica
     - ./multimedia
