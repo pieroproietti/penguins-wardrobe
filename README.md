@@ -193,7 +193,14 @@ Accessories are used alone or from costumes, for example: waydroid is an accesso
 eggs wardrobe get
 ```
 
-Clone the communyty wardrobe https://github.com/pieroproietti/penguins-wardrobe, of course you can fork it and work on your own.
+Clone the community wardrobe
+ 
+```
+https://github.com/pieroproietti/penguins-wardrobe
+```
+in .wardrobe inside your home. 
+
+Of course you can fork communuty-wardobe and work on your own.
 
 ## wardrobe list
 ```
