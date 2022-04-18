@@ -1,7 +1,7 @@
 # multimedia
 ---
 name: multimedia
-description: Owl is a clone of quirinux by Charlie Martínez multimedia packages
+description: a selection of usefull multimedia packages
 author: artisan
 release: 0.0.1
 distributions:
@@ -10,8 +10,6 @@ distributions:
   - buster
   - chimaera
   - focal
-  
-  
   - impish
   - jammy
 sequence:
