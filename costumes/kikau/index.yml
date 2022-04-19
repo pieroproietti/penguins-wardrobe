@@ -1,0 +1,28 @@
+# wardrobe: .
+# costume: /colibri
+---
+name: colibri
+description: >-
+  desktop KDE from neon
+author: artisan
+release: 0.0.1
+distributions:
+  - focal
+  - jammy
+sequence:
+  repositories:
+    sources_list:
+      - main
+      - contrib
+      - non-free
+    sources_list_d:
+      - >-
+        echo "deb http://archive.neon.kde.org/unstable focal main\bdeb-src http://archive.neon.kde.org/unstable focal main" | tee
+        /etc/apt/sources.list.d/neon.list > /dev/null    
+    update: true
+    upgrade: true
+  packages:
+    - kde-plasma-desktop
+    - plasma-nm
+  hostname: true
+reboot: true
