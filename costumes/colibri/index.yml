@@ -58,7 +58,6 @@ sequence:
   accessories:
     - base
     - eggs-dev
-    - live-installer
     - firmwares
 customize:
   dirs: true
