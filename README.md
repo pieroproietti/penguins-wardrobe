@@ -1,10 +1,12 @@
 # penguins-wardrobe
 
-A wardrobe can organize your costumes to wear your naked penguins. Using eggs wardrobe can help you to develop, organize and consolidate your Linux customization.
+The methafora consist in a wardrobe, costumes and accessories. 
 
-Of course you can dress your CLI system with a beatiful GUI interface, but it is also possible to wear it as LAMP server and so on.
+A wardrobe is a common repository managed with git organized with costumes, accessories and DOCUMENTATION dirs. Inside a wardrobe You can arrange your costumes collection to wear your penguins. 
 
-The methafora consist in a wardrobe, your default wardobe live .wardrobe, costumes and accessories.
+I found this method usefull to develop, organize and consolidate my Linux customizations and a compact way to have all the operations in the same place, find and reuse them when I needs.
+
+Of course you can dress your CLI system with wonderfull GUI interface, but it is also possible to wear it to act as server.
 
 ## Costumes and accessories
 
