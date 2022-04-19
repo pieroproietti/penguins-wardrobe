@@ -42,6 +42,7 @@ export interface IMateria {
 ```
 
 this is an example from my colibri, the configuration of my developer working station:
+
 ```
 # wardrobe: .
 # costume: /colibri
@@ -67,31 +68,50 @@ sequence:
       - contrib
       - non-free
     sources_list_d:
+      - rm -f /usr/share/keyrings/anydesk-stable.gpg
       - >-
         curl -fsSL "https://keys.anydesk.com/repos/DEB-GPG-KEY" | gpg --dearmor
         -o /usr/share/keyrings/anydesk-stable.gpg
       - >-
         echo "deb [signed-by=/usr/share/keyrings/anydesk-stable.gpg]
         http://deb.anydesk.com/ all main" | tee
-        /etc/apt/sources.list.d/anydesk-stable.list > /dev/null
+        /etc/apt/sources.list.d/anydesk-stable.list > /dev/null    
     update: true
     upgrade: true
   packages:
+    - adwaita-qt
     - anydesk
     - firefox-esr
+    - libxfce4ui-utils
+    - lightdm
+    - network-manager-gnome
+    - network-manager-openvpn
+    - network-manager-openvpn-gnome
+    - qt5ct
+    - tango-icon-theme
+    - thunar
+    - xarchiver
+    - xfce4-appfinder
+    - xfce4-panel
+    - xfce4-pulseaudio-plugin
+    - xfce4-session
+    - xfce4-settings
+    - xfce4-terminal
+    - xfce4-whiskermenu-plugin
+    - xfconf
+    - xfdesktop4
+    - xfwm4
   accessories:
     - base
     - eggs-dev
     - firmwares
-    - xfce4
 customize:
   dirs: true
   scripts:
-    # desktop_background_set.sh
     - desktop_link_set.sh
+    - lightdm_background_set.sh
   hostname: true
 reboot: true
-
 ```
 
 ### General informations
@@ -193,31 +213,35 @@ Accessories are used alone or from costumes, for example: waydroid is an accesso
 eggs wardrobe get
 ```
 
-Clone the community wardrobe
- 
-```
-https://github.com/pieroproietti/penguins-wardrobe
-```
-in .wardrobe inside your home. 
+Clone the [community wardrobe](https://github.com/pieroproietti/penguins-wardrobe) in ~/.wardrobe, the command accept argument [REPO] so, you can work with your personal wardrobe too. For example:
 
-Of course you can fork communuty-wardobe and work on your own.
+```
+eggs wardrobe https://github.com/quirinux-so/penguins-wardrobe
+```
+
+will get in ~/.wardrobe the quirinux version.
 
 ## wardrobe list
+List costumes and accessoried in wardrobe.
+
 ```
 eggs wardrobe list 
 ```
 
 ## wardrobe show COSTUME
+Show index.yml of the costume.
 ```
 eggs wardrobe show colibri --wardrobe ../my-own-wardrobe
 ```
 
 ## wardrobe wear COSTUME
+Start the process of wear a costume, at the end your system will be modified in accord of.
+
 ```
 eggs wardrobe wear colibri 
 ```
 ## wardrobe iroring COSTUME
-ironing put in alphabetic order most of the sections of costumes. You can use it to get a screenshot of ordered costume and use it to put order in your costume.
+ironing put in alphabetic order most of the sections of costumes. You can use it to get a screenshot of an ordered index.yml of the costume.
 
 ```
 eggs wardrobe ironing colibri --wardrobe ./my-own-wardrobe 
