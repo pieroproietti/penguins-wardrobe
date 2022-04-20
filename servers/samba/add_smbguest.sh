@@ -15,7 +15,7 @@ smbpasswd -a argo
 useradd -d /home/profes -g smbuser -s /bin/false -m profes
 echo profes:evolution | chpasswd
 smbpasswd -a profes
-groupadd workstation
-useradd -d /dev/null -g workstation -s /bin/false samba
-smbpasswd -a -m samba
+#groupadd workstation
+#useradd -d /dev/null -g workstation -s /bin/false samba
+#smbpasswd -a -m samba
 
