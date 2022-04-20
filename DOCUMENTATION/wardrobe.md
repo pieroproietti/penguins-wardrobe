@@ -21,22 +21,39 @@ La nostra struttura del wardrobe è questa:
             └─ DOCUMENTATION
 ```
 
-# wardrobe
-
-Naturalmente occorre avere un wardrobe per cercare i costumi e per utilizzarlo. 
+# I comandi wardrobe
 
 ## wardrobe get [REPO]
+
 Scarica il wardrobe specificato in REPO che può essere una comune repository git. 
+
+Come abbiamo detto un wardrobe è una semplice repository git, per prima cosa dobbiamo scaricarla in locale. 
+
+Lo possiamo fare con il comando ```git clone https://github.com/pieroproietti/penguins-wardrobe``` e lo faremo per lo sviluppo, però dato che in questo modo avremo sempre la noia di utilizzare un path per wardrobe diverso, per ovviare è stato aggiunto il comando ```eggs wardrobe get``` che scarica la repository [penguins-wardrobe](https://github.com/pieroproietti/penguins-wardrobe) senza trascinarsi indietro tutta la storia ```--depth 1```.
 
 Esempio:
 
 ```eggs wardrobe get```
 
-Se non viene specificata alcuna repository verrà utilizzata la repository communidy [penguins-wardrobe](https://github.com/pieroproietti/penguins-wardrobe)
+Può essere utilizzato questo comando anche passando come REPO la repository da utilizzare. Esempio:
+
+```eggs wardrobe get https://github.com/quirinux-ga/penguins-wardrobe```
+
+In questo caso verrà impostato come wardrobe di default quello di quirinux, una distribuzione per la grafica, cartoon.
 
 
 ## wardrobe list [--w wardrobe]
+Se non viene passato un particolare wardrobe, list andrà a mostrare i ```costume``` e gli ```accessory``` presenti nel wardrobe di default.
 
 ## wardrobe show COSTUME [-w wardrobe]
 
+Viene visualizzato in formato yaml o json il contentuto di index.yml del costume in oggetto.
+
+
 ## wardrobe wear COSTUME [-w wardrobe]
+Finalmente il comando per la vestizione: legge la definizione del costume e procede all'installazione di quanto necessario per inddossarlo. Alla fine il nostro sistema verrà configurato secondo quanto prescritto nel costume.
+
+Dato che questo comando andrà ad installare pacchetti, effettuare delle copie in aree riservate, etc, necessita dei diritti di root e dovrà essere chiamato con sudo:
+
+```sudo eggs wear colibri```
+
