@@ -23,6 +23,8 @@ sequence:
   packages:
   - samba
 customize:
+  scripts:
+    - add_smbguest.sh
   dirs: true
   hostname: true
-  reboot: true
+reboot: true
