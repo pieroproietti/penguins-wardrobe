@@ -22,6 +22,6 @@ sequence:
     upgrade: true
 sequence:
   packages:
-    - samba
+  - samba
 customize:
   dirs: true
