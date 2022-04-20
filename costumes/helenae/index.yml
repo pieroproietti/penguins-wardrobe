@@ -44,7 +44,7 @@ sequence:
   accessories:
     - base
     - eggs-dev
-    - live-installer
+    # live-installer
 customize:
   dirs: true
   scripts:
