@@ -24,3 +24,5 @@ sequence:
   - samba
 customize:
   dirs: true
+  hostname: true
+  reboot: true
