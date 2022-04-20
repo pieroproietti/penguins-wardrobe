@@ -27,6 +27,7 @@ sequence:
     - libxfce4ui-utils
     - lightdm
     - qt5ct
+    - network-manager
     - tango-icon-theme
     - thunar
     - xarchiver
