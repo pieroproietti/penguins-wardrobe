@@ -1,0 +1,27 @@
+# base
+---
+name: samba
+description: samba configuration sharing /home/samba/public /home/samba/shared
+author: artisan
+release: 0.0.1
+distributions:
+  - bookworm
+  - bullseye
+  - buster
+  - chimaera
+  - focal
+  - impish
+  - jammy
+sequence:
+  repositories:
+    sources_list:
+      - main
+      - contrib
+      - non-free
+    update: true
+    upgrade: true
+sequence:
+  packages:
+    - samba
+customize:
+  dirs: true
