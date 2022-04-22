@@ -21,6 +21,7 @@ sequence:
     update: true
     upgrade: true
   packages:
+  - openssh-server
   - apache2
   - mariadb-server
   - php 
