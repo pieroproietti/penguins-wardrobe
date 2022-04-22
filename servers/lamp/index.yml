@@ -1,7 +1,7 @@
 # base
 ---
 name: lamp
-description: LAMP configuration
+description: LAMP configuration you can externd
 author: artisan
 release: 0.0.1
 distributions:
@@ -21,15 +21,15 @@ sequence:
     update: true
     upgrade: true
   packages:
-  - openssh-server
   - apache2
+  - libapache2-mod-php
   - mariadb-server
-  - php 
-  - libapache2-mod-php 
+  - openssh-server # need just to help configuration
+  - php
   - php-mysql
 customize:
   scripts:
-    #- add_smbguest.sh
+    #- add_yours_scripts
   dirs: true
   hostname: true
 reboot: true
