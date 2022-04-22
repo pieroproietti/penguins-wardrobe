@@ -16,24 +16,10 @@ sequence:
     - main
     - contrib
     - non-free
-    sources_list_d:
-      - rm -f /usr/share/keyrings/waydroid.gpg
-      - >-
-        curl -fsSL  "https://repo.waydro.id/waydroid.gpg" | gpg --dearmor -o
-        /usr/share/keyrings/waydroid.gpg
-      - >-
-        echo "deb [signed-by=/usr/share/keyrings/waydroid.gpg]
-        https://repo.waydro.id/ `lsb_release -cs` main" | tee
-        /etc/apt/sources.list.d/waydroid-ppa.list > /dev/null
     update: true
     upgrade: true
-  dependencies:
-  - python3
-  - lxc
-  - curl
-  - iptables
-  - wget
-  packages:
+
+  noInstallRecommends:  
   - gdm3
   - gnome-control-center
   - gnome-session
@@ -41,17 +27,13 @@ sequence:
   - gnome-terminal
   - waydroid
   - xclip
-  packagesPip:
-  - gbinder-python
-  - pyclip  
+
   accessories:
     # base
     # eggs-dev
     # firmwares
-    # waydroid
+    waydroid
 customize:
-  scripts:
-    - install_waydroid_settings.sh
-    - install_image_from_local.sh
-    - no_hw_accelleration.sh
+  dirs: true
+  hostname: true
 reboot: true
