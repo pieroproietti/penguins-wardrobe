@@ -1,7 +1,5 @@
 # Credits
 
-![image](./50014314876_01f0cfd8e2_k.jpg)
-author: [Sæmundur Valdimarsson](https://www.flickr.com/photos/163930705@N05/)
-origin: [link](https://www.flickr.com/photos/163930705@N05/50014314876)
-
-
+![image](./48836262506_7c6080c759_h.jpg)
+author: [Beatrice Verez](https://www.flickr.com/photos/beatriceverez/)
+origin: [link](https://www.flickr.com/photos/beatriceverez/48836262506/)
