@@ -19,7 +19,8 @@ sequence:
     update: true
     upgrade: true
 
-  noInstallRecommends:  
+
+  packages_no_install_recommends:
   - gdm3
   - gnome-control-center
   - gnome-session
