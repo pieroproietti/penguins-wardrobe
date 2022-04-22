@@ -16,24 +16,23 @@ sequence:
     - main
     - contrib
     - non-free
+    source_list_d:
     update: true
     upgrade: true
 
-
-  packages_no_install_recommends:
+  packages:
   - gdm3
+  packages_no_install_recommends:
   - gnome-control-center
   - gnome-session
   - gnome-shell
   - gnome-terminal
-  - waydroid
   - xclip
-
   accessories:
     # base
     # eggs-dev
     # firmwares
-    - waydroid
+    # waydroid
 customize:
   dirs: true
   hostname: true
