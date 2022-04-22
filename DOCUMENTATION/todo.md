@@ -1,4 +1,4 @@
-# TO DO
+# working in progress...
 
 It's long time I enjoy using Linux, both - professional and hobbist  - Started about 2000 with Red Hat and Debian, switched to Debian with Knoppis, using Proxmox Ve since version 0.7.
 
@@ -13,4 +13,6 @@ eggs is capable of remaster, take a system and get a live iso. With the time, an
 wardrobe is an answer of the needs everyone trying to create on Debian, Devuan, Ubuntu respin need to know, use and extend.
 
 
+* [wardrobe](wardrobe.md)
+* [costume](costume.md)
 
