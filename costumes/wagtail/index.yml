@@ -19,12 +19,12 @@ sequence:
     source_list_d:
     update: true
     upgrade: true
-
   packages:
-  - gnome-session
+  - firefox-esr
   packages_no_install_recommends:
   - gdm3
   - gnome-control-center
+  - gnome-session
   - gnome-shell
   - gnome-terminal
   - xclip
@@ -32,7 +32,7 @@ sequence:
     # base
     # eggs-dev
     # firmwares
-    waydroid
+    - waydroid
 customize:
   dirs: true
   hostname: true
