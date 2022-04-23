@@ -35,7 +35,7 @@ sequence:
   packages:
     - adwaita-qt
     - anydesk
-    - firefox-esr
+    # firefox-esr
     - libxfce4ui-utils
     - lightdm
     - network-manager-gnome
