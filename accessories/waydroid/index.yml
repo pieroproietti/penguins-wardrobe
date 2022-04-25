@@ -36,6 +36,8 @@ sequence:
   packages:
   - python3-gi
   - python3-pip
+  - gir1.2-webkit2-4.0 # need
+  - gir1.2-vte-2.91 # need
   - xclip # comunque lo preende
   noInstallRecommends:
     - gdm3
