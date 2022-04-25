@@ -46,11 +46,11 @@ sequence:
     - gdm3
   debs: true
   packagesPip:
-    # gbinder-python
+    - gbinder-python # senza non funge
     - pyclip
 customize:
   scripts:
     - install_waydroid_settings.sh
     - install_image_from_local.sh
     - no_hw_accelleration.sh
-    - ln -s /bin-python3 /bin/python
+    - ln -s ./bin-python3 ./bin/python
