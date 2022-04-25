@@ -1,4 +1,22 @@
 # gir1.2* di waydroid-20220315
+
+# waydroid Depends: python3:any, lxc, python3-gbinder, python3-gi
+# libgbinder Depends: libglibutil (>= 1.0.52), libc6 (>= 2.17), libglib2.0-0 (>= 2.37.3)
+# libgbinder-dev Depends: libgbinder (= 1.1.19)
+# libgbinder-tools Depends: libgbinder
+# libglibutil Depends: libc6 (>= 2.14), libglib2.0-0 (>= 2.37.3)
+# libglibutil-dev Depends: libglibutil (= 1.0.63) 
+# python3-gbinder Depends: libc6 (>= 2.4), libgbinder, python3 (<< 3.10), python3 (>= 3.9~) 
+# python3-gbinder-dbgsym Depends: python3-gbinder (= 1.0.0~git20220425-1)
+# 
+#
+# not found packages
+# gir1.2-gck-1gir1.2-gcr-3
+# gir1.2-gtk-4.0
+# gir1.2-mutter-9
+# gir1.2-tracker-3.0
+ 
+
 apt install gir1.2-accountsservice-1.0 \
 gir1.2-atk-1.0 \
 gir1.2-atspi-2.0 \
