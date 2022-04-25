@@ -1,0 +1,71 @@
+# gir1.2* di waydroid-20220315
+
+```
+apt install gir1.2-accountsservice-1.0 \
+gir1.2-atk-1.0 \
+gir1.2-atspi-2.0 \
+gir1.2-caribou-1.0 \
+gir1.2-champlain-0.12 \
+gir1.2-clutter-1.0 \
+gir1.2-cogl-1.0:amd64 \
+gir1.2-coglpango-1.0 \
+gir1.2-dazzle-1.0 \
+gir1.2-evince-3.0 \
+gir1.2-freedesktop \
+gir1.2-gck-1\
+gir1.2-gcr-3 \
+gir1.2-gdata-0.0 \
+gir1.2-gdesktopenums-3.0 \
+gir1.2-gdkpixbuf-2.0 \
+gir1.2-gdm-1.0 \
+gir1.2-geoclue-2.0 \
+gir1.2-geocodeglib-1.0 \
+gir1.2-gfbgraph-0.2 \
+gir1.2-ggit-1.0 \
+gir1.2-glib-2.0 \
+gir1.2-gmenu-3.0 \
+gir1.2-gnomebluetooth-1.0 \
+gir1.2-gnomedesktop-3.0 \
+gir1.2-goa-1.0 \
+gir1.2-graphene-1.0 \
+gir1.2-grilo-0.3 \
+gir1.2-gst-plugins-bad-1.0 \
+gir1.2-gst-plugins-base-1.0 \
+gir1.2-gstreamer-1.0 \
+gir1.2-gtk-3.0 \
+gir1.2-gtk-4.0 \
+gir1.2-gtkchamplain-0.12 \
+gir1.2-gtkclutter-1.0 \
+gir1.2-gtksource-4 \
+gir1.2-gucharmap-2.90 \
+gir1.2-gweather-3.0 \
+gir1.2-handy-1 \
+gir1.2-harfbuzz-0.0 \
+gir1.2-ibus-1.0 \
+gir1.2-javascriptcoregtk-4.0 \
+gir1.2-json-1.0 \
+gir1.2-lokdocview-0.1 \
+gir1.2-malcontent-0 \
+gir1.2-mediaart-2.0 \
+gir1.2-mutter-9 \
+gir1.2-nm-1.0 \
+gir1.2-nma-1.0 \
+gir1.2-notify-0.7 \
+gir1.2-packagekitglib-1.0 \
+gir1.2-pango-1.0 \
+gir1.2-peas-1.0 \
+gir1.2-polkit-1.0 \
+gir1.2-rb-3.0 \
+gir1.2-rest-0.7 \
+gir1.2-rsvg-2.0 \
+gir1.2-secret-1 \
+gir1.2-soup-2.4 \
+gir1.2-totem-1.0 \
+gir1.2-totemplparser-1.0 \
+gir1.2-tracker-3.0 \
+gir1.2-upowerglib-1.0 \
+gir1.2-vte-2.91 \
+gir1.2-webkit2-4.0 \
+gir1.2-wnck-3.0 \
+gir1.2-zpj-0.0
+```
