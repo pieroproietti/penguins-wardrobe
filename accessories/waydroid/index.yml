@@ -38,7 +38,9 @@ sequence:
   - python3-pip
   - gir1.2-webkit2-4.0 # need
   - gir1.2-vte-2.91 # need
-  - xclip # comunque lo preende
+  - xclip # comunque lo prende
+  - libvte-2.91-dev # undecided
+
   noInstallRecommends:
     - gdm3
   debs: true
