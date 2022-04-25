@@ -1,6 +1,4 @@
 # gir1.2* di waydroid-20220315
-
-```
 apt install gir1.2-accountsservice-1.0 \
 gir1.2-atk-1.0 \
 gir1.2-atspi-2.0 \
@@ -68,4 +66,3 @@ gir1.2-vte-2.91 \
 gir1.2-webkit2-4.0 \
 gir1.2-wnck-3.0 \
 gir1.2-zpj-0.0
-```
