@@ -35,6 +35,8 @@ sequence:
     - wget
   packages:
   - python3-gi
+  - python3-pip
+  - xclip # comunque lo preende
   noInstallRecommends:
     - gdm3
   debs: true
