@@ -53,4 +53,4 @@ customize:
     - install_waydroid_settings.sh
     - install_image_from_local.sh
     - no_hw_accelleration.sh
-    - ln -s ./bin-python3 ./bin/python
+    - ln -s /bin/python3 /bin/python
