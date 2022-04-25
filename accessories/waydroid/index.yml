@@ -34,13 +34,14 @@ sequence:
     - lxc
     - wget
   packages:
-  - python3-gi
-  - python3-pip
-  - gir1.2-webkit2-4.0 # need
-  - gir1.2-vte-2.91 # need
-  - xclip # comunque lo prende
-  - libvte-2.91-dev # undecided
-
+    - gir1.2-gtk-3.0 # john
+    - gir1.2-vte-2.91 # undecided
+    - gir1.2-webkit2-4.0 # need
+    - libvte-2.91-dev  # need
+    - python3-gi # john
+    - python3-gi-cairo # john
+    - python3-pip
+    - xclip # comunque lo prende
   noInstallRecommends:
     - gdm3
   debs: true
