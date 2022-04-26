@@ -22,8 +22,7 @@ sequence:
     update: true
     upgrade: true
   packages:
-    - cinnamon
-    - firefox-esr
+    - cinnamon-desktop-environment
   accessories:
     - base
     - firmwares
