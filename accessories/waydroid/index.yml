@@ -37,6 +37,7 @@ sequence:
     - python3-gi # john
     - python3-gi-cairo # john
     - python3-pip
+    - spice-vdagent # only cut and copy
     - xclip # take it the same
     # waydroid
   noInstallRecommends:
