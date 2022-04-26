@@ -49,7 +49,7 @@ sequence:
     - sqlite3 # https://github.com/casualsnek/waydroid_script/
   noInstallRecommends:
     - gdm3
-  debs: true
+  debs: false
     # libgbinder
     # libgbinder-dev
     # libgbinder-tools

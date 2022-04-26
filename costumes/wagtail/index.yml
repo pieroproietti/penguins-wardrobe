@@ -27,7 +27,12 @@ sequence:
   - gnome-session
   - gnome-shell
   - gnome-terminal
+  - python3-pip
   - xclip
+  # installo le pip per waydroid
+  packagesPip:
+    - gbinder-python # senza non funge
+    - pyclip
   accessories:
     # base
     # eggs-dev
