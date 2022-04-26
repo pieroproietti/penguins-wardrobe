@@ -13,3 +13,5 @@ cp /usr/share/waydroid-settings/waydroid-settings.sh /usr/bin/
 chmod +x /usr/bin/waydroid-settings.sh
 cp /usr/share/waydroid-settings/icon2.png /usr/lib/waydroid/data/wd-settings-icon.png
 cp /usr/share/waydroid-settings/*.desktop /usr/share/applications/
+
+# wget -O - https://raw.githubusercontent.com/axel358/Waydroid-Settings/main/install.sh | bash

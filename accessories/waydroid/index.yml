@@ -27,19 +27,27 @@ sequence:
     - git
     - iptables
     - lxc
+    - python3
     - wget
   packages:
     - gir1.2-gtk-3.0 # john
-    #- gir1.2-gtk-4.0 # undecided
+    #- gir1.2-gtk-4.0 # we can't find it
     - gir1.2-vte-2.91 # undecided
     - gir1.2-webkit2-4.0 # need
     - libvte-2.91-dev  # need
     - python3-gi # john
     - python3-gi-cairo # john
     - python3-pip
-    - spice-vdagent # only cut and copy
     - xclip # take it the same
+
     # waydroid
+
+    # cut and copy VM
+    - spice-vdagent # only cut and copy
+
+    # waydroid_extras
+    - lzip # https://github.com/casualsnek/waydroid_script/
+    - sqlite # https://github.com/casualsnek/waydroid_script/
   noInstallRecommends:
     - gdm3
   debs: true
