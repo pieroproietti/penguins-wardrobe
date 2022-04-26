@@ -25,9 +25,9 @@ sequence:
     - cinnamon-desktop-environment
   accessories:
     - base
-    - firmwares
+    # firmwares
     - grafica
-    - liquorix_chimaera
+    # liquorix_chimaera
     - multimedia
     - office
 customize:
