@@ -39,8 +39,7 @@ sequence:
     - python3-gi-cairo # john
     - python3-pip
     - xclip # take it the same
-
-    # waydroid
+    - waydroid
 
     # cut and copy VM
     - spice-vdagent # only cut and copy
@@ -51,6 +50,13 @@ sequence:
   noInstallRecommends:
     - gdm3
   debs: true
+    # libgbinder
+    # libgbinder-dev
+    # libgbinder-tools
+    # libglibutil
+    # libglibutil-dev
+    # python3-gbinder
+    # python3-gbinder-dbgsym
   packagesPip:
     - gbinder-python # senza non funge
     - pyclip
