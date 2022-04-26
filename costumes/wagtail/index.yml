@@ -6,10 +6,6 @@ author: artisan
 release: 0.0.6
 distributions: 
 - bullseye
-- bookworm
-- chimaera
-- focal
-- jammy
 sequence:
   repositories:
     source_list:
@@ -29,10 +25,7 @@ sequence:
   - gnome-terminal
   - python3-pip
   - xclip
-  # installo le pip per waydroid
-  packagesPip:
-    - gbinder-python # senza non funge
-    - pyclip
+  - spice-vdagent # 
   accessories:
     # base
     # eggs-dev
