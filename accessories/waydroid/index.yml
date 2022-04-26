@@ -47,7 +47,7 @@ sequence:
 
     # waydroid_extras
     - lzip # https://github.com/casualsnek/waydroid_script/
-    - sqlite # https://github.com/casualsnek/waydroid_script/
+    - sqlite3 # https://github.com/casualsnek/waydroid_script/
   noInstallRecommends:
     - gdm3
   debs: true
