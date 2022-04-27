@@ -16,6 +16,7 @@ sequence:
     update: true
     upgrade: true
   packages:
+  - firefox-esr
   - spice-vdagent
   packages_no_install_recommends:
   - gdm3
