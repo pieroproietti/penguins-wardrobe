@@ -33,7 +33,7 @@ sequence:
     - python3-pip
     - waydroid
     - xclip
-  noInstallRecommends:
+  packages_no_install_recommends:
     - gdm3
   debs: false
   packagesPip:

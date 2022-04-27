@@ -44,7 +44,7 @@ sequence:
     # waydroid_extras
     - lzip # https://github.com/casualsnek/waydroid_script/
     - sqlite3 # https://github.com/casualsnek/waydroid_script/
-  noInstallRecommends:
+  packages_no_install_recommends:
     - gdm3
   debs: false
     # libgbinder
