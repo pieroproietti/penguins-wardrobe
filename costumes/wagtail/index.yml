@@ -20,12 +20,13 @@ sequence:
   - spice-vdagent
   packages_no_install_recommends:
   - gdm3
+  - gnome-control-center
   - gnome-session
   - gnome-terminal
   accessories:
     # base
-    - eggs-dev
-    # firmwares
+    # eggs-dev
+    - firmwares
     - waydroid
 customize:
   dirs: true
