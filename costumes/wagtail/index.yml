@@ -27,6 +27,6 @@ sequence:
     # firmwares
     - waydroid
 customize:
-  dirs: false
+  dirs: true
   hostname: true
 reboot: true
