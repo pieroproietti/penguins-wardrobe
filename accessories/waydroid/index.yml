@@ -24,6 +24,7 @@ sequence:
     update: true
     upgrade: true
   dependencies:
+    - ca-certificates
     - git
     - iptables
     - lxc
