@@ -23,10 +23,10 @@ sequence:
     - plasma-workspace-wayland
     - sddm
   accessories:
-    #- base
+    - base
     #- eggs-dev
     #- firmwares
-    - waydroid-working
+    - ./waydroid-warbler
 customize:
   dirs: true
   hostname: true
