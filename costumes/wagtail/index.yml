@@ -25,7 +25,7 @@ sequence:
   - gnome-terminal
   accessories:
     - base
-    - eggs-dev
+    # eggs-dev
     # firmwares\network-wifi
     # firmwares\video-amd
     - waydroid
