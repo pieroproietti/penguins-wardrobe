@@ -26,8 +26,8 @@ sequence:
   accessories:
     - base
     - eggs-dev
-    - firmwares\network-wifi
-    - firmwares\video-amd
+    # firmwares\network-wifi
+    # firmwares\video-amd
     - waydroid
 customize:
   dirs: true
