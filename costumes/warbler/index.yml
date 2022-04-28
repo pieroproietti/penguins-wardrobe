@@ -5,11 +5,7 @@ description: KDE waydroid installation using internal waydroid bookworm
 author: artisan
 release: 0.0.4
 distributions: 
-- bullseye
 - bookworm
-- chimaera
-- focal
-- jammy
 sequence:
   repositories:
     sources_list:
