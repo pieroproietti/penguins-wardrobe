@@ -24,9 +24,9 @@ sequence:
   - gnome-session
   - gnome-terminal
   accessories:
-    # base
-    # eggs-dev
-    - firmwares
+    - base
+    - eggs-dev
+    - firmwares\network-wifi
     - waydroid
 customize:
   dirs: true
