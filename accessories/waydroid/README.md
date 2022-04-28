@@ -47,14 +47,14 @@ rm gbinder-python -rf
 git clone --single-branch --branch bullseye https://github.com/erfanoabdi/gbinder-python.git
 cd gbinder-python/
 sudo apt build-dep .
-dch --create --package "gbinder-python" --newversion "1.0.0~git20220426-1" foo bar
-dh_make --createorig -p "gbinder-python_1.0.0~git20220426"
+dch --create --package "gbinder-python" --newversion "1.0.0~git20220427-1" foo bar
+dh_make --createorig -p "gbinder-python_1.0.0~git20220427"
 ```
 # Select "p" when prompted for the package type, leave the rest at the defaults
 ```
 debuild -us -uc
 cd ..
-sudo dpkg -i python3-gbinder_1.0.0~git20220426-1_amd64.deb
+sudo dpkg -i python3-gbinder_1.0.0~git20220427-1_amd64.deb
 ```
 Build and install Waydroid
 
