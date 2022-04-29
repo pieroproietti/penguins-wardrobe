@@ -1,0 +1,66 @@
+# waydroid
+---
+name: waydroid
+description: waydroid installer
+author: Jon West
+release: 0.0.1
+distributions:
+  - bullseye
+sequence:
+  repositories:
+    sources_list:
+      - main
+      - contrib
+      - non-free
+    sources_list_d:
+      - rm -f /usr/share/keyrings/waydroid.gpg
+      - >-
+        curl -fsSL  "https://repo.waydro.id/waydroid.gpg" | gpg --dearmor -o
+        /usr/share/keyrings/waydroid.gpg
+      - >-
+        echo "deb [signed-by=/usr/share/keyrings/waydroid.gpg]
+        https://repo.waydro.id/ `lsb_release -cs` main" | tee
+        /etc/apt/sources.list.d/waydroid-ppa.list > /dev/null
+    update: true
+    upgrade: true
+  dependencies:
+    - ca-certificates
+    - git
+    - iptables
+    - lxc
+    - python3
+    - wget
+  packages:
+    - gir1.2-gtk-3.0 # john
+    # gir1.2-gtk-4.0 # we can't find it
+    - gir1.2-vte-2.91 # undecided
+    - gir1.2-webkit2-4.0 # need
+    - libvte-2.91-dev  # need
+    - python3-gi # john
+    - python3-gi-cairo # john
+    - python3-pip
+    - xclip # take it the same
+    # waydroid
+
+    # waydroid_extras
+    - lzip # https://github.com/casualsnek/waydroid_script/
+    - sqlite3 # https://github.com/casualsnek/waydroid_script/
+  packages_no_install_recommends:
+    - gdm3
+  debs: true
+    # libgbinder
+    # libgbinder-dev
+    # libgbinder-tools
+    # libglibutil
+    # libglibutil-dev
+    # python3-gbinder
+    # python3-gbinder-dbgsym
+  packagesPip:
+    - gbinder-python # senza non funge
+    - pyclip
+customize:
+  scripts:
+    - install_waydroid_settings.sh
+    - install_image_from_local.sh
+    - no_hw_accelleration.sh
+    - "ln -s /bin/python3 /bin/python"
