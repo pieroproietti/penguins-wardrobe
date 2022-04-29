@@ -1,12 +1,30 @@
 #!/bin/bash
+DEST=~/WAYDROID-DEBS
+if [ ! $# -eq 0 ]; then
+    DEST=$1
+fi
+
+rm -f $DEST 
+if [ ! -d "$DEST" ]; then
+    mkdir $DEST
+fi
+
+
 # Here we are always root and always are working on a virgin system
 tmp=`mktemp -d`
-RELEASE=git20220429
+RELEASE=git$(date '+%Y%m%d')
 export EMAIL="piero.proietti@gmail.com"
 
-sudo apt install lxc
-sudo apt install devscripts dh-make
-sudo pip install cython
+# install waydroid prerequisites
+sudo apt install ca-certificates git iptables lxc python3 wget
+# install waydroid prerequisites 2
+sudo apt install gir1.2-gtk-3.0 gir1.2-vte-2.91 gir1.2-webkit2-4.0 libvte-2.91-dev python3-gi python3-gi-cairo python3-pip xclip
+
+# install prerequisites for build
+sudo apt install devscripts dh-make bison flex cython3 dh-python libpkgconf3 libpython3-all-dev pkgconf python3-all python3-all-dev
+# sudo pip install cython
+read -p "Press enter to continue"
+clear
 
 cd $tmp
 mkdir waydroid-build && cd $_
@@ -67,4 +85,5 @@ debuild -us -uc
 cd ..
 sudo dpkg -i waydroid_1.2.1_all.deb
 read -p "Press enter to continue"
-cd $tmp
+cp $tmp/waydroid-build/*.deb $DEST
+
