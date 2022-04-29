@@ -2,7 +2,10 @@
 RELEASE=git20220429
 export EMAIL="piero.proietti@gmail.com"
 
-# sudo apt install devscripts dh-make
+# sudo apt install devscripts dh-make 
+# sembra servano per jammy
+# per; lamenta mancanza di gbinber.c
+# sudo apt install python3-all dh-python
 sudo rmdir waydroid-build -rf
 
 mkdir waydroid-build && cd $_
