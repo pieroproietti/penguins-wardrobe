@@ -17,6 +17,7 @@ echo 7 > debian/compat
 debuild -us -uc
 cd ..
 sudo dpkg -i libglibutil*.deb
+read -p "Press enter to continue"
 
 # libgbinder
 clear
@@ -28,6 +29,7 @@ echo 7 > debian/compat
 debuild -us -uc
 cd ..
 sudo dpkg -i libgbinder*.deb
+read -p "Press enter to continue"
 
 # gbinder-python
 clear
@@ -41,6 +43,7 @@ dh_make --createorig -p "gbinder-python_1.0.0~${RELEASE}"
 debuild -us -uc
 cd ..
 sudo dpkg -i python3-gbinder_1.0.0~${RELEASE}-1_amd64.deb
+read -p "Press enter to continue"
 
 # waydroid
 clear
@@ -51,3 +54,4 @@ sudo apt build-dep .
 debuild -us -uc
 cd ..
 sudo dpkg -i waydroid_1.2.1_all.deb
+read -p "Press enter to continue"
