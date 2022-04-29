@@ -28,7 +28,7 @@ sequence:
     # eggs-dev
     # firmwares\network-wifi
     # firmwares\video-amd
-    - waydroid-bookworm
+    - waydroid-jammy
 customize:
   dirs: true
   hostname: true
