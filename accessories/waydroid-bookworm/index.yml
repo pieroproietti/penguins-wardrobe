@@ -47,14 +47,7 @@ sequence:
     - sqlite3 # https://github.com/casualsnek/waydroid_script/
   packages_no_install_recommends:
     - gdm3
-  debs: false
-    # libgbinder
-    # libgbinder-dev
-    # libgbinder-tools
-    # libglibutil
-    # libglibutil-dev
-    # python3-gbinder
-    # python3-gbinder-dbgsym
+  debs: true
   packagesPip:
     - gbinder-python # senza non funge
     - pyclip
