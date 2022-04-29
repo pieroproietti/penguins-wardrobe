@@ -1,5 +1,6 @@
 #!/bin/bash
 RELEASE=git20220429
+export EMAIL="piero.proietti@gmail.com"
 
 # sudo apt install devscripts dh-make
 sudo rmdir waydroid-build -rf
