@@ -36,6 +36,7 @@ sequence:
     - network-manager-openvpn
     - network-manager-openvpn-gnome
     - qt5ct
+    - spice-vdagent
     - tango-icon-theme
     - thunar
     - xarchiver
