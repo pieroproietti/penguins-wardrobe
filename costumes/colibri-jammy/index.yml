@@ -67,6 +67,10 @@ customize:
     - chmod +x /usr/local/bin/g4clone
     - curl -fsSL "https://raw.githubusercontent.com/pieroproietti/penguins-eggs/master/g4/g4passwd" -o /usr/local/bin/g4passwd
     - chmod +x /usr/local/bin/g4passwd
+    #
+    # remove packages
+    #
+    - apt purge ubuntu-session -y
 
   hostname: true
 reboot: true
