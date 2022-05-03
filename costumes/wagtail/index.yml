@@ -3,9 +3,11 @@
 name: wagtail
 description: GNOME waydroid installation
 author: artisan
-release: 0.0.6
+release: 0.0.7
 distributions: 
 - bullseye
+- bookworm
+- jammy
 sequence:
   repositories:
     source_list:
