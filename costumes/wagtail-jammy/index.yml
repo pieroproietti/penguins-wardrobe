@@ -5,8 +5,7 @@ description: GNOME waydroid installation
 author: artisan
 release: 0.0.7
 distributions: 
-- bullseye
-- bookworm
+- focal
 - jammy
 sequence:
   repositories:
@@ -18,7 +17,7 @@ sequence:
     update: true
     upgrade: true
   packages:
-  - firefox-esr
+  - firefox
   - spice-vdagent
   packages_no_install_recommends:
   - gdm3

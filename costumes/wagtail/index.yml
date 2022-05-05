@@ -7,7 +7,7 @@ release: 0.0.7
 distributions: 
 - bullseye
 - bookworm
-- jammy
+- chimaera
 sequence:
   repositories:
     source_list:
@@ -30,7 +30,7 @@ sequence:
     # eggs-dev
     # firmwares\network-wifi
     # firmwares\video-amd
-    - waydroid-jammy
+    - waydroid
 customize:
   dirs: true
   hostname: true
