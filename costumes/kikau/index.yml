@@ -30,5 +30,5 @@ customize:
   dirs: true
   scripts:
     - desktop_link_set.sh
-    # sddm_background_set.sh
+    # sddm_set.sh
 reboot: true

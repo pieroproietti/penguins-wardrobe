@@ -33,5 +33,7 @@ sequence:
     - waydroid
 customize:
   dirs: true
+  scripts:
+    - gdm3_set.sh
   hostname: true
 reboot: true
