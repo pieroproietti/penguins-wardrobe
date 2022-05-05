@@ -10,9 +10,6 @@ distributions:
   - bullseye
   - buster
   - chimaera
-  - focal
-  - impish
-  - jammy
 sequence:
   repositories:
     sources_list:
@@ -25,15 +22,15 @@ sequence:
     - cinnamon-desktop-environment
   accessories:
     - base
-    # firmwares
+    - firmwares
     - grafica
-    # liquorix_chimaera
+    - liquorix_chimaera
     - multimedia
     - office
 customize:
   dirs: true
   scripts:
-    - desktop_link_set.sh
-    - lightdm_set.sh 
+    - ../../scripts/config_desktop_link.sh
+    - ../../scripts/config_lightdm.sh
   hostname: true
 reboot: true
