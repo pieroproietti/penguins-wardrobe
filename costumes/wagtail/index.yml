@@ -34,6 +34,6 @@ sequence:
 customize:
   dirs: true
   scripts:
-    - gdm3_set.sh
+    - ../../scripts/config_gdm3.sh
   hostname: true
 reboot: true

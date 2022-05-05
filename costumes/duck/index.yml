@@ -24,7 +24,7 @@ sequence:
     - base
     - firmwares
     - grafica
-    - liquorix_chimaera
+    - liquorix
     - multimedia
     - office
 customize:

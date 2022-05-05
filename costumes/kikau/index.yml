@@ -29,6 +29,6 @@ customize:
   hostname: true
   dirs: true
   scripts:
-    - desktop_link_set.sh
-    # sddm_set.sh
+    - ../../scripts/config_desktop_link.sh
+    # ../../scripts/config_sddm.sh
 reboot: true

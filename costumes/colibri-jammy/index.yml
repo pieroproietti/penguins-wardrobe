@@ -56,8 +56,8 @@ sequence:
 customize:
   dirs: true
   scripts:
-    - desktop_link_set.sh
-    - gdm3_set.sh
+    - ../../scripts/config_desktop_link.sh
+    - ../../scripts/config_gdm3.sh
     #
     # insert command g4artisan
     #
