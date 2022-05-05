@@ -1,0 +1,37 @@
+# wagtail
+---
+name: wagtail
+description: GNOME waydroid installation
+author: artisan
+release: 0.0.7
+distributions: 
+- bullseye
+- bookworm
+- jammy
+sequence:
+  repositories:
+    source_list:
+    - main
+    - contrib
+    - non-free
+    source_list_d:
+    update: true
+    upgrade: true
+  packages:
+  - firefox-esr
+  - spice-vdagent
+  packages_no_install_recommends:
+  - gdm3
+  - gnome-control-center
+  - gnome-session
+  - gnome-terminal
+  accessories:
+    - base
+    # eggs-dev
+    # firmwares\network-wifi
+    # firmwares\video-amd
+    - waydroid-jammy
+customize:
+  dirs: true
+  hostname: true
+reboot: true
