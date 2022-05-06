@@ -1,7 +1,9 @@
 #!/bin/sh
 
-USER=$1
-DESKTOP=$2
+# USER=$1
+# DESKTOP=$2
+USER=${SUDO_USER}
+DESKTOP=${EGGS_DESKTOP}
 
 # create DESKTOP
 if [ ! -d "$DESKTOP" ]; then
