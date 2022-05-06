@@ -1,10 +1,13 @@
 #!/bin/sh
 
+BACKGROUND=$1
 #USER=$1
 #DESKTOP=$2
+
+## FROM ENV
 USER=${SUDO_USER}
 DESKTOP=${EGGS_DESKTOP}
-BACKGROUND=${EGGS_BACKGROUND}
+
 
 # set autologin
 # We need some different to just append 
