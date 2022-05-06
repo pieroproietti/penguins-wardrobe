@@ -60,7 +60,7 @@ customize:
   dirs: true
   scripts:
     - ../../scripts/config_desktop_link.sh
-    - ../../scripts/config_lightdm.sh # /usr/share/backgrounds/colibri/3794764350_2839ca0b26_b.jpg
+    - ../../scripts/config_lightdm.sh
     #
     # insert command g4artisan
     #
