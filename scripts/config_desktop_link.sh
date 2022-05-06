@@ -3,7 +3,7 @@
 # USER=$1
 # DESKTOP=$2
 USER=${SUDO_USER}
-DESKTOP=${EGGS_DESKTOP}
+DESKTOP=`su ${SUDO_USER} xdg-user-dir DESKTOP`
 
 # create DESKTOP
 if [ ! -d "$DESKTOP" ]; then
