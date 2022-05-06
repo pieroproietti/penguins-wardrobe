@@ -56,11 +56,10 @@ sequence:
     - yad
   accessories:
     - firmwares
-    - liquorix-chimaera
-    # ./live-installer
-    - ./grafica
-    - ./multimedia
-    - ./office
+    - liquorix
+    - grafica
+    - multimedia
+    - office
     - base
     - eggs-dev
 customize:
