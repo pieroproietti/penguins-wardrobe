@@ -61,6 +61,17 @@ customize:
   scripts:
     - ../../scripts/config_desktop_link.sh
     - ../../scripts/config_lightdm.sh
+    #
+    # insert command g4artisan
+    #
+    - rm -f /usr/local/bin/g4*
+    - curl -fsSL "https://raw.githubusercontent.com/pieroproietti/penguins-eggs/master/g4/g4artisan" -o /usr/local/bin/g4artisan
+    - chmod +x /usr/local/bin/g4artisan
+    - curl -fsSL "https://raw.githubusercontent.com/pieroproietti/penguins-eggs/master/g4/g4clone" -o /usr/local/bin/g4clone
+    - chmod +x /usr/local/bin/g4clone
+    - curl -fsSL "https://raw.githubusercontent.com/pieroproietti/penguins-eggs/master/g4/g4passwd" -o /usr/local/bin/g4passwd
+    - chmod +x /usr/local/bin/g4passwd
+
   hostname: true
 reboot: true
 

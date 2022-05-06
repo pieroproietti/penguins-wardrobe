@@ -110,8 +110,8 @@ sequence:
 customize:
   dirs: true
   scripts:
-    - desktop_link_set.sh
-    - lightdm_background_set.sh
+    - ../../scripts/config_desktop_link.sh
+    - ../../scripts/config_lightdm.sh
   hostname: true
 reboot: true
 ```
@@ -195,7 +195,7 @@ is boolean too, and if present hostname will take the name of the costume and ho
 ##### scripts
 scripts contain an array of one or more scripts to be used to customize the result
 
-You can add others scripts and directories inside:
+You can add others scripts and directories inside the costume or use general scripts under ```../../scripts/``` like ```../../scripts/config_desktop_link.sh```
 
 **Scripts examples**
 
@@ -207,7 +207,6 @@ Scripts are called from customize/scripts and executed on the specific order.
 **Accessories**
 An accessory it'a costume who live under accessories directory. You can see it as a belt to dress with your pants or a bag associated to your chotches.
 Accessories are used alone or from costumes, for example: waydroid is an accessoru and it's used gwaydroid, kwaydrois, the same for firmware who is added in hen, gwaydroid, kwaydroid and all future costumes who need a good hardware compatibility.
-
 
 # wardrobe get
 
