@@ -1,6 +1,6 @@
 #!/bin/sh
 
-BACKGROUD=`ls /usr/share/backgrounds/colibri/*.jpg`
+BACKGROUND=`ls /usr/share/backgrounds/colibri/*.jpg`
 #BACKGROUND=$1
 USER=${SUDO_USER}
 
