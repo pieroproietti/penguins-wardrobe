@@ -13,6 +13,8 @@ distributions:
   - jammy
 sequence:
   repositories:
+    sources_list:
+      - main
     sources_list_d:
       - rm -f /usr/share/keyrings/packages.microsoft.gpg
       - >-
