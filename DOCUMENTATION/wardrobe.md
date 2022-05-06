@@ -18,8 +18,26 @@ La nostra struttura del wardrobe è questa:
 ```
 ~/wardrobe ─┬─ accessories
             ├─ costumes 
-            └─ DOCUMENTATION
+            ├─ DOCUMENTATION
+            ├─ scripts
+            ├─ servers
+            └─ tools
 ```
+
+## accessories
+Contiene gli accessori dei costumi
+## costumes
+Contiene la definizione dei costumi
+## DOCUMENTATION
+Contiene questa documentatione
+## scripts
+Contiene degli script per configurare i link sul desktop ed il desltop manager. Vengono chiamati nella sezione finale per configurare lo sfondo, i link e l'autologin.
+## servers
+Contiene dei costumi server.
+
+## tools
+Contiene degli script di uso generale, in particolare la creazione dei pacchetti deb per waudroid,
+
 
 # I comandi wardrobe
 
@@ -55,5 +73,5 @@ Finalmente il comando per la vestizione: legge la definizione del costume e proc
 
 Dato che questo comando andrà ad installare pacchetti, effettuare delle copie in aree riservate, etc, necessita dei diritti di root e dovrà essere chiamato con sudo:
 
-```sudo eggs wear colibri```
+```sudo eggs wardrobe wear colibri```
 
