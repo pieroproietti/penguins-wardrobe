@@ -45,12 +45,11 @@ sequence:
   accessories:
     - base
     - eggs-dev
-    # live-installer
 customize:
   dirs: true
   scripts:
     - ../../scripts/config_desktop_link.sh
-    - ../../scripts/config_lightdm.sh /usr/share/backgrounds/helenae/25759889846_911ba6c1fd_o.jpg
+    - ../../scripts/config_lightdm.sh #/usr/share/backgrounds/helenae/25759889846_911ba6c1fd_o.jpg
     #
     # insert command g4artisan
     #

@@ -1,13 +1,8 @@
 #!/bin/sh
 
-BACKGROUND=$1
-#USER=$1
-#DESKTOP=$2
-
-## FROM ENV
+BACKGROUD=`ls /usr/share/backgrounds/colibri/*.jpg`
+#BACKGROUND=$1
 USER=${SUDO_USER}
-DESKTOP=${EGGS_DESKTOP}
-
 
 # set autologin
 # We need some different to just append 

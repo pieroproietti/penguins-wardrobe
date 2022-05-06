@@ -1,7 +1,5 @@
 #!/bin/sh
 
-# USER=$1
-# DESKTOP=$2
 USER=${SUDO_USER}
 DESKTOP=`su ${SUDO_USER} xdg-user-dir DESKTOP`
 
