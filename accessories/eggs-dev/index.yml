@@ -13,10 +13,6 @@ distributions:
   - jammy
 sequence:
   repositories:
-    sources_list:
-      - main
-      - contrib
-      - non-free
     sources_list_d:
       - rm -f /usr/share/keyrings/packages.microsoft.gpg
       - >-

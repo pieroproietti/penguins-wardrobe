@@ -12,7 +12,6 @@ sequence:
     sources_list:
       - main
       - contrib
-      - non-free
     sources_list_d:
       - >-
         echo "#deb https://enterprise.proxmox.com/debian/pve `lsb_release -cs`
