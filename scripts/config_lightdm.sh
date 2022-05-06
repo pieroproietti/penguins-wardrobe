@@ -1,7 +1,7 @@
 #!/bin/sh
 
-BACKGROUND=`ls /usr/share/backgrounds/colibri/*.jpg`
 #BACKGROUND=$1
+BACKGROUND=`ls /usr/share/backgrounds/halenae/*.jpg`
 USER=${SUDO_USER}
 
 # set autologin
