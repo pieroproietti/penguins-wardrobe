@@ -1,15 +1,12 @@
 # liquorix
 ---
 name: liquorix
-description: install liquorix kernel
+description: install liquorix kernel Debian
 author: artisan
 distributions:
   - bookworm
   - bullseye
   - buster
-  - focal
-  - impish
-  - jammy
 sequence:
   repositories:
     sources_list:

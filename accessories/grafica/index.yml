@@ -13,14 +13,14 @@ distributions:
   - impish
   - jammy
 sequence:
-    sources_list_d:
-      - rm -f /etc/apt/trusted.gpg.d/quirinux-ga.gpg
-      - >-
-        curl -fsSL "http://www.quirinux.ga/gpg/quirinux.asc" |
-        gpg --dearmor -o /etc/apt/trusted.gpg.d/quirinux-ga.gpg
-      - >-
-        echo "deb http://quirinux.ga/repo/ quirinux main" | tee
-        /etc/apt/sources.list.d/quirinux-ga.list > /dev/null
+  sources_list_d:
+    - rm -f /etc/apt/trusted.gpg.d/quirinux-ga.gpg
+    - >-
+      curl -fsSL "http://www.quirinux.ga/gpg/quirinux.asc" |
+      gpg --dearmor -o /etc/apt/trusted.gpg.d/quirinux-ga.gpg
+    - >-
+      echo "deb http://quirinux.ga/repo/ quirinux main" | tee
+      /etc/apt/sources.list.d/quirinux-ga.list > /dev/null
 
   packages:
     - converseen
