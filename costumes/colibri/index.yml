@@ -31,12 +31,14 @@ sequence:
         /etc/apt/sources.list.d/anydesk-stable.list > /dev/null    
     update: true
     upgrade: true
+  dependencies:
+    - lightdm
+    - lightdm-gtk-greeter # this is mandatory for ubuntu, without it will install gdm3 too
   packages:
     - adwaita-qt
     - anydesk
     # firefox-esr # excluded becouse not present in ubuntu
     - libxfce4ui-utils
-    - lightdm
     - lightdm-gtk-greeter # this is mandatory for ubuntu, without it will install gdm3 too
     - network-manager-gnome
     - network-manager-openvpn
