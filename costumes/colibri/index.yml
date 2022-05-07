@@ -12,7 +12,9 @@ distributions:
   - bullseye
   - buster
   - chimaera
-sequence:
+  - focal
+  - jammy
+  sequence:
   repositories:
     sources_list:
       - main
@@ -32,9 +34,10 @@ sequence:
   packages:
     - adwaita-qt
     - anydesk
-    # firefox-esr
+    # firefox-esr # excluded becouse not present in ubuntu
     - libxfce4ui-utils
     - lightdm
+    - lightdm-gtk-greeter # this is mandatory for ubuntu, without it will install gdm3 too
     - network-manager-gnome
     - network-manager-openvpn
     - network-manager-openvpn-gnome
