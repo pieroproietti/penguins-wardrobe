@@ -27,9 +27,9 @@ sequence:
         /etc/apt/sources.list.d/anydesk-stable.list > /dev/null    
     update: true
     upgrade: true
-  dependencies:
-    - lightdm
   packages:
+    - lightdm
+    - lightdm-greeter
     - xfce4
     - xfce4-whiskermenu-plugin
   accessories:
