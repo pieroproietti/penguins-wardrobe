@@ -40,16 +40,15 @@ sequence:
     - anydesk
     # firefox-esr # excluded becouse not present in ubuntu
     - libxfce4ui-utils
-    - network-manager-gnome
-    - network-manager-openvpn
-    - network-manager-openvpn-gnome
+    #- network-manager-gnome
+    #- network-manager-openvpn
+    #- network-manager-openvpn-gnome
     - qt5ct
     - tango-icon-theme
     - thunar
     - xarchiver
     - xfce4-appfinder
-    # xfce4-notifyd va installo altrimenti network-manager-gnome richiama gnome-shell
-    - xfce4-notifyd
+    - xfce4-notifyd # va installo altrimenti network-manager-gnome richiama gnome-shell
     - xfce4-panel
     - xfce4-pulseaudio-plugin
     - xfce4-session
