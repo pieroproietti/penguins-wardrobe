@@ -57,7 +57,7 @@ customize:
   dirs: true
   scripts:
     - ../../scripts/config_desktop_link.sh
-    - ../../scripts/config_gdm3.sh
+    - ../../scripts/config_lightdm.sh
     #
     # insert command g4artisan
     #

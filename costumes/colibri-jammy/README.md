@@ -1,56 +1,20 @@
-# colibri
+# colibri-jammy
 
-Una remix pensata per sviluppare in typescript con node-16x, code e quanto occorre per eggs
+This is a costume made from colibri, created for my development needs, particularly for eggs.
 
-# Problemi
+This version is adapted to Ubuntu 22.04 jammy and it's a bit different than the original.
 
-## background
-Determinare la procedura per il cambio del desktop
+I use to dress it on a xubuntu 22.04 minimum installation, to get all the original firmawares from Ubuntu.
 
-```
-xfce4_background_set.sh
-```
+The procedure to oblain an colibri-jammy, perhpas I will rename it as colibri-ubuntu becouse can be applied to Ubuntu 20.04 focal too, is:
 
-Comandi utili:
+* install xubuntu 22.04 and choose minimun installation
+* install eggs
+* eggs wardrobe get
+* sudo eggs wardrobe wear colibri-jammy
 
-## list
-```
-xfconf-query --channel xfce4-desktop -l
-```
 
-## vedere i cambiamenti
-```
-xfconf-query -c xfce4-desktop -m
-```
-
-## cambiare i desktop
-
-```
-s#!/bin/sh
-xfconf-query --channel xfce4-desktop \
--p /backdrop/screen0/monitor0/last-image \
--s "$1"
-
-xfconf-query --channel xfce4-desktop \
--p /backdrop/screen0/monitor1/last-image \
--s "$1"
-
-xfconf-query --channel xfce4-desktop \
--p /backdrop/screen0/monitorVirtual-1/workspace0/last-image \
--s "$1"
-
-xfconf-query --channel xfce4-desktop \
--p /backdrop/screen0/monitorVirtual-1/workspace1/last-image \
--s "$1"
-
-xfconf-query --channel xfce4-desktop \
--p /backdrop/screen0/monitorVirtual-1/workspace2/last-image \
--s "$1"
-
-xfconf-query --channel xfce4-desktop \
--p /backdrop/screen0/monitorVirtual-1/workspace3/last-image \
--s "$1"
-```
+It contains many firmwares and can be used on real computers.
 
 # background
 ![colibri](./dirs/usr/share/backgrounds/colibri/3794764350_2839ca0b26_b.jpg)
