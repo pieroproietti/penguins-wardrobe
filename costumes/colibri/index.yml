@@ -58,7 +58,7 @@ distributions:
   accessories:
     - base
     - eggs-dev
-    - firmwares
+    # firmwares
 customize:
   dirs: true
   scripts:
