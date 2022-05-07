@@ -14,7 +14,7 @@ distributions:
   - chimaera
   - focal
   - jammy
-  sequence:
+sequence:
   repositories:
     sources_list:
       - main
