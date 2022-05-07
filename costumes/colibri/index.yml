@@ -33,17 +33,18 @@ sequence:
     upgrade: true
   dependencies:
     - lightdm
+    - lightdm-autologin-greeter # this is mandatory for ubuntu, without it will install gdm3 too
     - lightdm-gtk-greeter # this is mandatory for ubuntu, without it will install gdm3 too
   packages:
-    # adwaita-qt
+    - adwaita-qt
     - anydesk
     # firefox-esr # excluded becouse not present in ubuntu
     - libxfce4ui-utils
     - lightdm-gtk-greeter # this is mandatory for ubuntu, without it will install gdm3 too
     - network-manager-gnome
-    #- network-manager-openvpn
-    #- network-manager-openvpn-gnome
-    #- qt5ct
+    - network-manager-openvpn
+    - network-manager-openvpn-gnome
+    - qt5ct
     - tango-icon-theme
     - thunar
     - xarchiver
