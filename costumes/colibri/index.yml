@@ -31,18 +31,14 @@ sequence:
         /etc/apt/sources.list.d/anydesk-stable.list > /dev/null    
     update: true
     upgrade: true
-  dependencies:
-    - lightdm
-    - lightdm-autologin-greeter # this is mandatory for ubuntu, without it will install gdm3 too
-    - lightdm-gtk-greeter # this is mandatory for ubuntu, without it will install gdm3 too
   packages:
     - adwaita-qt
     - anydesk
     # firefox-esr # excluded becouse not present in ubuntu
     - libxfce4ui-utils
-    #- network-manager-gnome
-    #- network-manager-openvpn
-    #- network-manager-openvpn-gnome
+    - lightdm
+    - lightdm-autologin-greeter # this is mandatory for ubuntu, without it will install gdm3 too
+    - lightdm-gtk-greeter # this is mandatory for ubuntu, without it will install gdm3 too
     - qt5ct
     - tango-icon-theme
     - thunar
@@ -58,6 +54,10 @@ sequence:
     - xfconf
     - xfdesktop4
     - xfwm4
+  packages_no_install_recommends:
+    - network-manager-gnome
+    - network-manager-openvpn
+    - network-manager-openvpn-gnome
   accessories:
     - base
     - eggs-dev
