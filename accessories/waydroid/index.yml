@@ -5,6 +5,8 @@ description: waydroid installer
 author: Jon West & Piero Proietti
 release: 0.0.2
 distributions:
+  - bullseye
+  - bookworm
   - jammy
 sequence:
   repositories:
