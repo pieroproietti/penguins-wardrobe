@@ -20,7 +20,7 @@ sequence:
     upgrade: true
   packages:
   - firefox # ubuntu
-  - firefox-esr # debian
+  - firefox-esr # debian/devuan
   - spice-vdagent
   packages_no_install_recommends:
   - gdm3
