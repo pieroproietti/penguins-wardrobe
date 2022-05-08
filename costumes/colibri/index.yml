@@ -37,7 +37,7 @@ sequence:
     # firefox-esr # excluded becouse not present in ubuntu
     - libxfce4ui-utils
     - lightdm
-    # lightdm-autologin-greeter # this is mandatory for ubuntu, without it will install gdm3 too
+    - lightdm-autologin-greeter # this is mandatory for ubuntu, without it will install gdm3 too
     - lightdm-gtk-greeter # this is mandatory for ubuntu, without it will install gdm3 too
     - qt5ct
     - tango-icon-theme
