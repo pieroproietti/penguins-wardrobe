@@ -20,3 +20,5 @@ sequence:
     - vulkan-tools
     - vulkan-validationlayers
     - xserver-xorg-video-amdgpu
+    - firmware-amd-graphics   # firmware for AMD/ATI graphics chips supported by the radeon, amdgpu and r128 drivers
+

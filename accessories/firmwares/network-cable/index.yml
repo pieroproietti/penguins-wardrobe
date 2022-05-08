@@ -20,3 +20,11 @@ sequence:
     - usb-modeswitch
     - usb-modeswitch-data
     - wvdial
+    - firmware-bnx2x # Binary firmware for Broadcom NetXtreme II 10Gb non-free
+    - firmware-bnx2 # Binary firmware for Broadcom NetXtremeII non-free
+    - firmware-myricom #  Binary firmware for Myri-10G Ethernet adapters [non-free]
+    - firmware-netronome # Binary firmware for Netronome network adapters [non-free]
+    - firmware-netxen # Binary firmware for QLogic Intelligent Ethernet (3000 and 3100 Series) [non-free]
+    - firmware-qlogic # Binary firmware for QLogic HBAs [non-free]
+
+

@@ -15,3 +15,5 @@ distributions:
 sequence:
   packages:
     - unace-nonfree
+    - firmware-samsung # Binary firmware for Samsung MFC video codecs [non-free]
+
