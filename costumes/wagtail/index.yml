@@ -7,7 +7,8 @@ release: 0.0.7
 distributions: 
 - bullseye
 - bookworm
-- chimaera
+- focal
+- jammy
 sequence:
   repositories:
     source_list:
@@ -18,7 +19,8 @@ sequence:
     update: true
     upgrade: true
   packages:
-  - firefox-esr
+  - firefox # ubuntu
+  - firefox-esr # debian
   - spice-vdagent
   packages_no_install_recommends:
   - gdm3
