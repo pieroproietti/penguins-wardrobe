@@ -40,6 +40,7 @@ sequence:
     - lightdm-autologin-greeter # this is mandatory for ubuntu, without it will install gdm3 too
     - lightdm-gtk-greeter # this is mandatory for ubuntu, without it will install gdm3 too
     - qt5ct
+    - spice-vdagent
     - tango-icon-theme
     - thunar
     - xarchiver
