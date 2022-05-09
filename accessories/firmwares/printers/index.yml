@@ -9,9 +9,6 @@ distributions:
   - bullseye
   - buster
   - chimaera
-  - focal
-  - impish
-  - jammy
 sequence:
   packages:
     - autoconf
@@ -32,8 +29,8 @@ sequence:
     - gutenprint-locales
     - ink
     - libtool
-    - openprinting-ppds
-    - printer-driver-all
+    - openprinting-ppds # (text): OpenPrinting printer support - PostScript PPD files
+    - printer-driver-all # (text): printer drivers metapackage
     - printer-driver-brlaser
     - printer-driver-c2050
     - printer-driver-c2esp
@@ -53,7 +50,6 @@ sequence:
     - sane
     - sane-utils
     - system-config-printer
-    - system-config-printer-udev
     - system-config-printer-udev
     - tix
     - unpaper

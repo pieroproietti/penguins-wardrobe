@@ -14,8 +14,8 @@ distributions:
   - jammy
 sequence:
   packages:
-    - dahdi-firmware-nonfree  # dahdi-* packages provide the DAHDI kernel modules and their required setup environment.
-    - firmware-misc-nonfree   # This package contains the binary firmware for various drivers in the Linux kerne
+    - dahdi-firmware-nonfree  # (comm): DAHDI non-free firmware [non-free]
+    - firmware-misc-nonfree   # Binary firmware for various drivers in the Linux kernel [non-free]
     - firmware-atheros        # Binary firmware for Qualcomm Atheros wireless cards non-free
     - firmware-b43-installer  # firmware installer for the b43 driver
     - firmware-b43legacy-installer # firmware installer for the b43legacy driver contrib
@@ -27,9 +27,9 @@ sequence:
     - firmware-ivtv # Binary firmware for iTVC15-family MPEG codecs (ivtv and pvrusb2 drivers) [non-free]
     - firmware-iwlwifi #  Binary firmware for Intel Wireless cards [non-free]
     - firmware-libertas # inary firmware for Marvell wireless cards [non-free]
-    - firmware-linux # Binary firmware for various drivers in the Linux kernel (metapackage) [non-free]
-    - firmware-linux-free
-    - firmware-linux-nonfree
+    - firmware-linux # (metapackages): Binary firmware for various drivers in the Linux kernel (metapackage) [non-free]
+    - firmware-linux-free #  (kernel): Binary firmware for various drivers in the Linux kernel
+    - firmware-linux-nonfree # (metapackages): Binary firmware for various drivers in the Linux kernel (metapackage) [non-free]
     - firmware-qcom-media # Binary firmware for Qualcomm graphics/video (dummy package) [non-free]
     - firmware-realtek # Binary firmware for Realtek wired/wifi/BT adapters [non-free]
     - firmware-siano #  Binary firmware for Siano MDTV receivers [non-free]

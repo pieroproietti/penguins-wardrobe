@@ -14,6 +14,6 @@ distributions:
   - jammy
 sequence:
   packages:
-    - unace-nonfree
-    - firmware-samsung # Binary firmware for Samsung MFC video codecs [non-free]
+    - unace-nonfree # (utils): extract, test and view .ace archives (non-free version) [non-free]
+    - firmware-samsung # (kernel): Binary firmware for Samsung MFC video codecs [non-free]
 

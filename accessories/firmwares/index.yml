@@ -7,12 +7,10 @@ distributions:
   - bullseye
   - buster
   - chimaera
-  - focal
-  - impish
-  - jammy
 sequence:
   accessories:
     - ./codecs
+    - ./nas
     - ./network-cable
     - ./network-wifi
     - ./printers
