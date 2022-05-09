@@ -1,8 +1,11 @@
-#!/bin/sh
+#!/bin/bash
 
-USER=$1
-DESKTOP=$2
-BACKGROUND="none"
+DISTRO=$(lsb_release -is)
+USER=${SUDO_USER}
+GDM_CONF="/etc/gdm3/custom.conf"
+if [ "${DISTRO}" = "Debian" ]; then
+    GDM_CONF="/etc/gdm3/daemon.conf"
+fi
 
 # set autologin
-echo "[daemon]\n# Enabling automatic login\nAutomaticLoginEnable=true\nAutomaticLogin=${USER}" >> /etc/gdm3/custom.conf
+echo -e "[daemon]\n# Enabling automatic login\nAutomaticLoginEnable=true\nAutomaticLogin=${USER}" >> ${GDM_CONF}
