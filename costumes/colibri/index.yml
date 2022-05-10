@@ -33,11 +33,12 @@ sequence:
     upgrade: true
   packages:
     - adwaita-qt
-    - anydesk
-    # firefox-esr # excluded becouse not present in ubuntu
+    # anydesk
+    - firefox
+    - firefox-esr
     - libxfce4ui-utils
     - lightdm
-    - lightdm-autologin-greeter # this is mandatory for ubuntu, without it will install gdm3 too
+    # lightdm-autologin-greeter 
     - lightdm-gtk-greeter # this is mandatory for ubuntu, without it will install gdm3 too
     - qt5ct
     - spice-vdagent
