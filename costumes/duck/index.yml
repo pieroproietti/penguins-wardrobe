@@ -20,6 +20,9 @@ sequence:
     upgrade: true
   packages:
     - cinnamon-desktop-environment
+  try_packages:
+    - firefox
+    - firefox-esr
   accessories:
     - base
     - firmwares
