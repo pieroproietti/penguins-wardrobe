@@ -34,7 +34,7 @@ sequence:
   packages:
     - adwaita-qt
     # anydesk
-    - firefox
+    # firefox
     - firefox-esr
     - libxfce4ui-utils
     - lightdm
