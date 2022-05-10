@@ -29,8 +29,6 @@ sequence:
     upgrade: true
   packages:
     - adwaita-qt
-    - firefox-esr
-    - firefox-esr
     - libxfce4ui-utils
     - lightdm
     - mutt
@@ -54,6 +52,9 @@ sequence:
     - xfdesktop4
     - xfwm4
     - yad
+  try_packages:
+    - firefox
+    - firefox-esr
   accessories:
     - firmwares
     - liquorix
