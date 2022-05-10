@@ -1,7 +1,6 @@
 #!/bin/bash
 
-USER=$(SUDO_USER)
-DESKTOP=$(su "${USER}" xdg-user-dir DESKTOP)
+DESKTOP=$(su "${SUDO_USER}" xdg-user-dir DESKTOP)
 
 # create DESKTOP
 if [ ! -d "$DESKTOP" ]; then
@@ -13,6 +12,6 @@ fi
 cp /usr/lib/penguins-eggs/assets/eggs.png /usr/share/icons
 
 # copy links
-cp /usr/lib/penguins-eggs/addons/eggs/adapt/applications/eggs-adapt.desktop "$DESKTOP"
-cp /usr/lib/penguins-eggs/assets/penguins-eggs.desktop "$DESKTOP"
-chown "$USER":"$USER" "$DESKTOP" -R
+cp /usr/lib/penguins-eggs/addons/eggs/adapt/applications/eggs-adapt.desktop "${DESKTOP}"
+cp /usr/lib/penguins-eggs/assets/penguins-eggs.desktop "${DESKTOP}"
+chown "${SUDO_USER}":"${SUDO_USER}" "${DESKTOP}" -R
