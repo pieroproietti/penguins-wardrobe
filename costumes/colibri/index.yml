@@ -32,9 +32,6 @@ sequence:
     update: true
     upgrade: true
   packages:
-    - intentionally-wrong-package-1
-    - intentionally-wrong-package-2
-    - intentionally-wrong-package-3
     - adwaita-qt
     # anydesk
     - libxfce4ui-utils
@@ -58,10 +55,6 @@ sequence:
     - xfdesktop4
     - xfwm4
   packages_no_install_recommends:
-    - intentionally-wrong-package-1
-    - intentionally-wrong-package-2
-    - intentionally-wrong-package-3
-
     - network-manager-gnome
     - network-manager-openvpn
     - network-manager-openvpn-gnome
