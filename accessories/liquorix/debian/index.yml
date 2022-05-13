@@ -22,7 +22,7 @@ sequence:
 
       # we can use: `lsb_release -cs`, but devuan don't have repos
       - >-
-        echo -e "deb http://liquorix.net/debian bullseye
+        echo -e "deb http://liquorix.net/debian `lsb_release -cs`
         main\ndeb-src http://liquorix.net/debian `lsb_release -cs`
         main" | tee /etc/apt/sources.list.d/liquorix.list > /dev/null
     update: true

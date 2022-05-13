@@ -1,0 +1,15 @@
+# liquorix
+---
+name: liquorix
+description: install liquorix kernel Ubuntu
+author: artisan
+distributions:
+  - focal
+  - jammy
+sequence:
+  preinst: 
+    - add-apt-repository ppa:damentz/liquorix && sudo apt-get update
+  packages:
+    - linux-headers-liquorix-amd64
+    - linux-image-liquorix-amd64
+  

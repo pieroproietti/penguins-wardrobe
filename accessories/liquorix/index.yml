@@ -1,7 +1,7 @@
 # liquorix
 ---
 name: liquorix
-description: install liquorix kernel Debian/Devuan
+description: install liquorix kernel Debian/Devuan/Ubuntu
 author: artisan
 distributions:
   - bookworm
@@ -9,7 +9,10 @@ distributions:
   - buster
   - chimaera
   - daedalus
+  - focal
+  - jammy
 sequence:
   try_accessories:
     - ./debian
     - ./devuan
+    - ./ubuntu
