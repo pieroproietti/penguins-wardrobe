@@ -6,7 +6,7 @@ description: >-
   desktop xfce4 plus all that I need to develop eggs, firmwares and anydesk
   repos
 author: artisan
-release: 0.0.3
+release: 0.9.1
 distributions:
   - bookworm
   - bullseye
@@ -36,8 +36,8 @@ sequence:
     # anydesk
     - libxfce4ui-utils
     - lightdm
-    # lightdm-autologin-greeter 
-    - lightdm-gtk-greeter # this is mandatory for ubuntu, without it will install gdm3 too
+    - lightdm-autologin-greeter # ubuntu seem to need it, Debian install it automatically
+    - lightdm-gtk-greeter # mandatory for ubuntu, without it will install gdm3
     - qt5ct
     - spice-vdagent
     - tango-icon-theme
@@ -64,7 +64,8 @@ sequence:
   accessories:
     - base
     - eggs-dev
-    # firmwares
+  try_accessories:
+    - firmwares
 customize:
   dirs: true
   scripts:
