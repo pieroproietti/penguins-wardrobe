@@ -4,7 +4,11 @@ COSTUME=$1
 BACKGROUND=$(ls /usr/share/backgrounds/"${COSTUME}"/*.jpg)
 
 # autologin
-echo -e "# wardrobe\n[Seat:*]\nautologin-user=${SUDO_USER}" >> /etc/lightdm/lightdm.conf
+LIGHTDM_CONF=/etc/lightdm/lightdm.conf
+if [ -f /etc/lightdm/lightdm.conf.d/lightdm-autologin-greeter.conf ]; then
+    LIGHTDM_CONF=/etc/lightdm/lightdm.conf.d/lightdm-autologin-greeter.conf
+fi
+echo -e "# wardrobe\n[Seat:*]\nautologin-user=${SUDO_USER}" >> ${LIGHTDM_CONF}
 
 # background
 echo -e "# wardrobe\nbackground=${BACKGROUND}" >> /etc/lightdm/lightdm-gtk-greeter.conf
