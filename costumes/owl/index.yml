@@ -3,7 +3,7 @@
 name: owl
 description: Owl is a clone of quirinux by Charlie Mart��nez
 author: artisan
-release: 0.0.1
+release: 0.9.0
 distributions:
   - bookworm
   - bullseye
@@ -31,7 +31,7 @@ sequence:
     - adwaita-qt
     - libxfce4ui-utils
     - lightdm
-    - lightdm-gtk-greeter
+    - lightdm-gtk-greeter # this is mandatory for ubuntu, without it will install gdm3 too
     - mutt
     - spice-vdagent
     - qt5ct
