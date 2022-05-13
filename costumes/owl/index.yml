@@ -31,7 +31,8 @@ sequence:
     - adwaita-qt
     - libxfce4ui-utils
     - lightdm
-    - lightdm-gtk-greeter # this is mandatory for ubuntu, without it will install gdm3 too
+    - lightdm-autologin-greeter # ubuntu seem to need it, Debian install it automatically
+    - lightdm-gtk-greeter # mandatory for ubuntu, without it will install gdm3
     - mutt
     - spice-vdagent
     - qt5ct
