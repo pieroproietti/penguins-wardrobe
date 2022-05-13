@@ -31,10 +31,8 @@ sequence:
     - adwaita-qt
     - libxfce4ui-utils
     - lightdm
+    - lightdm-gtk-greeter
     - mutt
-    - network-manager-gnome
-    - network-manager-openvpn
-    - network-manager-openvpn-gnome
     - spice-vdagent
     - qt5ct
     - tango-icon-theme
@@ -55,6 +53,10 @@ sequence:
   try_packages:
     - firefox
     - firefox-esr
+  packages_no_install_recommends:
+    - network-manager-gnome
+    - network-manager-openvpn
+    - network-manager-openvpn-gnome
   accessories:
     - firmwares
     - grafica
