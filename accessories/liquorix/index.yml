@@ -15,4 +15,4 @@ sequence:
   try_accessories:
     - ./debian
     - ./devuan
-    # ./ubuntu
+    - ./ubuntu
