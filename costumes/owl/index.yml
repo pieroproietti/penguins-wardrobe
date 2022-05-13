@@ -59,13 +59,13 @@ sequence:
     - network-manager-openvpn
     - network-manager-openvpn-gnome
   accessories:
-    - firmwares
     - grafica
     - multimedia
     - office
     - base
     - eggs-dev
   try_accessories:
+    - firmwares
     - liquorix
 customize:
   dirs: true

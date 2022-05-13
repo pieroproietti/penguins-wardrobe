@@ -9,9 +9,6 @@ distributions:
   - bullseye
   - buster
   - chimaera
-  - focal
-  - impish
-  - jammy
 sequence:
   packages:
     - dahdi-firmware-nonfree  # (comm): DAHDI non-free firmware [non-free]

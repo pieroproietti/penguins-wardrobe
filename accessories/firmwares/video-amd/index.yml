@@ -8,9 +8,6 @@ distributions:
   - bullseye
   - buster
   - chimaera
-  - focal
-  - impish
-  - jammy
 sequence:
   drivers_video_amd:
     - libdrm-amdgpu1

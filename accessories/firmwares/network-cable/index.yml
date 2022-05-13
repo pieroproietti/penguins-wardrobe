@@ -9,9 +9,6 @@ distributions:
   - bullseye
   - buster
   - chimaera
-  - focal
-  - impish
-  - jammy
 sequence:
   packages:
     - hardinfo # (x11): Displays system information
