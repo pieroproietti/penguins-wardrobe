@@ -4,12 +4,14 @@
 name: duck
 description: desktop cinnamon plus all that we need to enjoy at home and office
 author: artisan
-release: 0.0.3
+release: 0.9.0
 distributions:
   - bookworm
   - bullseye
-  - buster
   - chimaera
+  - daedalus
+  - focal
+  - jammy
 sequence:
   repositories:
     sources_list:
@@ -25,11 +27,12 @@ sequence:
     - firefox-esr
   accessories:
     - base
-    - firmwares
     - grafica
-    - liquorix
     - multimedia
     - office
+  try_accessories:
+    - liquorix
+    - firmawares
 customize:
   dirs: true
   scripts:
