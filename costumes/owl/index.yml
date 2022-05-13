@@ -57,12 +57,13 @@ sequence:
     - firefox-esr
   accessories:
     - firmwares
-    - liquorix
     - grafica
     - multimedia
     - office
     - base
     - eggs-dev
+  try_accessories:
+    - liquorix
 customize:
   dirs: true
   scripts:
