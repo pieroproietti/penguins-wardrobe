@@ -22,6 +22,10 @@ sequence:
     upgrade: true
   packages:
     - cinnamon-desktop-environment
+    - lightdm
+    - lightdm-autologin-greeter # ubuntu seem to need it, Debian install it automatically
+    - lightdm-gtk-greeter # mandatory for ubuntu, without it will install gdm3
+
   try_packages:
     - firefox
     - firefox-esr
