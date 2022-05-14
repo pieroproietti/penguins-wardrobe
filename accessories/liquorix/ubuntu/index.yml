@@ -8,7 +8,7 @@ distributions:
   - jammy
 sequence:
   packages:
-    - software-properties-common 
+    - software-properties-common
   try_accessories:
     - ./second-stage
 
