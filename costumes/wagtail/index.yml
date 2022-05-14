@@ -1,10 +1,12 @@
 # wagtail
 ---
 name: wagtail
-description: GNOME waydroid installation
+description: gnome waydroid installation
 author: artisan
-release: 0.0.7
+release: 0.9.1
 distributions: 
+- chimaera
+- daedalus
 - bullseye
 - bookworm
 - focal
@@ -19,20 +21,21 @@ sequence:
     update: true
     upgrade: true
   packages:
-  - firefox # ubuntu
-  - firefox-esr # debian/devuan
   - spice-vdagent
   packages_no_install_recommends:
   - gdm3
   - gnome-control-center
   - gnome-session
   - gnome-terminal
+  try_packages:
+    - firefox
+    - firefox-esr
   accessories:
     - base
-    # eggs-dev
-    # firmwares\network-wifi
-    # firmwares\video-amd
+    - eggs-dev
     - waydroid
+  try_accessories:
+    - firmwares\network-wifi
 customize:
   dirs: true
   scripts:
