@@ -4,7 +4,7 @@
 name: eagle
 description: desktop xfce4 plus proxmox-ve
 author: artisan
-release: 0.0.1
+release: 0.9.0
 distributions:
   - bullseye
 sequence:
@@ -58,6 +58,9 @@ sequence:
   accessories:
     - base
     - eggs-dev
+    # firmwares/network-cable # no-need installing from proxmox-ve
+    - firmwares/network-wifi 
+    - firmwares/video-amd
 customize:
   dirs: true
   scripts:

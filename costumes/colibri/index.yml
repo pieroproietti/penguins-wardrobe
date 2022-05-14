@@ -64,6 +64,7 @@ sequence:
   accessories:
     - base
     - eggs-dev
+    - python3-dev
   try_accessories:
     - firmwares
 customize:
