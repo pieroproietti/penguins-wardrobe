@@ -18,12 +18,11 @@ sequence:
     - cups-bsd
     - cups-client
     - cups-filters
-    - cups-pdf
-    - cups-pdf
+    # cups-pdf
     - cups-ppdc
     - dc
     - foomatic-db-compressed-ppds
-    - ghostscript-cups
+    # ghostscript-cups
     - ghostscript-x
     - gocr-tk
     - gutenprint-locales

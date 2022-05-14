@@ -21,5 +21,6 @@ sequence:
     - libnm-dev
     - libxml2-utils
     - meson
-    - pkg-config libglib2.0-dev-bin
+    - pkg-config 
+    - libglib2.0-dev-bin
     - python3-setuptools
