@@ -1,5 +1,5 @@
 ---
-name: flatpack
+name: flatpak
 description: flatpack 
 author: artisan
 release: 0.0.1
@@ -13,7 +13,7 @@ distributions:
   - jammy
 sequence:
   packages:
-    - flatpack
+    - flatpak
     - gnome-software-plugin-flatpak 
 customize:
   scripts:
