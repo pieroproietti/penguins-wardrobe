@@ -12,35 +12,38 @@ Of course you can dress your CLI system with wonderfull GUI interface, but it is
 
 A costume consist in a directory named after the costume and an index.yml file. 
 
-The king of content of costumes is actually defined in i-materia.ts from eggs:
+The king of contents of a costume is actually defined in i-materia.ts from eggs:
 ```
-export interface IMateria {
-   name: string
-   author: string
-   description: string
-   release: string
-   distributions: string []
-   sequence: {
-       repositories: {
-           sources_list: string []
-           sources_list_d: string []
-           update: boolean
-           upgrade: boolean
-       },
-       preinst: string[]
-       packages: string []
-       packages_no_install_recommends: string []
-       debs: boolean
-       packages_python: string []
-       accessories: string[]
+  name: string
+  author: string
+  description: string
+  release: string
+  distributions: string[]
+  sequence: {
+    repositories: {
+      sources_list: string[]
+      sources_list_d: string []
+      update: boolean
+      upgrade: boolean
+    },
+    preinst: string[]
+    dependencies: string[]
+    packages: string[]
+    packages_no_install_recommends: string[]
+    try_packages: string[]
+    try_packages_no_install_recommends: string[]
+    debs: boolean
+    packages_python: string[]
+    accessories: string[]
+    try_accessories: string[]
   }
   customize: {
     dirs: boolean
     hostname: boolean
-    scripts: string []
+    scripts: string[]
   }
   reboot: boolean
-}
+
 ```
 
 this is an example from my colibri, the configuration of my developer working station:
@@ -54,14 +57,13 @@ description: >-
   desktop xfce4 plus all that I need to develop eggs, firmwares and anydesk
   repos
 author: artisan
-release: 0.0.3
+release: 0.9.1
 distributions:
   - bookworm
   - bullseye
   - buster
   - chimaera
   - focal
-  - impish
   - jammy
 sequence:
   repositories:
@@ -82,18 +84,18 @@ sequence:
     upgrade: true
   packages:
     - adwaita-qt
-    - anydesk
-    - firefox-esr
+    # anydesk
     - libxfce4ui-utils
     - lightdm
-    - network-manager-gnome
-    - network-manager-openvpn
-    - network-manager-openvpn-gnome
+    - lightdm-autologin-greeter # ubuntu seem to need it, Debian install it automatically
+    - lightdm-gtk-greeter # mandatory for ubuntu, without it will install gdm3
     - qt5ct
+    - spice-vdagent
     - tango-icon-theme
     - thunar
     - xarchiver
     - xfce4-appfinder
+    - xfce4-notifyd # va installo altrimenti network-manager-gnome richiama gnome-shell
     - xfce4-panel
     - xfce4-pulseaudio-plugin
     - xfce4-session
@@ -103,15 +105,36 @@ sequence:
     - xfconf
     - xfdesktop4
     - xfwm4
+  packages_no_install_recommends:
+    - network-manager-gnome
+    - network-manager-openvpn
+    - network-manager-openvpn-gnome
+  try_packages:
+    - firefox
+    - firefox-esr
   accessories:
     - base
     - eggs-dev
+    - flatpak
+    - python3-dev
+  try_accessories:
     - firmwares
 customize:
   dirs: true
   scripts:
     - ../../scripts/config_desktop_link.sh
     - ../../scripts/config_lightdm.sh
+    #
+    # insert command g4artisan
+    #
+    - rm -f /usr/local/bin/g4*
+    - curl -fsSL "https://raw.githubusercontent.com/pieroproietti/penguins-eggs/master/g4/g4artisan" -o /usr/local/bin/g4artisan
+    - chmod +x /usr/local/bin/g4artisan
+    - curl -fsSL "https://raw.githubusercontent.com/pieroproietti/penguins-eggs/master/g4/g4clone" -o /usr/local/bin/g4clone
+    - chmod +x /usr/local/bin/g4clone
+    - curl -fsSL "https://raw.githubusercontent.com/pieroproietti/penguins-eggs/master/g4/g4passwd" -o /usr/local/bin/g4passwd
+    - chmod +x /usr/local/bin/g4passwd
+
   hostname: true
 reboot: true
 ```
