@@ -155,11 +155,15 @@ sequence is the crucial part of costumes, this is executed in that sequence and 
   * sources_list
   * sources_list_d
 * preinst
+* dependencies
 * packages
 * packages_no_install_recommends
+* try_packages
+* try_packages_no_install_recommends
 * debs
 * packages_python
 * accessories
+* try_accessories
 
 the idea back sequence is it to make it the more possible atomic.
 
@@ -187,7 +191,7 @@ This is a boolean field, if it's true, the content of ./debs with be installed v
 A simple array of python packages to be installed with pip
 
 #### accessories
-accessories are accesspries, can be internal or external. External accessories live in ./aceessories, internal accessories live inside the costume o accossory who declare it.
+accessories are accessories and can live inside the costume or external. External accessories live in ./aceessories, internal accessories live inside the costume or in others accessories who declare them.
 
 They have the same structure of costume and are called recursively from the costume.
 
@@ -212,7 +216,7 @@ put all in ```dirs```:
 ```
 
 ##### hostname
-is boolean too, and if present hostname will take the name of the costume and hosts will be changed in accord
+is boolean too, and if true, /etc/hostname will take the name of the costume and /etc/hosts will be changed in accord
 
 ##### scripts
 scripts contain an array of one or more scripts to be used to customize the result
@@ -227,8 +231,10 @@ Scripts are called from customize/scripts and executed on the specific order.
 - no-hw-accelleration.sh (script to set waydroid with no-hw-accelleration)
 
 **Accessories**
-An accessory it'a costume who live under accessories directory. You can see it as a belt to dress with your pants or a bag associated to your chotches.
-Accessories are used alone or from costumes, for example: waydroid is an accessoru and it's used gwaydroid, kwaydrois, the same for firmware who is added in hen, gwaydroid, kwaydroid and all future costumes who need a good hardware compatibility.
+An accessory it'a costume who live under accessories directory or inside the costume itself. You can see it as a belt to dress with your pants or a bag associated to your chotches.
+Accessories can be installed alone or called from costumes. For example: waydroid is an accessory and it's used by wagtail (gnome3) or warbler (KDE), the same for firmwares who is added in colibri and other species who need a good hardware compatibility.
+
+__Note__ eggs wardrobe wear accept a flag --no_firmwares to skip it, in the case you are building for virtual machines.
 
 # wardrobe get
 
@@ -236,7 +242,7 @@ Accessories are used alone or from costumes, for example: waydroid is an accesso
 eggs wardrobe get
 ```
 
-Clone the [community wardrobe](https://github.com/pieroproietti/penguins-wardrobe) in ~/.wardrobe, the command accept argument [REPO] so, you can work with your personal wardrobe too. For example:
+Clone the [penguins-wardrobe](https://github.com/pieroproietti/penguins-wardrobe) in ~/.wardrobe, the command accept argument [REPO] so, you can work with your personal wardrobe too. For example:
 
 ```
 eggs wardrobe https://github.com/quirinux-so/penguins-wardrobe
@@ -273,7 +279,6 @@ eggs wardrobe ironing colibri --wardrobe ./my-own-wardrobe
 # Costumes
 
 * **colibri** is a light XFC4 for developers you can easily start to improve eggs.
-* **colibri-helenae** is a reduct form of colibri without firmwares, is the most light colibri, in natura live in Cuba, here live on Virtual Machines.
 * **duck** come with cinnamon - probably is the right desktop for peoples coming from windows - here complete plus office, gimp and vlc
 * **owl** is a XFCE4 for graphics designers, this a simple/experimental bird, based on the work of Clarlie Martinez quirinux
 * **wagtail**, a GNOME waydroid installation.
@@ -285,7 +290,6 @@ eggs wardrobe ironing colibri --wardrobe ./my-own-wardrobe
 * firmwares
 * graphics
 * liquorix
-* liquorix-chimaera
 * multimedia
 * office
 * waydroid
