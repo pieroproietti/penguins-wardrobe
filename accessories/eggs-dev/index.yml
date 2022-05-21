@@ -42,4 +42,4 @@ customize:
   scripts:
     - echo -e "\n# wardrobe\nfs.inotify.max_user_watches=524288" >> /etc/sysctl.conf
     - npm i pnpm -g
-    - sudo ${SUDO_USER} pnpm install-completion
+    - sudo -u ${SUDO_USER} pnpm install-completion bash
