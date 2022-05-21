@@ -12,7 +12,7 @@ Of course you can dress your CLI system with wonderfull GUI interface, but it is
 
 A costume consist in a directory named after the costume and an index.yml file. 
 
-The king of contents of a costume is actually defined in i-materia.ts from eggs:
+The type of content of a costume is actually defined in i-materia.ts from eggs:
 ```
   name: string
   author: string
@@ -43,10 +43,9 @@ The king of contents of a costume is actually defined in i-materia.ts from eggs:
     scripts: string[]
   }
   reboot: boolean
-
 ```
 
-this is an example from my colibri, the configuration of my developer working station:
+This is an example of costume definition from my colibri, a configuration generating my personal developer working station:
 
 ```
 # wardrobe: .
