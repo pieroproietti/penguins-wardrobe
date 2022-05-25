@@ -12,38 +12,40 @@ Of course you can dress your CLI system with wonderfull GUI interface, but it is
 
 A costume consist in a directory named after the costume and an index.yml file. 
 
-The king of content of costumes is actually defined in i-materia.ts from eggs:
+The type of content of a costume is actually defined in i-materia.ts from eggs:
 ```
-export interface IMateria {
-   name: string
-   author: string
-   description: string
-   release: string
-   distributions: string []
-   sequence: {
-       repositories: {
-           sources_list: string []
-           sources_list_d: string []
-           update: boolean
-           upgrade: boolean
-       },
-       preinst: string[]
-       packages: string []
-       packages_no_install_recommends: string []
-       debs: boolean
-       packages_python: string []
-       accessories: string[]
+  name: string
+  author: string
+  description: string
+  release: string
+  distributions: string[]
+  sequence: {
+    repositories: {
+      sources_list: string[]
+      sources_list_d: string []
+      update: boolean
+      upgrade: boolean
+    },
+    preinst: string[]
+    dependencies: string[]
+    packages: string[]
+    packages_no_install_recommends: string[]
+    try_packages: string[]
+    try_packages_no_install_recommends: string[]
+    debs: boolean
+    packages_python: string[]
+    accessories: string[]
+    try_accessories: string[]
   }
   customize: {
     dirs: boolean
     hostname: boolean
-    scripts: string []
+    scripts: string[]
   }
   reboot: boolean
-}
 ```
 
-this is an example from my colibri, the configuration of my developer working station:
+This is an example of costume definition from my colibri, a configuration generating my personal developer working station:
 
 ```
 # wardrobe: .
@@ -54,14 +56,13 @@ description: >-
   desktop xfce4 plus all that I need to develop eggs, firmwares and anydesk
   repos
 author: artisan
-release: 0.0.3
+release: 0.9.1
 distributions:
   - bookworm
   - bullseye
   - buster
   - chimaera
   - focal
-  - impish
   - jammy
 sequence:
   repositories:
@@ -82,18 +83,18 @@ sequence:
     upgrade: true
   packages:
     - adwaita-qt
-    - anydesk
-    - firefox-esr
+    # anydesk
     - libxfce4ui-utils
     - lightdm
-    - network-manager-gnome
-    - network-manager-openvpn
-    - network-manager-openvpn-gnome
+    - lightdm-autologin-greeter # ubuntu seem to need it, Debian install it automatically
+    - lightdm-gtk-greeter # mandatory for ubuntu, without it will install gdm3
     - qt5ct
+    - spice-vdagent
     - tango-icon-theme
     - thunar
     - xarchiver
     - xfce4-appfinder
+    - xfce4-notifyd # va installo altrimenti network-manager-gnome richiama gnome-shell
     - xfce4-panel
     - xfce4-pulseaudio-plugin
     - xfce4-session
@@ -103,15 +104,36 @@ sequence:
     - xfconf
     - xfdesktop4
     - xfwm4
+  packages_no_install_recommends:
+    - network-manager-gnome
+    - network-manager-openvpn
+    - network-manager-openvpn-gnome
+  try_packages:
+    - firefox
+    - firefox-esr
   accessories:
     - base
     - eggs-dev
+    - flatpak
+    - python3-dev
+  try_accessories:
     - firmwares
 customize:
   dirs: true
   scripts:
     - ../../scripts/config_desktop_link.sh
     - ../../scripts/config_lightdm.sh
+    #
+    # insert command g4artisan
+    #
+    - rm -f /usr/local/bin/g4*
+    - curl -fsSL "https://raw.githubusercontent.com/pieroproietti/penguins-eggs/master/g4/g4artisan" -o /usr/local/bin/g4artisan
+    - chmod +x /usr/local/bin/g4artisan
+    - curl -fsSL "https://raw.githubusercontent.com/pieroproietti/penguins-eggs/master/g4/g4clone" -o /usr/local/bin/g4clone
+    - chmod +x /usr/local/bin/g4clone
+    - curl -fsSL "https://raw.githubusercontent.com/pieroproietti/penguins-eggs/master/g4/g4passwd" -o /usr/local/bin/g4passwd
+    - chmod +x /usr/local/bin/g4passwd
+
   hostname: true
 reboot: true
 ```
@@ -133,11 +155,15 @@ sequence is the crucial part of costumes, this is executed in that sequence and 
   * sources_list
   * sources_list_d
 * preinst
+* dependencies
 * packages
 * packages_no_install_recommends
+* try_packages
+* try_packages_no_install_recommends
 * debs
 * packages_python
 * accessories
+* try_accessories
 
 the idea back sequence is it to make it the more possible atomic.
 
@@ -165,7 +191,7 @@ This is a boolean field, if it's true, the content of ./debs with be installed v
 A simple array of python packages to be installed with pip
 
 #### accessories
-accessories are accesspries, can be internal or external. External accessories live in ./aceessories, internal accessories live inside the costume o accossory who declare it.
+accessories are accessories and can live inside the costume or external. External accessories live in ./aceessories, internal accessories live inside the costume or in others accessories who declare them.
 
 They have the same structure of costume and are called recursively from the costume.
 
@@ -190,7 +216,7 @@ put all in ```dirs```:
 ```
 
 ##### hostname
-is boolean too, and if present hostname will take the name of the costume and hosts will be changed in accord
+is boolean too, and if true, /etc/hostname will take the name of the costume and /etc/hosts will be changed in accord
 
 ##### scripts
 scripts contain an array of one or more scripts to be used to customize the result
@@ -205,8 +231,10 @@ Scripts are called from customize/scripts and executed on the specific order.
 - no-hw-accelleration.sh (script to set waydroid with no-hw-accelleration)
 
 **Accessories**
-An accessory it'a costume who live under accessories directory. You can see it as a belt to dress with your pants or a bag associated to your chotches.
-Accessories are used alone or from costumes, for example: waydroid is an accessoru and it's used gwaydroid, kwaydrois, the same for firmware who is added in hen, gwaydroid, kwaydroid and all future costumes who need a good hardware compatibility.
+An accessory it'a costume who live under accessories directory or inside the costume itself. You can see it as a belt to dress with your pants or a bag associated to your chotches.
+Accessories can be installed alone or called from costumes. For example: waydroid is an accessory and it's used by wagtail (gnome3) or warbler (KDE), the same for firmwares who is added in colibri and other species who need a good hardware compatibility.
+
+__Note__ eggs wardrobe wear accept a flag --no_firmwares to skip it, in the case you are building for virtual machines.
 
 # wardrobe get
 
@@ -214,7 +242,7 @@ Accessories are used alone or from costumes, for example: waydroid is an accesso
 eggs wardrobe get
 ```
 
-Clone the [community wardrobe](https://github.com/pieroproietti/penguins-wardrobe) in ~/.wardrobe, the command accept argument [REPO] so, you can work with your personal wardrobe too. For example:
+Clone the [penguins-wardrobe](https://github.com/pieroproietti/penguins-wardrobe) in ~/.wardrobe, the command accept argument [REPO] so, you can work with your personal wardrobe too. For example:
 
 ```
 eggs wardrobe https://github.com/quirinux-so/penguins-wardrobe
@@ -251,7 +279,6 @@ eggs wardrobe ironing colibri --wardrobe ./my-own-wardrobe
 # Costumes
 
 * **colibri** is a light XFC4 for developers you can easily start to improve eggs.
-* **colibri-helenae** is a reduct form of colibri without firmwares, is the most light colibri, in natura live in Cuba, here live on Virtual Machines.
 * **duck** come with cinnamon - probably is the right desktop for peoples coming from windows - here complete plus office, gimp and vlc
 * **owl** is a XFCE4 for graphics designers, this a simple/experimental bird, based on the work of Clarlie Martinez quirinux
 * **wagtail**, a GNOME waydroid installation.
@@ -263,7 +290,6 @@ eggs wardrobe ironing colibri --wardrobe ./my-own-wardrobe
 * firmwares
 * graphics
 * liquorix
-* liquorix-chimaera
 * multimedia
 * office
 * waydroid
