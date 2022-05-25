@@ -27,7 +27,8 @@ sequence:
     - lightdm-gtk-greeter # mandatory for ubuntu, without it will install gdm3
     - spice-vdagent
   try_packages:
-    - firefox
+    . dbus-x11 # ubuntu
+    - firefox # ubuntu
     - firefox-esr
   accessories:
     - base
