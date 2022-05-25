@@ -4,7 +4,7 @@
 name: duck
 description: desktop cinnamon plus all that we need to enjoy at home and office
 author: artisan
-release: 0.9.0
+release: 0.9.1
 distributions:
   - bookworm
   - bullseye
@@ -23,8 +23,9 @@ sequence:
   packages:
     - cinnamon-desktop-environment
     - lightdm
-    - lightdm-autologin-greeter # ubuntu seem to need it, Debian install it automatically
+    # lightdm-autologin-greeter
     - lightdm-gtk-greeter # mandatory for ubuntu, without it will install gdm3
+    - spice-vdagent
   try_packages:
     - firefox
     - firefox-esr
