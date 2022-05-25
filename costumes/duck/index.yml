@@ -35,7 +35,7 @@ sequence:
     - multimedia
     - office
   try_accessories:
-    - liquorix
+    # liquorix
     - firmwares
 customize:
   dirs: true
