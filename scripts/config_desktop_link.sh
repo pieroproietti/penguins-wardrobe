@@ -8,7 +8,6 @@ if [ ! -d "$DESKTOP" ]; then
 fi
 
 # copy icons
-
 cp /usr/lib/penguins-eggs/assets/eggs.png /usr/share/icons
 
 # copy links
