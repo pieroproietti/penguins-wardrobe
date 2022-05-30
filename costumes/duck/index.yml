@@ -10,6 +10,7 @@ distributions:
   - bullseye
   - chimaera
   - daedalus
+  - bionic
   - focal
   - jammy
 sequence:
