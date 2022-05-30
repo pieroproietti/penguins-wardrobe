@@ -8,8 +8,8 @@ distributions:
   - bullseye
   - buster
   - chimaera
+  - bionic
   - focal
-  - impish
   - jammy
 sequence:
   packages:

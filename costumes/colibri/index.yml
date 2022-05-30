@@ -12,6 +12,7 @@ distributions:
   - bullseye
   - buster
   - chimaera
+  - bionic
   - focal
   - jammy
 sequence:
