@@ -1,0 +1,22 @@
+# eggs-dev
+---
+name: kvm
+description: 'add necessary to run VMs'
+author: artisan
+distributions:
+  - bookworm
+  - bullseye
+  - buster
+  - chimaera
+  - focal
+  - impish
+  - jammy
+sequence:
+  packages:
+    - qemu-system
+    - libvirt-daemon-system
+    - virtinst
+    - virt-manager 
+customize:
+  scripts:
+    - adduser ${SUDO_USER} libvirt
