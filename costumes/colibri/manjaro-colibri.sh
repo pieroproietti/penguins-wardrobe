@@ -17,6 +17,7 @@ lightdm \
 lightdm-gtk-greeter \
 qt5ct \
 spice-vdagent \
+shellcheck \
 thunar \
 xarchiver \
 xfce4-appfinder \
