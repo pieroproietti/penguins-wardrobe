@@ -19,8 +19,9 @@ xfce4-whiskermenu-plugin \
 xfconf \
 xfdesktop-gtk3 \
 xfwm4 \
-xorg-xserver \
-spice-vdagent \
+xorg-server 
+
+pamac spice-vdagent \
 network-manager-applet
 
 # eggs-dev
