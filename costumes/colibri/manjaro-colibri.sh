@@ -28,3 +28,7 @@ pamac install vscode nodejs npm pnpm
 
 systemctl enable NetworkManager
 systemctl enable lightdm
+
+# copy configutation
+cp dirs/* / -R
+
