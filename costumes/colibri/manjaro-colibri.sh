@@ -18,12 +18,13 @@ xfce4-terminal \
 xfce4-whiskermenu-plugin \
 xfconf \
 xfdesktop-gtk3 \
-xfwm4 
+xfwm4 \
+xorg-xserver \
+spice-vdagent \
+network-manager-applet
 
-pamac install spice-vdagent
-
-pamac install vscode 
-pamac install network-manager-applet
+# eggs-dev
+pamac install vscode nodejs npm pnpm
 
 systemctl enable NetworkManager
 systemctl enable lightdm
