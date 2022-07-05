@@ -39,5 +39,6 @@ rsync -avx ./dirs/etc/skel/.config ${HOME}
 # SUDO_USER=esiste
 COSTUME="colibri"
 
-../../scripts/config_lightdm.sh ${COSTUME}
+../../scripts/config_lightdm.sh colibri /home/${SUDO_USER}
+chown ${SUDO_USER}:${SUDO_USER} /home/${SUDO_USER} -R
 ../../scripts/config_desktop_link.sh
