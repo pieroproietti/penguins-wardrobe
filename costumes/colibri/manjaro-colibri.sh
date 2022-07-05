@@ -1,6 +1,6 @@
 # here we define a colibri for manjaro
 # I need experience here
-pamac install \
+pacman -Syu \
 libxfce4ui-gtk3 \
 lightdm \
 lightdm-gtk-greeter \
@@ -26,7 +26,7 @@ pamac spice-vdagent \
 network-manager-applet
 
 # eggs-dev
-pamac install vscode nodejs npm pnpm
+pacman -Syu install vscode nodejs npm pnpm
 
 systemctl enable NetworkManager
 systemctl enable lightdm
