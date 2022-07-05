@@ -32,4 +32,5 @@ systemctl enable lightdm
 
 # copy configutation
 cp dirs/* / -R
+rsync -avx dirs/etc/skel/.config /home/artisan
 
