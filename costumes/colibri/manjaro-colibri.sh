@@ -48,7 +48,8 @@ systemctl enable lightdm
 cp ./dirs/* / -R
 
 # copy configuration from dirs to MY_USERHOME
-rsync -avx ./dirs/etc/skel/.config "${MY_USERHOME}"/.config
+# `rsync -avx  ${this.costume}/dirs/etc/skel/.config /home/${user}/`
+rsync -avx ./dirs/etc/skel/.config "${MY_USERHOME}"/
 
 # config ligghtdn $COSTUME $MY_USERHOME
 ../../scripts/config_lightdm.sh "${COSTUME}" "${MY_USERHOME}"
