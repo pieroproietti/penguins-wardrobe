@@ -19,6 +19,7 @@ xfce4-whiskermenu-plugin \
 xfconf \
 xfdesktop-gtk3 \
 xfwm4 \
+xdg-user-dirs \
 xorg-server 
 
 pamac spice-vdagent \
@@ -30,7 +31,13 @@ pamac install vscode nodejs npm pnpm
 systemctl enable NetworkManager
 systemctl enable lightdm
 
-# copy configutation
+# copy configuration from dirs
 cp dirs/* / -R
-rsync -avx dirs/etc/skel/.config /home/artisan
+rsync -avx ./dirs/etc/skel/.config ${HOME}
 
+
+# SUDO_USER=esiste
+COSTUME="colibri"
+
+../../scripts/config_lightdm.sh ${COSTUME}
+../../scripts/config_desktop_link.sh
