@@ -31,14 +31,26 @@ pamac install vscode nodejs npm pnpm
 systemctl enable NetworkManager
 systemctl enable lightdm
 
-# copy configuration from dirs
-cp dirs/* / -R
-rsync -avx ./dirs/etc/skel/.config ${HOME}
-
+clear
 
 # SUDO_USER=esiste
 COSTUME="colibri"
+MY_USERNAME=`logname`
+echo "MY_USERNAME: ${MY_USERNAME}"
 
-../../scripts/config_lightdm.sh colibri /home/${SUDO_USER}
-chown ${SUDO_USER}:${SUDO_USER} /home/${SUDO_USER} -R
-../../scripts/config_desktop_link.sh
+MY_USERHOME=/home/${MY_USERNAME}
+echo "MY_USERHOME: ${MY_USERHOME}"
+
+# copy configuration from dirs
+cp ./dirs/* / -R
+echo "rsync -avx ./dirs/etc/skel/.config ${MY_USERHOME}/.config"
+rsync -avx ./dirs/etc/skel/.config ${MY_USERHOME}/.config
+
+echo "../../scripts/config_lightdm.sh colibri ${MY_USERHOME}"
+../../scripts/config_lightdm.sh colibri ${MY_USERHOME}
+
+echo "../../scripts/config_desktop_link.sh ${MY_USERHOME}"
+../../scripts/config_desktop_link.sh ${MY_USERHOME}
+
+echo "chown ${MY_USERNAME}:${MY_USERNAME} ${MY_USERHOME} -R"
+chown ${MY_USERNAME}:${MY_USERNAME} ${MY_USERHOME} -R
