@@ -1,13 +1,14 @@
+#!/bin/bash
 #
 # temporary script to get colibri in manjaro
 # 
 
 clear
 COSTUME="colibri"
-MY_USERNAME=`logname`
+MY_USERNAME=$(logname)
 echo "MY_USERNAME: ${MY_USERNAME}"
 
-MY_USERHOME=/home/${MY_USERNAME}
+MY_USERHOME="/home/${MY_USERNAME}"
 echo "MY_USERHOME: ${MY_USERHOME}"
 
 pacman -Syu \
@@ -46,13 +47,13 @@ systemctl enable lightdm
 cp ./dirs/* / -R
 
 # copy configuration from dirs to MY_USERHOME
-rsync -avx ./dirs/etc/skel/.config ${MY_USERHOME}/.config
+rsync -avx ./dirs/etc/skel/.config "${MY_USERHOME}"/.config
 
 # config ligghtdn $COSTUME $MY_USERHOME
-../../scripts/config_lightdm.sh ${COSTUME} ${MY_USERHOME}
+../../scripts/config_lightdm.sh "${COSTUME}" "${MY_USERHOME}"
 
 # config desktop links $MY_USERHOME
-../../scripts/config_desktop_link.sh ${MY_USERHOME}
+../../scripts/config_desktop_link.sh "${MY_USERHOME}"
 
 # Reimpostazione diritti
-chown ${MY_USERNAME}:${MY_USERNAME} ${MY_USERHOME} -R
+chown "${MY_USERNAME}:${MY_USERNAME}" "${MY_USERHOME}" -R
