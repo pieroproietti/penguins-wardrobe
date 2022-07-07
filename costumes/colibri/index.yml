@@ -34,10 +34,8 @@ sequence:
     upgrade: true
   packages:
     - adwaita-qt
-    # anydesk
     - libxfce4ui-utils
     - lightdm
-    # lightdm-autologin-greeter # ubuntu seem to need it, Debian install it automatically
     - lightdm-gtk-greeter # mandatory for ubuntu, without it will install gdm3
     - qt5ct
     - spice-vdagent
@@ -65,10 +63,10 @@ sequence:
   accessories:
     - base
     - eggs-dev
-    - flatpak
-    - python3-dev
+    # flatpak
+    # python3-dev
   try_accessories:
-    - firmwares
+    # firmwares
 customize:
   dirs: true
   scripts:
