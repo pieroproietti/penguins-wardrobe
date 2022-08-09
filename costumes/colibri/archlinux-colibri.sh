@@ -19,6 +19,9 @@ pacman -S spice-vdagent shellcheck xdg-user-dirs
 # tools
 pacman -S xarchiver unzip firefox network-manager-applet polkit-gnome
 
+# pongo utente nel gruppo autologin
+gpasswd -a ${MY_USERNAME} autologin
+
 # eggs-dev
 pacman -Syu vscode nodejs npm 
 npm install pnpm -g
