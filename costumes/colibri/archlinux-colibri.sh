@@ -16,6 +16,8 @@ pacman -S xorg-server xorg-apps
 pacman -S lightdm lightdm-gtk-greeter
 pacman -S xfce4 xfce4-goodies
 pacman -S spice-vdagent shellcheck xdg-user-dirs
+# tools
+pacman -S xarchiver unzip firefox network-manager-applet polkit-gnome
 
 # eggs-dev
 pacman -Syu vscode nodejs npm 
