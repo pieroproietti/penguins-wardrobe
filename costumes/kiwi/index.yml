@@ -25,6 +25,12 @@ sequence:
   packages:
     - kde-plasma-desktop
     - plasma-nm
+  try_packages:
+    - firefox
+    - firefox-esr
+  accessories:
+    - base
+    - eggs-dev
 customize:
   hostname: true
   dirs: true
