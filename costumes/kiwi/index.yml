@@ -1,11 +1,11 @@
 # wardrobe: .
 # costume: /kikau
 ---
-name: kikau
+name: kiwi
 description: >-
   basic desktop KDE
 author: artisan
-release: 0.0.1
+release: 0.0.2
 distributions:
   - bookworm
   - bullseye
@@ -30,5 +30,5 @@ customize:
   dirs: true
   scripts:
     - ../../scripts/config_desktop_link.sh
-    # ../../scripts/config_sddm.sh
+    - ../../scripts/config_sddm.sh
 reboot: true
