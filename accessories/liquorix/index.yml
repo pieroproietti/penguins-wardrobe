@@ -11,6 +11,7 @@ distributions:
   - daedalus
   - focal
   - jammy
+  - kinetic
 sequence:
   try_accessories:
     - ./debian

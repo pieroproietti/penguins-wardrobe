@@ -6,6 +6,7 @@ author: artisan
 distributions:
   - focal
   - jammy
+  - kinetic
 sequence:
   packages:
     - software-properties-common

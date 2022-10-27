@@ -12,6 +12,7 @@ distributions:
   - bionic
   - focal
   - jammy
+  - kinetic
 sequence:
   sources_list_d:
     - rm -f /etc/apt/trusted.gpg.d/quirinux-ga.gpg

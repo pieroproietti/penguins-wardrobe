@@ -15,6 +15,7 @@ distributions:
   - bionic
   - focal
   - jammy
+  - kinetic
 sequence:
   repositories:
     sources_list:

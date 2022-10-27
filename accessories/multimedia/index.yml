@@ -12,6 +12,7 @@ distributions:
   - bionic
   - focal
   - jammy
+  - kinetic
 sequence:
   packages:
     - audacity

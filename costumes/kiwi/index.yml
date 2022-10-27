@@ -14,6 +14,7 @@ distributions:
   - focal
   - impish
   - jammy
+  - kinetic
 sequence:
   repositories:
     sources_list:

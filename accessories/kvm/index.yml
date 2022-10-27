@@ -11,6 +11,7 @@ distributions:
   - focal
   - impish
   - jammy
+  - kinetic
 sequence:
   packages:
     - qemu-system

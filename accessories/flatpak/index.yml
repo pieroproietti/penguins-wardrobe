@@ -11,6 +11,7 @@ distributions:
   - bionic
   - focal
   - jammy
+  - kinetic
 sequence:
   packages:
     - flatpak

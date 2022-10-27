@@ -11,6 +11,7 @@ distributions:
 - bookworm
 - focal
 - jammy
+- kinetic
 sequence:
   repositories:
     source_list:
