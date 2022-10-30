@@ -14,9 +14,9 @@ sequence:
       - rm -f /usr/share/keyrings/kdebian.gpg
       - >-
         curl -fsSL http://www.kdebian.org/public-key.asc | gpg --dearmor -o 
-        /usr/share/keyrings/kdebian.gpg
+        /usr/share/keyrings/public-key.asc
       - >-
-        echo "deb [signed-by=/usr/share/keyrings/kdebian.gpg]
+        echo "deb [signed-by=/usr/share/keyrings/public-key.asc]
         http://kdebian.org/ppa sid main contrib" | tee 
         /etc/apt/sources.list.d/kdebian-ppa.list > /dev/null
 
