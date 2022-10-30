@@ -20,7 +20,7 @@ sequence:
       - echo "deb https://download.opensuse.org/repositories/home:/npreining:/debian-kde:/plasma525/Debian_Testing/ ./" >>/etc/apt/sources.list.d/obs-npreining-kde.list
       - echo "deb https://download.opensuse.org/repositories/home:/npreining:/debian-kde:/apps2204/Debian_Testing/ ./" >>/etc/apt/sources.list.d/obs-npreining-kde.list
       - echo "deb https://download.opensuse.org/repositories/home:/npreining:/debian-kde:/other/Debian_Testing/ ./" >>/etc/apt/sources.list.d/obs-npreining-kde.list
-s
+
     sources_list:
     - main
     - contrib
