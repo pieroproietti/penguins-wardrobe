@@ -11,7 +11,7 @@ distributions:
 sequence:
   repositories:
     sources_list_d:
-      - curl -fsSL  "https://www.preining.info/obs-npreining.asc"| gpg --dearmor -o /usr/share/keyrings/obs-npreining.asc
+      - curl -fsSL  "https://www.preining.info/obs-npreining.asc"| mv obs-npreining.asc /etc/apt/trusted.gpg.d/
       - rm -f /etc/apt/sources.list.d/obs-npreining-kde.list
       - echo "deb https://download.opensuse.org/repositories/home:/npreining:/debian-kde:/other-deps/Debian_Testing/ ./" >/etc/apt/sources.list.d/obs-npreining-kde.list
       - echo "deb https://download.opensuse.org/repositories/home:/npreining:/debian-kde:/frameworks/Debian_Testing/ ./" >>/etc/apt/sources.list.d/obs-npreining-kde.list
