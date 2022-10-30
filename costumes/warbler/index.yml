@@ -13,11 +13,11 @@ sequence:
     sources_list_d:
       - curl -fsSL  "https://www.preining.info/obs-npreining.asc"| gpg --dearmor -o /usr/share/keyrings/obs-npreining.asc
       - rm /etc/apt/source.list.d/kde.list
-      - echo "deb https://download.opensuse.org/repositories/home:/npreining:/debian-kde:/other-deps/Debian_Testing/ ./" >/etc/apt/source.list.d/obs-npreining.list
-      - echo "deb https://download.opensuse.org/repositories/home:/npreining:/debian-kde:/frameworks/Debian_Testing/ ./" >>/etc/apt/source.list.d/obs-npreining.list
-      - echo "deb https://download.opensuse.org/repositories/home:/npreining:/debian-kde:/plasma525/Debian_Testing/ ./" >>/etc/apt/source.list.d/obs-npreining.list
-      - echo "deb https://download.opensuse.org/repositories/home:/npreining:/debian-kde:/apps2204/Debian_Testing/ ./" >>/etc/apt/source.list.d/obs-npreining.list
-      - echo "deb https://download.opensuse.org/repositories/home:/npreining:/debian-kde:/other/Debian_Testing/ ./" >>/etc/apt/source.list.d/obs-npreining.list
+      - echo "deb https://download.opensuse.org/repositories/home:/npreining:/debian-kde:/other-deps/Debian_Testing/ ./" >/etc/apt/sources.list.d/obs-npreining.list
+      - echo "deb https://download.opensuse.org/repositories/home:/npreining:/debian-kde:/frameworks/Debian_Testing/ ./" >>/etc/apt/sources.list.d/obs-npreining.list
+      - echo "deb https://download.opensuse.org/repositories/home:/npreining:/debian-kde:/plasma525/Debian_Testing/ ./" >>/etc/apt/sources.list.d/obs-npreining.list
+      - echo "deb https://download.opensuse.org/repositories/home:/npreining:/debian-kde:/apps2204/Debian_Testing/ ./" >>/etc/apt/sources.list.d/obs-npreining.list
+      - echo "deb https://download.opensuse.org/repositories/home:/npreining:/debian-kde:/other/Debian_Testing/ ./" >>/etc/apt/sources.list.d/obs-npreining.list
 
     sources_list:
     - main
