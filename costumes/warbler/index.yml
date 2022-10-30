@@ -3,9 +3,11 @@
 name: warbler
 description: KDE waydroid installation using internal waydroid bookworm
 author: artisan
-release: 0.0.4
+release: 0.0.5
 distributions: 
 - bookworm
+- focal
+- jammy
 sequence:
   repositories:
     sources_list:
