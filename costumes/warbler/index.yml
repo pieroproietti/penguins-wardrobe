@@ -13,11 +13,11 @@ sequence:
     sources_list_d:
       - rm -f /etc/apt/trusted.gpg.d/obs-npreining.asc
       - curl -fsSL https://www.preining.info/obs-npreining.asc -o /etc/apt/trusted.gpg.d/obs-npreining-kde.list
-      - echo "deb https://download.opensuse.org/repositories/home:/npreining:/debian-kde:/other-deps/Debian_Testing/ ./" >/etc/apt/sources.list.d/obs-npreining-kde.list
-      - echo "deb https://download.opensuse.org/repositories/home:/npreining:/debian-kde:/frameworks/Debian_Testing/ ./" >>/etc/apt/sources.list.d/obs-npreining-kde.list
-      - echo "deb https://download.opensuse.org/repositories/home:/npreining:/debian-kde:/plasma525/Debian_Testing/ ./" >>/etc/apt/sources.list.d/obs-npreining-kde.list
-      - echo "deb https://download.opensuse.org/repositories/home:/npreining:/debian-kde:/apps2204/Debian_Testing/ ./" >>/etc/apt/sources.list.d/obs-npreining-kde.list
-      - echo "deb https://download.opensuse.org/repositories/home:/npreining:/debian-kde:/other/Debian_Testing/ ./" >>/etc/apt/sources.list.d/obs-npreining-kde.list
+      - echo "deb [signed-by=/etc/apt/trusted.gpg.d/obs-npreining-kde.list] https://download.opensuse.org/repositories/home:/npreining:/debian-kde:/other-deps/Debian_Testing/ ./" >/etc/apt/sources.list.d/obs-npreining-kde.list
+      - echo "deb [signed-by=/etc/apt/trusted.gpg.d/obs-npreining-kde.list] https://download.opensuse.org/repositories/home:/npreining:/debian-kde:/frameworks/Debian_Testing/ ./" >>/etc/apt/sources.list.d/obs-npreining-kde.list
+      - echo "deb [signed-by=/etc/apt/trusted.gpg.d/obs-npreining-kde.list] https://download.opensuse.org/repositories/home:/npreining:/debian-kde:/plasma525/Debian_Testing/ ./" >>/etc/apt/sources.list.d/obs-npreining-kde.list
+      - echo "deb [signed-by=/etc/apt/trusted.gpg.d/obs-npreining-kde.list] https://download.opensuse.org/repositories/home:/npreining:/debian-kde:/apps2204/Debian_Testing/ ./" >>/etc/apt/sources.list.d/obs-npreining-kde.list
+      - echo "deb [signed-by=/etc/apt/trusted.gpg.d/obs-npreining-kde.list] https://download.opensuse.org/repositories/home:/npreining:/debian-kde:/other/Debian_Testing/ ./" >>/etc/apt/sources.list.d/obs-npreining-kde.list
 
     sources_list:
     - main
