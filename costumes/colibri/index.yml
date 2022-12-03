@@ -16,6 +16,7 @@ distributions:
   - focal
   - jammy
   - kinetic
+  - rolling
 sequence:
   repositories:
     sources_list:
