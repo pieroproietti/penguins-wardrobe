@@ -27,6 +27,7 @@ pacman -Syy xorg-server \
             polkit-gnome
 
 # pongo utente nel gruppo autologin
+groupadd -r autologin
 gpasswd -a ${MY_USERNAME} autologin
 
 # eggs-dev
