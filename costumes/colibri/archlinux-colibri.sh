@@ -12,12 +12,19 @@ MY_USERHOME="/home/${MY_USERNAME}"
 echo "MY_USERHOME: ${MY_USERHOME}"
 
 pacman -Syyu
-pacman -Syy xorg-server xorg-apps
-pacman -Syy lightdm lightdm-gtk-greeter
-pacman -Syy xfce4 xfce4-goodies
-pacman -Syy spice-vdagent shellcheck xdg-user-dirs
-# tools
-pacman -Syy xarchiver unzip firefox network-manager-applet polkit-gnome
+pacman -Syy xorg-server \
+            xorg-apps \
+            lightdm \
+            lightdm-gtk-greeter \
+            xfce4 xfce4-goodies \
+            spice-vdagent \
+            shellcheck \
+            xdg-user-dirs \
+            xarchiver \
+            unzip \
+            firefox \
+            network-manager-applet \
+            polkit-gnome
 
 # pongo utente nel gruppo autologin
 gpasswd -a ${MY_USERNAME} autologin
