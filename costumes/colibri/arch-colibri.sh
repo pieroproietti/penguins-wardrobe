@@ -55,7 +55,7 @@ rsync -avx ./dirs/etc/skel/.config "${MY_USERHOME}"/
 chown "${MY_USERNAME}:${MY_USERNAME}" "${MY_USERHOME}" -R
 
 echo $COSTUME /etc/hostname
-cat <<'EOF' >> /etc/hosts
+cat <<'EOF' > /etc/hosts
 127.0.0.1 localhost localhost.localdomain
 127.0.1.1 ${COSTUME}
 # The following lines are desirable for IPv6 capable hosts
