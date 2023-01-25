@@ -1,62 +1,39 @@
-# Method 1: build and install from source
+# Warbler plasma/wayland/waydroid
 
-sudo apt install python3-pip
+This is the second version of this experiment, I want create a slim
+ISO to be used for develpment.
 
-For development, you will also need Cython:
+There is a motivation on the lacks of sddm in this system, unfortunately
+sddm bring dependencies from X11 almost in this version I'm using 
+from Debian/bookworm .
 
-pip install cython
+# That you get
 
+* waydroid
+* lineage-18.1-20230121-VANILLA-waydroid_x86_64 system.img (766 MB)
+* lineage-18.1-20230121-MAINLINE-waydroid_x86_64 vendor.img (165 MB)
+* vscode, node, git and necessary to develop
+* firmwares wifi cards (you can ask for more additions)
 
-Make a new directory and gather all the dependencies
-```
-mkdir Waydroid-build && cd $_
-git clone https://github.com/sailfishos/libglibutil.git
-git clone https://github.com/mer-hybris/libgbinder.git
-git clone --single-branch --branch bullseye https://github.com/erfanoabdi/gbinder-python.git
-```
+# how to install
+The live is autologin, just look the instructions in console:
 
-Install the necessary Debian build tools
+```sudo eggs install --unattended```
 
-```
-sudo apt install devscripts dh-make
-```
-Build and install Waydroid dependencies
-```
-cd libglibutil/
-sudo apt build-dep .
-debuild -us -uc
-cd ..
-sudo dpkg -i libglibutil*.deb
-cd libgbinder/
-sudo apt build-dep .
-debuild -us -uc
-cd ..
-sudo dpkg -i libgbinder*.deb
-```
-gbinder-python has incomplete Debian packaging and needs a little more work, remember to update the git version number next time you build:
+# how to use
+```startplasma-wayland``` to get the GUI, click on waydroid to run it.
 
+# how to remaster
+This system can be easily remastered with eggs:
 
-```
-rm gbinder-python -rf
-git clone --single-branch --branch bullseye https://github.com/erfanoabdi/gbinder-python.git
-cd gbinder-python/
-sudo apt build-dep .
-dch --create --package "gbinder-python" --newversion "1.0.0~git20220426-1" foo bar
-dh_make --createorig -p "gbinder-python_1.0.0~git20220426"
-```
-# Select "p" when prompted for the package type, leave the rest at the defaults
-```
-debuild -us -uc
-cd ..
-sudo dpkg -i python3-gbinder_1.0.0~git20220426-1_amd64.deb
-```
-Build and install Waydroid
+```sudo eggs produce --fast```
 
-```
-git clone --single-branch --branch bullseye https://github.com/waydroid/waydroid.git
-cd waydroid/
-sudo apt build-dep .
-debuild -us -uc
-cd ..
-sudo dpkg -i waydroid_1.2.1_all.deb 
-```
+You will get an iso of your system, without you user data.
+
+```sudo eggs produce --clone```
+
+You will get an iso of your system, with you user data.
+
+enjoy!
+
+piero.proietti@gmail.com
