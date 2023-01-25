@@ -30,7 +30,7 @@ This system can be easily remastered with eggs:
 
 You will get an iso of your system, without you user data.
 
-```sudo eggs produce --clone```
+```sudo eggs produce --fast --clone```
 
 You will get an iso of your system, with you user data.
 

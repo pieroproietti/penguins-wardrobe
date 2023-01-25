@@ -26,7 +26,6 @@ sequence:
     - base
     - eggs-dev
     - firmwares/network-wifi
-    - firmwares/drivers_video_amd
 customize:
   dirs: true
   hostname: true
