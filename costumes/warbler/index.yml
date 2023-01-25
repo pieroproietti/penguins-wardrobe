@@ -3,7 +3,7 @@
 name: warbler
 description: KDE waydroid installation using internal waydroid bookworm
 author: artisan
-release: 0.0.5
+release: 0.0.6
 distributions: 
 - bookworm
 - focal
