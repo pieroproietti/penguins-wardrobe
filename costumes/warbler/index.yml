@@ -10,7 +10,7 @@ distributions:
 - jammy
 sequence:
   repositories:
-    sources_list_d:
+    # sources_list_d:
       # rm -f /etc/apt/trusted.gpg.d/obs-npreining.asc
       # curl -fsSL https://www.preining.info/obs-npreining.asc -o /etc/apt/trusted.gpg.d/obs-npreining-kde.list
       # echo "deb [signed-by=/etc/apt/trusted.gpg.d/obs-npreining-kde.list] https://download.opensuse.org/repositories/home:/npreining:/debian-kde:/other-deps/Debian_Testing/ ./" >/etc/apt/sources.list.d/obs-npreining-kde.list
