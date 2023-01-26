@@ -8,6 +8,7 @@ distributions:
 - bookworm
 - focal
 - jammy
+- kinetic
 sequence:
   repositories:
     sources_list:
@@ -25,7 +26,7 @@ sequence:
     - ./waydroid-warbler
     - base
     - eggs-dev
-    - firmwares/network-wifi
+    # firmwares/network-wifi
 customize:
   dirs: true
   hostname: true
