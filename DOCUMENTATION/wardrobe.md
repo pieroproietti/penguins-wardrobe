@@ -5,19 +5,20 @@ Ognuno di noi ha l'esperienza di un guardaroba, il classico armadio in camera da
 ![wardorbe](./images/wardrobe/51616859915_5f8eaabfa4_w.jpg)
 
 
-Ho voluto utilizzare questa metafora perchè semplice da ricordare, un ```costume``` da indossare, uno o più ```accessories``` da aggiungere. 
+Ho voluto utilizzare questa metafora perchè semplice da ricordare, dei ```costumes``` da indossare, uno o più ```accessories``` da aggiungere. 
 
-Gli accessori possono sia essere definiti nel costume e nel "tiretto" ```accessories```
+Gli accessori possono sia essere definiti all'interno del costume e nel "tiretto" ```accessories```
 
-Il nostro armadio è a due ante, da una parte i costumi dall'altra le definizioni di accessori. 
+Il nostro armadio è a due ante, da una parte la definizione dei costumi dall'altra quella degli accessori. 
 
-Volendo essere larghi ed esagerati lo potremmo definire a tre ante includendo anche la DOCUMENTATION che state leggendo.
+Volendo essere larghi lo potremmo definire anche a tre o quattro ante includendo anche la DOCUMENTATION  che state leggendo e la directory CONFIG per le configurazioni per installazione unattended.
 
 La nostra struttura del wardrobe è questa:
 
 ```
 ~/wardrobe ─┬─ accessories
             ├─ costumes 
+            ├─ CONFIG
             ├─ DOCUMENTATION
             ├─ scripts
             ├─ servers
@@ -28,6 +29,8 @@ La nostra struttura del wardrobe è questa:
 Contiene gli accessori dei costumi
 ## costumes
 Contiene la definizione dei costumi
+## CONFIG
+Contiene file di configurazione .YAML utilizzati da ```eggs install --custom file```
 ## DOCUMENTATION
 Contiene questa documentatione
 ## scripts
