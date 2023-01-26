@@ -34,15 +34,15 @@ sequence:
     - python3
     - wget
   packages:
-    - dhclient # jon last request
+    - coredhcp-client # jon last request
     - gir1.2-gtk-3.0 # john
     - gir1.2-gtk-4.0 # we can't find it
     - gir1.2-vte-2.91 # undecided
     - gir1.2-webkit2-4.0 # need
-    - ifconfig # jon last request
-    - iwlist # jon last request
+    - net-tools # jon last request ifconfig
+    - iw # jon last request
     - libvte-2.91-dev  # need
-    - nmcli # jon last request
+    - network-manager # jon last request nwcli
     - python3-gi # john
     - python3-gi-cairo # john
     - python3-pip
