@@ -1,9 +1,9 @@
-# waydroid at: 2023-01-25
+# waydroid at: 2023-01-26
 ---
 name: waydroid
 description: waydroid installer
 author: Jon West
-release: 0.0.1
+release: 0.0.2
 distributions:
 - bookworm
 - focal
@@ -34,11 +34,15 @@ sequence:
     - python3
     - wget
   packages:
+    - dhclient # jon last request
     - gir1.2-gtk-3.0 # john
     - gir1.2-gtk-4.0 # we can't find it
     - gir1.2-vte-2.91 # undecided
     - gir1.2-webkit2-4.0 # need
+    - ifconfig # jon last request
+    - iwlist # jon last request
     - libvte-2.91-dev  # need
+    - nmcli # jon last request
     - python3-gi # john
     - python3-gi-cairo # john
     - python3-pip
