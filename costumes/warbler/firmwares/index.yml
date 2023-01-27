@@ -1,4 +1,8 @@
 # network-wifi
+# Ubuntu 22.04 don't have firmware-atheros
+# git clone git://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git
+# sudo cp -r linux-firmwareath* /lib/firmware
+# ... Sorry I can't test it
 ---
 name: waydroid network-wifi
 description: install firmware drivers network-wifi
@@ -7,8 +11,7 @@ release: 0.0.1
 distributions:
   - bookworm
   - bullseye
-  - buster
-  - chimaera
+  # focal
   # kinetic
 sequence:
   packages:
