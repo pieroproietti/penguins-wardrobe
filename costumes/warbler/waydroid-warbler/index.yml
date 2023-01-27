@@ -33,32 +33,35 @@ sequence:
     - lxc
     - python3
     - wget
+  try_packages:
+    - coredhcp-client # Debian 
+    - isc-dhcp-client # Ubuntu until kinetic
   packages:
-    - coredhcp-client # jon last request
-    - gir1.2-gtk-3.0 # john
-    - gir1.2-gtk-4.0 # we can't find it
-    - gir1.2-vte-2.91 # undecided
-    - gir1.2-webkit2-4.0 # need
-    - net-tools # jon last request ifconfig
-    - iw # jon last request
-    - libvte-2.91-dev  # need
-    - network-manager # jon last request nwcli
-    - python3-gi # john
-    - python3-gi-cairo # john
+    - gir1.2-gtk-3.0 
+    - gir1.2-gtk-4.0 
+    - gir1.2-vte-2.91
+    - gir1.2-webkit2-4.0
+    - net-tools # ifconfig
+    - iw # iwclient
+    - libvte-2.91-dev
+    - network-manager # nmcli
+    - python3-gi
+    - python3-gi-cairo
     - python3-pip
     - waydroid
-    - xclip # take it the same
+    - xclip
 
     # waydroid_extras
     - lzip # https://github.com/casualsnek/waydroid_script/
     - sqlite3 # https://github.com/casualsnek/waydroid_script/
+
   debs: false
   packagesPip:
-    - gbinder-python # senza non funge
+    - gbinder-python
     - pyclip
 customize:
   scripts:
     - install_waydroid_settings.sh
     - install_image_from_local.sh
-    - no_hw_accelleration.sh
+    - no_hw_accelleration.sh 
     - "ln -s /bin/python3 /bin/python"

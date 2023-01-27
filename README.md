@@ -280,8 +280,8 @@ eggs wardrobe ironing colibri --wardrobe ./my-own-wardrobe
 
 * **colibri** is a light XFC4 for developers you can easily start to improve eggs.
 * **duck** come with cinnamon - probably is the right desktop for peoples coming from windows - here complete plus office, gimp and vlc
-* **owl** is a XFCE4 for graphics designers, this a simple/experimental bird, based on the work of Clarlie Martinez quirinux
-* **warbler**, a wayland/KDE/waydroid installation
+* **owl** is a XFCE4 for graphics designers, this a simple/experimental bird, based on the work of Charlie Martinez [quirinux](https://blog.quirinux.org/)
+* **warbler**, a wayland/KDE/waydroid installation 
 
 # Accessories
 * base

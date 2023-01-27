@@ -9,13 +9,15 @@ distributions:
   - bullseye
   - buster
   - chimaera
+  # kinetic
 sequence:
   packages:
     - firmware-atheros # Binary firmware for Qualcomm Atheros wireless cards non-free
     - firmware-brcm80211 # Binary firmware for Broadcom/Cypress 802.11 wireless card
     - firmware-ipw2x00 #  Binary firmware for Intel Pro Wireless 2100, 2200 and 2915 [non-free]
     - firmware-iwlwifi #  Binary firmware for Intel Wireless cards [non-free]
-    - firmware-libertas # inary firmware for Marvell wireless cards [non-free]
+    - firmware-libertas # binary firmware for Marvell wireless cards [non-free]
     - firmware-realtek # Binary firmware for Realtek wired/wifi/BT adapters [non-free]
     - firmware-zd1211 # binary firmware for the zd1211rw wireless driver [non-free]
+    - firmware-linux-free # Binary firmware for various drivers in the Linux kernel
 
