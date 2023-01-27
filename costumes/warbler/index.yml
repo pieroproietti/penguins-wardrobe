@@ -24,7 +24,8 @@ sequence:
     - plasma-workspace-wayland
   accessories:
     - ./firmwares
-    - ./waydroid-warbler
+    . ./python3-dev
+    - ./waydroid
     - base
     - eggs-dev
 customize:

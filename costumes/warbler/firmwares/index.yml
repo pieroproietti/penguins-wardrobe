@@ -11,7 +11,7 @@ release: 0.0.1
 distributions:
   - bookworm
   - bullseye
-  # focal
+  # jammy
   # kinetic
 sequence:
   packages:

@@ -291,4 +291,3 @@ eggs wardrobe ironing colibri --wardrobe ./my-own-wardrobe
 * liquorix
 * multimedia
 * office
-* waydroid
