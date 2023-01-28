@@ -3,6 +3,7 @@
 # git clone git://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git
 # sudo cp -r linux-firmwareath* /lib/firmware
 # ... Sorry I can't test it
+# Piero: RTL8822 CE (cp rtw88/ /lib/firmware)
 ---
 name: waydroid network-wifi
 description: install firmware drivers network-wifi
