@@ -17,6 +17,8 @@ sequence:
   packages_no_install_recommends:
     - gdm3
     - gnome-control-center
+    - gnome-keyring
+    - gnome-session
     - gnome-shell
     - gnome-terminal
     - nautilus 
