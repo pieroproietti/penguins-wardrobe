@@ -6,8 +6,6 @@ author: artisan
 release: 0.9.1
 distributions:
   - bookworm
-  - jammy
-  - kinetic
 sequence:
   packages:
     - appstream-util

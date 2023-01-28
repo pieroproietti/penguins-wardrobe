@@ -3,9 +3,9 @@
 name: warbler
 description: plasma/wayland/waydroid
 author: artisan
-release: 0.0.6
+release: 0.1.0
 distributions: 
-- jammy
+- bookworm
 sequence:
   repositories:
     sources_list:
@@ -20,8 +20,8 @@ sequence:
     - plasma-nm
     - plasma-workspace-wayland
   accessories:
-    #- ./firmwares
-    #- ./python3-dev
+    - ./firmwares
+    - ./python3-dev
     - ./waydroid
     - base
     - eggs-dev
