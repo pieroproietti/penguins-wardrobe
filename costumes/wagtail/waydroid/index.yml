@@ -5,7 +5,6 @@ description: waydroid installer
 author: Jon West
 release: 0.0.2
 distributions:
-- bookworm
 - jammy
 sequence:
   repositories:
@@ -20,7 +19,7 @@ sequence:
         /usr/share/keyrings/waydroid.gpg
       - >-
         echo "deb [signed-by=/usr/share/keyrings/waydroid.gpg]
-        https://repo.waydro.id/ bookworm main" | tee
+        https://repo.waydro.id/ jammy main" | tee
         /etc/apt/sources.list.d/waydroid-ppa.list > /dev/null
     update: true
     upgrade: true
