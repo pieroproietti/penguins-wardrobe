@@ -1,0 +1,29 @@
+# warbier
+---
+name: wagtail
+description: a reduced wayland/gnome/waydroid
+author: artisan
+release: 0.1.0
+distributions: 
+- jammy
+sequence:
+  repositories:
+    sources_list:
+    - main
+    - contrib
+    - non-free
+    update: true
+    upgrade: true
+  packages_no_install_recommends:
+    - gnome-session
+    - gnome-terminal
+    - gnome-session
+  accessories:
+    - ./python3-dev
+    - ./waydroid
+    - base
+    - eggs-dev
+customize:
+  dirs: true
+  hostname: true
+reboot: true

@@ -1,0 +1,27 @@
+# network-wifi
+# Ubuntu 22.04 don't have firmware-atheros
+# git clone git://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git
+# sudo cp -r linux-firmwareath* /lib/firmware
+# ... Sorry I can't test it
+# Piero: RTL8822 CE (cp rtw88/ /lib/firmware)
+---
+name: waydroid network-wifi
+description: install firmware drivers network-wifi
+author: artisan
+release: 0.0.1
+distributions:
+  - bookworm
+  - bullseye
+  # jammy
+  # kinetic
+sequence:
+  packages:
+    - firmware-atheros # Binary firmware for Qualcomm Atheros wireless cards non-free
+    - firmware-brcm80211 # Binary firmware for Broadcom/Cypress 802.11 wireless card
+    - firmware-ipw2x00 #  Binary firmware for Intel Pro Wireless 2100, 2200 and 2915 [non-free]
+    - firmware-iwlwifi #  Binary firmware for Intel Wireless cards [non-free]
+    - firmware-libertas # binary firmware for Marvell wireless cards [non-free]
+    - firmware-realtek # Binary firmware for Realtek wired/wifi/BT adapters [non-free]
+    - firmware-zd1211 # binary firmware for the zd1211rw wireless driver [non-free]
+    - firmware-linux-free # Binary firmware for various drivers in the Linux kernel
+
