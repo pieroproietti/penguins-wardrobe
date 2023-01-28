@@ -1,10 +1,11 @@
 # warbier
 ---
 name: wagtail
-description: a reduced wayland/gnome/waydroid
+description: wagtail wayland/gnome/waydroid
 author: artisan
 release: 0.1.0
 distributions: 
+- bookworm
 - jammy
 sequence:
   repositories:
@@ -15,15 +16,13 @@ sequence:
     update: true
     upgrade: true
   packages_no_install_recommends:
-    - gnome-shell
-    - nautilus 
-    - gnome-terminal 
-    - guake 
-    - gnome-tweaks
-    - gnome-control-center
-    - xdg-user-dirs
     - gdm3
+    - gnome-control-center
+    - gnome-shell
     - gnome-terminal
+    - gnome-tweaks
+    - nautilus 
+    - xdg-user-dirs
   accessories:
     - ./waydroid
     - base

@@ -3,10 +3,6 @@
 This is the second version of this experiment, I want create a slim
 ISO to be used for develpment.
 
-There is a motivation on the lacks of sddm in this system, unfortunately
-sddm bring dependencies from X11 almost in this version I'm using 
-from Debian/bookworm .
-
 # That you get
 
 * waydroid
