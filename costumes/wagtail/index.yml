@@ -22,7 +22,7 @@ sequence:
     - gnome-tweaks
     - gnome-control-center
     - xdg-user-dirs
-    - gdm
+    - gdm3
     - gnome-terminal
   accessories:
     - ./waydroid
