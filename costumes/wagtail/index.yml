@@ -15,11 +15,16 @@ sequence:
     update: true
     upgrade: true
   packages_no_install_recommends:
-    - gnome-session
+    - gnome-shell
+    - nautilus 
+    - gnome-terminal 
+    - guake 
+    - gnome-tweaks
+    - gnome-control-center
+    - xdg-user-dirs
+    - gdm
     - gnome-terminal
-    - gnome-session
   accessories:
-    - ./python3-dev
     - ./waydroid
     - base
     - eggs-dev

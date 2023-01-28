@@ -5,10 +5,7 @@ description: plasma/wayland/waydroid
 author: artisan
 release: 0.0.6
 distributions: 
-- bookworm
-- focal
 - jammy
-- kinetic
 sequence:
   repositories:
     sources_list:
@@ -23,8 +20,8 @@ sequence:
     - plasma-nm
     - plasma-workspace-wayland
   accessories:
-    - ./firmwares
-    - ./python3-dev
+    #- ./firmwares
+    #- ./python3-dev
     - ./waydroid
     - base
     - eggs-dev
