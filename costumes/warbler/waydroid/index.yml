@@ -5,7 +5,7 @@ description: waydroid installer
 author: Jon West
 release: 0.0.2
 distributions:
-- jammy
+- bookworm
 sequence:
   repositories:
     sources_list:
