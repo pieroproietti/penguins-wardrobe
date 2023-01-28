@@ -6,7 +6,6 @@ author: artisan
 release: 0.1.0
 distributions: 
 - bookworm
-- jammy
 sequence:
   repositories:
     sources_list:
@@ -20,9 +19,7 @@ sequence:
     - gnome-control-center
     - gnome-shell
     - gnome-terminal
-    - gnome-tweaks
     - nautilus 
-    - xdg-user-dirs
   accessories:
     - ./waydroid
     - base
