@@ -61,6 +61,7 @@ sequence:
     - pyclip
 customize:
   scripts:
+    - install_waydroid_package_manager.sh
     - install_waydroid_settings.sh
     - install_image_from_local.sh
     - no_hw_accelleration.sh 
