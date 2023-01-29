@@ -1,0 +1,25 @@
+# warbier
+---
+name: whipbird
+description: whipbird wayland/weston/waydroid
+author: artisan
+release: 0.0.1
+distributions: 
+- bookworm
+sequence:
+  repositories:
+    sources_list:
+    - main
+    - contrib
+    - non-free
+    update: true
+    upgrade: true
+  packages_no_install_recommends:
+    - weston
+  accessories:
+    - ./waydroid
+    - ./firmwares
+customize:
+  dirs: true
+  hostname: true
+reboot: true
