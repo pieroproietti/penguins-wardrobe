@@ -6,6 +6,7 @@ author: artisan
 release: 0.9.1
 distributions:
   - bookworm
+  - bullseye
 sequence:
   packages:
     - appstream-util

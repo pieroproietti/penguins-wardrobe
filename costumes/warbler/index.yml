@@ -6,6 +6,7 @@ author: artisan
 release: 0.1.0
 distributions: 
 - bookworm
+- bullseye
 sequence:
   repositories:
     sources_list:
