@@ -19,7 +19,7 @@ sequence:
         /usr/share/keyrings/waydroid.gpg
       - >-
         echo "deb [signed-by=/usr/share/keyrings/waydroid.gpg]
-        https://repo.waydro.id/${lsb_release -c} main" | tee
+        https://repo.waydro.id/$(lsb_release -c) main" | tee
         /etc/apt/sources.list.d/waydroid-ppa.list > /dev/null
     update: true
     upgrade: true
