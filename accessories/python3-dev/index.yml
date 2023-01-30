@@ -1,7 +1,7 @@
 # costume: /home/artisan/penguins-wardrobe/accessories/python3-dev/
 ---
 name: python3-dev
-description: sviluppo in python per os-installer
+description: sviluppo in python
 author: artisan
 release: 0.9.0
 distributions:
