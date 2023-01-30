@@ -20,6 +20,7 @@ sequence:
     - plasma-nm
     - plasma-workspace-wayland
     - sddm
+    - systemsettings
   accessories:
     - ./firmwares
     - ./python3-dev
