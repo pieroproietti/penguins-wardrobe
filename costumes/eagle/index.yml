@@ -14,7 +14,7 @@ sequence:
       - contrib
     sources_list_d:
       - >-
-        echo "#deb https://enterprise.proxmox.com/debian/pve `lsb_release -cs`
+        echo "#deb https://enterprise.proxmox.com/debian/pve $(lsb_release -cs)
         pve-enterprise"| tee /etc/apt/sources.list.d/pve-enterprise.list >
         /dev/null
 
@@ -25,7 +25,7 @@ sequence:
         --dearmor -o /usr/share/keyrings/proxmox-release-bullseye.gpg
       - >-
         echo "deb [signed-by=/usr/share/keyrings/proxmox-release-bullseye.gpg]
-        http://download.proxmox.com/debian/pve `lsb_release -cs`
+        http://download.proxmox.com/debian/pve $(lsb_release -cs)
         pve-no-subscription" | tee
         /etc/apt/sources.list.d/pve-no-subscription.list > /dev/null
     update: true
