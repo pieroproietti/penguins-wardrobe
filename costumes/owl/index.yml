@@ -19,6 +19,7 @@ sequence:
       - contrib
       - non-free
     sources_list_d:
+      - rm -f /etc/apt/sources.list.d/quirinux.list
       - wget -O - https://repo.quirinux.org/gpg/quirinux.asc | apt-key add -
       - >-
         echo "deb https://repo.quirinux.org quirinux main" | tee
