@@ -19,13 +19,18 @@ sequence:
       - contrib
       - non-free
     sources_list_d:
-      - rm -f /etc/apt/trusted.gpg.d/quirinux-ga.gpg
-      - >-
-        curl -fsSL "https://repo.quirinux.org/gpg/quirinux.asc" |
-        gpg --dearmor -o /etc/apt/trusted.gpg.d/quirinux-ga.gpg
+      - rm -f /etc/apt/trusted.gpg.d/quirinux-gpg.gqg
+      - wget -O - https://repo.quirinux.org/gpg/quirinux.asc | apt-key add -
       - >-
         echo "deb https://repo.quirinux.org quirinux main" | tee
-        /etc/apt/sources.list.d/quirinux-ga.list > /dev/null
+        /etc/apt/sources.list.d/quirinux.list > /dev/null
+      #- rm -f /etc/apt/trusted.gpg.d/quirinux-ga.gpg
+      #- >-
+      #  curl -fsSL "https://repo.quirinux.org/gpg/quirinux.asc" |
+      #  gpg --dearmor -o /etc/apt/trusted.gpg.d/quirinux-ga.gpg
+      #- >-
+      #  echo "deb https://repo.quirinux.org quirinux main" | tee
+      #  /etc/apt/sources.list.d/quirinux-ga.list > /dev/null
     update: true
     upgrade: true
   packages:
