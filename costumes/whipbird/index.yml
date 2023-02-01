@@ -21,5 +21,7 @@ sequence:
     - ./firmwares
 customize:
   dirs: true
+  scripts:
+    - ../../scripts/config_desktop_link.sh
   hostname: true
 reboot: true
