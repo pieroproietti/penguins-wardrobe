@@ -23,6 +23,7 @@ sequence:
     - gnome-terminal
     - nautilus 
   accessories:
+    - ./firmwares
     - ./waydroid
     - base
     - eggs-dev
