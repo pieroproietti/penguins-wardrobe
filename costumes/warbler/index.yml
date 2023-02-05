@@ -41,6 +41,8 @@ sequence:
     update: true
     upgrade: true
   packages_no_install_recommends:
+    - discover-plasma
+    - dolphin
     - firefox-esr
     - konsole
     - plasma-desktop
