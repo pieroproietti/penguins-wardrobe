@@ -12,31 +12,31 @@ sequence:
     - main
     - contrib
     - non-free
-    sources_list_d:
-      - rm -f /usr/local/share/keyrings/obs-npreining.asc
-      - mkdir /usr/local/share/keyrings/ -p
-      - >- 
-        curl -fsSL https://www.preining.info/obs-npreining.asc | tee /usr/local/share/keyrings/obs-npreining.asc
+    #sources_list_d:
+      #- rm -f /usr/local/share/keyrings/obs-npreining.asc
+      #- mkdir /usr/local/share/keyrings/ -p
+      #- >- 
+      #  curl -fsSL https://www.preining.info/obs-npreining.asc | tee /usr/local/share/keyrings/obs-npreining.asc
 
-      - >-
-        echo "deb [signed-by=/usr/local/share/keyrings/obs-npreining.asc] 
-        https://download.opensuse.org/repositories/home:/npreining:/debian-kde:/other-deps/Debian_Unstable  ./ " | 
-        tee /etc/apt/sources.list.d/kde-frameworks.list > /dev/null
+      #- >-
+      #  echo "deb [signed-by=/usr/local/share/keyrings/obs-npreining.asc] 
+      #  https://download.opensuse.org/repositories/home:/npreining:/debian-kde:/other-deps/Debian_Unstable  ./ " | 
+      #  tee /etc/apt/sources.list.d/kde-frameworks.list > /dev/null
 
-      - >-
-        echo "deb [signed-by=/usr/local/share/keyrings/obs-npreining.asc] 
-        https://download.opensuse.org/repositories/home:/npreining:/debian-kde:/plasma525/Debian_Unstable  ./ " | 
-        tee /etc/apt/sources.list.d/kde-plasma525.list > /dev/null
+      #- >-
+      #  echo "deb [signed-by=/usr/local/share/keyrings/obs-npreining.asc] 
+      #  https://download.opensuse.org/repositories/home:/npreining:/debian-kde:/plasma525/Debian_Unstable  ./ " | 
+      #  tee /etc/apt/sources.list.d/kde-plasma525.list > /dev/null
 
-      - >-
-        echo "deb [signed-by=/usr/local/share/keyrings/obs-npreining.asc] 
-        https://download.opensuse.org/repositories/home:/npreining:/debian-kde:/apps2208/Debian_Unstable  ./ " | 
-        tee /etc/apt/sources.list.d/kde-apps2208.list > /dev/null
+      #- >-
+      #  echo "deb [signed-by=/usr/local/share/keyrings/obs-npreining.asc] 
+      #  https://download.opensuse.org/repositories/home:/npreining:/debian-kde:/apps2208/Debian_Unstable  ./ " | 
+      #  tee /etc/apt/sources.list.d/kde-apps2208.list > /dev/null
 
-      - >-
-        echo "deb [signed-by=/usr/local/share/keyrings/obs-npreining.asc] 
-        https://download.opensuse.org/repositories/home:/npreining:/debian-kde:/other/Debian_Unstable  ./ " | 
-        tee /etc/apt/sources.list.d/kde-other.list > /dev/null
+      #- >-
+      #  echo "deb [signed-by=/usr/local/share/keyrings/obs-npreining.asc] 
+      #  https://download.opensuse.org/repositories/home:/npreining:/debian-kde:/other/Debian_Unstable  ./ " | 
+      #  tee /etc/apt/sources.list.d/kde-other.list > /dev/null
 
     update: true
     upgrade: true
