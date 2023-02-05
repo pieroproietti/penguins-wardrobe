@@ -1,6 +1,7 @@
 #!/bin/sh
-
+#
 # Here we are always root and always are working on a virgin system
+#
 tmp=`mktemp -d`
 cd $tmp
 git clone --recurse-submodules https://github.com/axel358/Waydroid-Settings waydroid-settings
