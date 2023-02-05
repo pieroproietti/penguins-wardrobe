@@ -17,11 +17,11 @@ sequence:
   packages_no_install_recommends:
     - weston
   accessories:
-    - ./waydroid
     - ./firmwares
+    - waydroid
 customize:
   dirs: true
   scripts:
-    - ../../scripts/config_desktop_link.sh
+    - ../../scripts/add_wifi_firmwares.sh
   hostname: true
 reboot: true

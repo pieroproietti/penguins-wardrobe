@@ -6,7 +6,6 @@ author: artisan
 release: 0.1.0
 distributions: 
 - bookworm
-- bullseye
 sequence:
   repositories:
     sources_list:
@@ -25,10 +24,14 @@ sequence:
   accessories:
     - ./firmwares
     - ./python3-dev
-    - ./waydroid
     - base
     - eggs-dev
+    - waydroid
 customize:
   dirs: true
+  scripts:
+    - ../../scripts/config_desktop_link.sh
+    - ../../scripts/config_sddm.sh
+    - ../../scripts/add_wifi_firmwares.sh
   hostname: true
 reboot: true

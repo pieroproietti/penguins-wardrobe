@@ -24,9 +24,9 @@ sequence:
     - nautilus 
   accessories:
     - ./firmwares
-    - ./waydroid
     - base
     - eggs-dev
+    - waydroid
 customize:
   dirs: true
   scripts:
