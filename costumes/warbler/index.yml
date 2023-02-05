@@ -12,6 +12,31 @@ sequence:
     - main
     - contrib
     - non-free
+    sources_list_d:
+      - rm -f /usr/local/share/keyrings/obs-npreining.asc
+      - >-
+        curl -fsSL https://www.preining.info/obs-npreining.asc | sudo tee /usr/local/share/keyrings/obs-npreining.asc
+
+      - >-
+        echo "deb [signed-by=/usr/local/share/keyrings/obs-npreining.asc] 
+        https://download.opensuse.org/repositories/home:/npreining:/debian-kde:/other-deps/bookworm  ./ " | 
+        tee /etc/apt/sources.list.d/kde-frameworks.list > /dev/null
+
+      - >-
+        echo "deb [signed-by=/usr/local/share/keyrings/obs-npreining.asc] 
+        https://download.opensuse.org/repositories/home:/npreining:/debian-kde:/plasma525/bookworm  ./ " | 
+        tee /etc/apt/sources.list.d/kde-plasma525.list > /dev/null
+
+      - >-
+        echo "deb [signed-by=/usr/local/share/keyrings/obs-npreining.asc] 
+        https://download.opensuse.org/repositories/home:/npreining:/debian-kde:/apps2208/bookworm  ./ " | 
+        tee /etc/apt/sources.list.d/kde-apps2208.list > /dev/null
+
+      - >-
+        echo "deb [signed-by=/usr/local/share/keyrings/obs-npreining.asc] 
+        https://download.opensuse.org/repositories/home:/npreining:/debian-kde:/apps2208/bookworm  ./ " | 
+        tee /etc/apt/sources.list.d/kde-other.list > /dev/null
+
     update: true
     upgrade: true
   packages_no_install_recommends:

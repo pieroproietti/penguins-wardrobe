@@ -4,12 +4,5 @@
 #
 clear
 echo "wardrobe: installing waydroid-package-manager"
-read -rp "Press enter to continue"
+read -t180 -rp "Press enter to continue..."
 scp -r artisan@192.168.1.2:/opt/waydroid/waydroid-package-manager /etc/skel
-
-
-
-
-
-
-
