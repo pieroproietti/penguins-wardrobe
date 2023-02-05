@@ -41,12 +41,14 @@ sequence:
     update: true
     upgrade: true
   packages_no_install_recommends:
-    - kde-plasma-desktop
+    # kde-plasma-desktop
     - konsole
     - plasma-nm
     - plasma-workspace-wayland
     - sddm
     - systemsettings
+
+    - firefox-esr
   accessories:
     - ./firmwares
     - ./python3-dev
