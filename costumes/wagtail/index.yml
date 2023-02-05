@@ -30,6 +30,8 @@ sequence:
 customize:
   dirs: true
   scripts:
-    - ../../scripts/wifi.sh
+    - ../../scripts/config_desktop_link.sh
+    - ../../scripts/config_gdm3.sh
+    - ../../scripts/add_wifi_firmwares.sh
   hostname: true
 reboot: true
