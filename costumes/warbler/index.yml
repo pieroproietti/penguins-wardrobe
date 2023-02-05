@@ -12,40 +12,14 @@ sequence:
     - main
     - contrib
     - non-free
-    #sources_list_d:
-      #- rm -f /usr/local/share/keyrings/obs-npreining.asc
-      #- mkdir /usr/local/share/keyrings/ -p
-      #- >- 
-      #  curl -fsSL https://www.preining.info/obs-npreining.asc | tee /usr/local/share/keyrings/obs-npreining.asc
-
-      #- >-
-      #  echo "deb [signed-by=/usr/local/share/keyrings/obs-npreining.asc] 
-      #  https://download.opensuse.org/repositories/home:/npreining:/debian-kde:/other-deps/Debian_Unstable  ./ " | 
-      #  tee /etc/apt/sources.list.d/kde-frameworks.list > /dev/null
-
-      #- >-
-      #  echo "deb [signed-by=/usr/local/share/keyrings/obs-npreining.asc] 
-      #  https://download.opensuse.org/repositories/home:/npreining:/debian-kde:/plasma525/Debian_Unstable  ./ " | 
-      #  tee /etc/apt/sources.list.d/kde-plasma525.list > /dev/null
-
-      #- >-
-      #  echo "deb [signed-by=/usr/local/share/keyrings/obs-npreining.asc] 
-      #  https://download.opensuse.org/repositories/home:/npreining:/debian-kde:/apps2208/Debian_Unstable  ./ " | 
-      #  tee /etc/apt/sources.list.d/kde-apps2208.list > /dev/null
-
-      #- >-
-      #  echo "deb [signed-by=/usr/local/share/keyrings/obs-npreining.asc] 
-      #  https://download.opensuse.org/repositories/home:/npreining:/debian-kde:/other/Debian_Unstable  ./ " | 
-      #  tee /etc/apt/sources.list.d/kde-other.list > /dev/null
-
     update: true
     upgrade: true
   packages_no_install_recommends:
-    - discover-plasma
     - dolphin
     - firefox-esr
     - konsole
     - plasma-desktop
+    - plasma-discover
     - plasma-nm
     - plasma-workspace-wayland
     - sddm
@@ -59,7 +33,7 @@ sequence:
 customize:
   dirs: true
   scripts:
-    - echo "[Autologin]\nUser=artisan\nSession=plasma-wayland" > /etc/sddm.conf
+    #- echo "[Autologin]\nUser=artisan\nSession=plasma-wayland" > /etc/sddm.conf
     - ../../scripts/config_desktop_link.sh
     - ../../scripts/config_sddm.sh
     - ../../scripts/add_wifi_firmwares.sh
