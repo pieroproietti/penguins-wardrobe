@@ -29,5 +29,7 @@ sequence:
     - eggs-dev
 customize:
   dirs: true
+  scripts:
+    - ../../scripts/wifi.sh
   hostname: true
 reboot: true
