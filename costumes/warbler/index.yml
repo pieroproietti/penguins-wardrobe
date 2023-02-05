@@ -15,7 +15,7 @@ sequence:
     sources_list_d:
       - rm -f /usr/local/share/keyrings/obs-npreining.asc
       - >-
-        curl -fsSL https://www.preining.info/obs-npreining.asc | sudo tee /usr/local/share/keyrings/obs-npreining.asc
+        curl -fsSL https://www.preining.info/obs-npreining.asc | tee /usr/local/share/keyrings/obs-npreining.asc
 
       - >-
         echo "deb [signed-by=/usr/local/share/keyrings/obs-npreining.asc] 
