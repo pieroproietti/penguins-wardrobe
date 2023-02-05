@@ -14,7 +14,8 @@ sequence:
     - non-free
     sources_list_d:
       - rm -f /usr/local/share/keyrings/obs-npreining.asc
-      - >-
+      - mkdir /usr/local/share/keyrings/ -p
+      - >- 
         curl -fsSL https://www.preining.info/obs-npreining.asc | tee /usr/local/share/keyrings/obs-npreining.asc
 
       - >-
