@@ -57,6 +57,7 @@ sequence:
 customize:
   dirs: true
   scripts:
+    - echo "[Autologin]\nUser=artisan\nSession=plasma-wayland" > /etc/sddm.conf
     - ../../scripts/config_desktop_link.sh
     - ../../scripts/config_sddm.sh
     - ../../scripts/add_wifi_firmwares.sh
