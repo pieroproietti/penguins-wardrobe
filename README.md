@@ -173,7 +173,7 @@ Show index.yml of the costume.
 eggs wardrobe show colibri --wardrobe ../my-own-wardrobe
 ```
 
-## wardrobe wear COSTUME
+## sudo wardrobe wear COSTUME
 Start the process of wear a costume, at the end your system will be modified in accord of.
 
 ```
