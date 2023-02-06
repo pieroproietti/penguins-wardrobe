@@ -22,9 +22,9 @@ E' possibile vestire un sistema CLI con un splendida interfaccia GUI, ma è anch
 
 Un costume consiste un una directory denominata con il nome del costume ed un file index.yaml. 
 
-I tipi dei contenuti del costume sono attualmente definiti in [i-materia.ts](https://github.com/pieroproietti/penguins-eggs/blob/master/src/interfaces/i-materia.ts) su [penguins-eggs](https://github.com/pieroproietti/penguins-eggs):
+I **type** dei contenuti del costume sono attualmente definiti typescript [i-materia.ts](https://github.com/pieroproietti/penguins-eggs/blob/master/src/interfaces/i-materia.ts) su [penguins-eggs](https://github.com/pieroproietti/penguins-eggs).
 
-Qui abbiamo sono delle definizioni di costume ad esempio il mio colibri che utilizzo per il mio lavoro di sviluppatore, potete visualizzare tutto l'esempio direttamente sul wardrobe: [index.yaml](https://github.com/pieroproietti/penguins-wardrobe/blob/main/costumes/colibri/index.yml)
+Qui abbiamo sono delle definizioni di costume in linguaggio YAML. ad esempio il mio colibri che utilizzo per il mio lavoro di sviluppatore, lo potete visualizzare tutto l'esempio direttamente sul wardrobe: [index.yaml](https://github.com/pieroproietti/penguins-wardrobe/blob/main/costumes/colibri/index.yml)
 
 
 ```
@@ -64,14 +64,14 @@ La sequence è la parte cruciale sia dei costumi che degli accessori, viene eseg
 * accessories
 * try_accessories
 
-L'idea diesto la sequenza è stata di renderla minima ed indivisibile.
+L'idea dietro la sequenza è stata di renderla minima ed indivisibile.
 
 #### repositories
-Definisce cosa abbiamo bisogno sia nella nostra ```/etc/apt/surces.list``` e principalmente, nella directory ```/etc/aot/surces.list.d```.
+Definisce cosa abbiamo bisogno sia nella nostra ```/etc/apt/surces.list``` e principalmente, nella directory ```/etc/apt/sources.list.d```.
 
-repositories è formata da due item:
+```repositories``` è formata da due item:
 
-* ```sources_list``` componenti da utilizzare: main, contrib, non-free 
+* ```sources_list``` componenti da utilizzare: **main**, **contrib**, **non-free**
 * ```sources_list_d``` commandi per aggiungere altre repository all'interno di ```/etc/apt/sources.list.d```.
 
 #### preinst
@@ -85,13 +85,13 @@ Una semplice array di pacchetti da installare con l'opzione ```--no-install-reco
 
 #### debs
 
-This is a boolean field, if it's true, the content of the directory ./debs with be installed via the command: ```dpkg -i ./debs/*.deb```.
+Questo è un campo booleano, se è true il contenuto della directory ./debs sarà installato con il comando ```dpkg -i ./debs/*.deb```.
 
 #### packages_python
-A simple array of python packages to be installed with pip.
+Un semplice array di pacchetti python che saranno installati con pip.
 
 #### accessories
-List of accessories to be installed to complete the costume. eg:
+Una lista di accessori da installare per completare il costume. esempio:
 ```
 accessories:
 - base
@@ -101,17 +101,17 @@ accessories:
 ```
 
 ### customize
-costomize contain the final actions to finalize the installation and customize the result. Can contain:
+costomize contiene le azioni per finalizzare l'installazione e customizzare il risultto. Può contente:
 * dirs
 * hostname
 * scripts
 
 ##### dirs
-dirs is boolean, if true, directory ./dirs inside the costume will be copied to / of the system,
+dirs è un campo booleano, se true la directory ./dirs interna al costume verrà copiata nella root del sistema.
 
-example: 
-You need to copy something in ```/etc/skel```, in ```/usr/share/applications``` and your background on ```/usr/share/background```. You can 
-put all in ```dirs```:
+Esempio: Abbiamo bisogno di copiare qualcosa in ```/etc/skel```, in ```/usr/share/applications``` ed il nostro background su ```/usr/share/background```. 
+
+Possiamo mettere il tutto in ```dirs```:
 
 ```
 - dirs   + etc   + skel  
@@ -119,26 +119,26 @@ put all in ```dirs```:
                            + backgrounds  + waydroid
 ```
 ##### hostname
-is boolean too, and if true, /etc/hostname will take the name of the costume and /etc/hosts will be changed in accord
+Anche questo è un campo booleano e, se truei, il file ```/etc/hostname``` verrà posto con il nome del costume ed in accordo a ciò sarà modificato anche ```/etc/hosts```.
 
 ##### scripts
-scripts contain an array of one or more scripts to be used to customize the result.
+scripts contiene un array di uno o più script utilizzati per customizzare il risulto.
 
-You can add others scripts and directories inside the costume or use general scripts under ```../../scripts/``` like ```../../scripts/config_desktop_link.sh```.
+Potete aggiunge altri script e directory all'interno di del costume o utilizzare gli script generali sotto ```../../scripts/``` come ```../../scripts/config_desktop_link.sh```.
 
 **Scripts examples**
 
-Scripts are called from ```customize/scripts``` and executed on the specific order.
+Gli scripts sono chiamati da ```customize/scripts``` ed eseguiti nell'ordine specifico.
 
 - install-image-from-local.sh (a script to copy sustem.img and vendor.img from local)
 - no-hw-accelleration.sh (script to set waydroid with no-hw-accelleration)
 
 # Accessories
-accessories can be defined inside a costume or outside. External accessories live in ```./accessories```, internal accessories live inside the costume or in others accessories who declare them.
+Gli accessori possono essere definiti all'interno di un costume o risiededere fuori da esso in```./accessories```, gli accessori interni vivono all'interno di un costume o di altri accessori che li dichiarano.
 
-They have the same structure of costume and are called recursively from the costume it self. You can see it as a belt to dress with your pants or a bag associated to your chotches.
+Hanno la stessa struttura dei costumi e sono chiamata ricorsivamente da questi. Potete vederli come una cinta da mettere con deo pantaloni specifici o una borsa associata al proprio tailler.
 
-Accessories can be installed alone or called from costumes. 
+Gli accessori possono sia essera installati da soli oppure chiamati da un costume. 
 
 For example: waydroid is an accessory and it's used by wagtail (gnome3) or warbler (KDE), the same is eggs_dev who is added in colibri, or firmware added to duck amd owl who need a good hardware compatibility.
 
