@@ -17,8 +17,8 @@ La nostra struttura del wardrobe è questa:
 
 ```
 ~/wardrobe ─┬─ accessories
-            ├─ costumes 
             ├─ config
+            ├─ costumes 
             ├─ DOCUMENTATION
             ├─ scripts
             ├─ servers
@@ -27,12 +27,15 @@ La nostra struttura del wardrobe è questa:
 
 ## accessories
 Contiene gli accessori dei costumi
+
 ## costumes
 Contiene la definizione dei costumi
+
 ## config
 Contiene file di configurazione .YAML utilizzati da ```eggs install --custom file```
+
 ## DOCUMENTATION
-Contiene questa documentatione
+Contiene la presente documentatione
 
 ## scripts
 Contiene degli script per configurare i link sul desktop ed il desltop manager. Vengono chiamati nella sezione finale per configurare lo sfondo, i link e l'autologin.
@@ -41,10 +44,11 @@ Contiene degli script per configurare i link sul desktop ed il desltop manager. 
 Contiene dei costumi server.
 
 ## themes
-Contiene i temi di eggs, precedentemente in penguins-addons.
+Contiene i temi di eggs, precedentemente contenuti in penguins-addons.
 
 
 # I comandi wardrobe
+wardrobe dispone di soli quattro comandi: get, list, show e wear.
 
 ## wardrobe get [REPO]
 
@@ -63,7 +67,6 @@ Può essere utilizzato questo comando anche passando come REPO la repository da 
 ```eggs wardrobe get https://github.com/quirinux-ga/penguins-wardrobe```
 
 In questo caso verrà impostato come wardrobe di default quello di quirinux, una distribuzione per la grafica, cartoon.
-
 
 ## wardrobe list [--w wardrobe]
 Se non viene passato un particolare wardrobe, list andrà a mostrare i ```costume``` e gli ```accessory``` presenti nel wardrobe di default.
