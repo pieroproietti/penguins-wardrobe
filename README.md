@@ -4,7 +4,7 @@ E' una repository costituita principalmente da file .yaml e semplici script bash
 
 Ho utilizzato questo approccio sia per la creazione di alcune customizzazioni personali, sia per la creazione di tre sistemi Linux con waydroid chiamati: wagtail, warbler e whipbird e basati rispettivamente su gnome, KDE Plasma e weston.
 
-![wagtail-warbler-whipbird](./DOCUMENTATION/images/wardrobe/wagtail-warbler-whipbird.png)
+![wagtail-warbler-whipbird](./DOCUMENTATION/images/wagtail-warbler-whipbird.png)
 
 # La metafora
 
