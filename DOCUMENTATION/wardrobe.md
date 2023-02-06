@@ -18,28 +18,30 @@ La nostra struttura del wardrobe è questa:
 ```
 ~/wardrobe ─┬─ accessories
             ├─ costumes 
-            ├─ CONFIG
+            ├─ config
             ├─ DOCUMENTATION
             ├─ scripts
             ├─ servers
-            └─ tools
+            └─ themes
 ```
 
 ## accessories
 Contiene gli accessori dei costumi
 ## costumes
 Contiene la definizione dei costumi
-## CONFIG
+## config
 Contiene file di configurazione .YAML utilizzati da ```eggs install --custom file```
 ## DOCUMENTATION
 Contiene questa documentatione
+
 ## scripts
 Contiene degli script per configurare i link sul desktop ed il desltop manager. Vengono chiamati nella sezione finale per configurare lo sfondo, i link e l'autologin.
+
 ## servers
 Contiene dei costumi server.
 
-## tools
-Contiene degli script di uso generale, in particolare la creazione dei pacchetti deb per waudroid,
+## themes
+Contiene i temi di eggs, precedentemente in penguins-addons.
 
 
 # I comandi wardrobe
