@@ -9,8 +9,10 @@ I have used this approach both for creating some personal customizations and for
 # The methafora
 
 The methafora consist in a wardrobe, costumes and accessories. 
+
 ![wardorbe](./DOCUMENTATION/images/wardrobe/51616859915_5f8eaabfa4_w.jpg)
-penguins-wardrobe is a repository for costumes andaccessories, managed using Git and organized into directories for costumes, accessories, and documentation. The wardrobe allows for easy organization and consolidation of Linux customizations, making it simple to find and reuse previous work.
+
+penguins-wardrobe is a repository for costumes and accessories, managed using Git and organized into directories for costumes, accessories, and documentation. The wardrobe allows for easy organization and consolidation of Linux customizations, making it simple to find and reuse previous work.
 
 It is possible to dress the CLI system with a beautiful GUI interface, but it can also be used as a server without a GUI. This method has proven useful for development and organization
 
@@ -44,7 +46,7 @@ release: 0.0.3
 ```
 
 ### sequence
-sequence is the crucial part of costumes, this is executed in that sequence and the idea is to make it the more possible atomic. Can contain:
+sequence is the crucial part of costumes and accessories, this is executed in that sequence and the idea is to make it the more possible atomic. Can contain:
 
 * repositories
   * sources_list
@@ -63,33 +65,37 @@ sequence is the crucial part of costumes, this is executed in that sequence and 
 the idea back sequence is it to make it the more possible atomic.
 
 #### repositories
-That you need to add to your .list file in ```/etc/apt/surces.list``` and ```/etc/aot/surces.list.d```
+That you need to add to your ```/etc/apt/surces.list``` and, mostly, on ```/etc/aot/surces.list.d``` directory.
 
 repositories consist in two item:
 
-* ```sources_list``` component to be used: main, contrub, non-free 
+* ```sources_list``` component names to be used: main, contrib, non-free 
 * ```sources_list_d``` commands to add other repositories in /etc/apt/sources.list.d
 
 #### preinst
 Sometime we need to make same action before to install packages, we can add here one or more scripts to do that actions.
 
 #### packages
-A simple array of packages to be installed
+A simple array of packages to be installed.
 
 #### packages_no_install_recommenfs
-A simple array of packages to be installed with option no-install-recommenfs
+A simple array of packages to be installed with option ```--no-install-recommends```.
 
 #### debs
-This is a boolean field, if it's true, the content of ./debs with be installed via a ```dpkg -i ./debs/*.deb``` command
+This is a boolean field, if it's true, the content of the directory ./debs with be installed via the command: ```dpkg -i ./debs/*.deb```.
 
 #### packages_python
-A simple array of python packages to be installed with pip
+A simple array of python packages to be installed with pip.
 
 #### accessories
-accessories are accessories and can live inside the costume or external. External accessories live in ./aceessories, internal accessories live inside the costume or in others accessories who declare them.
-
-They have the same structure of costume and are called recursively from the costume.
-
+List of accessories to be installed to complete the costume. eg:
+```
+accessories:
+- base
+- eggs-dev # defined in /accessory
+- waydroid #
+- ./firmware # here we will look to an accessory defined inside the costume
+```
 
 ### customize
 costomize contain the final actions to finalize the installation and customize the result. Can contain:
@@ -109,27 +115,36 @@ put all in ```dirs```:
          + usr   + share   + applications + install-to-waydroid.desktop
                            + backgrounds  + waydroid
 ```
-
 ##### hostname
 is boolean too, and if true, /etc/hostname will take the name of the costume and /etc/hosts will be changed in accord
 
 ##### scripts
-scripts contain an array of one or more scripts to be used to customize the result
+scripts contain an array of one or more scripts to be used to customize the result.
 
-You can add others scripts and directories inside the costume or use general scripts under ```../../scripts/``` like ```../../scripts/config_desktop_link.sh```
+You can add others scripts and directories inside the costume or use general scripts under ```../../scripts/``` like ```../../scripts/config_desktop_link.sh```.
 
 **Scripts examples**
 
-Scripts are called from customize/scripts and executed on the specific order.
+Scripts are called from ```customize/scripts``` and executed on the specific order.
 
 - install-image-from-local.sh (a script to copy sustem.img and vendor.img from local)
 - no-hw-accelleration.sh (script to set waydroid with no-hw-accelleration)
 
 # Accessories
-An accessory it'a costume who live under accessories directory or inside the costume itself. You can see it as a belt to dress with your pants or a bag associated to your chotches.
-Accessories can be installed alone or called from costumes. For example: waydroid is an accessory and it's used by wagtail (gnome3) or warbler (KDE), the same for firmwares who is added in colibri and other species who need a good hardware compatibility.
+accessories can be defined inside a costume or outside. External accessories live in ```./accessories```, internal accessories live inside the costume or in others accessories who declare them.
 
-__Note__ ```sudo eggs wardrobe wear``` accept a flag --no_firmwares to skip it, in the case we are building for virtual machines or tests.
+They have the same structure of costume and are called recursively from the costume it self. You can see it as a belt to dress with your pants or a bag associated to your chotches.
+
+Accessories can be installed alone or called from costumes. 
+
+For example: waydroid is an accessory and it's used by wagtail (gnome3) or warbler (KDE), the same is eggs_dev who is added in colibri, or firmware added to duck amd owl who need a good hardware compatibility.
+
+wagtail and warbler are made for developers, so have just an internal firmwares accessory filled mostly with wifi cards.
+
+__Note__ ```sudo eggs wardrobe wear``` accept a flag ```--no_firmwares``` to skip it, in the case we are building for virtual machines or tests.
+
+(*) wagtail. warbler and wispbird before to end the installation run also a special script [add_wifi_firmwares.sh](https://github.com/pieroproietti/penguins-wardrobe/blob/main/scripts/add_wifi_firmwares.sh) to add in Debian bookworm firmwares from bullseye.
+
 
 ## wardrobe get
 
@@ -137,13 +152,13 @@ __Note__ ```sudo eggs wardrobe wear``` accept a flag --no_firmwares to skip it, 
 eggs wardrobe get
 ```
 
-Clone the [penguins-wardrobe](https://github.com/pieroproietti/penguins-wardrobe) in ~/.wardrobe, the command accept argument [REPO] so, you can work with your personal wardrobe too. For example:
+Clone the [penguins-wardrobe](https://github.com/pieroproietti/penguins-wardrobe) in ```~/.wardrobe```, the command accept argument [REPO] so, you can work with your personal wardrobe too. For example:
 
 ```
 eggs wardrobe https://github.com/quirinux-so/penguins-wardrobe
 ```
 
-will get in ~/.wardrobe the quirinux version.
+will get in ```~/.wardrobe``` the quirinux version.
 
 ## wardrobe list
 List costumes and accessoried in wardrobe.
@@ -186,14 +201,13 @@ sudo eggs wardrobe wear colibri
 
 # Themes
 
-A theme for eggs, let you to customize it and save your time.
+A theme for eggs, let you to customize the apparence of the live image. You can customize the boot of live images made with eggs using themes.
 
 An eggs theme is simply an organized set of files and directories, YAML being the most widely used.
 
-educaandos is the first example of an external eggs theme available, others themes are: neon, telos, ufficiozero and waydroid imported from the previous themes included in eggs before.
+```educaandos``` was the first example of an external eggs theme available, others themes are: neon, telos, ufficiozero and waydroid imported from the previous themes included inside eggs before.
 
-## Themes
-You can customize the boot of live images made with eggs using themes.
+## analizing a theme
 
 A theme consists of a simple folder under addons, called with the name of vendor (in the example: blissos), that includes:
 
@@ -235,7 +249,7 @@ branding.desc file is generated by eggs, please refer to branding for more infor
 * partitions.yml (Not used yet)
 * users.yml (*)
 
-(*) In EducaAndOS to ensure administration capability for our user, we need a groups configuration specified in users.yml. Note: If it is not specified as thema educaandos, the configuration of groups in which the live user and the installed system user will be part, will not have the possibility of administration.
+(*) In ```EducaAndOS``` to ensure administration capability for our user, we need a groups configuration specified in users.yml. Note: If it is not specified as thema educaandos, the configuration of groups in which the live user and the installed system user will be part, will not have the possibility of administration.
 
 * livecd
 Take cure of the apparence of your live.
@@ -245,16 +259,18 @@ Usage
 ```
 sudo eggs produce --fast --theme ../path/to/theme
 ```
-example: clone this repository:
-
-```git clone https://github.com/pieroproietti/penguins-wardrobe```
-and produce your customized live:
+example: 
 
 ```
-sudo eggs produce --fast  --theme ../penguins-wardrobe/themes/educaandos-plus
+sudo eggs produce --fast  --theme .wardrobe/themes/educaandos-plus
 ```
+You can also clone the wardrobe with Git, and take the theme from:
+```
+sudo eggs produce --fast  --theme /penguins-wardrobe/themes/educaandos-plus
+```
+
 # Further plans
-A theme is a type of addons for eggs. There are other addons as well: adapt that provides a link to resize the window on a virtual machine, pve that shows on the desktop the link to the local Proxmox VE server, rsupport, etc.
+A theme is a type of addons for eggs. There are other addons as well: adapt that provides a link to resize the window on a virtual machine, pve that shows on the desktop the link to the local Proxmox VE server, rsupport, etc. They live inside penguins-eggs at the moment.
 
 I hope with time -including through collaborations - to add more possibilities to both addons and themes. You don't necessarily have to be a developer to create a theme, in fact graphic designers, translators, textbook writers or proofreaders are welcome.
 
@@ -263,11 +279,14 @@ You can request me to be added as a collaborator to this repository and thus par
 
 # Config
 
-This directory it's used from eggs install --custom to let an unattended installation customized for you.
+This directory it is used to let a minimal customization of unattended installation. 
 
-```sudo eggs install --unattended``` is equivalent to ```sudo install --custom un``` so it's easy to have more customizations.
+```sudo eggs install --unattended``` is equivalent to ```sudo install --custom us``` so it's easy to have more customizations, just fork the repository and make a PR.
 
-For example, you can copy us.yaml to bliss.yaml and change user and password, if you want, and call your custom configuration with:
+For example, you can copy us.yaml to bliss.yaml, change user and password, and get your custom configuration:
 
 ```sudo eggs install --custom bliss```
+
+# Thats all folks!
+
 
