@@ -9,7 +9,7 @@ I have used this approach both for creating some personal customizations and for
 # The methafora
 
 The methafora consist in a wardrobe, costumes and accessories. 
-
+![wardorbe](./DOCUMENTATION/images/wardrobe/51616859915_5f8eaabfa4_w.jpg)
 penguins-wardrobe is a repository for costumes andaccessories, managed using Git and organized into directories for costumes, accessories, and documentation. The wardrobe allows for easy organization and consolidation of Linux customizations, making it simple to find and reuse previous work.
 
 It is possible to dress the CLI system with a beautiful GUI interface, but it can also be used as a server without a GUI. This method has proven useful for development and organization
@@ -18,7 +18,7 @@ It is possible to dress the CLI system with a beautiful GUI interface, but it ca
 
 A costume consist in a directory named after the costume and an index.yml file. 
 
-The type of content of a costume is actually defined in ```i-materia.ts``` from [penguins-eggs](https://github.com/pieroproietti/penguins-eggs/blob/master/src/interfaces/i-materia.ts):
+The type of content of a costume is actually defined in [i-materia.ts](https://github.com/pieroproietti/penguins-eggs/blob/master/src/interfaces/i-materia.ts) from [penguins-eggs](https://github.com/pieroproietti/penguins-eggs):
 
 Here we have an example of costume definition from my colibri, I use it to generate my personal developer working station. You can find a more updated version here; [index.yaml](https://github.com/pieroproietti/penguins-wardrobe/blob/main/costumes/colibri/index.yml)
 
