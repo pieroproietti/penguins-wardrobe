@@ -1,5 +1,11 @@
 # penguins-wardrobe
 
+E' una repository costituita principalmente da file .yaml e semplici script bash che viene utilizzata da eggs per creare delle customizzazioni di sistemi linux a partire da una immagine minima - denominata "naked" - sino ad ottenere un sistema completo.
+
+Ho utilizzato questo approccio sia per la creazione di alcune customizzazioni personali, sia per la creazione di tre sistemi Linux con waydroid chiamati: wagtail, warbler e whipbird e basati rispettivamente su gnome, KDE Plasma e weston.
+
+# La metafora
+
 The methafora consist in a wardrobe, costumes and accessories. 
 
 A wardrobe is a common repository managed with git organized with costumes, accessories and DOCUMENTATION dirs. Inside a wardrobe You can arrange your costumes collection to wear your penguins. 
