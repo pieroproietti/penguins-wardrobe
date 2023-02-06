@@ -10,50 +10,18 @@ I have used this approach both for creating some personal customizations and for
 
 The methafora consist in a wardrobe, costumes and accessories. 
 
-A wardrobe is a common repository managed with git organized with costumes, accessories and DOCUMENTATION dirs. Inside a wardrobe You can arrange your costumes collection to wear your penguins. 
+penguins-wardrobe is a repository for costumes andaccessories, managed using Git and organized into directories for costumes, accessories, and documentation. The wardrobe allows for easy organization and consolidation of Linux customizations, making it simple to find and reuse previous work.
 
-I found this method usefull to develop, organize and consolidate my Linux customizations and a compact way to have all the operations in the same place, find and reuse them when I needs.
-
-Of course you can dress your CLI system with wonderfull GUI interface, but it is also possible to wear it as server without a GUI at all.
+It is possible to dress the CLI system with a beautiful GUI interface, but it can also be used as a server without a GUI. This method has proven useful for development and organization
 
 ## Costumes and accessories
 
 A costume consist in a directory named after the costume and an index.yml file. 
 
-The type of content of a costume is actually defined in i-materia.ts from eggs:
-```
-  name: string
-  author: string
-  description: string
-  release: string
-  distributions: string[]
-  sequence: {
-    repositories: {
-      sources_list: string[]
-      sources_list_d: string []
-      update: boolean
-      upgrade: boolean
-    },
-    preinst: string[]
-    dependencies: string[]
-    packages: string[]
-    packages_no_install_recommends: string[]
-    try_packages: string[]
-    try_packages_no_install_recommends: string[]
-    debs: boolean
-    packages_python: string[]
-    accessories: string[]
-    try_accessories: string[]
-  }
-  customize: {
-    dirs: boolean
-    hostname: boolean
-    scripts: string[]
-  }
-  reboot: boolean
-```
+The type of content of a costume is actually defined in ```i-materia.ts``` from [penguins-eggs](https://github.com/pieroproietti/penguins-eggs/blob/master/src/interfaces/i-materia.ts):
 
-This is an example of costume definition from my colibri, a configuration generating my personal developer working station:
+Here we have an example of costume definition from my colibri, I use it to generate my personal developer working station. You can find a more updated version here; [index.yaml](https://github.com/pieroproietti/penguins-wardrobe/blob/main/costumes/colibri/index.yml)
+
 
 ```
 # wardrobe: .
@@ -67,11 +35,7 @@ author: artisan
 release: 0.9.1
 distributions:
   - bookworm
-  - bullseye
-  - buster
-  - chimaera
-  - focal
-  - jammy
+
 sequence:
   repositories:
     sources_list:
@@ -91,7 +55,6 @@ sequence:
     upgrade: true
   packages:
     - adwaita-qt
-    # anydesk
     - libxfce4ui-utils
     - lightdm
     - lightdm-autologin-greeter # ubuntu seem to need it, Debian install it automatically
@@ -176,7 +139,7 @@ sequence is the crucial part of costumes, this is executed in that sequence and 
 the idea back sequence is it to make it the more possible atomic.
 
 #### repositories
-That you need to add / change your .list file in /etc/aot/surces.list and /etc/aot/surces.list.d
+That you need to add to your .list file in ```/etc/apt/surces.list``` and ```/etc/aot/surces.list.d```
 
 repositories consist in two item:
 
@@ -238,13 +201,13 @@ Scripts are called from customize/scripts and executed on the specific order.
 - install-image-from-local.sh (a script to copy sustem.img and vendor.img from local)
 - no-hw-accelleration.sh (script to set waydroid with no-hw-accelleration)
 
-**Accessories**
+# Accessories
 An accessory it'a costume who live under accessories directory or inside the costume itself. You can see it as a belt to dress with your pants or a bag associated to your chotches.
 Accessories can be installed alone or called from costumes. For example: waydroid is an accessory and it's used by wagtail (gnome3) or warbler (KDE), the same for firmwares who is added in colibri and other species who need a good hardware compatibility.
 
-__Note__ eggs wardrobe wear accept a flag --no_firmwares to skip it, in the case you are building for virtual machines.
+__Note__ ```sudo eggs wardrobe wear``` accept a flag --no_firmwares to skip it, in the case we are building for virtual machines or tests.
 
-# wardrobe get
+## wardrobe get
 
 ```
 eggs wardrobe get
@@ -275,21 +238,17 @@ eggs wardrobe show colibri --wardrobe ../my-own-wardrobe
 Start the process of wear a costume, at the end your system will be modified in accord of.
 
 ```
-eggs wardrobe wear colibri 
-```
-## wardrobe iroring COSTUME
-ironing put in alphabetic order most of the sections of costumes. You can use it to get a screenshot of an ordered index.yml of the costume.
-
-```
-eggs wardrobe ironing colibri --wardrobe ./my-own-wardrobe 
+sudo eggs wardrobe wear colibri 
 ```
 
-# Costumes
+# Actual costumes:
+* ```colibri``` is a light XFC4 for developers you can easily start to improve eggs.
+* ```duck``` come with cinnamon - probably is the right desktop for peoples coming from windows - here complete plus office, gimp and vlc
+* ```owl``` is a XFCE4 for graphics designers, this a simple/experimental bird, based on the work of Charlie Martinez [quirinux](https://blog.quirinux.org/)
 
-* **colibri** is a light XFC4 for developers you can easily start to improve eggs.
-* **duck** come with cinnamon - probably is the right desktop for peoples coming from windows - here complete plus office, gimp and vlc
-* **owl** is a XFCE4 for graphics designers, this a simple/experimental bird, based on the work of Charlie Martinez [quirinux](https://blog.quirinux.org/)
-* **warbler**, a wayland/KDE/waydroid installation 
+* ```wagtail```, a wayland/Gnome/waydroid installation;
+* ```warbler```, a wayland/KDE/waydroid installation;
+* ```whipbird```: a wayland/weston/waydroid installation.
 
 # Accessories
 * base
@@ -300,16 +259,6 @@ eggs wardrobe ironing colibri --wardrobe ./my-own-wardrobe
 * multimedia
 * office
 * waydroid
-
-## Config
-
-This directory it's used from eggs install --custom to let an unattended installation customized for you.
-
-```sudo eggs install --unattended``` is equivalent to ```sudo install --custom un``` so it's easy to have more customizations.
-
-For example, you can copy us.yaml to bliss.yaml and change user and password, if you want, and call your custom configuration with:
-
-```sudo eggs install --custom bliss```
 
 # Themes
 
@@ -360,27 +309,41 @@ branding.desc file is generated by eggs, please refer to branding for more infor
 * users.yml
 * locale.yml (Not used yet)
 * partitions.yml (Not used yet)
+* users.yml (*)
 
-* users.yml
+(*) In EducaAndOS to ensure administration capability for our user, we need a groups configuration specified in users.yml. Note: If it is not specified as thema educaandos, the configuration of groups in which the live user and the installed system user will be part, will not have the possibility of administration.
 
-In EducaAndOS to ensure administration capability for our user, we need a groups configuration specified in users.yml. Note: If it is not specified as thema educaandos, the configuration of groups in which the live user and the installed system user will be part, will not have the possibility of administration.
-
-livecd
+* livecd
 Take cure of the apparence of your live.
 
+
 Usage
+```
 sudo eggs produce --fast --theme ../path/to/theme
-example
-clone this repository:
+```
+example: clone this repository:
 
-git clone https://github.com/pieroproietti/penguins-addons
-And produce your customized live:
+```git clone https://github.com/pieroproietti/penguins-wardrobe```
+and produce your customized live:
 
-sudo eggs produce --fast  --theme ../penguins-addons/educaandos-plus
-Further plans
+```
+sudo eggs produce --fast  --theme ../penguins-wardrobe/themes/educaandos-plus
+```
+# Further plans
 A theme is a type of addons for eggs. There are other addons as well: adapt that provides a link to resize the window on a virtual machine, pve that shows on the desktop the link to the local Proxmox VE server, rsupport, etc.
 
 I hope with time -including through collaborations - to add more possibilities to both addons and themes. You don't necessarily have to be a developer to create a theme, in fact graphic designers, translators, textbook writers or proofreaders are welcome.
 
 You can request me to be added as a collaborator to this repository and thus participate in the development.
+
+
+# Config
+
+This directory it's used from eggs install --custom to let an unattended installation customized for you.
+
+```sudo eggs install --unattended``` is equivalent to ```sudo install --custom un``` so it's easy to have more customizations.
+
+For example, you can copy us.yaml to bliss.yaml and change user and password, if you want, and call your custom configuration with:
+
+```sudo eggs install --custom bliss```
 
