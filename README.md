@@ -289,7 +289,6 @@ For example, you can copy us.yaml to bliss.yaml, change user and password, and g
 ```sudo eggs install --custom bliss```
 
 # Thats all folks!
-No need other configurations, penguins-eggs are battery included or better, as in the real, live is inside! :-D
 
 ## More informations
 There is a [Penguin's eggs official book](https://penguins-eggs.net/book/) and same other documentation - mostly for developers - on [penguins-eggs repo](https://github.com/pieroproietti/penguins-eggs) under **documents** and **i386**, in particular we have [hens, differents species](https://github.com/pieroproietti/penguins-eggs/blob/master/documents/hens-different-species.md) who descrive how to use eggs in manjaro.
