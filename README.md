@@ -209,7 +209,8 @@ An eggs theme is simply an organized set of files and directories, YAML being th
 
 ## analizing a theme
 
-A theme consists of a simple folder under addons, called with the name of vendor (in the example: blissos), that includes:
+A theme consists of a simple folder under addons, called with the name of   
+vendor (in the example: educanandos), that includes:
 
 ```
 educaandos/
