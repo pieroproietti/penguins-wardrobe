@@ -15,13 +15,11 @@ distributions:
   - kinetic
 sequence:
   sources_list_d:
-    - rm -f /etc/apt/trusted.gpg.d/quirinux-ga.gpg
+    - rm -f /etc/apt/sources.list.d/quirinux.list
+    - wget -O - https://repo.quirinux.org/gpg/quirinux.asc | apt-key add -
     - >-
-      curl -fsSL "https://www.quirinux.ga/gpg/quirinux.asc" |
-      gpg --dearmor -o /etc/apt/trusted.gpg.d/quirinux-ga.gpg
-    - >-
-      echo "deb https://quirinux.ga/repo/ quirinux main" | tee
-      /etc/apt/sources.list.d/quirinux-ga.list > /dev/null
+      echo "deb https://repo.quirinux.org quirinux main" | tee
+      /etc/apt/sources.list.d/quirinux.list > /dev/null
 
   packages:
     - converseen
