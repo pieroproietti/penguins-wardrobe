@@ -1,10 +1,8 @@
-# penguinwardroe
+# penguins-wardrobe
 
-Si tratta di un un repository costituito principalmente da file .yaml e da semplici  script bash usata da eggs per creare personalizzazioni di sistemi Linux a partire da un'immage - naked - per ottenere un sistema completo.
+Si tratta di un repository costituito principalmente da file .yaml e da semplici  script bash ed usata da eggs per creare personalizzazioni di sistemi Linux a partire da una sistema installato CLI - o nella nostra terminologia "naked" - per ottenere un sistema completo.
 
-Ho utilizzato questo metodo sia per la creazione di alcune personalizzazioni
-di sistemi Linux con waydroid denominatie wagtail, warbler e whipbird 
-rispettivamente su Gnome, KDE Plasma e Weston.
+Ho utilizzato questo metodo sia per la creazione di alcune personalizzazioni generiche, sia per la creazione di sistemi Linux con waydroid denominati:  wagtail, warbler e whipbird e basati rispettivamente su Gnome, KDE Plasma e Weston.
 
 ![wagtail-warbler-whipbird](./images/wagtail-warbler-whipbird.png)
 
@@ -14,18 +12,19 @@ La metafora consiste in un guardaroba contenente costumi ed accessori per la ves
 
 ![wardorbe](./images/wardrobe/51616859915_5f8eaabfa4_w.jpg)
 
-penguins-wardrobe è una repository per costumes ed accessories, utilizzata usando Git ed organizzata per directory: costumes, accessories, config, themes e documentation. Il wardrobe permette una facile organizzazione e per la consolizzazione delle nostre esperienze di customizzazioni Linux, rendendo semplice cercare e riutilizzare il lavoro precedentemente svolto.
+penguins-wardrobe è una repository per **costumes** ed **accessories**, gestita con Git ed organizzata per directory: costumes, accessories, config, themes e documentation. Il wardrobe permette sia una facile organizzazione del nostro lavoro. sia il consolidamento delle nostre esperienze di customizzazioni Linux, rendendo più semplice cercare e riutilizzare il lavoro svolto in precedenza.
 
-E' possibile vestire un sistema CLI con un splendida interfaccia GUI, ma è anche possibile utilizzare il wardrobe per collezionare configurazioni server senza necessariamente una interfaccia grafica. Questo metodo si è dimostrato utipe per lo sviluppo e l'organizzazione.
+E' possibile vestire un sistema CLI con un splendida interfaccia GUI, ma è anche possibile utilizzare il wardrobe per collezionare configurazioni server senza necessariamente una interfaccia grafica. 
+
+Questo metodo si è dimostrato utile per lo sviluppo e l'organizzazione del lavoro.
 
 ## Costumi ed accessori
 
-Un costume consiste un una directory denominata con il nome del costume ed un file index.yaml. 
+Un costume consiste essenzialmente in una directory denominata con il nome del costume ed un file yaml: index.yaml. 
 
-I **type** dei contenuti del costume sono attualmente definiti typescript [i-materia.ts](https://github.com/pieroproietti/penguins-eggs/blob/master/src/interfaces/i-materia.ts) su [penguins-eggs](https://github.com/pieroproietti/penguins-eggs).
+I **type** dei contenuti del costume sono definiti nel file [i-materia.ts](https://github.com/pieroproietti/penguins-eggs/blob/master/src/interfaces/i-materia.ts) su [penguins-eggs](https://github.com/pieroproietti/penguins-eggs) ed utilizzati dalla classe [tailor.ts](https://github.com/pieroproietti/penguins-eggs/blob/master/src/classes/tailor.ts).
 
-Qui abbiamo sono delle definizioni di costume in linguaggio YAML. ad esempio il mio colibri che utilizzo per il mio lavoro di sviluppatore, lo potete visualizzare tutto l'esempio direttamente sul wardrobe: [index.yaml](https://github.com/pieroproietti/penguins-wardrobe/blob/main/costumes/colibri/index.yml)
-
+Qui abbiamo sono delle definizioni di costumi ed accessori in linguaggio YAML. Ad esempio questo è il file index.yaml del mio colibri:
 
 ```
 # wardrobe: .
@@ -36,6 +35,11 @@ name: colibri
   hostname: true
 reboot: true
 ```
+Potete visualizzare l'intero [index.yaml](https://github.com/pieroproietti/penguins-wardrobe/blob/main/costumes/colibri/index.yml).
+
+La sintassi utilizzata è jaml, piuttosto semplice da leggere, per la scrittura potete contare su numerosi addons per praticamente ogni editor.
+
+Andiamo a vedere come è composto.
 
 ### Informazioni generali
 ```
@@ -48,7 +52,7 @@ release: 0.0.3
 ```
 
 ### sequence 
-La sequence è la parte cruciale sia dei costumi che degli accessori, viene eseguita in sequenza - da qua il nome - e l'idea è stata di crearla il più possibile atomica. Puà contenere:
+La sequence è la parte cruciale sia dei costumi che degli accessori, viene eseguita in sequenza - da qua il nome - e l'idea è stata di renderla minima ed indivisibile. Può contenere:
 
 * repositories
   * sources_list
@@ -64,7 +68,7 @@ La sequence è la parte cruciale sia dei costumi che degli accessori, viene eseg
 * accessories
 * try_accessories
 
-L'idea dietro la sequenza è stata di renderla minima ed indivisibile.
+L'idea dietro la sequenza è stata di renderla il più possibile atomica.
 
 #### repositories
 Definisce cosa abbiamo bisogno sia nella nostra ```/etc/apt/surces.list``` e principalmente, nella directory ```/etc/apt/sources.list.d```.
@@ -75,7 +79,7 @@ Definisce cosa abbiamo bisogno sia nella nostra ```/etc/apt/surces.list``` e pri
 * ```sources_list_d``` commandi per aggiungere altre repository all'interno di ```/etc/apt/sources.list.d```.
 
 #### preinst
-Abbiamo a volte la necessita di eseguire alcune azioni prima dell'installazione dei pacchetti, possimo aggiungere queste azioni in forma di script in questa sezione.
+Abbiamo a volte la necessita di eseguire alcune azioni prima dell'installazione dei pacchetti, possiamo aggiungere queste azioni in forma di script in questa sezione.
 
 #### packages
 Un semplice array di pacchetti da installare, è il cuore del sistema.
@@ -96,12 +100,12 @@ Una lista di accessori da installare per completare il costume. esempio:
 accessories:
 - base
 - eggs-dev # defined in /accessory
-- waydroid #
-- ./firmware # here we will look to an accessory defined inside the costume
+- waydroid # defined in /accessory
+- ./firmwares # here we will use an accessory defined inside the costume, note ./
 ```
 
 ### customize
-costomize contiene le azioni per finalizzare l'installazione e customizzare il risultto. Può contente:
+costomize contiene le azioni per finalizzare l'installazione e customizzare il risultato. Può contente:
 * dirs
 * hostname
 * scripts
@@ -119,37 +123,37 @@ Possiamo mettere il tutto in ```dirs```:
                            + backgrounds  + waydroid
 ```
 ##### hostname
-Anche questo è un campo booleano e, se truei, il file ```/etc/hostname``` verrà posto con il nome del costume ed in accordo a ciò sarà modificato anche ```/etc/hosts```.
+Anche questo è un campo booleano e, se true, il file ```/etc/hostname``` verrà posto con il nome del costume ed in accordo a ciò sarà modificato anche ```/etc/hosts```.
 
 ##### scripts
 scripts contiene un array di uno o più script utilizzati per customizzare il risulto.
 
-Potete aggiunge altri script e directory all'interno di del costume o utilizzare gli script generali sotto ```../../scripts/``` come ```../../scripts/config_desktop_link.sh```.
+Potete aggiunge altri script e directory all'interno di del costume o utilizzare gli script sotto ```../../scripts/``` come ```../../scripts/config_desktop_link.sh```.
 
-**Scripts examples**
+**Esempi**
 
 Gli scripts sono chiamati da ```customize/scripts``` ed eseguiti nell'ordine specifico.
 
-- install-image-from-local.sh (a script to copy sustem.img and vendor.img from local)
+- install-image-from-local.sh (a script to copy system.img and vendor.img from local)
 - no-hw-accelleration.sh (script to set waydroid with no-hw-accelleration)
 
 # Accessories
-Gli accessori possono essere definiti all'interno di un costume o risiededere fuori da esso in```./accessories```, gli accessori interni vivono all'interno di un costume o di altri accessori che li dichiarano.
+Gli accessori possono essere definiti all'interno di un costume o fuori dallo stesso - principalmente in ```accessories``` ma anche interni ad un altro costume. Gli accessori interni vivono all'interno di un costume o di altri accessori che li dichiarano.
 
-Hanno la stessa struttura dei costumi e sono chiamata ricorsivamente da questi. Potete vederli come una cinta da mettere con deo pantaloni specifici o una borsa associata al proprio tailler.
+Hanno la stessa struttura dei costumi e sono chiamati da questi. Potete vederli come una cintura da mettere con dei pantaloni alla moda o una borsa associata al tailler.
 
-Gli accessori possono sia essera installati da soli oppure chiamati da un costume. 
+Gli accessori possono sia essere installati da soli oppure chiamati da un costume. 
 
-Ad esempio: waydroid è un accessoria ed è utilizzato da wagtail (gnome3) e  warbler (KDE), lo stesso per eggs-dev che viene aggiunto in colibri oppure  firmwares in duck ed owl che hanno bisogno di una maggiore compatibilità hardware.
+Ad esempio: waydroid è un accessorio ed è utilizzato da wagtail (gnome3) e  warbler (KDE), lo stesso per eggs-dev che viene aggiunto in colibri oppure  firmwares in duck ed owl che hanno bisogno di una maggiore compatibilità hardware.
 
-colibri, wagtail, warbler e whispbird sono fatti per sviluppatori, così usano solo un accessorio firmwares interno con soprattutto driver per wifi.
+colibri, wagtail, warbler e whispbird sono fatti per sviluppatori, così usano un accessorio firmwares interno con principalmente driver per wifi.
 
 
 __Nota__ ```sudo eggs wardrobe wear``` accetta una flag ```--no_firmwares``` per saltare completamente il firmware nel caso stiamo lavorando per macchine virtuali o facendo dei test.
 
 (*) wagtail. warbler e whispbird prima della fine dell'installazione chiamano pure uno speciale script [add_wifi_firmwares.sh](https://github.com/pieroproietti/penguins-wardrobe/blob/main/scripts/add_wifi_firmwares.sh) per aggiungere in Debian bookworm firmwares proveniente da bullseye.
 
-Gli stessi drivers possono essere scaricati da [non-free]
+Gli stessi drivers - anche più aggiornati - possono essere comunque scaricati da [non-free]
 (http://cdimage.debian.org/cdimage/unofficial/non-free/firmware/bookworm/current/).
 
 
@@ -159,7 +163,7 @@ Gli stessi drivers possono essere scaricati da [non-free]
 eggs wardrobe get
 ```
 
-Esegue il clone di [penguins-wardrobe](https://github.com/pieroproietti/penguins-wardrobe) in ```~/.wardrobe```, il comando accetta un argomento [REPO] so, così potete lavora con il vostro wardrobe privato. Ad esempio:
+Esegue il clone di [penguins-wardrobe](https://github.com/pieroproietti/penguins-wardrobe) in ```~/.wardrobe```, il comando accetta un argomento [REPO], così potete lavorare con il vostro wardrobe invece di quello standard. Ad esempio:
 
 ```
 eggs wardrobe https://github.com/quirinux-so/penguins-wardrobe
@@ -168,16 +172,16 @@ eggs wardrobe https://github.com/quirinux-so/penguins-wardrobe
 scaricherà in  ```~/.wardrobe``` la versione di quirinux.
 
 ## wardrobe list
-Mostra la lista dei costumes ed accessoried presenti nel wardrobe.
+Mostra la lista dei costumes ed accessories presenti nel wardrobe.
 
 ```
 eggs wardrobe list 
 ```
 
 ## wardrobe show COSTUME
-Mostra l'indice index.yml di un costume.
+Mostra l'indice index.yaml di un costume.
 ```
-eggs wardrobe show colibri --wardrobe ../my-own-wardrobe
+eggs wardrobe show colibri
 ```
 
 ## sudo wardrobe wear COSTUME
