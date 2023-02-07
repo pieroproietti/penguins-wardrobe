@@ -17,12 +17,14 @@ sequence:
   packages_no_install_recommends:
     - dolphin
     - firefox-esr
+    - kde-config-sddm
     - konsole
     - plasma-desktop
     - plasma-discover
     - plasma-nm
     - plasma-workspace-wayland
     - sddm
+    - sddm-theme-breeze
     - systemsettings
   accessories:
     - ./firmwares
