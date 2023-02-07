@@ -35,8 +35,8 @@ sequence:
 customize:
   dirs: true
   scripts:
-    - ../../scripts/config_desktop_link.sh
     - ./config_sddm.sh
+    - ../../scripts/config_desktop_link.sh
     - ../../scripts/add_wifi_firmwares.sh
   hostname: true
 reboot: true
