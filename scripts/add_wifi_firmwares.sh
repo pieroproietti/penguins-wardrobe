@@ -13,13 +13,12 @@
 # let's go
 source="192.168.1.2:/opt/wardrobe/bookworm/firmware/"
 mountpoint=$(mktemp -d)
-dest=$(mktemp -d)
 sshfs ${source} ${mountpoint}
-cp ${mountpoint}/firmware-amd-graphics*.deb ${dest}
-cp ${mountpoint}/firmware-atheros_*.deb ${dest}
-cp ${mountpoint}/firmware-brcm80211_*.deb ${dest}
-cp ${mountpoint}/firmware-ipw2x00_*.deb ${dest}
-cp ${mountpoint}/firmware-iwlwifi_*.deb ${dest}
-cp ${mountpoint}/firmware-libertas_*.deb ${dest}
-cp ${mountpoint}/firmware-realtek_*.deb ${dest}
-dpkg -i ${mountpoint}/*.deb 
+dpkg -i ${mountpoint}/firmware-amd-graphics*.deb ${dest}
+dpkg -i ${mountpoint}/firmware-atheros_*.deb ${dest}
+dpkg -i ${mountpoint}/firmware-brcm80211_*.deb ${dest}
+dpkg -i ${mountpoint}/firmware-ipw2x00_*.deb ${dest}
+dpkg -i ${mountpoint}/firmware-iwlwifi_*.deb ${dest}
+dpkg -i ${mountpoint}/firmware-libertas_*.deb ${dest}
+dpkg -i ${mountpoint}/firmware-realtek_*.deb ${dest}
+
