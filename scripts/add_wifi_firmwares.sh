@@ -11,6 +11,10 @@
 # - firmware-libertas # Binary firmware for Marvell wireless cards
 # - firmware-realtek # Binary firmware for Realtek wired/wifi/BT adapters 
 # let's go
+clear
+echo "============================================"
+echo "wardrobe: Installing bookworm firmware wifi "
+echo "============================================"
 source="192.168.1.2:/opt/wardrobe/bookworm/firmware/"
 mountpoint=$(mktemp -d)
 sshfs ${source} ${mountpoint}
