@@ -11,16 +11,14 @@
 # - firmware-libertas # Binary firmware for Marvell wireless cards
 # - firmware-realtek # Binary firmware for Realtek wired/wifi/BT adapters 
 # let's go
-curDir=$(pwd)
-tmp=`mktemp -d`
-cd $tmp
-GET="wget http://ftp.it.debian.org/debian/pool/non-free/f/firmware-nonfree/"
-${GET}firmware-amd-graphics_20210818-1~bpo11+1_all.deb
-${GET}firmware-atheros_20210818-1~bpo11%2b1_all.deb 
-${GET}firmware-brcm80211_20210818-1~bpo11%2b1_all.deb
-${GET}firmware-ipw2x00_20210818-1~bpo11%2b1_all.deb
-${GET}firmware-iwlwifi_20210818-1~bpo11%2b1_all.deb
-${GET}firmware-libertas_20210818-1~bpo11%2b1_all.deb
-${GET}firmware-realtek_20210818-1~bpo11%2b1_all.deb
-dpkg -i *.deb
-cd $curDir
+mountpoint=$(mktemp -d)
+dest=$(mktemp -d)
+sshfs ${source} ${mountpoint}
+cp ${mountpoint}/firmware-amd-graphics*.deb ${dest}
+cp ${mountpoint}/firmware-atheros_*.deb ${dest}
+cp ${mountpoint}/firmware-brcm80211_*.deb ${dest}
+cp ${mountpoint}/firmware-ipw2x00_*.deb ${dest}
+cp ${mountpoint}/firmware-iwlwifi_*.deb ${dest}
+cp ${mountpoint}/firmware-libertas_*.deb ${dest}
+cp ${mountpoint}/firmware-realtek_*.deb ${dest}
+dpkg -i ${mountpoint}/*.deb 
