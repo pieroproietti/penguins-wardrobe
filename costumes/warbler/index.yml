@@ -18,6 +18,7 @@ sequence:
     - dolphin
     - firefox-esr
     - kde-config-sddm
+    - kdialog
     - konsole
     - plasma-desktop
     - plasma-discover
