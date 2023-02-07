@@ -273,18 +273,10 @@ esempio:
 sudo eggs produce --fast  --theme .wardrobe/themes/educaandos-plus
 ```
 
-Potete anche clonare il wardrobe con Git e prendere il thema da esso:
+Potete anche clonare il wardrobe con Git e prendere il tema da esso:
 ```
 sudo eggs produce --fast  --theme /penguins-wardrobe/themes/educaandos-plus
 ```
-
-# Further plans
-A theme is a type of addons for eggs. There are other addons as well: adapt that provides a link to resize the window on a virtual machine, pve that shows on the desktop the link to the local Proxmox VE server, rsupport, etc. They live inside penguins-eggs at the moment.
-
-I hope with time -including through collaborations - to add more possibilities to both addons and themes. You don't necessarily have to be a developer to create a theme, in fact graphic designers, translators, textbook writers or proofreaders are welcome.
-
-You can request me to be added as a collaborator to this repository and thus participate in the development.
-
 
 # Config
 Questa directory è utilizzata con una customizzazione minimale per alcune opzioni dell'installazione --unattended. 
@@ -297,8 +289,8 @@ Ad esempio potete copiare us.yaml in bliss.yaml, e cambiare il nome dell'utente 
 
 # Thats all folks!
 
-## More informations
-There is a [Penguin's eggs official book](https://penguins-eggs.net/book/) and same other documentation - mostly for developers - on [penguins-eggs repo](https://github.com/pieroproietti/penguins-eggs) under **documents** and **i386**, in particular we have [hens, differents species](https://github.com/pieroproietti/penguins-eggs/blob/master/documents/hens-different-species.md) who descrive how to use eggs in manjaro.
+## Altre informazioni
+C'è un manuale [Penguin's eggs official book](https://penguins-eggs.net/book/) ed altra documentazione  - principalmente per sviluppatori - su [penguins-eggs repo](https://github.com/pieroproietti/penguins-eggs) sotto **documents** oltre alla documentazione presente in [penguins-wardrobe](https://github.com/pieroproietti/penguins-wardrobe/DOCUMENTATION) 
 
 * [blog](https://penguins-eggs.net)    
 * [facebook penguin's eggs group](https://www.facebook.com/groups/128861437762355/)
@@ -310,5 +302,3 @@ You can contact me at pieroproietti@gmail.com or [meet me](https://meet.jit.si/P
 
 ## Copyright and licenses
 Copyright (c) 2017, 2023 [Piero Proietti](https://penguins-eggs.net/about-me.html), dual licensed under the MIT or GPL Version 2 licenses.
-
-
