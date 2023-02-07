@@ -22,7 +22,8 @@ sequence:
     - gnome-shell
     - gnome-terminal
     - firefox-esr
-    - nautilus 
+    - nautilus
+    - zenity
   accessories:
     - ./firmwares
     - base
