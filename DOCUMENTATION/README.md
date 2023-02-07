@@ -219,7 +219,7 @@ Un tema è semplicemente un sistema organizzato di file e directory, anche per i
 
 ## analizziamo un tema
 
-Un tema consiste un una semplice directory sotto themes, denominata con il nome del vendor (in questo esempio: educanandos), che include:
+Un tema consiste in una semplice directory sotto themes, denominata con il nome del vendor (in questo esempio: educanandos), che include:
 
 ```
 educaandos/
@@ -237,12 +237,12 @@ educaandos/
 Solo un link .desktop, verrà copiato in /usr/share/applications/ e sulla cartella Desktop.
 
 ### artwork
-L'icona per il tuo link -desktop, verrà copiata in /usr/share/icons/.
+L'icona per il tuo link .desktop, verrà copiata in /usr/share/icons/.
 
 ### calamares
 Contiene la configurazione per calamares ed è la parte più importante del tema.
 
-I file di configurazione di capamares sono scritti sempre in yaml e contengono la documantazione per le varie optioni. Il principale file di configurazione settings.conf viene automaticamente generato da eggs, solo partition, locale ed users sono usati da wardrobe.
+I file di configurazione di calamares sono scritti sempre in yaml e contengono la documantazione per le varie optioni. Il principale file di configurazione settings.conf viene automaticamente generato da eggs, solo partition, locale ed users sono usati da wardrobe.
 
 Per le informazioni di riferimento sulla configurazione di questi file si rimanda al sito di [calamares](https://calamares.is).
 
