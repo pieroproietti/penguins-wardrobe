@@ -140,13 +140,13 @@ Hanno la stessa struttura dei costumi e sono chiamata ricorsivamente da questi. 
 
 Gli accessori possono sia essera installati da soli oppure chiamati da un costume. 
 
-For example: waydroid is an accessory and it's used by wagtail (gnome3) or warbler (KDE), the same is eggs_dev who is added in colibri, or firmware added to duck amd owl who need a good hardware compatibility.
+Ad esempio: waydroid è un accessoria ed è utilizzato da wagtail (gnome3) e  warbler (KDE), lo stesso per eggs-dev che viene aggiunto in colibri oppure  firmwares in duck ed owl che hanno bisogno di una maggiore compatibilità hardware.
 
-wagtail and warbler are made for developers, so have just an internal firmwares accessory filled mostly with wifi cards.
+colibri, wagtail, warbler e whispbird sono fatti per sviluppatori, così usano solo un accessorio firmwares interno con soprattutto driver per wifi.
 
-__Note__ ```sudo eggs wardrobe wear``` accept a flag ```--no_firmwares``` to skip it, in the case we are building for virtual machines or tests.
+__Note__ ```sudo eggs wardrobe wear``` accetta una flag ```--no_firmwares``` per saltare completamente il firmware nel caso stiamo lavorando per macchine virtuali o facendo dei test.
 
-(*) wagtail. warbler and wispbird before to end the installation run also a special script [add_wifi_firmwares.sh](https://github.com/pieroproietti/penguins-wardrobe/blob/main/scripts/add_wifi_firmwares.sh) to add in Debian bookworm firmwares from bullseye.
+(*) wagtail. warbler e whispbird prima della fine dell'installazione chiamano pure uno speciale script [add_wifi_firmwares.sh](https://github.com/pieroproietti/penguins-wardrobe/blob/main/scripts/add_wifi_firmwares.sh) per aggiungere in Debian bookworm firmwares proveniente da bullseye.
 
 
 ## wardrobe get
@@ -155,29 +155,29 @@ __Note__ ```sudo eggs wardrobe wear``` accept a flag ```--no_firmwares``` to ski
 eggs wardrobe get
 ```
 
-Clone the [penguins-wardrobe](https://github.com/pieroproietti/penguins-wardrobe) in ```~/.wardrobe```, the command accept argument [REPO] so, you can work with your personal wardrobe too. For example:
+Esegue il clone di [penguins-wardrobe](https://github.com/pieroproietti/penguins-wardrobe) in ```~/.wardrobe```, il comando accetta un argomento [REPO] so, così potete lavora con il vostro wardrobe privato. Ad esempio:
 
 ```
 eggs wardrobe https://github.com/quirinux-so/penguins-wardrobe
 ```
 
-will get in ```~/.wardrobe``` the quirinux version.
+scaricherà in  ```~/.wardrobe``` la versione di quirinux.
 
 ## wardrobe list
-List costumes and accessoried in wardrobe.
+Mostra la lista dei costumes ed accessoried presenti nel wardrobe.
 
 ```
 eggs wardrobe list 
 ```
 
 ## wardrobe show COSTUME
-Show index.yml of the costume.
+Mostra l'indice index.yml di un costume.
 ```
 eggs wardrobe show colibri --wardrobe ../my-own-wardrobe
 ```
 
 ## sudo wardrobe wear COSTUME
-Start the process of wear a costume, at the end your system will be modified in accord of.
+Avvia il processo di vestizione di un costume, alla fine del processo il sistema sarà modificato secondo le indicazioni del costume.
 
 ```
 sudo eggs wardrobe wear colibri 
