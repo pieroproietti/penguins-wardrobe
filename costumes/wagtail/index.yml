@@ -21,6 +21,7 @@ sequence:
     - gnome-session
     - gnome-shell
     - gnome-terminal
+    - firefox-esr
     - nautilus 
   accessories:
     - ./firmwares
