@@ -203,17 +203,15 @@ sudo eggs wardrobe wear colibri
 * waydroid
 
 # Themes
+Mentre costumes ed accessories si applicano ad un sistema installato, i themes lavorano per la customizzazione per l'immagine live. E' possibile customizzare il boot delle immagini iso create con eggs creando ed utilizzando i themes.
 
-A theme for eggs, let you to customize the apparence of the live image. You can customize the boot of live images made with eggs using themes.
+Un tema è semplicemente un sistema organizzato di file e directory, anche per i temi .yaml è il linguaggio maggiormente utilizzato.
 
-An eggs theme is simply an organized set of files and directories, YAML being the most widely used.
+```educaandos``` è stato il primo esempio di un tema esterno disponibile, altri temi che potete trovare nel wardrobe sono: neon, telos, ufficiozero and waydroid precedentemente presenti direttamente all'interno di eggs.
 
-```educaandos``` was the first example of an external eggs theme available, others themes are: neon, telos, ufficiozero and waydroid imported from the previous themes included inside eggs before.
+## analizziamo un tema
 
-## analizing a theme
-
-A theme consists of a simple folder under addons, called with the name of   
-vendor (in the example: educanandos), that includes:
+Un tema consiste un una semplice directory sotto themes, denominata con il nome del vendor (in questo esempio: educanandos), che include:
 
 ```
 educaandos/
@@ -228,15 +226,15 @@ educaandos/
 
 ### applications
 
-Just a desktop link, it will be copied to /usr/share/applications/ and on the Desktop.
+Solo un link .desktop, verrà copiato in /usr/share/applications/ e sulla cartella Desktop.
 
 ### artwork
-The icon for your desktop link, will be copied on /usr/share/icons/
+L'icona per il tuo link -desktop, verrà copiata in /usr/share/icons/.
 
 ### calamares
-Contain the calamares customizations and it's by far the most important part of the theme.
+Contiene la configurazione per calamares ed è la parte più importante del tema.
 
-Each sample configuration file contains documentation on the options it contains.
+Ogni file di configurazione di esempio contiene la documentazione sulle opzioni interne.
 
 The configuration of calamares is specified in yaml files and contains within it documentation for the various options. The main calamares settings.conf file is automatically created by eggs, only partition, locale and users are used here.
 
