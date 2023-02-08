@@ -87,6 +87,12 @@ Un semplice array di pacchetti da installare, è il cuore del sistema.
 ### packages_no_install_recommends
 Una semplice array di pacchetti da installare con l'opzione ```--no-install-recommends```.
 
+### try_packages
+Come packages ma non fallisce se non trova il pacchetto.
+
+### try_packages_no_install_recommends
+Come packages_no_install_recommends ma non fallisce se non trova il pacchetto.
+
 ### debs
 
 Questo è un campo booleano, se è true il contenuto della directory ./debs sarà installato con il comando ```dpkg -i ./debs/*.deb```.
