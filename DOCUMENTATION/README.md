@@ -84,7 +84,7 @@ Abbiamo a volte la necessita di eseguire alcune azioni prima dell'installazione 
 ### packages
 Un semplice array di pacchetti da installare, è il cuore del sistema.
 
-### packages_no_install_recommenfs
+### packages_no_install_recommends
 Una semplice array di pacchetti da installare con l'opzione ```--no-install-recommends```.
 
 ### debs
