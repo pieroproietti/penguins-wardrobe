@@ -110,6 +110,9 @@ accessories:
 - ./firmwares # here we will use an accessory defined inside the costume, note ./
 ```
 
+### try_accessories
+Come  [accessories](#accessories) ma non fallisce.
+
 ## customize
 costomize contiene le azioni per finalizzare l'installazione e customizzare il risultato. Può contente:
 * dirs
