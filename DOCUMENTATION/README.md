@@ -151,9 +151,7 @@ colibri, wagtail, warbler e whispbird sono fatti per sviluppatori, così usano u
 
 __Nota__ ```sudo eggs wardrobe wear``` accetta una flag ```--no_firmwares``` per saltare completamente il firmware nel caso stiamo lavorando per macchine virtuali o facendo dei test.
 
-(*) wagtail. warbler e whispbird prima della fine dell'installazione chiamano pure uno speciale script [add_wifi_firmwares.sh](https://github.com/pieroproietti/penguins-wardrobe/blob/main/scripts/add_wifi_firmwares.sh) per aggiungere in Debian bookworm firmwares proveniente da bullseye.
-
-Gli stessi drivers - anche più aggiornati - possono essere comunque scaricati da [non-free](http://cdimage.debian.org/cdimage/unofficial/non-free/firmware/bookworm/current/).
+(*) wagtail. warbler e whispbird prima della fine dell'installazione chiamano pure uno speciale script [add_wifi_firmwares.sh](https://github.com/pieroproietti/penguins-wardrobe/blob/main/scripts/add_wifi_firmwares.sh) per aggiungere in Debian bookworm scaricabile [non-free](http://cdimage.debian.org/cdimage/unofficial/non-free/firmware/bookworm/current/).
 
 
 # I comandi
