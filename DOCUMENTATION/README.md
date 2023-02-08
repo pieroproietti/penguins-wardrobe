@@ -80,8 +80,11 @@ Definisce cosa abbiamo bisogno sia nella nostra ```/etc/apt/surces.list``` e pri
 
 ```repositories``` è formata da due item:
 
-* ```sources_list``` componenti da utilizzare: **main**, **contrib**, **non-free**
-* ```sources_list_d``` commandi per aggiungere altre repository all'interno di ```/etc/apt/sources.list.d```.
+#### sources_list
+Specifica dei componenti da utilizzare: **main**, **contrib**, **non-free**
+
+#### sources_list_d
+Specifica dei commandi per aggiungere altre repository all'interno di ```/etc/apt/sources.list.d```.
 
 ### preinst
 Abbiamo a volte la necessita di eseguire alcune azioni prima dell'installazione dei pacchetti, possiamo aggiungere queste azioni in forma di script in questa sezione.
