@@ -39,7 +39,12 @@ La sintassi utilizzata è yaml, piuttosto semplice da leggere, mentre per la scr
 
 Andiamo a vedere come è composto il file index.yaml di un costume.
 
-### Informazioni generali
+Possiamo suddividerlo in tre parti:
+* [intestazione](#intestazione)
+* [sequence](#sequence)
+* [customize](#customize)
+
+### intestazione
 ```
 name: colibri
 description: >-
