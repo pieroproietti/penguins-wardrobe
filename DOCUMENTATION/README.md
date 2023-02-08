@@ -52,19 +52,19 @@ release: 0.0.3
 ## sequence 
 La sequence è la parte cruciale sia dei costumi che degli accessori, viene eseguita in sequenza - da qua il nome - e l'idea è stata di renderla minima ed indivisibile. Può contenere:
 
-* repositories
-  * sources_list
-  * sources_list_d
-* preinst
-* dependencies
-* packages
-* packages_no_install_recommends
-* try_packages
-* try_packages_no_install_recommends
-* debs
-* packages_python
-* accessories
-* try_accessories
+* ```repositories```
+  * ```sources_list```
+  * ```sources_list_d```
+* ```preinst```
+* ```dependencies```
+* ```packages```
+* ```packages_no_install_recommends```
+* ```try_packages```
+* ```try_packages_no_install_recommends```
+* ```debs```
+* ```packages_python```
+* ```accessories```
+* ```try_accessories```
 
 L'idea dietro la sequenza è stata quella di renderla il più possibile atomica.
 
