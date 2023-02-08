@@ -216,11 +216,13 @@ sudo eggs wardrobe wear colibri
 # Temi
 Mentre i costumi e gli accessori si applicano ad un sistema installato, i temi rendono possibile la customizzazione dell'immagine live. E' possibile customizzare il boot delle immagini iso create con eggs creando ed utilizzando i themes.
 
-Come per i costumi e gli accessori, i temi sono principalmente costituiti da una directory, file yaml, icone, sfondi e quant'altro necessario. L'idea è stata presa dai file di configurazione di calamares ed estesa ad aspetti più specifici di eggs come il boot live e, successivamente i costumi e gli accessori.
+Come per i costumi e gli accessori, i temi sono principalmente costituiti da una directory, file yaml, icone, sfondi e quant'altro necessario. L'idea è stata presa dai file di configurazione di calamares ed estesa ad aspetti più specifici di eggs come il boot live e, successivamente i costumi e gli accessori. Solo da poco ho deciso di racchiudere anche i temi in wardrobe, inizialmente erano parte di eggs, poi sono stati spostati in penguins-addons, infine con la nascita di penguins-wardrobe sono stati aggiunti ad esso.
+
+Solo scrivento questo questo scritto, mi rendo conto però del grande debito nei confronti di calamares che mi ha suggerito prima di passare a yaml per la configurazione di eggs e, successivamente di utilizzare in maniera estensiva questa metodologia. Spero però che il mio debito possa essere stato ripagato dal fatto di aver denominato krill l'installer CLI interno di eggs.
 
 ```educaandos``` è stato il primo esempio di un tema esterno disponibile, altri temi che potete trovare nel wardrobe sono: neon, telos, ufficiozero and waydroid precedentemente presenti direttamente all'interno di eggs.
 
-## Znalizziamo un tema
+## Analizziamo un tema
 
 Un tema consiste in una semplice directory sotto themes, denominata con il nome del vendor (in questo esempio: educanandos), che include:
 
@@ -235,7 +237,9 @@ educaandos/
         livecd
 ```
 ## themes
-E' solo il contenitore di tutto, la radice per così dire del tema. Contiene:
+E' solo il contenitore di tutto, la radice per così dire del tema stesso. 
+
+Contiene:
 
 ### applications
 
@@ -247,7 +251,7 @@ L'icona per il tuo link .desktop, verrà copiata in /usr/share/icons/.
 ### calamares
 Contiene la configurazione per calamares ed è la parte più importante del tema.
 
-I file di configurazione di calamares sono scritti sempre in yaml e contengono la documantazione per le varie optioni. Il principale file di configurazione settings.conf viene automaticamente generato da eggs, solo partition, locale ed users sono usati da wardrobe.
+I file di configurazione di calamares sono scritti sempre in yaml e contengono la documentazione per le varie optioni. Il principale file di configurazione settings.conf viene automaticamente generato da eggs, solo partition, locale ed users sono attualmente usati da wardrobe.
 
 Per le informazioni di riferimento sulla configurazione di questi file si rimanda al sito di [calamares](https://calamares.is).
 
@@ -267,7 +271,6 @@ branding.desc questo file viene generato da eggs, fare riferimento a [branding](
 * livecd
 Si prende cura dell'aspetto del boot da live.
 
-
 **Uso**
 ```
 sudo eggs produce --fast --theme ../path/to/theme
@@ -284,18 +287,18 @@ sudo eggs produce --fast  --theme /penguins-wardrobe/themes/educaandos-plus
 ```
 
 # Config
-Questa directory è utilizzata con una customizzazione minimale per alcune opzioni dell'installazione --unattended. 
+Questa directory è utilizzata per permettere una customizzazione delle opzioni per l'installazione --unattended. 
 
 ```sudo eggs install --unattended``` è equivalente a ```sudo install --custom us``` in questo modo è relativamente facile avere customizzazioni diverse, semplicemente creando un fork di questa repository ed una PR al sottoscritto.
 
-Ad esempio potete copiare us.yaml in bliss.yaml, e cambiare il nome dell'utente e la password ed avere la vostra personalizzazione con:
+Ad esempio potete copiare us.yaml in bliss.yaml, e cambiare sia il nome dell'utente live che la password ed avere la vostra installazione personalizzazione con:
 
 ```sudo eggs install --custom bliss```
 
-Se invece volete la customizzazione in italiano:
+Se invece vo serve la customizzazione in italiano:
 ```sudo eggs install --custom it```
 
-Ovviamente è possibile crearne a misura per tutti.
+Ovviamente è possibile creare configurazioni a misura per tutti.
 
 # Thats all folks!
 
