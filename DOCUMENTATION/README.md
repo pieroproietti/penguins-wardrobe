@@ -52,7 +52,7 @@ release: 0.0.3
 ## sequence 
 La sequence è la parte cruciale sia dei costumi che degli accessori, viene eseguita in sequenza - da qua il nome - e l'idea è stata di renderla minima ed indivisibile. Può contenere:
 
-* ```[repositories](repository)```
+* [repositories](repository)
   * ```sources_list```
   * ```sources_list_d```
 * ```preinst```
