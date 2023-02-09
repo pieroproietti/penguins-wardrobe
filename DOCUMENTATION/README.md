@@ -249,7 +249,7 @@ Come per i costumi e gli accessori, i temi sono principalmente costituiti da una
 
 E solo scrivento questo questo scritto, mi rendo conto del grande debito nei confronti di calamares che mi ha suggerito prima di passare a yaml per la configurazione di eggs e, poi di utilizzare in maniera estensiva questa metodologia. Spero però che il mio debito possa essere stato ripagato dal fatto di aver denominato krill l'installer CLI interno di eggs.
 
-```educaandos``` è stato il primo esempio di un tema esterno disponibile, altri temi che potete trovare nel wardrobe sono: neon, telos, ufficiozero and waydroid precedentemente presenti direttamente all'interno di eggs.
+[educaandos](https://github.com/aosucas499/guadalinex) è stato il primo esempio di un tema esterno disponibile, altri temi che potete trovare nel wardrobe sono: neon, telos, ufficiozero and waydroid precedentemente presenti direttamente all'interno di eggs.
 
 ## Analizziamo un tema
 
