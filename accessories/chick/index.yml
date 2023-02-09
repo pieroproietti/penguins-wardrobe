@@ -17,6 +17,20 @@ distributions:
 sequence:
   packages:
     - gcompris
+    - keduca
+    - kalzium
+    - kanagram
+    - kbruch
+    - khangman
+    - kig
+    - kmplot
+    - kpercentage
+    - kstars
+    - ktouch
+    - kturtle
+    - kverbos
+    - kvoctrain
+    - kwordquiz    
   accessories:
     - base # per la repository di eggs
     - eggs-dev # al momento serve a me
