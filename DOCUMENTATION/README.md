@@ -294,8 +294,9 @@ branding.desc viene generato da eggs, fare riferimento a calamares [branding.des
 
 (*) In ```EducaAndOS``` per avere i diritti di amministrazione per l'utente, abbiamo la necessità di configurare lo stesso in un gruppo specifico.
 
-* livecd
+### livecd
 Si prende cura dell'aspetto del boot da live.
+Abbiamo in questo casi i temi per grub ed isolinux, nonchè lo spash per il boot.
 
 **Uso**
 ```
