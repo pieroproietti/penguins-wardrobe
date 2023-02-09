@@ -360,4 +360,6 @@ You can contact me at pieroproietti@gmail.com or [meet me](https://meet.jit.si/P
 ## Copyright and licenses
 Copyright (c) 2017, 2023 [Piero Proietti](https://penguins-eggs.net/about-me.html), dual licensed under the MIT or GPL Version 2 licenses.
 
+Lo screenshot è stato preso durante la "vestizione" di wagtail, warbler e whipbird sulla mia stazione di lavoro, potete trovare il risultato finale [qui](https://sourceforge.net/projects/penguins-eggs/files/ISOS/waydroid/).
+
 ![wagtail-warbler-whipbird](./images/wagtail-warbler-whipbird.png)
