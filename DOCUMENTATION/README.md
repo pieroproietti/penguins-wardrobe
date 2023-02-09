@@ -329,6 +329,19 @@ Se invece vo serve la customizzazione in italiano:
 
 Ovviamente è possibile creare configurazioni a misura per tutti.
 
+# Compatibilità
+Utilizzo wardrobe soprattutto per Debian dove si assicura la massima compatibilità, ma anche per Devuan che sostanzialmente ricalca Debian stessa. Qualche aggiunta ed accorgimento, invece, si è reso necessario per includere anche Ubuntu.
+
+## repositories
+I Ubuntu abbiamo delle differenze nel sources.list, in particolare cambia il nome dei componenti che passano dai canonici: ```main```, ```contrib```, ```non-free``` a ```main```, ```restricted```, ```universe``` e ```multiverse```.
+
+In Ubuntu, quindi, sources.list viene semplicemente ignorato, mentre è comunque possibile aggiungere altre repository in source.list.d.
+
+## Gestione delle differenze dei nomi dei pacchetti
+Alcuni pacchetti possono essere denominati diversamente Debian/Devuan rispetto ad Ubuntu. Un caso tipico è firefox, ```firefox-esr``` su Debian semplicemente ```firefox``` in Ubuntu. La soluzioni è l'utilizzo della sezione ```try_packages``` dove si possono includere entrambi e si caricherà solo il pacchetto corrispondente.
+
+Lo stesso discorso vale per gli accessori che, possono essere definity per distribuzioni diverse, anche qua c'è la possibilità di utilizzare ```try_accessories``` .
+
 # Thats all folks!
 
 ## Altre informazioni
