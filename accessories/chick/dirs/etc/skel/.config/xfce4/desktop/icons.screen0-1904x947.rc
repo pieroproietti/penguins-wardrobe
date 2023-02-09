@@ -2,22 +2,18 @@
 4.10.3+=true
 
 [/home/artisan/Scrivania/penguins-eggs.desktop]
-row=1
+row=3
 col=0
 
 [/home/artisan/Scrivania/eggs-adapt.desktop]
-row=4
+row=2
 col=0
 
 [Cestino]
 row=0
 col=0
 
-[/]
-row=2
-col=0
-
 [/home/artisan]
-row=3
+row=1
 col=0
 
