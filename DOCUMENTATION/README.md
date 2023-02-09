@@ -336,7 +336,7 @@ Utilizzo wardrobe soprattutto per Debian dove si assicura la massima compatibili
 ## repositories
 I Ubuntu abbiamo delle differenze nel sources.list, in particolare cambia il nome dei componenti che passano dai canonici: ```main```, ```contrib```, ```non-free``` alla diversa denominazione di Ubuntu: ```main```, ```restricted```, ```universe``` e ```multiverse```.
 
-In Ubuntu, quindi, sources.list viene semplicemente ignorato, mentre è comunque possibile aggiungere altre repository in source.list.d.
+In Ubuntu, quindi, sources.list viene semplicemente ignorato, mentre è comunque possibile aggiungere altre repository in source.list.d. Lo stesso avviene per LMDE5 elsie che pur essendo una derivata Debian, ha un source.list dummy e riporta il suo contenuto in source.list.d.
 
 ## Gestione delle differenze dei nomi dei pacchetti
 Alcuni pacchetti possono essere denominati diversamente Debian/Devuan rispetto ad Ubuntu. Un caso tipico è firefox, ```firefox-esr``` su Debian semplicemente ```firefox``` in Ubuntu. La soluzioni è l'utilizzo della sezione ```try_packages``` dove si possono includere entrambi e si caricherà solo il pacchetto corrispondente.
