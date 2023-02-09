@@ -249,7 +249,7 @@ Come per i costumi e gli accessori, i temi sono principalmente costituiti da una
 
 E solo scrivento questo questo scritto, mi rendo conto del grande debito nei confronti di calamares che mi ha suggerito prima di passare a yaml per la configurazione di eggs e, poi di utilizzare in maniera estensiva questa metodologia. Spero però che il mio debito possa essere stato ripagato dal fatto di aver denominato krill l'installer CLI interno di eggs.
 
-[educaandos-plus](https://github.com/aosucas499/guadalinex) è stato il primo esempio di un tema esterno disponibile, altri temi che potete trovare nel wardrobe sono: neon, telos, ufficiozero and waydroid precedentemente presenti direttamente all'interno di eggs.
+[educaandos-plus](https://github.com/aosucas499/guadalinex) è stato il primo esempio di un tema esterno disponibile. Altri temi che potete trovare nel wardrobe sono: neon, telos, ufficiozero and waydroid.
 
 ## Analizziamo un tema
 
@@ -334,14 +334,14 @@ Ovviamente è possibile creare configurazioni a misura per tutti.
 Utilizzo wardrobe soprattutto per Debian dove si assicura la massima compatibilità, ma anche per Devuan che sostanzialmente ricalca Debian stessa. Qualche aggiunta ed accorgimento, invece, si è reso necessario per includere anche Ubuntu.
 
 ## repositories
-I Ubuntu abbiamo delle differenze nel sources.list, in particolare cambia il nome dei componenti che passano dai canonici: ```main```, ```contrib```, ```non-free``` a ```main```, ```restricted```, ```universe``` e ```multiverse```.
+I Ubuntu abbiamo delle differenze nel sources.list, in particolare cambia il nome dei componenti che passano dai canonici: ```main```, ```contrib```, ```non-free``` alla diversa denominazione di Ubuntu: ```main```, ```restricted```, ```universe``` e ```multiverse```.
 
 In Ubuntu, quindi, sources.list viene semplicemente ignorato, mentre è comunque possibile aggiungere altre repository in source.list.d.
 
 ## Gestione delle differenze dei nomi dei pacchetti
 Alcuni pacchetti possono essere denominati diversamente Debian/Devuan rispetto ad Ubuntu. Un caso tipico è firefox, ```firefox-esr``` su Debian semplicemente ```firefox``` in Ubuntu. La soluzioni è l'utilizzo della sezione ```try_packages``` dove si possono includere entrambi e si caricherà solo il pacchetto corrispondente.
 
-Lo stesso discorso vale per gli accessori che, possono essere definity per distribuzioni diverse, anche qua c'è la possibilità di utilizzare ```try_accessories``` .
+Lo stesso discorso vale per gli accessori che possono pure essere definiti per distribuzioni diverse, anche qua c'è la possibilità di utilizzare ```try_accessories``` .
 
 # Thats all folks!
 
