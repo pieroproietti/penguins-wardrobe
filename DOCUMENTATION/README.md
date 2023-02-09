@@ -297,7 +297,7 @@ branding.desc viene generato da eggs, fare riferimento a calamares [branding.des
 ### livecd
 Si prende cura dell'aspetto del boot da live.
 
-Abbiamo in questo casi i temi per [grub](/themes/educaandos-plus/theme/livecd/grub.theme.cfg) ed [isolinux](/themes/educaandos-plus/theme/livecd/isolinux.theme.cfg), nonchè lo [spash]((/themes/educaandos-plus/theme/livecd/splash.png) per il boot.
+Abbiamo in questo casi i temi per [grub](/themes/educaandos-plus/theme/livecd/grub.theme.cfg) ed [isolinux](/themes/educaandos-plus/theme/livecd/isolinux.theme.cfg), nonchè lo [spash](/themes/educaandos-plus/theme/livecd/splash.png) per il boot.
 
 **Uso**
 ```
