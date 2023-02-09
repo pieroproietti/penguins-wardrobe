@@ -4,9 +4,9 @@ It is a repository mainly consisting of .yaml files and simple bash scripts used
 
 It's too hard and long for me to have differents translation of this documentation, so I decided to write it in italian and give just a translation link.
 
-* [original](https://github.com/pieroproietti/penguins-wardrobe/tree/main/DOCUMENTATION#penguins-wardrobe)
+## [original](https://github.com/pieroproietti/penguins-wardrobe/tree/main/DOCUMENTATION#penguins-wardrobe)
 
-* [translated](https://github-com.translate.goog/pieroproietti/penguins-wardrobe/tree/main/DOCUMENTATION?_x_tr_sl=it&_x_tr_tl=en&_x_tr_hl=it&_x_tr_pto=wapp)
+## [translated](https://github-com.translate.goog/pieroproietti/penguins-wardrobe/tree/main/DOCUMENTATION?_x_tr_sl=it&_x_tr_tl=en&_x_tr_hl=it&_x_tr_pto=wapp)
 
 ## More informations
 There is a [Penguin's eggs official book](https://penguins-eggs.net/book/) and same other documentation - mostly for developers - on [penguins-eggs repo](https://github.com/pieroproietti/penguins-eggs) under **documents** and **i386**, in particular we have [hens, differents species](https://github.com/pieroproietti/penguins-eggs/blob/master/documents/hens-different-species.md) who descrive how to use eggs in manjaro.
