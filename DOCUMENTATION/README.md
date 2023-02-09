@@ -4,8 +4,6 @@ Si tratta di un repository costituito principalmente da file yaml e da semplici 
 
 Ho utilizzato questo metodo sia per la creazione di alcune personalizzazioni generiche, sia per la creazione di sistemi Linux con waydroid denominati:  wagtail, warbler e whipbird e basati rispettivamente su Gnome, KDE Plasma e Weston.
 
-![wagtail-warbler-whipbird](./images/wagtail-warbler-whipbird.png)
-
 # La metafora del guardaroba
 
 La metafora consiste in un guardaroba contenente costumi ed accessori per la vestizione.
@@ -361,3 +359,5 @@ You can contact me at pieroproietti@gmail.com or [meet me](https://meet.jit.si/P
 
 ## Copyright and licenses
 Copyright (c) 2017, 2023 [Piero Proietti](https://penguins-eggs.net/about-me.html), dual licensed under the MIT or GPL Version 2 licenses.
+
+![wagtail-warbler-whipbird](./images/wagtail-warbler-whipbird.png)
