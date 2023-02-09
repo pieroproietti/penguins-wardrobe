@@ -47,7 +47,7 @@ sequence:
     - libreoffice
     - libreoffice-l10n-it
     - firefox-esr
-    - firefox-l10n-it
+    - firefox-esr-l10n-it
 
   accessories:
     - base
