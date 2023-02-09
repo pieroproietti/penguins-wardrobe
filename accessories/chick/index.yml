@@ -13,6 +13,7 @@ description: >-
 author: artisan
 release: 0.0.1
 distributions:
+  - bullseye
   - jammy
 sequence:
   packages:

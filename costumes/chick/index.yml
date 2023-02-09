@@ -1,0 +1,53 @@
+# wardrobe: .
+# costume: chick
+# da non confondere con chick accessori che è per Ubuntu
+---
+name: chick
+description: >-
+  desktop xfce4 per la scuola
+author: artisan
+release: 0.0.1
+distributions:
+  - bookworm
+  - bullseye
+  - chimaera
+sequence:
+  repositories:
+    sources_list:
+      - main
+      - contrib
+      - non-free
+    update: true
+    upgrade: true
+  packages:
+    - adwaita-qt
+    - libxfce4ui-utils
+    - lightdm
+    - lightdm-gtk-greeter # mandatory for ubuntu, without it will install gdm3
+    - qt5ct
+    - spice-vdagent
+    - tango-icon-theme
+    - thunar
+    - xarchiver
+    - xfce4-appfinder
+    - xfce4-notifyd # va installo altrimenti network-manager-gnome richiama gnome-shell
+    - xfce4-panel
+    - xfce4-pulseaudio-plugin
+    - xfce4-session
+    - xfce4-settings
+    - xfce4-terminal
+    - xfce4-whiskermenu-plugin
+    - xfconf
+    - xfdesktop4
+    - xfwm4
+  packages_no_install_recommends:
+    - network-manager-gnome
+    - network-manager-openvpn
+    - network-manager-openvpn-gnome
+  try_packages:
+    - firefox
+    - firefox-esr
+  accessories:
+    - base
+    - eggs-dev
+    - chick
