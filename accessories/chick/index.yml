@@ -1,14 +1,22 @@
 # wardrobe: .
 # accessory: chick
+# made for: si applica su una xubuntu installazione minima
+#           lasciando cosi lo spazione per la scelta dei
+#           pacchetti da installare.
+# note:     al momento non installa nulla, mera configurazione
+#           del desktop, repo di eggs, vscode 
+# packages: mi viene in mente gcompris
 ---
 name: chick
 description: >-
-  desktop xfce4 per scuola
+  desktop xfce4 per scuola primaria
 author: artisan
 release: 0.0.1
 distributions:
   - jammy
 sequence:
+  packages:
+    - gcompris
   accessories:
     - base # per la repository di eggs
     - eggs-dev # al momento serve a me
