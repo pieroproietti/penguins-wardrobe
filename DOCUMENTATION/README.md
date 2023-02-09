@@ -343,6 +343,9 @@ Alcuni pacchetti possono essere denominati diversamente Debian/Devuan rispetto a
 
 Lo stesso discorso vale per gli accessori che possono pure essere definiti per distribuzioni diverse, anche qua c'è la possibilità di utilizzare ```try_accessories``` .
 
+## Versioni naked
+Un'altra ragione per utilizzare Debian/Devuan invece di Ubuntu e derivate è la difficoltà di ottenere una versione "naked" ovvero una installazione CLI minima. E' possibile con Ubuntu, utilizzando la versione server, ma l'immagine contiene comunque funzionalità non richieste ed è abbastanza pesante rispetto alla controparte Debian.
+
 # Thats all folks!
 
 ## Altre informazioni
