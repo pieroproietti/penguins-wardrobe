@@ -285,15 +285,12 @@ I file di configurazione di calamares sono scritti sempre in yaml e contengono l
 Per le informazioni di riferimento sulla configurazione di questi file si rimanda al sito di [calamares](https://calamares.is).
 
 #### branding
-branding.desc questo file viene generato da eggs, fare riferimento a [branding](https://github.com/calamares/calamares/blob/calamares/src/branding/default/branding.desc) per maggiori informazioni.
+branding.desc viene generato da eggs, fare riferimento a calamares [branding.desc](https://github.com/calamares/calamares/blob/calamares/src/branding/default/branding.desc) per maggiori informazioni.
 
 #### modules
-* locale.yml
-* partitions.yml
-* users.yml (*)
-* locale.yml (Not used yet)
-* partitions.yml (Not used yet)
-
+* [locale.yml](/themes/educaandos-plus/theme/calamares/modules/locale.yml)
+* [partitions.yml](/themes/educaandos-plus/theme/calamares/modules/partition.yml)
+* [users.yml](/themes/educaandos-plus/theme/calamares/modules/users.yml) (*)
 
 (*) In ```EducaAndOS``` per avere i diritti di amministrazione per l'utente, abbiamo la necessità di configurare lo stesso in un gruppo specifico.
 
