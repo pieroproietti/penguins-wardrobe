@@ -20,10 +20,12 @@ sequence:
     update: true
     upgrade: true
   packages:
+    # xfce4   
     - adwaita-qt
     - libxfce4ui-utils
     - lightdm
     - lightdm-gtk-greeter # mandatory for ubuntu, without it will install gdm3
+    - network-manager-gnome
     - qt5ct
     - spice-vdagent
     - tango-icon-theme
@@ -40,13 +42,13 @@ sequence:
     - xfconf
     - xfdesktop4
     - xfwm4
-  packages_no_install_recommends:
-    - network-manager-gnome
-    - network-manager-openvpn
-    - network-manager-openvpn-gnome
-  try_packages:
-    - firefox
+
+    # office
+    - libreoffice
+    - libreoffice-l10n-it
     - firefox-esr
+    - firefox-l10n-it
+
   accessories:
     - base
     - eggs-dev

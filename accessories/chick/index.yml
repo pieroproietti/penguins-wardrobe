@@ -18,19 +18,19 @@ distributions:
 sequence:
   packages:
     - gcompris
-    - keduca
+    # keduca  # non esiste nelle repo
     - kalzium
     - kanagram
     - kbruch
     - khangman
     - kig
     - kmplot
-    - kpercentage
+    # kpercentage  # non esiste nelle repo
     - kstars
     - ktouch
     - kturtle
-    - kverbos
-    - kvoctrain
+    # kverbos # non esiste nelle repo
+    # kvoctrain # non esiste nelle repo
     - kwordquiz    
   accessories:
     - base # per la repository di eggs
