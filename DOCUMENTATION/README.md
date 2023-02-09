@@ -300,7 +300,7 @@ Si prende cura dell'aspetto del boot da live.
 Abbiamo in questo casi i temi per [grub](/themes/educaandos-plus/theme/livecd/grub.theme.cfg) ed [isolinux](/themes/educaandos-plus/theme/livecd/isolinux.theme.cfg), nonchè lo [spash](/themes/educaandos-plus/theme/livecd/splash.png) per il boot.
 
 ## Uso dei temi
-Per essere utilizzato un tema deve essere passato come parametro al flag --theme in produce. Esempio:
+Per essere utilizzato un tema deve essere passato come parametro al flag ```--theme``` in produce:
 
 ```
 sudo eggs produce --fast --theme ../path/to/theme
