@@ -265,41 +265,43 @@ educaandos/
             modules
         livecd
 ```
-## themes
+### themes
 E' solo il contenitore di tutto, la radice per così dire del tema stesso. 
 
 Contiene:
 
-### applications
+#### applications
 
 Solo un link .desktop, verrà copiato in /usr/share/applications/ e sulla cartella Desktop.
 
-### artwork
+#### artwork
 L'icona per il tuo link .desktop, verrà copiata in /usr/share/icons/.
 
-### calamares
+#### calamares
 Contiene la configurazione per calamares ed è la parte più importante del tema.
 
 I file di configurazione di calamares sono scritti sempre in yaml e contengono la documentazione per le varie optioni. Il principale file di configurazione settings.conf viene automaticamente generato da eggs, solo partition, locale ed users sono attualmente usati da wardrobe.
 
 Per le informazioni di riferimento sulla configurazione di questi file si rimanda al sito di [calamares](https://calamares.is).
 
-#### branding
+##### branding
 branding.desc viene generato da eggs, fare riferimento a calamares [branding.desc](https://github.com/calamares/calamares/blob/calamares/src/branding/default/branding.desc) per maggiori informazioni.
 
-#### modules
+##### modules
 * [locale.yml](/themes/educaandos-plus/theme/calamares/modules/locale.yml)
 * [partitions.yml](/themes/educaandos-plus/theme/calamares/modules/partition.yml)
 * [users.yml](/themes/educaandos-plus/theme/calamares/modules/users.yml) (*)
 
 (*) In ```EducaAndOS``` per avere i diritti di amministrazione per l'utente, abbiamo la necessità di configurare lo stesso in un gruppo specifico.
 
-### livecd
+#### livecd
 Si prende cura dell'aspetto del boot da live.
 
 Abbiamo in questo casi i temi per [grub](/themes/educaandos-plus/theme/livecd/grub.theme.cfg) ed [isolinux](/themes/educaandos-plus/theme/livecd/isolinux.theme.cfg), nonchè lo [spash](/themes/educaandos-plus/theme/livecd/splash.png) per il boot.
 
-**Uso**
+## Uso dei temi
+Per essere utilizzato un tema deve essere passato come parametro al flag --theme in produce. Esempio:
+
 ```
 sudo eggs produce --fast --theme ../path/to/theme
 ```
