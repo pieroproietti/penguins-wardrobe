@@ -1,6 +1,6 @@
 # penguins-wardrobe
 
-Si tratta di un repository costituito principalmente da file .yaml e da semplici  script bash ed usato da eggs per creare personalizzazioni di sistemi Linux a partire da una sistema installato CLI - o nella nostra terminologia "naked" - per ottenere un sistema completo.
+Si tratta di un repository costituito principalmente da file yaml e da semplici  script bash ed usato da eggs per creare personalizzazioni di sistemi Linux a partire da una sistema minimale CLI già installato - o nella nostra terminologia "naked" - per ottenere un sistema completo.
 
 Ho utilizzato questo metodo sia per la creazione di alcune personalizzazioni generiche, sia per la creazione di sistemi Linux con waydroid denominati:  wagtail, warbler e whipbird e basati rispettivamente su Gnome, KDE Plasma e Weston.
 
@@ -31,6 +31,13 @@ In wardrobe, quindi abbiamo soltanto delle informazioni che specificano soprattu
 # costume: /colibri
 ---
 name: colibri
+description: >-
+  desktop xfce4 plus all that I need to develop eggs, firmwares and anydesk
+  repos
+author: artisan
+release: 0.9.1
+distributions:
+  - bookworm
 ...
   hostname: true
 reboot: true
@@ -45,6 +52,8 @@ Possiamo suddividerlo in tre parti:
 * [customize](#customize)
 
 ### intestazione
+Definisce il nome, l'autore, descrizione e la release del costume. Una parte importante è ```distributions``` se la distribuzione corrente non è inclusa il costume non verrà applicato.
+
 ```
 name: colibri
 description: >-
@@ -52,6 +61,9 @@ description: >-
   repos
 author: artisan
 release: 0.0.3
+distributions:
+  - bullseye
+  - bookworm
 ```
 
 ## sequence 
