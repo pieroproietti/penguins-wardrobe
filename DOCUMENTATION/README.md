@@ -123,9 +123,9 @@ Come  [accessories](#accessories) ma non fallisce.
 
 ## customize
 costomize contiene le azioni per finalizzare l'installazione e customizzare il risultato. Può contente:
-* dirs
-* hostname
-* scripts
+* [dirs](#dirs)
+* [hostname](#hostname)
+* [scripts](#scripts)
 
 #### dirs
 dirs è un campo booleano, se true la directory ./dirs interna al costume verrà copiata nella root del sistema.
@@ -153,6 +153,9 @@ Gli scripts sono chiamati da ```customize/scripts``` ed eseguiti nell'ordine spe
 
 - install-image-from-local.sh (a script to copy system.img and vendor.img from local)
 - no-hw-accelleration.sh (script to set waydroid with no-hw-accelleration)
+
+## reboot
+Se presente e vero in sistema viene resettato dopo la vestizione.
 
 # Accessories
 Gli accessori possono essere definiti all'interno di un costume o fuori dallo stesso - principalmente in ```accessories``` ma anche interni ad un altro costume. Gli accessori interni vivono all'interno di un costume o di altri accessori che li dichiarano.
