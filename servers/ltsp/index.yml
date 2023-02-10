@@ -1,0 +1,40 @@
+# ltsp
+---
+name: ltsp
+description: LTSP configuration
+author: artisan
+release: 0.0.1
+distributions:
+  - bullseye
+  - jammy
+sequence:
+  repositories:
+    sources_list:
+      - main
+      - contrib
+      - non-free
+    sources_list_d:
+      - rm -f /etc/apt/sources.list.d/ltsp-ubuntu-ppa-focal.list
+      - rm -f /etc/apt/trusted.gpg.d/ltsp_ubuntu_ppa.gpg
+      - wget https://ltsp.org/misc/ltsp-ubuntu-ppa-focal.list -O /etc/apt/sources.list.d/ltsp-ubuntu-ppa-focal.list
+      - wget https://ltsp.org/misc/ltsp_ubuntu_ppa.gpg -O /etc/apt/trusted.gpg.d/ltsp_ubuntu_ppa.gpg
+    update: true
+    upgrade: true
+  packages:
+  - ltsp 
+  - ltsp-binaries 
+  - dnsmasq 
+  - nfs-kernel-server 
+  - openssh-server 
+  - squashfs-tools # già presente in eggs
+  - ethtool 
+  - net-tools # the good old style
+  - epoptes # visualizza le stazioni di lavoro degli alunni
+customize:
+  scripts:
+    # andrebbe creato teacher non usato artisan
+    - gpasswd -a artisan epoptes
+    - ltsp dnsmasq 
+    - ltsp image /
+    - ltsp ipxe
+    - ltsp nfs
