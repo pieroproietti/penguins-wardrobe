@@ -140,17 +140,16 @@ costomize contiene le azioni per finalizzare l'installazione e customizzare il r
 #### dirs
 dirs è un campo booleano, se true la directory ./dirs interna al costume verrà copiata nella root del sistema.
 
-Esempio: Abbiamo bisogno di copiare qualcosa in ```/etc/skel```, in ```/usr/share/applications``` ed il nostro background su ```/usr/share/background```. 
+Esempio: Abbiamo bisogno di copiare la nostra customizzazione del desktop ```/etc/skel``` ed il nostro background su ```/usr/share/background```. 
 
 Possiamo mettere il tutto in ```dirs```:
 
 ```
 - dirs   + etc   + skel  
-         + usr   + share   + applications + install-to-waydroid.desktop
-                           + backgrounds  + waydroid
+         + usr   + backgrounds  + colibri
 ```
 #### hostname
-Anche questo è un campo booleano e, se true, il file ```/etc/hostname``` verrà posto con il nome del costume ed in accordo a ciò sarà modificato anche ```/etc/hosts```.
+Anche questo è un campo booleano e, se true, il file ```/etc/hostname``` verrà posto al nome del costume ed in accordo ad esso sarà anche modificato ```/etc/hosts```.
 
 #### scripts
 scripts contiene un array di uno o più script utilizzati per customizzare il risulto.
@@ -160,28 +159,31 @@ Potete aggiunge altri script e directory all'interno di del costume o utilizzare
 **Esempi**
 
 Gli scripts sono chiamati da ```customize/scripts``` ed eseguiti nell'ordine specifico.
-
-- install-image-from-local.sh (a script to copy system.img and vendor.img from local)
-- no-hw-accelleration.sh (script to set waydroid with no-hw-accelleration)
-
+```
+customize:
+  dirs: true
+  scripts:
+    - ../../scripts/config_desktop_link.sh
+    - ../../scripts/config_lightdm.sh
+```
 ## reboot
-Se presente e vero in sistema viene resettato dopo la vestizione.
+Se vero in sistema verrà riavviato dopo la vestizione.
 
 # Accessories
 Gli accessori possono essere definiti all'interno di un costume o fuori dallo stesso - principalmente in ```accessories``` ma anche interni ad un altro costume. Gli accessori interni vivono all'interno di un costume o di altri accessori che li dichiarano.
 
-Hanno la stessa struttura dei costumi e sono chiamati da questi. Potete vederli come una cintura da mettere con dei pantaloni alla moda o una borsa associata al tailler.
+Hanno la stessa struttura dei costumi e vengono richiamati da questi. Potete vederli come una cintura da mettere con dei pantaloni alla moda o una borsa associata al tailler.
 
-Gli accessori possono sia essere installati da soli oppure chiamati da un costume. 
+Gli accessori, però sono installabili anche singolarmente, ad esempio: ```sudo eggs wardrobe wear accessories/eggs-dev``` ci installerà gli strumenti di sviluppo. 
 
-Ad esempio: waydroid è un accessorio ed è utilizzato da wagtail (gnome3) e  warbler (KDE), lo stesso per eggs-dev che viene aggiunto in colibri oppure  firmwares in duck ed owl che hanno bisogno di una maggiore compatibilità hardware.
+Tutto quello che risiede sotto ```accessories²`` è un accessorio. Ad esempio: base è un accessorio, utilizzato in molti vestiti; waydroid è un accessorio ed è utilizzato da wagtail (gnome3),  warbler (KDE) e whipbird; firmwares usato in duck ed owl.
 
-colibri, wagtail, warbler e whispbird sono fatti per sviluppatori, così usano un accessorio firmwares interno con principalmente driver per wifi.
+colibri, wagtail, warbler e whispbird essendo nati essenzialmente per sviluppatori, non usano l'accessorio firmwares, ma dispongono un un accessorio interno firmware contentente principalmente driver per wifi. (*)
 
 
 __Nota__ ```sudo eggs wardrobe wear``` accetta una flag ```--no_firmwares``` per saltare completamente il firmware nel caso stiamo lavorando per macchine virtuali o facendo dei test.
 
-(*) wagtail. warbler e whispbird prima della fine dell'installazione chiamano pure uno speciale script [add_wifi_firmwares.sh](https://github.com/pieroproietti/penguins-wardrobe/blob/main/scripts/add_wifi_firmwares.sh) per aggiungere in Debian bookworm firmware scaricabile da [cdimage unofficial non-free](http://cdimage.debian.org/cdimage/unofficial/non-free/firmware/bookworm/current/).
+(*) wagtail, warbler e whispbird prima della fine dell'installazione chiamano pure uno speciale script [add_wifi_firmwares.sh](https://github.com/pieroproietti/penguins-wardrobe/blob/main/scripts/add_wifi_firmwares.sh) per aggiungere in Debian bookworm firmware scaricabile da [cdimage unofficial non-free](http://cdimage.debian.org/cdimage/unofficial/non-free/firmware/bookworm/current/).
 
 
 # I comandi
