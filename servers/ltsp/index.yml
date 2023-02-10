@@ -32,11 +32,20 @@ sequence:
   - epoptes # visualizza le stazioni di lavoro degli alunni
 customize:
   scripts:
+    # Occorre abilitare resolved
     - systemctl enable systemd-resolved.service
     - systemctl start systemd-resolved.service
-    # andrebbe creato teacher non usato artisan
+
+    # forse andrebbe creato teacher e non usato artisan
+    # ma sembra che funge solo dalla scrivania del server
     - gpasswd -a artisan epoptes
     - ltsp dnsmasq 
-    - ltsp image /
     - ltsp ipxe
     - ltsp nfs
+    - ltsp initrd
+    - clear
+    - echo "============"
+    - echo "ltsp image /"
+    - echo "============"
+
+
