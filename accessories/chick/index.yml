@@ -17,10 +17,21 @@ distributions:
   - jammy
 sequence:
   packages:
+    # jush a bit educational gtk stuffs
+    - drgeo # interactive geometry
     - gcompris
     - gelemental
+    - gnome-chemistry-utils package # gtk widgets and small programs for chemistry
+    - granule # Leitner system flashcard utiltiy (text only)
+    - klavaro # touch typing
+    - littlewizard # - development environment for children
+    - rurple-ng # - educational tool to help students learn the Python programming language (comes with 48 lessons)
+    - solfege #  ear training
     - stellarium
-    # I removed all the programs to work light
+    - tuxtype # TypingTutor - touch typing plugin for gedit
+    - wordplay #  anagrams
+
+    # jush a bit educational kde stuffs
     # keduca  # non esiste nelle repo
     #- kalzium
     #- kanagram
