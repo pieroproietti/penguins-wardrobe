@@ -57,5 +57,5 @@ sequence:
 
 customize:
   scripts:
-  - "gpassword -A ${SUDO_USER} epoptes"
-
+  - useradd ${SUDO_USER} epoptes
+reboot: true

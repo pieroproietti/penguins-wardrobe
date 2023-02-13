@@ -18,6 +18,7 @@ distributions:
 sequence:
   packages:
     - gcompris
+    - gelemental
     - stellarium
     # I removed all the programs to work light
     # keduca  # non esiste nelle repo
@@ -54,4 +55,4 @@ customize:
     - chmod +x /usr/local/bin/g4passwd
 
   hostname: true
-reboot: true
+#reboot: true 
