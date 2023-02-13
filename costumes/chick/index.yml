@@ -57,5 +57,5 @@ sequence:
 
 customize:
   scripts:
-  - useradd ${SUDO_USER} epoptes
+  - adduser ${SUDO_USER} epoptes
 reboot: true
