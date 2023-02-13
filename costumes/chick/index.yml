@@ -57,5 +57,5 @@ sequence:
 
 customize:
   scripts:
-  - adduser ${SUDO_USER} epoptes
+  - "gpassword -A ${SUDO_USER} epoptes"
 
