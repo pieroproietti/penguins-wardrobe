@@ -53,6 +53,9 @@ sequence:
     - firefox-esr-l10n-it
 
   accessories:
-    - base
-    - eggs-dev
     - chick
+
+customize:
+  scripts:
+  - adduser ${SUDO_USER} epoptes
+

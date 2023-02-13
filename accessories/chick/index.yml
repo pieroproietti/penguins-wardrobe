@@ -18,20 +18,22 @@ distributions:
 sequence:
   packages:
     - gcompris
+    - stellarium
+    # I removed all the programs to work light
     # keduca  # non esiste nelle repo
-    - kalzium
-    - kanagram
-    - kbruch
-    - khangman
-    - kig
-    - kmplot
+    #- kalzium
+    #- kanagram
+    #- kbruch
+    #- khangman
+    #- kig
+    #- kmplot
     # kpercentage  # non esiste nelle repo
-    - kstars
-    - ktouch
-    - kturtle
+    #- kstars
+    #- ktouch
+    #- kturtle
     # kverbos # non esiste nelle repo
     # kvoctrain # non esiste nelle repo
-    - kwordquiz    
+    #- kwordquiz    
   accessories:
     - base # per la repository di eggs
     - eggs-dev # al momento serve a me
