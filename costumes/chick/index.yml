@@ -43,9 +43,12 @@ sequence:
     - xfdesktop4
     - xfwm4
 
+    # controllo remoto studenti
+    - epoptes
+
     # office
-    - libreoffice
-    - libreoffice-l10n-it
+    #- libreoffice
+    #- libreoffice-l10n-it
     - firefox-esr
     - firefox-esr-l10n-it
 
