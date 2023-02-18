@@ -7,11 +7,11 @@
 #           del desktop, repo di eggs, vscode 
 # packages: mi viene in mente gcompris
 ---
-name: chick
+name: chicks
 description: >-
   desktop xfce4 per scuola primaria
 author: artisan
-release: 0.0.1
+release: 0.0.2
 distributions:
   - bullseye
   - jammy

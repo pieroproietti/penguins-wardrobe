@@ -1,8 +1,8 @@
 # wardrobe: .
-# costume: chick
+# costume: chicks
 # da non confondere con chick accessori che è per Ubuntu
 ---
-name: chick
+name: chicks
 description: >-
   desktop xfce4 per la scuola
 author: artisan
@@ -53,7 +53,7 @@ sequence:
     - firefox-esr-l10n-it
 
   accessories:
-    - chick
+    - chicks
 
 customize:
   scripts:
