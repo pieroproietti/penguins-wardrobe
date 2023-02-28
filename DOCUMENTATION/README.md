@@ -303,17 +303,17 @@ Abbiamo in questo casi i temi per [grub](/themes/educaandos-plus/theme/livecd/gr
 Per essere utilizzato un tema deve essere passato come parametro al flag ```--theme``` in produce:
 
 ```
-sudo eggs produce --fast --theme ../path/to/theme
+sudo eggs produce --theme ../path/to/theme
 ```
 esempio: 
 
 ```
-sudo eggs produce --fast  --theme .wardrobe/themes/educaandos-plus
+sudo eggs produce --theme .wardrobe/themes/educaandos-plus
 ```
 
 Potete anche clonare il wardrobe con Git e prendere il tema da esso:
 ```
-sudo eggs produce --fast  --theme /penguins-wardrobe/themes/educaandos-plus
+sudo eggs produce --theme /penguins-wardrobe/themes/educaandos-plus
 ```
 
 # Config
