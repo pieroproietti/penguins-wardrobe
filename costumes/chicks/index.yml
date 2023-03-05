@@ -6,9 +6,11 @@ name: chicks
 description: >-
   desktop xfce4 per la scuola
 author: artisan
-release: 0.0.1
+release: 0.0.3
 distributions:
   - bullseye
+  - buster
+  - chimaera
   - daedalus-ceres
   - jammy
 sequence:
