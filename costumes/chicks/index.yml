@@ -8,6 +8,7 @@ description: >-
 author: artisan
 release: 0.0.3
 distributions:
+  - beowulf
   - bullseye
   - buster
   - chimaera

@@ -4,6 +4,7 @@ name: eggs-dev
 description: 'add repositories: nodesource, code, install: nodejs, code'
 author: artisan
 distributions:
+  - beowulf
   - bookworm
   - bullseye
   - buster
