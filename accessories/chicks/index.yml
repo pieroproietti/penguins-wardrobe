@@ -29,7 +29,6 @@ sequence:
     - granule # Leitner system flashcard utiltiy (text only)
     - klavaro # touch typing
     - littlewizard # development environment for children
-    #- rurple-ng # not found # educational tool to help students learn the Python programming language (comes with 48 lessons)
     - solfege #  ear training
     - stellarium
     - tuxtype # TypingTutor - touch typing plugin for gedit

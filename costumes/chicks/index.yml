@@ -50,9 +50,11 @@ sequence:
     - epoptes
 
     # office
-    #- libreoffice
-    #- libreoffice-l10n-it
+    - libreoffice
     - firefox-esr
+
+    # italiano
+    - libreoffice-l10n-it
     - firefox-esr-l10n-it
 
   accessories:
