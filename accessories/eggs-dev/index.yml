@@ -10,10 +10,7 @@ distributions:
   - buster
   - chimaera
   - daedalus-ceres
-  - bionic
-  - focal
   - jammy
-  - kinetic
 sequence:
   repositories:
     sources_list:

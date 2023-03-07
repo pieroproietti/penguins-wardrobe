@@ -9,6 +9,7 @@ author: artisan
 release: 0.0.3
 distributions:
   - beowulf
+  - bookworm
   - bullseye
   - buster
   - chimaera
