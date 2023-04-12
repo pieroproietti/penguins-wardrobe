@@ -15,14 +15,16 @@ sequence:
     update: true
     upgrade: true
   packages_no_install_recommends:
+    - firefox-esr
     - gdm3
     - gnome-control-center
     - gnome-keyring
     - gnome-session
     - gnome-shell
     - gnome-terminal
-    - firefox-esr
     - nautilus
+    - spice-vdagent
+    - xorg
     - zenity
   accessories:
     # ./firmwares
