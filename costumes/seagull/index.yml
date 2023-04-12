@@ -1,0 +1,40 @@
+# warbier
+---
+name: seagull
+description: seagull wayland/gnome-kiosk/waydroid
+author: artisan
+release: 0.1.0
+distributions: 
+- bullseye
+sequence:
+  repositories:
+    sources_list:
+    - main
+    - contrib
+    - non-free
+    update: true
+    upgrade: true
+  packages_no_install_recommends:
+    - gdm3
+    - gnome-kiosk
+    #- gnome-control-center
+    #- gnome-keyring
+    #- gnome-session
+    #- gnome-shell
+    - gnome-terminal
+    - firefox-esr
+    - nautilus
+    - zenity
+  accessories:
+    # ./firmwares
+    - base
+    #- eggs-dev
+    - waydroid
+customize:
+  dirs: true
+  scripts:
+    - ../../scripts/config_desktop_link.sh
+    - ../../scripts/config_gdm3.sh
+    - ../../scripts/add_wifi_firmwares.sh
+  hostname: true
+reboot: true
