@@ -14,6 +14,11 @@ sequence:
     - non-free
     update: true
     upgrade: true
+  packages:
+    - cmake
+    - libmutter-12-dev # experimental I think we must try bookworm!
+    - meson
+    - pkg-config
   packages_no_install_recommends:
     - firefox-esr
     - gdm3
