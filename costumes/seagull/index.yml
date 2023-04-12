@@ -18,8 +18,8 @@ sequence:
     upgrade: true
   packages:
     - cmake
-    # libgnome-desktop-4-dev # bookworm
-    - libgnome-desktop-3-19  # bullseye
+    # libgnome-desktop-4-dev # bookworm compositor_dependencies += dependency('gnome-desktop-4')
+    - libgnome-desktop-3-19-dev  # bullseye compositor_dependencies += dependency('gnome-desktop-3-19')
     - libibus-1.0-dev
     #- libmutter-11-dev # bookworm put mutter_api_version = 11 on meson.build
     - libmutter-7-dev # bullseye put mutter_api_version = 7 on meson.build
