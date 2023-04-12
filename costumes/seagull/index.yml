@@ -5,7 +5,7 @@ description: mutter based compositor for kiosks
 author: artisan
 release: 0.0.1
 distributions: 
-- bullseye
+- bookworm
 sequence:
   repositories:
     sources_list:
@@ -32,10 +32,10 @@ sequence:
     - xorg
     - zenity
   accessories:
-    # ./firmwares
+    - ./firmwares
     - base
     - eggs-dev
-    - waydroid
+    # waydroid
 customize:
   dirs: true
   scripts:
