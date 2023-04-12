@@ -1,4 +1,5 @@
 # seagull
+again to solve dependencies gtk4
 ---
 name: seagull
 description: mutter based compositor for kiosks
@@ -16,9 +17,13 @@ sequence:
     upgrade: true
   packages:
     - cmake
-    - libmutter-12-dev # experimental I think we must try bookworm!
+    - libgnome-desktop-4-dev
+    - libibus-1.0-dev
+    - libmutter-11-dev # put mutter_api_version = 11 on meson.build
+    - libsystemd-dev
     - meson
     - pkg-config
+    - translate-toolkit
   packages_no_install_recommends:
     - firefox-esr
     - gdm3
