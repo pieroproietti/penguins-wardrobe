@@ -1,5 +1,5 @@
 # seagull
-again to solve dependencies gtk4
+# again to solve dependencies gtk4
 ---
 name: seagull
 description: mutter based compositor for kiosks
