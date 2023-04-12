@@ -8,7 +8,7 @@
 name: waydroid network-wifi
 description: install firmware drivers network-wifi
 author: artisan
-release: 0.1.0
+release: 0.0.1
 distributions:
   - bullseye
 sequence:
@@ -32,3 +32,11 @@ sequence:
     - vulkan-tools
     - vulkan-validationlayers
     - xserver-xorg-video-amdgpu
+    #
+    - firmware-amd-graphics*
+    - firmware-brcm80211_*
+    - firmware-ipw2x00_*
+    - firmware-iwlwifi_*
+    - firmware-libertas_*
+    - firmware-realtek_*
+
