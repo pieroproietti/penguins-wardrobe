@@ -1,17 +1,12 @@
-# network-wifi
-# Ubuntu 22.04 don't have firmware-atheros
-# git clone git://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git
-# sudo cp -r linux-firmwareath* /lib/firmware
-# ... Sorry I can't test it
-# Piero: RTL8822 CE (cp rtw88/ /lib/firmware)
+# seem all drivers go in bullseye (2023-04-12 )
 ---
 name: waydroid network-wifi
 description: install firmware drivers network-wifi
 author: artisan
-release: 0.1.0
+release: 0.0.1
 distributions:
-  - bookworm
   - bullseye
+  - bookworm
 sequence:
   packages:
     # wi-fi
@@ -20,10 +15,9 @@ sequence:
     - firmware-ipw2x00 #  Binary firmware for Intel Pro Wireless 2100, 2200 and 2915 [non-free]
     - firmware-iwlwifi #  Binary firmware for Intel Wireless cards [non-free]
     - firmware-libertas # binary firmware for Marvell wireless cards [non-free]
+    - firmware-linux-free # Binary firmware for various drivers in the Linux kernel
     - firmware-realtek # Binary firmware for Realtek wired/wifi/BT adapters [non-free]
     - firmware-zd1211 # binary firmware for the zd1211rw wireless driver [non-free]
-    - firmware-linux-free # Binary firmware for various drivers in the Linux kernel
-
     # video
     - firmware-amd-graphics   # firmware for AMD/ATI graphics chips supported by the radeon, amdgpu and r128 drivers
     - libdrm-amdgpu1
@@ -33,3 +27,4 @@ sequence:
     - vulkan-tools
     - vulkan-validationlayers
     - xserver-xorg-video-amdgpu
+
