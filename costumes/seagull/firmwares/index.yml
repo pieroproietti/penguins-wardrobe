@@ -10,7 +10,7 @@ description: install firmware drivers network-wifi
 author: artisan
 release: 0.1.0
 distributions:
-  - bookworm
+  - bullseye
 sequence:
   packages:
     # wi-fi
