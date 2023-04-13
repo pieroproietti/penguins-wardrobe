@@ -21,7 +21,5 @@ sequence:
     - waydroid
 customize:
   dirs: true
-  scripts:
-    - ../../scripts/add_wifi_firmwares.sh
   hostname: true
 reboot: true
