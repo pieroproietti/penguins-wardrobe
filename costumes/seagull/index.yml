@@ -16,7 +16,7 @@ sequence:
     - non-free
     update: true
     upgrade: true
-  packages:
+  packages_no_install_recommends:
     - cmake
     # libgnome-desktop-4-dev # bookworm compositor_dependencies += dependency('gnome-desktop-4')
     - libgnome-desktop-3-19-dev  # bullseye compositor_dependencies += dependency('gnome-desktop-3-19')
@@ -27,7 +27,8 @@ sequence:
     - meson
     - pkg-config
     - translate-toolkit
-  packages_no_install_recommends:
+  
+    # gnome 
     - firefox-esr
     - gdm3
     - gnome-control-center
