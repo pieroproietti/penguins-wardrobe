@@ -34,7 +34,7 @@ sequence:
     - gnome-control-center
     - gnome-keyring
     - gnome-session
-    - gnome-shell
+    # gnome-shell not used from kiosk
     - gnome-terminal
     - nautilus
     - spice-vdagent
