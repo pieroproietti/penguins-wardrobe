@@ -1,18 +1,23 @@
 #!/bin/bash
-
-# wear colibri 4 arch
-
+# eggs wardrobe wear colibri 4 arch
 clear
+
+if [[ $EUID -ne 0 ]]; then
+   echo "eggs wardrobe wear need to run with root privileges. Please, prefix it with sudo" 
+   exit 1
+fi
+
 COSTUME="colibri"
 MY_USERNAME=$(logname)
-echo "MY_USERNAME: ${MY_USERNAME}"
-
 MY_USERHOME="/home/${MY_USERNAME}"
-echo "MY_USERHOME: ${MY_USERHOME}"
+echo "wardrobe: /home/artisan/.wardrobe/"
+echo "Prepare your costume: colibri?"
+read -p "Press enter to continue or [CTRL-C] to abort"
 
+# update
 pacman -Syyu --noconfirm
 
-#
+# install costume
 pacman -Syy --noconfirm \
 firefox \
 lightdm \
@@ -39,8 +44,6 @@ pacman -Syyu --noconfirm \
 nodejs \
 npm \
 vscode
-
-
 # install pnpm with npm
 npm install pnpm -g
 
@@ -48,12 +51,10 @@ npm install pnpm -g
 systemctl enable NetworkManager
 systemctl enable lightdm
 
-
-# copy configuration from dirs
+# copy configuration from dirs to / and MY_USERHOME
 cp ./dirs/* / -R
-
-# copy configuration from dirs to MY_USERHOME
-rsync -avx ./dirs/etc/skel/.config "${MY_USERHOME}"/
+rsync -avx ./dirs/etc/skel/.config "${MY_USERHOME}"/ 
+chown "${MY_USERNAME}:${MY_USERNAME}" "${MY_USERHOME}" -R
 
 # config lightdm $COSTUME $MY_USERHOME
 ../../scripts/config_lightdm.sh "${COSTUME}" "${MY_USERHOME}"
@@ -61,14 +62,13 @@ rsync -avx ./dirs/etc/skel/.config "${MY_USERHOME}"/
 # config desktop links $MY_USERHOME
 ../../scripts/config_desktop_link.sh "${MY_USERHOME}"
 
-# Reimpostazione diritti
-chown "${MY_USERNAME}:${MY_USERNAME}" "${MY_USERHOME}" -R
-
+# /etc/hostname
 echo ${COSTUME} > /etc/hostname
 
+# /etc/hosts
 cat << 'EOF' > /etc/hosts
 127.0.0.1 localhost localhost.localdomain
-127.0.1.1 ${COSTUME} ${COSTUME}.localhost 
+127.0.1.1 colibri colibri.localhost 
 # The following lines are desirable for IPv6 capable hosts
 :: 1     ip6 - localhost ip6 - loopback
 fe00:: 0 ip6 - localnet
