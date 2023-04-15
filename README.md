@@ -4,8 +4,9 @@ It is a repository mainly consisting of .yaml files and simple bash scripts used
 
 It's too hard and long for me to have differents translation of this documentation, so I decided to write it in italian and give just a translation link.
 
-## [Documentation](https://penguins-eggs.net/docs/Tutorial/penguins-wardrobe)
+## Documentation
 
+Documentation of penguins-wardrobe was moved to [penguins-eggs.net](https://penguins-eggs.net/docs/Tutorial/penguins-wardrobe).
 
 # More informations
 You can contact me by [mail](mailto://pieroproietti@gmail.com) or follow me on 
