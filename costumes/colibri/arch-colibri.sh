@@ -14,10 +14,10 @@ fi
 COSTUME="colibri"
 MY_USERNAME=$(logname)
 MY_USERHOME="/home/${MY_USERNAME}"
+# update
 
-echo "wardrobe: Prepare your costume: ${COSTUME)?"
-read -p "Press enter to continue or [CTRL-C] to abort"
-
+echo "wardrobe: Prepare your costume: $(COSTUME)?"
+read -pr "Press enter to continue or CTRL-C to abort"
 
 # update
 pacman -Syyu --noconfirm
@@ -42,7 +42,7 @@ zenity
 
 # add user on autologin group
 groupadd -r autologin
-gpasswd -a ${MY_USERNAME} autologin
+gpasswd -a "$(MY_USERNAME)" autologin
 
 # eggs-dev
 pacman -Syyu --noconfirm \
