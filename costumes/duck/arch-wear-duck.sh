@@ -53,6 +53,7 @@ systemctl enable lightdm
 
 // accessories: office
 source ../../accessories/office/arch-wear-office.sh
+source ../../accessories/multimedia/arch-wear-multimedia.sh
 source ../../accessories/grafica/arch-wear-grafica.sh
 
 # copy configuration from dirs to / and MY_USERHOME

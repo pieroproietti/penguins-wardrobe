@@ -9,12 +9,13 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 pacman -Syu --noconfirm \
-    converseen \
-    gimp \
-    imagemagick \
-    okular \
-    pinta \
-    ristretto \
-    shotwell 
+    audacity \
+    brasero \
+    kdenlive \
+    mediainfo \
+    quodlibet \
+    vlc \
+    xfburn
 
-# lacks: dia, kde-config-tablet
+# lacks: exfalso, kazam
+
