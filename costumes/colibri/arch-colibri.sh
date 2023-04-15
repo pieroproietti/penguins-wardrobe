@@ -1,17 +1,17 @@
 #!/bin/bash
 # eggs wardrobe wear colibri 4 arch
 clear
-
+echo "eggs wardrobe"
+echo ""
 if [[ $EUID -ne 0 ]]; then
-   echo "eggs wardrobe wear need to run with root privileges. Please, prefix it with sudo" 
+   echo "$0 need to run with root privileges.\nPlease, prefix it with sudo" 
    exit 1
 fi
 
 COSTUME="colibri"
 MY_USERNAME=$(logname)
 MY_USERHOME="/home/${MY_USERNAME}"
-echo "wardrobe: /home/artisan/.wardrobe/"
-echo "Prepare your costume: colibri?"
+echo "wardrobe: Prepare your costume: ${COSTUME)?"
 read -p "Press enter to continue or [CTRL-C] to abort"
 
 # update
