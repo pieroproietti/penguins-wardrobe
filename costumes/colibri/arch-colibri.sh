@@ -42,7 +42,7 @@ zenity
 
 # add user on autologin group
 groupadd -r autologin
-gpasswd -a "$(MY_USERNAME)" autologin
+gpasswd -a "${MY_USERNAME}" autologin
 
 # eggs-dev
 pacman -Syyu --noconfirm \
