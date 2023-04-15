@@ -5,6 +5,7 @@ echo "eggs wardrobe"
 echo ""
 if [[ $EUID -ne 0 ]]; then
    echo "$0 need to run with root privileges."
+   echo "\n\n"
    echo "Please, prefix it with sudo" 
    exit 1
 fi
