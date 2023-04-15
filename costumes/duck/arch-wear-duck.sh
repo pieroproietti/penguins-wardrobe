@@ -22,6 +22,7 @@ read -r
 pacman -Syu --noconfirm \
 cinnamon \
 firefox \
+gnome-terminal \
 lightdm \
 lightdm-gtk-greeter \
 network-manager-applet \

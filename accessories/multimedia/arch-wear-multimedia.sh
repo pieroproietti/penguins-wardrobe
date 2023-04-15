@@ -1,6 +1,6 @@
 #!/bin/bash
 clear
-echo "arch-wear-grafica"
+echo "arch-wear-multimedia"
 echo ""
 
 if [[ $EUID -ne 0 ]]; then
