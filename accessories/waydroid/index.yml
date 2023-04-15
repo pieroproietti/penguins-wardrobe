@@ -23,17 +23,18 @@ sequence:
         /etc/apt/sources.list.d/waydroid-ppa.list > /dev/null
     update: true
     upgrade: true
-  dependencies:
+  try_packages:
+    - coredhcp-client # Debian 
+    - isc-dhcp-client # Ubuntu until kinetic
+  packages:
+    # ex-dependencies:
     - ca-certificates
     - git
     - iptables
     - lxc
     - python3
     - wget
-  try_packages:
-    - coredhcp-client # Debian 
-    - isc-dhcp-client # Ubuntu until kinetic
-  packages:
+    # 
     - gir1.2-gtk-3.0 
     - gir1.2-gtk-4.0 
     - gir1.2-vte-2.91
