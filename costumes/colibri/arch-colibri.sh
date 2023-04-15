@@ -3,17 +3,17 @@
 clear
 echo "eggs wardrobe"
 echo ""
-if [[ $EUID -ne 0 ]]; then
-   echo "$0 need to run with root privileges."
-   echo "\n\n"
-   echo "Please, prefix it with sudo" 
-   exit 1
-fi
 
 COSTUME="colibri"
 MY_USERNAME=$(logname)
 MY_USERHOME="/home/${MY_USERNAME}"
 echo "wardrobe: Prepare your costume: ${COSTUME)?"
+if [[ $EUID -ne 0 ]]; then
+   echo "$0 need to run with root privileges."
+   echo ""
+   echo "Please, prefix it with sudo" 
+   exit 1
+fi
 read -p "Press enter to continue or [CTRL-C] to abort"
 
 # update
