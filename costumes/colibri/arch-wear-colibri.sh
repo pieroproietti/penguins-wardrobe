@@ -4,7 +4,7 @@ echo "arch-wear-colibri"
 echo ""
 
 if [[ $EUID -ne 0 ]]; then
-   printf "%s need to run with root privileges. \nPlease, prefix it with sudo", "$0"
+   printf "%s need to run with root privileges. \nPlease, prefix it with sudo\n", "$0"
    exit 1
 fi
 
@@ -14,7 +14,7 @@ MY_USERHOME="/home/${MY_USERNAME}"
 # update
 
 # wait to start
-printf "wardrobe: Prepare your costume: %s?", "${COSTUME}"
+printf "wardrobe: Prepare your costume: %s?", "${COSTUME}\n"
 printf "Press enter to continue or CTRL-C to abort\n"
 read -r
 
