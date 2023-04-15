@@ -15,7 +15,7 @@ MY_USERHOME="/home/${MY_USERNAME}"
 
 # wait to start
 printf "wardrobe: Prepare your costume: %s?\n", "${COSTUME}"
-printf "Press enter to continue or CTRL-C to abort\n"
+echo "Press enter to continue or CTRL-C to abort"
 read -r
 
 # install costume
