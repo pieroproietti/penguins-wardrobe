@@ -1,7 +1,6 @@
 #!/bin/bash
-#
-# temporary script to get colibri in manjaro
-# 
+
+# wear colibri 4 arch
 
 clear
 COSTUME="colibri"
@@ -11,10 +10,10 @@ echo "MY_USERNAME: ${MY_USERNAME}"
 MY_USERHOME="/home/${MY_USERNAME}"
 echo "MY_USERHOME: ${MY_USERHOME}"
 
-pacman -Syyu
+pacman -Syyu --noconfirm
 
 #
-pacman -Syy \
+pacman -Syy --noconfirm \
 firefox \
 lightdm \
 lightdm-gtk-greeter \
@@ -28,17 +27,19 @@ xdg-user-dirs \
 xfce4 \
 xfce4-goodies \
 xorg-apps \
-xorg-server 
+xorg-server \
+zenity
 
-# pongo utente nel gruppo autologin
+# add user on autologin group
 groupadd -r autologin
 gpasswd -a ${MY_USERNAME} autologin
 
 # eggs-dev
-pacman -Syyu \
+pacman -Syyu --noconfirm \
 nodejs \
 npm \
-vscode 
+vscode
+
 
 # install pnpm with npm
 npm install pnpm -g
@@ -52,10 +53,9 @@ systemctl enable lightdm
 cp ./dirs/* / -R
 
 # copy configuration from dirs to MY_USERHOME
-# `rsync -avx  ${this.costume}/dirs/etc/skel/.config /home/${user}/`
 rsync -avx ./dirs/etc/skel/.config "${MY_USERHOME}"/
 
-# config ligghtdn $COSTUME $MY_USERHOME
+# config lightdm $COSTUME $MY_USERHOME
 ../../scripts/config_lightdm.sh "${COSTUME}" "${MY_USERHOME}"
 
 # config desktop links $MY_USERHOME
@@ -68,7 +68,7 @@ echo ${COSTUME} > /etc/hostname
 
 cat << 'EOF' > /etc/hosts
 127.0.0.1 localhost localhost.localdomain
-127.0.1.1 colibri colibri.localhost 
+127.0.1.1 ${COSTUME} ${COSTUME}.localhost 
 # The following lines are desirable for IPv6 capable hosts
 :: 1     ip6 - localhost ip6 - loopback
 fe00:: 0 ip6 - localnet
