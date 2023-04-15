@@ -41,7 +41,7 @@ groupadd -r autologin
 gpasswd -a "${MY_USERNAME}" autologin
 
 # accessories
-source ../../accessories/grafica/arch-wear-eggs-dev.sh
+source ../../accessories/eggs-dev/arch-wear-eggs-dev.sh
 
 # enabling services
 systemctl enable NetworkManager
@@ -52,11 +52,11 @@ cp ./dirs/* / -R
 rsync -avx ./dirs/etc/skel/.config "${MY_USERHOME}"/ 
 chown "${MY_USERNAME}:${MY_USERNAME}" "${MY_USERHOME}" -R
 
-# config lightdm $COSTUME $MY_USERHOME
-../../scripts/config_lightdm.sh "${COSTUME}" "${MY_USERHOME}"
+# config lightdm $COSTUME
+../../scripts/config_lightdm.sh "${COSTUME}"
 
-# config desktop links $MY_USERHOME
-../../scripts/config_desktop_link.sh "${MY_USERHOME}"
+# config desktop links
+../../scripts/config_desktop_link.sh
 
 # /etc/hostname
 echo ${COSTUME} > /etc/hostname
