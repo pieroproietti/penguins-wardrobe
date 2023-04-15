@@ -1,7 +1,7 @@
 #!/bin/bash
-# eggs wardrobe wear colibri 4 arch
+# arch-wear-colibri
 clear
-echo "eggs wardrobe"
+echo "arch-wear-colibri"
 echo ""
 
 if [[ $EUID -ne 0 ]]; then
@@ -19,11 +19,8 @@ MY_USERHOME="/home/${MY_USERNAME}"
 echo "wardrobe: Prepare your costume: ${COSTUME}?"
 read -r "Press enter to continue or CTRL-C to abort"
 
-# update
-pacman -Syyu --noconfirm
-
 # install costume
-pacman -Syy --noconfirm \
+pacman -Syu --noconfirm \
 firefox \
 lightdm \
 lightdm-gtk-greeter \
