@@ -17,7 +17,7 @@ MY_USERHOME="/home/${MY_USERNAME}"
 # update
 
 echo "wardrobe: Prepare your costume: $(COSTUME)?"
-read -pr "Press enter to continue or CTRL-C to abort"
+read -p "Press enter to continue or CTRL-C to abort"
 
 # update
 pacman -Syyu --noconfirm
