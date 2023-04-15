@@ -51,6 +51,10 @@ npm install pnpm -g
 systemctl enable NetworkManager
 systemctl enable lightdm
 
+// accessories: office
+source ../../accessories/office/arch-wear-office.sh
+source ../../accessories/grafica/arch-wear-grafica.sh
+
 # copy configuration from dirs to / and MY_USERHOME
 cp ./dirs/* / -R
 rsync -avx ./dirs/etc/skel/.config "${MY_USERHOME}"/ 
@@ -79,4 +83,4 @@ ff02:: 3 ip6 - allhosts
 EOF
 
 #reboot
-reboot
+# reboot
