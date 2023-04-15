@@ -40,13 +40,8 @@ zenity
 groupadd -r autologin
 gpasswd -a "${MY_USERNAME}" autologin
 
-# eggs-dev
-pacman -Syyu --noconfirm \
-nodejs \
-npm \
-vscode
-# install pnpm with npm
-npm install pnpm -g
+# accessories
+source ../../accessories/grafica/arch-wear-eggs-dev.sh
 
 # enabling services
 systemctl enable NetworkManager

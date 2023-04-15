@@ -40,22 +40,15 @@ zenity
 groupadd -r autologin
 gpasswd -a "${MY_USERNAME}" autologin
 
-# eggs-dev
-pacman -Syyu --noconfirm \
-nodejs \
-npm \
-vscode
-# install pnpm with npm
-npm install pnpm -g
-
 # enabling services
 systemctl enable NetworkManager
 systemctl enable lightdm
 
-// accessories: office
-source ../../accessories/office/arch-wear-office.sh
-source ../../accessories/multimedia/arch-wear-multimedia.sh
+# accessories: 
+source ../../accessories/grafica/arch-wear-eggs-dev.sh
 source ../../accessories/grafica/arch-wear-grafica.sh
+source ../../accessories/multimedia/arch-wear-multimedia.sh
+source ../../accessories/office/arch-wear-office.sh
 
 # copy configuration from dirs to / and MY_USERHOME
 cp ./dirs/* / -R
