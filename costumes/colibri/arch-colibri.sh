@@ -12,28 +12,38 @@ MY_USERHOME="/home/${MY_USERNAME}"
 echo "MY_USERHOME: ${MY_USERHOME}"
 
 pacman -Syyu
-pacman -Syy xorg-server \
-            xorg-apps \
-            lightdm \
-            lightdm-gtk-greeter \
-            xfce4 xfce4-goodies \
-            spice-vdagent \
-            shellcheck \
-            xdg-user-dirs \
-            xarchiver \
-            unzip \
-            firefox \
-            network-manager-applet \
-            polkit-gnome
+
+#
+pacman -Syy \
+firefox \
+lightdm \
+lightdm-gtk-greeter \
+network-manager-applet \
+polkit-gnome \
+shellcheck \
+spice-vdagent \
+unzip \
+xarchiver \
+xdg-user-dirs \
+xfce4 \
+xfce4-goodies \
+xorg-apps \
+xorg-server 
 
 # pongo utente nel gruppo autologin
 groupadd -r autologin
 gpasswd -a ${MY_USERNAME} autologin
 
 # eggs-dev
-pacman -Syyu vscode nodejs npm 
+pacman -Syyu \
+nodejs \
+npm \
+vscode 
+
+# install pnpm with npm
 npm install pnpm -g
 
+# enabling services
 systemctl enable NetworkManager
 systemctl enable lightdm
 
@@ -67,4 +77,3 @@ ff02:: 1 ip6 - allnodes
 ff02:: 2 ip6 - allrouters
 ff02:: 3 ip6 - allhosts
 EOF
-

@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# temporary script to get colibri in manjaro
+# script to get colibri on manjaro
 # 
 
 clear
@@ -16,10 +16,11 @@ libxfce4ui-gtk3 \
 lightdm \
 lightdm-gtk-greeter \
 qt5ct \
-spice-vdagent \
 shellcheck \
+spice-vdagent \
 thunar \
 xarchiver \
+xdg-user-dirs \
 xfce4-appfinder \
 xfce4-notifyd \
 xfce4-panel \
@@ -31,15 +32,22 @@ xfce4-whiskermenu-plugin \
 xfconf \
 xfdesktop-gtk3 \
 xfwm4 \
-xdg-user-dirs \
 xorg-server 
 
-pacman -Syu  spice-vdagent network-manager-applet
+# 
+pacman -Syu \
+network-manager-applet \
+spice-vdagent 
 
 # eggs-dev
-pacman -Syu vscode nodejs npm 
+pacman -Syu \
+nodejs \
+npm \
+vscode 
+#
 npm install pnpm -g
 
+# enable services 
 systemctl enable NetworkManager
 systemctl enable lightdm
 
@@ -48,7 +56,6 @@ systemctl enable lightdm
 cp ./dirs/* / -R
 
 # copy configuration from dirs to MY_USERHOME
-# `rsync -avx  ${this.costume}/dirs/etc/skel/.config /home/${user}/`
 rsync -avx ./dirs/etc/skel/.config "${MY_USERHOME}"/
 
 # config ligghtdn $COSTUME $MY_USERHOME
@@ -57,5 +64,5 @@ rsync -avx ./dirs/etc/skel/.config "${MY_USERHOME}"/
 # config desktop links $MY_USERHOME
 ../../scripts/config_desktop_link.sh "${MY_USERHOME}"
 
-# Reimpostazione diritti
+# reimpostazione diritti
 chown "${MY_USERNAME}:${MY_USERNAME}" "${MY_USERHOME}" -R
