@@ -1,13 +1,10 @@
 #!/bin/bash
-# arch-wear-colibri
 clear
 echo "arch-wear-colibri"
 echo ""
 
 if [[ $EUID -ne 0 ]]; then
-   echo "$0 need to run with root privileges."
-   echo ""
-   echo "Please, prefix it with sudo" 
+   printf "%s need to run with root privileges. \nPlease, prefix it with sudo", "$0"
    exit 1
 fi
 
@@ -16,8 +13,10 @@ MY_USERNAME=$(logname)
 MY_USERHOME="/home/${MY_USERNAME}"
 # update
 
-echo "wardrobe: Prepare your costume: ${COSTUME}?"
-read -r "Press enter to continue or CTRL-C to abort"
+# wait to start
+printf "wardrobe: Prepare your costume: %s?", "${COSTUME}"
+printf "Press enter to continue or CTRL-C to abort\n"
+read -r
 
 # install costume
 pacman -Syu --noconfirm \
