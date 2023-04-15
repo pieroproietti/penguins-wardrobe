@@ -14,7 +14,7 @@ MY_USERHOME="/home/${MY_USERNAME}"
 # update
 
 # wait to start
-printf "wardrobe: Prepare your costume: %s?", "${COSTUME}\n"
+printf "wardrobe: Prepare your costume: %s?\n", "${COSTUME}"
 printf "Press enter to continue or CTRL-C to abort\n"
 read -r
 
