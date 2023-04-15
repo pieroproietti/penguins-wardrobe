@@ -85,4 +85,5 @@ ff02:: 3 ip6 - allhosts
 EOF
 
 #reboot
-# reboot
+reboot
+
