@@ -41,10 +41,10 @@ sequence:
     - xorg
     - zenity
   accessories:
-    - ./firmwares
     - base
     - eggs-dev
-    # waydroid
+    - firmwares-light
+    - waydroid
 customize:
   dirs: true
   scripts:

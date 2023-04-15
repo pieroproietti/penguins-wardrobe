@@ -64,7 +64,7 @@ sequence:
   accessories:
     - base
     - eggs-dev
-    - ./firmwares
+    - firmwares-light
     # flatpak
     # python3-dev
   try_accessories:

@@ -28,10 +28,10 @@ sequence:
     - sddm-theme-breeze
     - systemsettings
   accessories:
-    - ./firmwares
     - ./python3-dev
     - base
     - eggs-dev
+    - firmwares-light
     - waydroid
 customize:
   dirs: true

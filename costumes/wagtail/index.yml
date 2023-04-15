@@ -25,9 +25,9 @@ sequence:
     - nautilus
     - zenity
   accessories:
-    - ./firmwares
     - base
     - eggs-dev
+    - firmwares-light
     - waydroid
 customize:
   dirs: true
