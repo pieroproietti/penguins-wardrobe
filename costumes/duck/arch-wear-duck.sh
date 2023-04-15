@@ -45,7 +45,7 @@ systemctl enable NetworkManager
 systemctl enable lightdm
 
 # accessories: 
-source ../../accessories/grafica/arch-wear-eggs-dev.sh
+source ../../accessories/eggs-dev/arch-wear-eggs-dev.sh
 source ../../accessories/grafica/arch-wear-grafica.sh
 source ../../accessories/multimedia/arch-wear-multimedia.sh
 source ../../accessories/office/arch-wear-office.sh
