@@ -8,13 +8,8 @@ description: >-
 author: artisan
 release: 0.0.3
 distributions:
-  - beowulf
-  - bookworm
   - bullseye
-  - buster
   - chimaera
-  - daedalus-ceres
-  - jammy
 sequence:
   repositories:
     sources_list:
@@ -50,18 +45,20 @@ sequence:
     # controllo remoto studenti
     - epoptes
 
-    # office
-    - libreoffice
-    - firefox-esr
-
     # italiano
     - libreoffice-l10n-it
     - firefox-esr-l10n-it
 
   accessories:
-    - chicks
+    - educational
+    - office
 
 customize:
+  dirs: true
   scripts:
   - adduser ${SUDO_USER} epoptes
+  - ../../scripts/config_desktop_link.sh
+  - ../../scripts/config_lightdm.sh
+  hostname: true
+
 reboot: true
