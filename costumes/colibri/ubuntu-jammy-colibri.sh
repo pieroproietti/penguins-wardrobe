@@ -44,6 +44,7 @@ sudo apt install --force-yes \
     xfconf \
     xfdesktop4 \
     xfwm4 \
+    zenity
 
 # add user on autologin group
 #groupadd -r autologin
