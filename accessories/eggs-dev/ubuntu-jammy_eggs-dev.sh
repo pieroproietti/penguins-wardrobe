@@ -10,9 +10,12 @@ fi
 
 # install 
 sudo apt install --force-yes \
-    code \
     nodejs \
     npm
+
+# snap install
+sudo snap install \
+    code 
 
 # install pnpm with npm
 npm install pnpm -g

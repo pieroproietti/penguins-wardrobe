@@ -1,6 +1,6 @@
 #!/bin/bash
 clear
-echo "ubuntu-jammy-colibri"
+echo "ubuntu-jammy_colibri"
 echo ""
 
 if [[ $EUID -ne 0 ]]; then
@@ -23,7 +23,6 @@ sudo apt update
 # install costume
 sudo apt install --force-yes \
     adwaita-qt \
-    firefox \
     libxfce4ui-utils  \
     lightdm  \
     lightdm-gtk-greeter  \
@@ -45,6 +44,10 @@ sudo apt install --force-yes \
     xfdesktop4 \
     xfwm4 \
     zenity
+
+sudo snap install \
+    firefox
+
 
 # add user on autologin group
 #groupadd -r autologin
