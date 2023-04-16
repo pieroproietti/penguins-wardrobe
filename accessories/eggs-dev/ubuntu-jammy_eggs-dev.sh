@@ -15,7 +15,7 @@ sudo apt install --force-yes \
 
 # snap install
 sudo snap install \
-    code 
+    code --classic
 
 # install pnpm with npm
 npm install pnpm -g
