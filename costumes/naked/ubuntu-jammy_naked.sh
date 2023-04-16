@@ -23,6 +23,7 @@ sudo apt update
 # install costume
 sudo apt install --force-yes \
     locales \
+    man \
     nano 
 
 # reboot
