@@ -9,7 +9,7 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 # install 
-sudo apt install --force-yes \
+sudo apt install --allow \
     code \
     nodejs \
     npm
