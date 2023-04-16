@@ -27,7 +27,6 @@ sudo apt install --force-yes \
     libxfce4ui-utils  \
     lightdm  \
     lightdm-gtk-greeter  \
-    nano \
     network-manager-gnome \
     spice-vdagent  \
     tango-icon-theme  \
