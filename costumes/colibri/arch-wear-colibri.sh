@@ -23,6 +23,7 @@ pacman -Syu --noconfirm \
 firefox \
 lightdm \
 lightdm-gtk-greeter \
+man \
 network-manager-applet \
 polkit-gnome \
 shellcheck \
@@ -54,8 +55,6 @@ chown "${MY_USERNAME}:${MY_USERNAME}" "${MY_USERHOME}" -R
 
 # config lightdm $COSTUME
 ../../scripts/config_lightdm.sh "${COSTUME}"
-
-# config desktop links
 ../../scripts/config_desktop_link.sh
 
 # /etc/hostname
