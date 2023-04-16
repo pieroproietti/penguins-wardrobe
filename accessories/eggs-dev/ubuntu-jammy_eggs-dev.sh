@@ -1,6 +1,6 @@
 #!/bin/bash
 clear
-echo "arch_eggs-dev"
+echo "ubuntu-jammy_eggs-dev"
 echo ""
 
 if [[ $EUID -ne 0 ]]; then
@@ -9,7 +9,7 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 # install 
-sudo apt install --allow \
+sudo apt install --force-yes \
     code \
     nodejs \
     npm
