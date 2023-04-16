@@ -9,14 +9,10 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 # sources_list_d
-curl -fsSL https://deb.nodesource.com/gpgkey/nodesource.gpg.key | gpg --dearmor -o /usr/share/keyrings/nodesource.gpg > /dev/null
-echo "deb [signed-by=/usr/share/keyrings/nodesource.gpg] https://deb.nodesource.com/node_16.x bullseye main" | tee /etc/apt/sources.list.d/nodesource.list > /dev/null
-
-# update
-sudo apt update 
+curl -fsSL https://deb.nodesource.com/setup_16.x | bash - 
 
 # install 
-sudo apt install --force-yes \
+sudo apt-get install -y \
     nodejs \
     npm
 
