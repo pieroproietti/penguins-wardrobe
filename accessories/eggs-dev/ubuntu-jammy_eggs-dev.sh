@@ -9,7 +9,7 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 # sources_list_d
-curl -fsSL https://deb.nodesource.com/setup_16.x | bash - 
+curl -fsSL https://deb.nodesource.com/setup_19.x | bash - 
 
 # install 
 sudo apt-get install -y \
