@@ -12,7 +12,7 @@ fi
 curl -fsSL https://deb.nodesource.com/setup_19.x | bash - 
 
 # install 
-sudo apt-get install -y \
+apt-get install -y \
     nodejs \
     npm
 
