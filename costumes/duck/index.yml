@@ -9,7 +9,7 @@ distributions:
   - bullseye
   - chimaera
   - jammy
-  sequence:
+sequence:
   repositories:
     sources_list:
       - main
