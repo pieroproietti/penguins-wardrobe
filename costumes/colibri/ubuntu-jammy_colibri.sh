@@ -23,11 +23,12 @@ sudo apt update
 # install costume
 sudo apt install --force-yes \
     adwaita-qt \
+    firefox \
     libxfce4ui-utils  \
     lightdm  \
     lightdm-gtk-greeter  \
-    network-manager-gnome \
     nano \
+    network-manager-gnome \
     spice-vdagent  \
     tango-icon-theme  \
     thunar  \
@@ -44,10 +45,6 @@ sudo apt install --force-yes \
     xfdesktop4 \
     xfwm4 \
     zenity
-
-sudo snap install \
-    firefox
-
 
 # add user on autologin group
 #groupadd -r autologin
