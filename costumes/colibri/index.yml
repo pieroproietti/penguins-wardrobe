@@ -8,14 +8,9 @@ description: >-
 author: artisan
 release: 0.9.1
 distributions:
-  - bookworm
   - bullseye
-  - buster
   - chimaera
-  - bionic
-  - focal
   - jammy
-  - kinetic
 sequence:
   repositories:
     sources_list:
