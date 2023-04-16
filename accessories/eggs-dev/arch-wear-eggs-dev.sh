@@ -17,4 +17,6 @@ pacman -Syu --noconfirm \
 # install pnpm with npm
 npm install pnpm -g
 
+../../scripts/add_g4.sh
+
 # lacks:
