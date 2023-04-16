@@ -11,7 +11,6 @@ fi
 COSTUME="colibri"
 MY_USERNAME=$(logname)
 MY_USERHOME="/home/${MY_USERNAME}"
-# update
 
 # wait to start
 printf "wardrobe: Prepare your costume: %s?\n", "${COSTUME}"

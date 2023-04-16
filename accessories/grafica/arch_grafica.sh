@@ -1,6 +1,6 @@
 #!/bin/bash
 clear
-echo "arch-wear-office"
+echo "arch_grafica"
 echo ""
 
 if [[ $EUID -ne 0 ]]; then
@@ -9,6 +9,12 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 pacman -Syu --noconfirm \
-gimp \
-libreoffice \
-vlc
+    converseen \
+    gimp \
+    imagemagick \
+    okular \
+    pinta \
+    ristretto \
+    shotwell 
+
+# lacks: dia, kde-config-tablet

@@ -1,6 +1,6 @@
 #!/bin/bash
 clear
-echo "arch-wear-duck"
+echo "arch_duck"
 echo ""
 
 if [[ $EUID -ne 0 ]]; then
@@ -58,10 +58,10 @@ systemctl enable NetworkManager
 systemctl enable lightdm
 
 # accessories: 
-source ../../accessories/eggs-dev/arch-wear-eggs-dev.sh
-source ../../accessories/grafica/arch-wear-grafica.sh
-source ../../accessories/multimedia/arch-wear-multimedia.sh
-source ../../accessories/office/arch-wear-office.sh
+source ../../accessories/eggs-dev/arch_eggs-dev.sh
+source ../../accessories/grafica/arch_grafica.sh
+source ../../accessories/multimedia/arch_multimedia.sh
+source ../../accessories/office/arch_office.sh
 
 # copy configuration from dirs to / and MY_USERHOME
 cp ./dirs/* / -R

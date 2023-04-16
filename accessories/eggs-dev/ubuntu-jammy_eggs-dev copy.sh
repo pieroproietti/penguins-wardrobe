@@ -1,6 +1,6 @@
 #!/bin/bash
 clear
-echo "arch-wear-eggs-dev"
+echo "arch_eggs-dev"
 echo ""
 
 if [[ $EUID -ne 0 ]]; then
@@ -8,11 +8,11 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 
-pacman -Syu --noconfirm \
+# install 
+sudo apt install --force-yes \
+    code \
     nodejs \
-    npm \
-    pacman-contrib \
-    vscode 
+    npm
 
 # install pnpm with npm
 npm install pnpm -g

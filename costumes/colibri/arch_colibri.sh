@@ -1,6 +1,6 @@
 #!/bin/bash
 clear
-echo "arch-wear-colibri"
+echo "arch_colibri"
 echo ""
 
 if [[ $EUID -ne 0 ]]; then
@@ -42,7 +42,7 @@ groupadd -r autologin
 gpasswd -a "${MY_USERNAME}" autologin
 
 # accessories
-source ../../accessories/eggs-dev/arch-wear-eggs-dev.sh
+source ../../accessories/eggs-dev/arch_eggs-dev.sh
 
 # enabling services
 systemctl enable NetworkManager

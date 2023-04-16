@@ -1,6 +1,6 @@
 #!/bin/bash
 clear
-echo "arch-wear-firmwares-light"
+echo "arch_firmwares-light"
 echo ""
 
 if [[ $EUID -ne 0 ]]; then
