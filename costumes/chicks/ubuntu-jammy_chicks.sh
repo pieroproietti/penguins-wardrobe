@@ -1,6 +1,6 @@
 #!/bin/bash
 clear
-echo "ubuntu-jammy_colibri"
+echo "ubuntu-jammy_chicks"
 echo ""
 
 if [[ $EUID -ne 0 ]]; then
@@ -8,7 +8,7 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 
-COSTUME="colibri"
+COSTUME="chicks"
 MY_USERNAME=$(logname)
 MY_USERHOME="/home/${MY_USERNAME}"
 
