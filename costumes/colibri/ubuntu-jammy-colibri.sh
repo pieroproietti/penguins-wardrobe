@@ -18,6 +18,9 @@ printf "wardrobe: Prepare your costume: %s?\n", "${COSTUME}"
 echo "Press enter to continue or CTRL-C to abort"
 read -r
 
+# unpdate
+sudo apt update
+
 # install costume
 sudo apt install --force-yes \
     adwaita-qt \
@@ -26,10 +29,7 @@ sudo apt install --force-yes \
     lightdm  \
     lightdm-gtk-greeter  \
     network-manager-gnome \
-    network-manager-openvpn \
-    network-manager-openvpn-gnome \
     nano \
-    qt5ct \
     spice-vdagent  \
     tango-icon-theme  \
     thunar  \
@@ -52,7 +52,7 @@ sudo apt install --force-yes \
 #gpasswd -a "${MY_USERNAME}" autologin
 
 # accessories
-#source ../../accessories/eggs-dev/arch-wear-eggs-dev.sh
+source ../../accessories/eggs-dev/ubuntu-jammy-eggs-dev.sh
 
 # enabling services
 systemctl enable NetworkManager
@@ -83,5 +83,5 @@ ff02:: 2 ip6 - allrouters
 ff02:: 3 ip6 - allhosts
 EOF
 
+# reboot
 #reboot
-reboot
