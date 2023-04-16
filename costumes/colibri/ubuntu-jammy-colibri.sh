@@ -51,7 +51,7 @@ sudo apt install --force-yes \
 #gpasswd -a "${MY_USERNAME}" autologin
 
 # accessories
-source ../../accessories/eggs-dev/ubuntu-jammy-eggs-dev.sh
+source ../../accessories/eggs-dev/ubuntu-jammy_eggs-dev.sh
 
 # enabling services
 systemctl enable NetworkManager
