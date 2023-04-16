@@ -36,6 +36,19 @@ xorg-apps \
 xorg-server \
 zenity
 
+# others-stuff
+pacman -Syu --noconfirm \
+   gedit \
+   gnome-system-monitor \
+   pavucontrol \
+   pulseaudio \
+   pulseaudio-alsa \
+   thunderbird 
+
+# icons
+pacman -Syu --noconfirm \
+   mate-icon-theme-faenza
+
 # add user on autologin group
 groupadd -r autologin
 gpasswd -a "${MY_USERNAME}" autologin
