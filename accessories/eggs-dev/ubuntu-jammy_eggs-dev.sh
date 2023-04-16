@@ -13,8 +13,7 @@ curl -fsSL https://deb.nodesource.com/setup_19.x | bash -
 
 # install 
 apt-get install -y \
-    nodejs \
-    npm
+    nodejs
 
 # snap install
 sudo snap install \
