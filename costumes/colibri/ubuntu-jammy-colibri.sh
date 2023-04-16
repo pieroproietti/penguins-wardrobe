@@ -21,7 +21,7 @@ read -r
 sudo apt update
 
 # install costume
-sudo apt install --allow \
+sudo apt install --force-yes \
     adwaita-qt \
     firefox \
     libxfce4ui-utils  \
