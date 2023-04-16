@@ -56,6 +56,7 @@ chown "${MY_USERNAME}:${MY_USERNAME}" "${MY_USERHOME}" -R
 # config lightdm $COSTUME
 ../../scripts/config_lightdm.sh "${COSTUME}"
 ../../scripts/config_desktop_link.sh
+../../scripts/add_g4.sh
 
 # /etc/hostname
 echo ${COSTUME} > /etc/hostname

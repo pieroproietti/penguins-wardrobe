@@ -1,1 +1,1 @@
-cp g4* /usr/local/bin
+cp ../../scripts/g4* /usr/local/bin
