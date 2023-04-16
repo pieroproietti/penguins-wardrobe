@@ -28,7 +28,8 @@ sudo apt install --force-yes \
     network-manager-gnome \
     network-manager-openvpn \
     network-manager-openvpn-gnome \
-    qt5ct  \
+    nano \
+    qt5ct \
     spice-vdagent  \
     tango-icon-theme  \
     thunar  \
@@ -54,8 +55,8 @@ sudo apt install --force-yes \
 #source ../../accessories/eggs-dev/arch-wear-eggs-dev.sh
 
 # enabling services
-#systemctl enable NetworkManager
-#systemctl enable lightdm
+systemctl enable NetworkManager
+systemctl enable lightdm
 
 # copy configuration from dirs to / and MY_USERHOME
 cp ./dirs/* / -R
