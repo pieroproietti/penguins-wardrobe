@@ -1,6 +1,6 @@
 #!/bin/bash
 clear
-echo "arch_office"
+echo "ubuntu-jammy_office"
 echo ""
 
 if [[ $EUID -ne 0 ]]; then
@@ -8,7 +8,8 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 
-pacman -Syu --noconfirm \
+apt install -y \
    gimp \
    libreoffice \
    vlc
+

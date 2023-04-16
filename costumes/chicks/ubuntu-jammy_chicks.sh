@@ -45,12 +45,13 @@ sudo apt install -y \
     xfwm4 \
     zenity
 
-# add user on autologin group
-#groupadd -r autologin
-#gpasswd -a "${MY_USERNAME}" autologin
+# accessories:
+source ../../accessories/office/ubuntu-jammy_office.sh
 
-# accessories
-source ../../accessories/eggs-dev/ubuntu-jammy_eggs-dev.sh
+sudo apt install -y \
+    epoptes \
+    libreoffice-l10n-it \
+    firefox-l10n-it
 
 # enabling services
 systemctl enable NetworkManager
@@ -71,7 +72,7 @@ echo ${COSTUME} > /etc/hostname
 # /etc/hosts
 cat << 'EOF' > /etc/hosts
 127.0.0.1 localhost localhost.localdomain
-127.0.1.1 colibri colibri.localhost 
+127.0.1.1 chicks chicks.localhost 
 # The following lines are desirable for IPv6 capable hosts
 :: 1     ip6 - localhost ip6 - loopback
 fe00:: 0 ip6 - localnet
