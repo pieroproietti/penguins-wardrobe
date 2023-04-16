@@ -11,6 +11,7 @@ fi
 pacman -Syu --noconfirm \
     nodejs \
     npm \
+    pacman-contrib \
     vscode 
 
 # install pnpm with npm
