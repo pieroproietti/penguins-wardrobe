@@ -12,7 +12,7 @@ pacman -Syu --noconfirm \
     klavaro \
     solfege 
 
-# lacks: gcompris, tuxtype, wordplay, gelemental,  granule, littlewizard, stellarium 
+# lacks:
 
 # yay --noconfirm gelemental
 # yay --noconfirm gcompris 
