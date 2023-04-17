@@ -9,14 +9,15 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 pacman -Syu --noconfirm \
-    gcompris \
-    gelemental \
-    granule \
     klavaro \
-    littlewizard \
-    solfege \
-    stellarium \
-    tuxtype \
-    wordplay 
+    solfege 
 
-# lacks:
+# lacks: gcompris, tuxtype, wordplay, gelemental,  granule, littlewizard, stellarium 
+
+# yay --noconfirm gelemental
+# yay --noconfirm gcompris 
+# yay --noconfirm granule 
+# yay --noconfirm littlewizard 
+# yay --noconfirm stellarium 
+# yay --noconfirm tuxtype
+# yay --noconfirm wordplay
