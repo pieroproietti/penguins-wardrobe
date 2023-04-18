@@ -25,5 +25,8 @@ apt-get install -y \
     locales \
     nano 
 
+# /etc/hostname
+../../scripts/hostname.sh
+
 # reboot
 reboot
