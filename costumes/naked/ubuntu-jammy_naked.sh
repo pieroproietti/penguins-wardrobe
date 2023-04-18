@@ -18,10 +18,10 @@ echo "Press enter to continue or CTRL-C to abort"
 read -r
 
 # unpdate
-sudo apt update
+apt-get update
 
 # install costume
-sudo apt install --force-yes \
+apt install --force-yes \
     locales \
     man \
     nano 
