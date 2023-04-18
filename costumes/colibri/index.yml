@@ -9,6 +9,7 @@ author: artisan
 release: 0.9.1
 distributions:
   - bullseye
+  - bookworm
   - chimaera
 sequence:
   repositories:
