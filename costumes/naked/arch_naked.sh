@@ -22,5 +22,8 @@ read -r
 pacman -Syu --noconfirm \
    man 
    
+# /etc/hostname
+../../scripts/hostname.sh
+
 #reboot
 reboot

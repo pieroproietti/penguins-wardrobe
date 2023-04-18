@@ -16,4 +16,5 @@ ff02:: 2 ip6 - allrouters
 ff02:: 3 ip6 - allhosts
 EOF
 
-sed -i "'s/{{COSTUME}}/${COSTUME}'" /etc/hosts
+# replace COSTUME
+sed -i 's@COSTUME@'"${COSTUME}"'@g' /etc/hosts

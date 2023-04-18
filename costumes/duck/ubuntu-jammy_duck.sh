@@ -49,25 +49,14 @@ cp ./dirs/* / -R
 rsync -avx ./dirs/etc/skel/.config "${MY_USERHOME}"/ 
 chown "${MY_USERNAME}:${MY_USERNAME}" "${MY_USERHOME}" -R
 
+
+
+# /etc/hostname
+../../scripts/hostname.sh
+
 # config lightdm $COSTUME
 ../../scripts/config_lightdm.sh "${COSTUME}"
 ../../scripts/config_desktop_link.sh
-
-# /etc/hostname
-echo ${COSTUME} > /etc/hostname
-
-# /etc/hosts
-cat << 'EOF' > /etc/hosts
-127.0.0.1 localhost localhost.localdomain
-127.0.1.1 colibri colibri.localhost 
-# The following lines are desirable for IPv6 capable hosts
-:: 1     ip6 - localhost ip6 - loopback
-fe00:: 0 ip6 - localnet
-ff00:: 0 ip6 - mcastprefix
-ff02:: 1 ip6 - allnodes
-ff02:: 2 ip6 - allrouters
-ff02:: 3 ip6 - allhosts
-EOF
 
 # reboot
 reboot
