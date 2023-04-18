@@ -13,9 +13,7 @@ curl -fsSL https://deb.nodesource.com/setup_19.x | bash -
 
 # install 
 apt-get install -y \
-    gcompris \
     gelemental \
-    gnome-chemistry-utils \
     granule \
     klavaro \
     littlewizard \
@@ -24,4 +22,4 @@ apt-get install -y \
     tuxtype \
     wordplay
 
-# lacks:
+# lacks: gcompris gnome-chemistry-utils
