@@ -10,7 +10,6 @@ release: 0.9.1
 distributions:
   - bullseye
   - chimaera
-  - jammy
 sequence:
   repositories:
     sources_list:
@@ -30,16 +29,18 @@ sequence:
     upgrade: true
   packages:
     - adwaita-qt
+    - firefox
     - libxfce4ui-utils
     - lightdm
-    - lightdm-gtk-greeter # mandatory for ubuntu, without it will install gdm3
+    - lightdm-gtk-greeter
+    - network-manager-gnome
     - qt5ct
     - spice-vdagent
     - tango-icon-theme
     - thunar
     - xarchiver
     - xfce4-appfinder
-    - xfce4-notifyd # va installo altrimenti network-manager-gnome richiama gnome-shell
+    - xfce4-notifyd
     - xfce4-panel
     - xfce4-pulseaudio-plugin
     - xfce4-session
@@ -49,13 +50,6 @@ sequence:
     - xfconf
     - xfdesktop4
     - xfwm4
-  packages_no_install_recommends:
-    - network-manager-gnome
-    - network-manager-openvpn
-    - network-manager-openvpn-gnome
-  try_packages:
-    - firefox
-    - firefox-esr
   accessories:
     - base
     - eggs-dev
@@ -69,17 +63,7 @@ customize:
   scripts:
     - ../../scripts/config_desktop_link.sh
     - ../../scripts/config_lightdm.sh
-    #
-    # insert command g4artisan
-    #
-    - rm -f /usr/local/bin/g4*
-    - curl -fsSL "https://raw.githubusercontent.com/pieroproietti/penguins-eggs/master/g4/g4artisan" -o /usr/local/bin/g4artisan
-    - chmod +x /usr/local/bin/g4artisan
-    - curl -fsSL "https://raw.githubusercontent.com/pieroproietti/penguins-eggs/master/g4/g4clone" -o /usr/local/bin/g4clone
-    - chmod +x /usr/local/bin/g4clone
-    - curl -fsSL "https://raw.githubusercontent.com/pieroproietti/penguins-eggs/master/g4/g4passwd" -o /usr/local/bin/g4passwd
-    - chmod +x /usr/local/bin/g4passwd
-
+    - ../../scruots/add_g4.sk
   hostname: true
 reboot: true
 
