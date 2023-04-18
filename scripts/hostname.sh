@@ -1,12 +1,14 @@
 #!/bin/bash
 
+COSTUME=$1
+
 # /etc/hostname
 echo ${COSTUME} > /etc/hostname
 
 # /etc/hosts
 cat << 'EOF' > /etc/hosts
 127.0.0.1 localhost localhost.localdomain
-127.0.1.1 {{COSTUME}} {{COSTUME}}.localhost 
+127.0.1.1 COSTUME COSTUME.localhost 
 # The following lines are desirable for IPv6 capable hosts
 :: 1     ip6 - localhost ip6 - loopback
 fe00:: 0 ip6 - localnet
