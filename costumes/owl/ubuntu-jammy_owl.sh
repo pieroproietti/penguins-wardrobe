@@ -18,10 +18,10 @@ echo "Press enter to continue or CTRL-C to abort"
 read -r
 
 # unpdate
-sudo apt update
+apt-get update
 
 # install costume
-sudo apt install -y \
+apt-get install -y \
     adwaita-qt \
     firefox \
     libxfce4ui-utils  \
@@ -55,8 +55,8 @@ source ../../accessories/multimedia/ubuntu-jammy_multimedia.sh
 source ../../accessories/office/ubuntu-jammy_office.sh
 
 # enabling services
-systemctl enable NetworkManager
-systemctl enable lightdm
+#systemctl enable NetworkManager
+#systemctl enable lightdm
 
 # copy configuration from dirs to / and MY_USERHOME
 cp ./dirs/* / -R
@@ -73,7 +73,7 @@ echo ${COSTUME} > /etc/hostname
 # /etc/hosts
 cat << 'EOF' > /etc/hosts
 127.0.0.1 localhost localhost.localdomain
-127.0.1.1 colibri colibri.localhost 
+127.0.1.1 owl owl.localhost 
 # The following lines are desirable for IPv6 capable hosts
 :: 1     ip6 - localhost ip6 - loopback
 fe00:: 0 ip6 - localnet
@@ -82,6 +82,9 @@ ff02:: 1 ip6 - allnodes
 ff02:: 2 ip6 - allrouters
 ff02:: 3 ip6 - allhosts
 EOF
+
+# eggs 
+eggs dad -d
 
 # reboot
 reboot
