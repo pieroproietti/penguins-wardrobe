@@ -8,9 +8,6 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 
-# sources_list_d
-curl -fsSL https://deb.nodesource.com/setup_19.x | bash - 
-
 # install 
 apt-get install -y \
     gelemental \
