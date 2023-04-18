@@ -30,7 +30,7 @@ sequence:
     upgrade: true
   packages:
     - adwaita-qt
-    - firefox
+    - firefox-esr
     - libxfce4ui-utils
     - lightdm
     - lightdm-gtk-greeter
