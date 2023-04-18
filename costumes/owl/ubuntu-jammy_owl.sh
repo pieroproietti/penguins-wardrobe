@@ -83,8 +83,5 @@ ff02:: 2 ip6 - allrouters
 ff02:: 3 ip6 - allhosts
 EOF
 
-# eggs 
-eggs dad -d
-
 # reboot
 reboot

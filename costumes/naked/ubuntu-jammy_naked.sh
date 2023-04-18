@@ -21,9 +21,8 @@ read -r
 apt-get update
 
 # install costume
-apt install --force-yes \
+apt-get install -y \
     locales \
-    man \
     nano 
 
 # reboot
