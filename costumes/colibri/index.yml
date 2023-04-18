@@ -64,7 +64,7 @@ customize:
   scripts:
     - ../../scripts/config_desktop_link.sh
     - ../../scripts/config_lightdm.sh
-    - ../../scruots/add_g4.sk
-  hostname: true
+    - ../../scripts/add_g4.sk
+  # hostname: true
 reboot: true
 
