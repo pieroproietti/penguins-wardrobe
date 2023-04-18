@@ -46,16 +46,17 @@ apt-get install -y \
     zenity
 
 # accessories:
+source ../../accessories/educational/ubuntu-jammy_educational.sh
 source ../../accessories/office/ubuntu-jammy_office.sh
 
-sudo apt install -y \
+apt-get install -y \
     epoptes \
     libreoffice-l10n-it \
     firefox-l10n-it
 
 # enabling services
-systemctl enable NetworkManager
-systemctl enable lightdm
+#systemctl enable NetworkManager
+#systemctl enable lightdm
 
 # copy configuration from dirs to / and MY_USERHOME
 cp ./dirs/* / -R
