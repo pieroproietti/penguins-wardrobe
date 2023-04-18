@@ -23,7 +23,8 @@ pacman -Syu --noconfirm \
    man 
    
 # /etc/hostname
-../../scripts/hostname.sh
+../../scripts/hostname.sh "${COSTUME}"
+
 
 #reboot
 reboot

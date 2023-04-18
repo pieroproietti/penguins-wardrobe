@@ -52,7 +52,7 @@ chown "${MY_USERNAME}:${MY_USERNAME}" "${MY_USERHOME}" -R
 
 
 # /etc/hostname
-../../scripts/hostname.sh
+../../scripts/hostname.sh "${COSTUME}"
 
 # config lightdm $COSTUME
 ../../scripts/config_lightdm.sh "${COSTUME}"

@@ -61,10 +61,12 @@ cp ./dirs/* / -R
 rsync -avx ./dirs/etc/skel/.config "${MY_USERHOME}"/ 
 chown "${MY_USERNAME}:${MY_USERNAME}" "${MY_USERHOME}" -R
 
+# /etc/hostname
+../../scripts/hostname.sh "${COSTUME}"
+
 # config lightdm $COSTUME
 ../../scripts/config_lightdm.sh "${COSTUME}"
 ../../scripts/config_desktop_link.sh
-../../scripts/hostname.sh
 
 # reboot
 reboot

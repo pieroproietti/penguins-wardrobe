@@ -26,7 +26,7 @@ apt-get install -y \
     nano 
 
 # /etc/hostname
-../../scripts/hostname.sh
+../../scripts/hostname.sh "${COSTUME}"
 
 # reboot
 reboot
