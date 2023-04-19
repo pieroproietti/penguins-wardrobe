@@ -1,0 +1,64 @@
+# wardrobe: .
+# costume: chicks
+---
+name: chicks
+description: >-
+  desktop xfce4 per la scuola
+author: artisan
+release: 0.0.3
+distributions:
+  - focal
+  - jammy
+sequence:
+  repositories:
+    sources_list:
+      - main 
+      - universe
+      - restricted
+      - multiverse
+    update: true
+    upgrade: true
+  packages:
+    - adwaita-qt
+    - firefox 
+    - libxfce4ui-utils 
+    - lightdm 
+    - lightdm-gtk-greeter
+    - network-manager-gnome
+    - spice-vdagent
+    - tango-icon-theme 
+    - thunar
+    - xarchiver
+    - xfce4-appfinder
+    - xfce4-notifyd
+    - xfce4-panel
+    - xfce4-pulseaudio-plugin
+    - xfce4-session
+    - xfce4-settings
+    - xfce4-terminal
+    - xfce4-whiskermenu-plugin
+    - xfconf
+    - xfdesktop4
+    - xfwm4
+    - zenity
+
+    # controllo remoto studenti
+    - epoptes
+
+    # italiano
+    - libreoffice-l10n-it
+    - firefox-esr-l10n-it
+
+  accessories:
+    - educational
+    - office
+
+customize:
+  dirs: true
+  scripts:
+  - adduser ${SUDO_USER} epoptes
+  - ../../scripts/config_desktop_link.sh
+  - ../../scripts/config_lightdm.sh
+  - ../../scripts/hostname.sh
+
+reboot: true
