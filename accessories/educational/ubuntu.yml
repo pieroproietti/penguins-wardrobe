@@ -1,0 +1,24 @@
+# wardrobe: .
+# accessory: educational
+---
+name: educational
+description: >-
+  educational
+author: artisan
+release: 0.0.1
+distributions:
+  - focal
+  - jammy
+sequence:
+  packages:
+    # jush a bit educational gtk stuffs
+    - drgeo
+    - gelemental
+    - gnome-chemistry-utils
+    - granule # Leitner system flashcard utiltiy (text only)
+    - klavaro # touch typing
+    - littlewizard # development environment for children
+    - solfege #  ear training
+    - stellarium
+    - tuxtype # TypingTutor - touch typing plugin for gedit
+    - wordplay #  anagrams
