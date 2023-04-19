@@ -16,7 +16,7 @@ pacman -Syu --noconfirm \
     firmware-libertas \
     firmware-linux-free \
     firmware-realtek \
-    firmware-zd1211 \
+    firmware-zd1211 
 
 pacman -Syu --noconfirm \
     firmware-amd-graphics \
