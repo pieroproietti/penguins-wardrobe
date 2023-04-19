@@ -1,1 +1,1 @@
-cp ~/.wardrobe/scripts/g4/* /usr/local/bin
+cp /home/${SUDO_USER}/.wardrobe/scripts/g4/* /usr/local/bin
