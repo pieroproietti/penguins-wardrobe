@@ -11,9 +11,10 @@ distributions:
 sequence:
   repositories:
     sources_list:
-      - main
-      - contrib
-      - non-free
+    - main 
+    - universe
+    - restricted
+    - multiverse
     sources_list_d:
       - rm -f /etc/apt/sources.list.d/quirinux.list
       - wget -O - https://repo.quirinux.org/gpg/quirinux.asc | apt-key add -
@@ -54,7 +55,6 @@ sequence:
     - office
     - base
     - eggs-dev
-  try_accessories:
     # firmwares
     # liquorix
 customize:

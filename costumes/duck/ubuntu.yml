@@ -1,0 +1,40 @@
+# wardrobe: penguins-wardrobe
+# costume: /duck
+---
+name: duck
+description: desktop cinnamon plus all that we need to enjoy at home and office
+author: artisan
+release: 0.9.1
+distributions:
+- focal
+- jammy
+sequence:
+  repositories:
+    sources_list:
+    - main 
+    - universe
+    - restricted
+    - multiverse
+    update: true
+    upgrade: true
+  packages:
+  - dbus-x11 # ubuntu
+  - cinnamon-desktop-environment
+  - firefox
+  - lightdm
+  - lightdm-autologin-greeter # ubuntu seem to need it, Debian install it automatically
+  - lightdm-gtk-greeter # mandatory for ubuntu, without it will install gdm3
+  - spice-vdagent
+  accessories:
+  - base
+  - grafica
+  - multimedia
+  - office
+  # firmwares
+customize:
+  dirs: true
+  scripts:
+  - ../../scripts/config_desktop_link.sh
+  - ../../scripts/config_lightdm.sh
+  - ../../scripts/hostname.sh
+reboot: true
