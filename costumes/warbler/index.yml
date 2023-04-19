@@ -32,7 +32,7 @@ sequence:
     - ./python3-dev
     - base
     - eggs-dev
-    - firmwares-light
+    # firmwares-light
     - waydroid
 customize:
   dirs: true

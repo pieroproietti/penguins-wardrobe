@@ -27,7 +27,7 @@ sequence:
   accessories:
     - base
     - eggs-dev
-    - firmwares-light
+    # firmwares-light
     - waydroid
 customize:
   dirs: true

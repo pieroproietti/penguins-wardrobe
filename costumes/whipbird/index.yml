@@ -17,7 +17,7 @@ sequence:
   packages_no_install_recommends:
     - weston
   accessories:
-    - firmwares-light
+    # firmwares-light
     - waydroid
 customize:
   dirs: true
