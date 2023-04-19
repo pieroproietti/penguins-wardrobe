@@ -47,7 +47,7 @@ sequence:
 
     # italiano
     - libreoffice-l10n-it
-    - firefox-l10n-it
+    #- firefox-l10n-it
 
   accessories:
     - educational
