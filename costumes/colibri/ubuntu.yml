@@ -8,9 +8,8 @@ description: >-
 author: artisan
 release: 0.9.1
 distributions:
-  - bullseye
-  - bookworm
-  - chimaera
+  - focal
+  - jammy
 sequence:
   repositories:
     sources_list:
@@ -30,7 +29,7 @@ sequence:
     upgrade: true
   packages:
     - adwaita-qt
-    - firefox-esr
+    - firefox
     - libxfce4ui-utils
     - lightdm
     - lightdm-gtk-greeter
