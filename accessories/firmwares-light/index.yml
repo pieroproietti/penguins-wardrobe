@@ -1,4 +1,4 @@
-# seem all drivers go in bullseye (2023-04-12 )
+# seem all drivers are now on bullseye (2023-04-12 )
 ---
 name: waydroid network-wifi
 description: install firmware drivers network-wifi
@@ -18,6 +18,7 @@ sequence:
     - firmware-linux-free # Binary firmware for various drivers in the Linux kernel
     - firmware-realtek # Binary firmware for Realtek wired/wifi/BT adapters [non-free]
     - firmware-zd1211 # binary firmware for the zd1211rw wireless driver [non-free]
+
     # video
     - firmware-amd-graphics   # firmware for AMD/ATI graphics chips supported by the radeon, amdgpu and r128 drivers
     - libdrm-amdgpu1

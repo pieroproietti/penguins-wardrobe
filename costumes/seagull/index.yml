@@ -32,7 +32,6 @@ sequence:
     - pkg-config
     - spice-vdagent
     - translate-toolkit
-    - xorg
     - zenity
   accessories:
     - base
