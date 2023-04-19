@@ -11,10 +11,7 @@ distributions:
   - jammy
 sequence:
   packages:
-    # jush a bit educational gtk stuffs
-    - drgeo
     - gelemental
-    - gnome-chemistry-utils
     - granule # Leitner system flashcard utiltiy (text only)
     - klavaro # touch typing
     - littlewizard # development environment for children
