@@ -38,5 +38,6 @@ customize:
   scripts:
     - ./config_sddm.sh
     - ../../scripts/config_desktop_link.sh
-  hostname: true
+    - ../../scripts/hostname.sh
+  #hostname: true
 reboot: true
