@@ -62,7 +62,7 @@ customize:
   scripts:
     - ../../scripts/config_desktop_link.sh
     - ../../scripts/config_lightdm.sh
-    - ../../scripts/add_g4.sh
+    - ../../scripts/config_g4.sh
     - ../../scripts/hostname.sh
 reboot: true
 
