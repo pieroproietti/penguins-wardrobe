@@ -54,7 +54,7 @@ sequence:
   accessories:
     - base
     - eggs-dev
-    - firmwares-light
+    # firmwares-light
     # flatpak
     # python3-dev
   try_accessories:
@@ -64,7 +64,8 @@ customize:
   scripts:
     - ../../scripts/config_desktop_link.sh
     - ../../scripts/config_lightdm.sh
-    - ../../scripts/add_g4.sk
+    -  ../../scripts/hostname.sh
+    - ../../scripts/add_g4.sk 
   # hostname: true
 reboot: true
 
