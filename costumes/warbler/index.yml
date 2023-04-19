@@ -5,6 +5,7 @@ description: plasma/wayland/waydroid
 author: artisan
 release: 0.1.0
 distributions: 
+- bullseye
 - bookworm
 sequence:
   repositories:
