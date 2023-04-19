@@ -40,5 +40,4 @@ customize:
     - ./config_sddm.sh
     - ../../scripts/config_desktop_link.sh
     - ../../scripts/hostname.sh
-  #hostname: true
 reboot: true

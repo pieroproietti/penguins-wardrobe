@@ -27,9 +27,10 @@ sequence:
   - openssh-server # need just to help configuration
   - php
   - php-mysql
+  
 customize:
-  scripts:
-    #- add_yours_scripts
   dirs: true
-  hostname: true
+  scripts:  
+    - ../../scripts/hostname.sh
+
 reboot: true

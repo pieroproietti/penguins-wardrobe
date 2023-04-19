@@ -66,5 +66,4 @@ customize:
   scripts:
     - ../../scripts/config_desktop_link.sh
     - ../../scripts/config_lightdm.sh
-  hostname: true
 reboot: true

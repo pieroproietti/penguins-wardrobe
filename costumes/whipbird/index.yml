@@ -21,5 +21,6 @@ sequence:
     - waydroid
 customize:
   dirs: true
-  hostname: true
+  scripts:  
+    - ../../scripts/hostname.sh
 reboot: true
