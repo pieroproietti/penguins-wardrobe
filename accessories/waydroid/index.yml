@@ -1,12 +1,11 @@
-# waydroid at: 2023-01-26
+# waydroid at: 2023-04-19
 ---
 name: waydroid
 description: waydroid installer
 author: Jon West
-release: 0.0.2
+release: 0.0.3
 distributions:
 - bookworm
-- bullseye
 sequence:
   repositories:
     sources_list:
@@ -24,35 +23,29 @@ sequence:
         /etc/apt/sources.list.d/waydroid-ppa.list > /dev/null
     update: true
     upgrade: true
-  try_packages:
-    - coredhcp-client # Debian 
-    - isc-dhcp-client # Ubuntu until kinetic
   packages:
-    # ex-dependencies:
     - ca-certificates
-    - git
-    - iptables
-    - lxc
-    - python3
-    - wget
-    # 
+    - coredhcp-client # Debian 
     - gir1.2-gtk-3.0 
     - gir1.2-gtk-4.0 
     - gir1.2-vte-2.91
     - gir1.2-webkit2-4.0
-    - net-tools # ifconfig
+    - git
+    - iptables
     - iw # iwclient
     - libvte-2.91-dev
+    - lxc
+    - lzip # https://github.com/casualsnek/waydroid_script/
+    - net-tools # ifconfig
     - network-manager # nmcli
+    - python3
     - python3-gi
     - python3-gi-cairo
     - python3-pip
-    - waydroid
-    - xclip
-
-    # waydroid_extras
-    - lzip # https://github.com/casualsnek/waydroid_script/
     - sqlite3 # https://github.com/casualsnek/waydroid_script/
+    - waydroid
+    - wget
+    - xclip
 
   debs: false
   packagesPip:

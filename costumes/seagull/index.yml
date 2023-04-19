@@ -4,9 +4,8 @@
 name: seagull
 description: mutter based compositor for kiosks
 author: artisan
-release: 0.0.1
+release: 0.0.2
 distributions: 
-- bullseye
 - bookworm
 sequence:
   repositories:
@@ -18,26 +17,21 @@ sequence:
     upgrade: true
   packages_no_install_recommends:
     - cmake
-    - libgnome-desktop-4-dev # bookworm compositor_dependencies += dependency('gnome-desktop-4')
-    #- libgnome-desktop-3-19-dev  # bullseye compositor_dependencies += dependency('gnome-desktop-3-19')
-    - libibus-1.0-dev
-    - libmutter-11-dev # bookworm put mutter_api_version = 11 on meson.build
-    #- libmutter-7-dev # bullseye put mutter_api_version = 7 on meson.build
-    - libsystemd-dev
-    - meson
-    - pkg-config
-    - translate-toolkit
-  
-    # gnome 
     - firefox-esr
     - gdm3
     - gnome-control-center
     - gnome-keyring
     - gnome-session
-    # gnome-shell not used from kiosk
     - gnome-terminal
+    - libgnome-desktop-4-dev
+    - libibus-1.0-dev
+    - libmutter-11-dev
+    - libsystemd-dev
+    - meson
     - nautilus
+    - pkg-config
     - spice-vdagent
+    - translate-toolkit
     - xorg
     - zenity
   accessories:
@@ -51,4 +45,5 @@ customize:
     - ../../scripts/config_desktop_link.sh
     - ../../scripts/config_gdm3.sh
     - ../../scripts/hostname.sh
+    
 reboot: true
