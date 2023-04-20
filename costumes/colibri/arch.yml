@@ -29,6 +29,9 @@ sequence:
     - unzip 
     - xarchiver 
     - xdg-user-dirs 
+    - xfce4
+    - xfce4-goodies
+    - xorg-apps
     - xorg-server 
     - zenity
 
