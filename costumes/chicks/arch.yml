@@ -14,7 +14,6 @@ sequence:
     upgrade: true
 
   packages:
-    - epoptes  
     - firefox 
     - lightdm 
     - lightdm-gtk-greeter 
@@ -39,10 +38,10 @@ customize:
   dirs: true
   scripts:
   # arch
-  - groupadd -r autologin
-  - gpasswd -a "${SUDO_USER}" autologin
   - systemctl enable NetworkManager
   - systemctl enable lightdm
+  - groupadd -r autologin
+  - gpasswd -a "${SUDO_USER}" autologin
 
   # standard
   - adduser ${SUDO_USER} epoptes
