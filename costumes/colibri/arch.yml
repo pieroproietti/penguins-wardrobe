@@ -11,12 +11,14 @@ distributions:
   - rolling
 sequence:
   repositories:
-    sources_list:
     update: true
     upgrade: true
+
+  groups:
+  - xfce4 
+  - xorg-apps 
+
   packages:
-    - -g xfce4
-    - -g xorg-apps 
     - firefox 
     - lightdm 
     - lightdm-gtk-greeter 
