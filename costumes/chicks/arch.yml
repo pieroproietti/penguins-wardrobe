@@ -1,0 +1,57 @@
+# wardrobe: .
+# distro: arch
+# costume: chicks
+---
+name: chicks
+description: >-
+  desktop xfce4 per la scuola
+author: artisan
+release: 0.0.1
+distributions:
+  - rolling
+sequence:
+  repositories:
+    sources_list:
+      - main
+      - contrib
+      - non-free
+    update: true
+    upgrade: true
+  packages:
+    - firefox 
+    - lightdm 
+    - lightdm-gtk-greeter 
+    - man 
+    - network-manager-applet 
+    - polkit-gnome 
+    - shellcheck 
+    - spice-vdagent 
+    - unzip 
+    - xarchiver 
+    - xdg-user-dirs 
+    - xfce4 
+    - xfce4-goodies 
+    - xorg-apps 
+    - xorg-server 
+    - zenity
+
+    # controllo remoto studenti
+    - epoptes
+
+    # italiano
+    - libreoffice-l10n-it
+    - firefox-esr-l10n-it
+
+  accessories:
+    - educational
+    - office
+
+customize:
+  dirs: true
+  scripts:
+  - adduser ${SUDO_USER} epoptes
+  - ../../scripts/config_desktop_link.sh
+  - ../../scripts/config_lightdm.sh
+  - ../../scripts/hostname.sh
+
+reboot: true
