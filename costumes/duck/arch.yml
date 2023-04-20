@@ -6,7 +6,7 @@ description: desktop cinnamon plus all that we need to enjoy at home and office
 author: artisan
 release: 0.9.1
 distributions:
-  - rotlling
+  - rolling
 sequence:
   repositories:
     sources_list:
