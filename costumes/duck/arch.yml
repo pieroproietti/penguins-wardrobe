@@ -55,8 +55,10 @@ customize:
     # Arch
     - systemctl enable NetworkManager
     - systemctl enable lightdm
+
+    # add user on autologin group
     - groupadd -r autologin
-    - gpasswd -a "${MY_USERNAME}" autologin
+    - gpasswd -a "${SUDO_USER}" autologin
 
     # standard
     - ../../scripts/config_desktop_link.sh
