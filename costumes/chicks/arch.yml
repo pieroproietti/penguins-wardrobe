@@ -1,11 +1,9 @@
 # wardrobe: .
 # distro: arch
-# costume: colibri
 ---
-name: colibri
+name: chicks
 description: >-
-  desktop xfce4 plus all that I need to develop eggs, firmwares and anydesk
-  repos
+  desktop xfce4 per la scuola
 author: artisan
 release: 0.0.1
 distributions:
@@ -16,6 +14,7 @@ sequence:
     upgrade: true
 
   packages:
+    - epoptes  
     - firefox 
     - lightdm 
     - lightdm-gtk-greeter 
@@ -33,7 +32,8 @@ sequence:
     - zenity
 
   accessories:
-    - eggs-dev
+    - educational
+    - office
 
 customize:
   dirs: true
@@ -45,8 +45,10 @@ customize:
   - systemctl enable lightdm
 
   # standard
+  - adduser ${SUDO_USER} epoptes
   - ../../scripts/config_desktop_link.sh
   - ../../scripts/config_lightdm.sh
   - ../../scripts/hostname.sh
 
-reboot: true
+reboot: false
+

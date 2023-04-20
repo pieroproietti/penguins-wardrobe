@@ -8,5 +8,5 @@ distributions:
 sequence:
   packages:
     - gimp
-    - libreoffice-fresh
+    - libreoffice
     - vlc
