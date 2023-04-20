@@ -4,15 +4,9 @@ name: office
 description: install libreoffice, gimp, vlc
 author: artisan
 distributions:
-  - bookworm
-  - bullseye
-  - buster
-  - chimaera
-  - bionic
-  - focal
-  - jammy
+  - rolling
 sequence:
   packages:
     - gimp
-    - libreoffice
+    - libreoffice-fresh
     - vlc
