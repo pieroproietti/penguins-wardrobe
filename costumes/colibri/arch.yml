@@ -15,6 +15,8 @@ sequence:
     update: true
     upgrade: true
   packages:
+    - -g xfce4
+    - -g xorg-apps 
     - firefox 
     - lightdm 
     - lightdm-gtk-greeter 
@@ -25,9 +27,6 @@ sequence:
     - unzip 
     - xarchiver 
     - xdg-user-dirs 
-    #- xfce4 
-    #- xfce4-goodies 
-    #- xorg-apps 
     - xorg-server 
     - zenity
 
