@@ -41,6 +41,12 @@ sequence:
 customize:
   dirs: true
   scripts:
+  # arch
+  - groupadd -r autologin
+  - gpasswd -a "${SUDO_USER}" autologin
+  - systemctl enable NetworkManager
+  - systemctl enable lightdm
+  # standard
   - adduser ${SUDO_USER} epoptes
   - ../../scripts/config_desktop_link.sh
   - ../../scripts/config_lightdm.sh
