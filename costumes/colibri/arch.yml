@@ -1,8 +1,8 @@
 # wardrobe: .
 # distro: arch
-# costume: chicks
+# costume: colibri
 ---
-name: chicks
+name: colibri
 description: >-
   desktop xfce4 per la scuola
 author: artisan
@@ -12,9 +12,6 @@ distributions:
 sequence:
   repositories:
     sources_list:
-      - main
-      - contrib
-      - non-free
     update: true
     upgrade: true
   packages:
@@ -28,15 +25,14 @@ sequence:
     - unzip 
     - xarchiver 
     - xdg-user-dirs 
-    - xfce4 
-    - xfce4-goodies 
-    - xorg-apps 
+    #- xfce4 
+    #- xfce4-goodies 
+    #- xorg-apps 
     - xorg-server 
     - zenity
 
   accessories:
-    - educational
-    - office
+    - eggs-dev
 
 customize:
   dirs: true
@@ -46,6 +42,7 @@ customize:
   - gpasswd -a "${SUDO_USER}" autologin
   - systemctl enable NetworkManager
   - systemctl enable lightdm
+
   # standard
   - adduser ${SUDO_USER} epoptes
   - ../../scripts/config_desktop_link.sh
