@@ -12,7 +12,7 @@ distributions:
   - bionic
   - focal
   - jammy
-  - kinetic
+  - rolling
 sequence:
   sources_list_d:
     - rm -f /etc/apt/sources.list.d/quirinux.list
