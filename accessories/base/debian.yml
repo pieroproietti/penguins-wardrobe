@@ -12,6 +12,7 @@ distributions:
   - chimaera
   - daedalus-ceres
   - jammy
+  - rolling  
 sequence:
   repositories:
     sources_list:
