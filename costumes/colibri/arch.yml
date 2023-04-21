@@ -18,7 +18,6 @@ sequence:
   packages:
     - firefox 
     - lightdm 
-    - lightdm-gtk-greeter 
     - network-manager-applet 
     - polkit-gnome 
     - shellcheck 
