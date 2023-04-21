@@ -12,7 +12,6 @@ sequence:
   packages:
     - klavaro
     - solfege 
-
     # gcompris
     # gelemental
     # granule # Leitner system flashcard utiltiy (text only)

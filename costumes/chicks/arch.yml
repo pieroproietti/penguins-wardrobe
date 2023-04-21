@@ -49,5 +49,5 @@ customize:
   - ../../scripts/config_lightdm.sh
   - ../../scripts/hostname.sh
 
-reboot: false
+reboot: true
 
