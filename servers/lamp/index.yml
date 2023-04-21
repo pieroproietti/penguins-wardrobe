@@ -1,7 +1,7 @@
 # base
 ---
 name: lamp
-description: LAMP configuration you can externd
+description: LAMP configuration you can extend
 author: artisan
 release: 0.0.1
 distributions:
@@ -10,7 +10,6 @@ distributions:
   - buster
   - chimaera
   - focal
-  - impish
   - jammy
 sequence:
   repositories:
