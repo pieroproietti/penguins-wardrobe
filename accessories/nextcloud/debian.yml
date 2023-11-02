@@ -1,0 +1,29 @@
+# nextcloud
+---
+name: nextcloud
+description: 'nextcloud'
+author: artisan
+distributions:
+  - bullseye
+  - bookworm
+  - chimaera
+  - daedalus
+sequence:
+  packages:
+  - mariadb-server
+  - mariadb-client
+  - php 
+  - php-cli
+  - php-xml
+  - php-zip
+  - php-curl
+  - php-gd
+  - php-cgi
+  - php-mysql
+  - php-mbstring
+
+  - apache2 
+  - libapache2-mod-php
+customize:
+  scripts:
+    - adduser ${SUDO_USER} libvirt

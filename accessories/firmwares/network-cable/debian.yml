@@ -1,0 +1,30 @@
+# network-cable
+---
+name: network-cable
+description: install drivers network-cable
+author: artisan
+release: 0.0.1
+distributions:
+  - bookworm
+  - bullseye
+  - buster
+  - chimaera
+  - daedalus
+
+sequence:
+  packages:
+    - hardinfo # (x11): Displays system information
+    - mobile-broadband-provider-info # (admin): database of mobile broadband service providers
+    - pppconfig # (admin): Text menu based utility for configuring ppp
+    - usb-modeswitch # (comm): mode switching tool for controlling "flip flop" USB devices
+    - usb-modeswitch-data # (comm): mode switching data for usb-modeswitch
+    - wvdial # comm): intelligent Point-to-Point Protocol dialer
+    
+    - firmware-bnx2x # Binary firmware for Broadcom NetXtreme II 10Gb non-free
+    - firmware-bnx2 # Binary firmware for Broadcom NetXtremeII non-free
+    - firmware-myricom #  Binary firmware for Myri-10G Ethernet adapters [non-free]
+    - firmware-netronome # Binary firmware for Netronome network adapters [non-free]
+    - firmware-netxen # Binary firmware for QLogic Intelligent Ethernet (3000 and 3100 Series) [non-free]
+    - firmware-qlogic # Binary firmware for QLogic HBAs [non-free]
+
+

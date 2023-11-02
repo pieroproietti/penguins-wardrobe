@@ -1,0 +1,47 @@
+# eggs-dev
+---
+name: eggs-dev
+description: 'add repositories: nodesource, code, install: nodejs, code'
+author: artisan
+distributions:
+  - beowulf
+  - bookworm
+  - bullseye
+  - trixie
+  - chimaera
+  - daedalus
+  - jammy
+sequence:
+  repositories:
+    sources_list:
+      - main
+    sources_list_d:
+      - rm -f /usr/share/keyrings/packages.microsoft.gpg
+      - >-
+        curl -fsSL "https://packages.microsoft.com/keys/microsoft.asc" | gpg
+        --dearmor -o /usr/share/keyrings/packages.microsoft.gpg
+      - >-
+        echo "deb [signed-by=/usr/share/keyrings/packages.microsoft.gpg
+        arch=amd64] http://packages.microsoft.com/repos/code stable main" | tee
+        /etc/apt/sources.list.d/vscode.list > /dev/null
+
+      - rm -f /usr/share/keyrings/nodesource.gpg
+      - >-
+        curl -fsSL https://deb.nodesource.com/gpgkey/nodesource.gpg.key | gpg
+        --dearmor -o /usr/share/keyrings/nodesource.gpg > /dev/null
+      - >-
+        echo "deb [signed-by=/usr/share/keyrings/nodesource.gpg]
+        https://deb.nodesource.com/node_16.x bullseye main" | tee
+        /etc/apt/sources.list.d/nodesource.list > /dev/null
+    update: true
+    upgrade: true
+  packages:
+    - code
+    - nodejs
+customize:
+  scripts:
+    - echo -e "\n# wardrobe\nfs.inotify.max_user_watches=524288" >> /etc/sysctl.conf
+    - npm i pnpm -g
+    - sudo -u ${SUDO_USER} pnpm install-completion bash
+    - ../../scripts/tools-jq.sh
+    

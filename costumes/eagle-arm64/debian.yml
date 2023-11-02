@@ -1,0 +1,88 @@
+# wardrobe: penguins-wardrobe
+# costume: /eagle-arm64
+---
+name: eagle
+description: desktop xfce4 plus proxmox-ve
+author: artisan
+release: 0.0.2
+distributions:
+  - bookworm
+architecture: # NOT_USED FOR NOW
+  - arm64
+sequence:
+  repositories:
+    sources_list:
+      - main
+    sources_list_d:
+
+      # codium: we need to replace vscode with codium
+      #         becouse the archetecture arm64
+      - rm -f /usr/share/keyrings/vscodium-archive-keyring.gpg
+      - >-
+        curl -fsSL "https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg" | gpg
+        --dearmor -o /usr/share/keyrings/vscodium-archive-keyring.gpg
+
+      - >-
+        echo "deb [signed-by=/usr/share/keyrings/packages.microsoft.gpg
+        arch=amd64] http://packages.microsoft.com/repos/code stable main" | tee
+        /etc/apt/sources.list.d/vscode.list > /dev/null
+
+      - >-
+        echo 'deb [ signed-by=/usr/share/keyrings/vscodium-archive-keyring.gpg ] https://download.vscodium.com/debs vscodium main' \
+        | tee /etc/apt/sources.list.d/vscodium.list
+
+      # proxmox: this is a temporary solution, we need to take
+      #          the correct values from curl as for codium
+      - rm -f /etc/apt/trusted.gpg.d/pveport.gpg
+      - cp /home/artisan/.wardrobe/costumes/eagle-arm64/dirs/etc/apt/trusted.gpg.d/pveport.gpg /etc/apt/trusted.gpg.d/pveport.gpg
+      - echo "deb https://mirrors.apqa.cn/proxmox/debian/pve bookworm port">/etc/apt/sources.list.d/pveport.list
+    update: true
+    upgrade: true
+  preinst: 
+    - hostnamectl set-hostname
+    - pve-live.sh
+  packages:
+    # packages desktop
+    - adwaita-qt
+    - firefox-esr
+    - libxfce4ui-utils
+    - lightdm
+    - spice-vdagent
+    - tango-icon-theme
+    - thunar
+    - xarchiver
+    - xfce4-appfinder
+    - xfce4-panel
+    - xfce4-pulseaudio-plugin
+    - xfce4-session
+    - xfce4-settings
+    - xfce4-terminal
+    - xfce4-whiskermenu-plugin
+    - xfconf
+    - xfdesktop4
+    - xfwm4
+
+    # packages: codium
+    - codium
+
+    # packages: proxmox
+    - open-iscsi
+    - postfix
+    - proxmox-ve
+    - virt-viewer
+
+  accessories:
+    - base
+customize:
+  dirs: true
+  scripts:
+    - ../../scripts/config_desktop_link.sh
+    - ../../scripts/config_lightdm.sh
+
+    # typical Proxmox VE
+    - systemctl enable pveproxy
+    - cp /usr/lib/penguins-eggs/addons/eggs/pve/applications/eggs-pve.desktop /home/${SUDO_USER}/Desktop
+    - chmod +x /home/${SUDO_USER}/Desktop/eggs-pve.desktop
+    - chown ${SUDO_USER}:${SUDO_USER} /home/${SUDO_USER}/Desktop/eggs-pve.desktop
+    - cp /usr/lib/penguins-eggs/addons/eggs/pve/artwork/eggs-pve.png /usr/share/icons/
+reboot: true

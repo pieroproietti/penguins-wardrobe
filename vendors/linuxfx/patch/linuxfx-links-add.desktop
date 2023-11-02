@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=LinuxFX links add
+TryExec=linuxfx-links-add.sh
+Exec=linuxfx-links-add.sh
+StartupNotify=false
+NoDisplay=true
+
+X-GNOME-Autostart-Phase=Initialization
+X-KDE-autostart-phase=1

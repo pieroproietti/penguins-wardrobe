@@ -1,0 +1,57 @@
+# wardrobe: .
+# distro: arch
+# costume: albatros
+---
+name: albatros
+description: >-
+  desktop kde plus all that I need to develop eggs, firmwares
+author: artisan
+release: 0.0.1
+distributions:
+  - bookworm
+sequence:
+  repositories:
+    sources_list:
+      - main
+      # contrib
+      # non-free
+      # non-free-firmware
+    update: true
+    upgrade: true
+
+  packages:
+    - alsa-utils 
+    - ark
+    - audacious
+    - bluez 
+    - cups
+    - discover
+    - dolphin 
+    - firefox-esr
+    - git
+    - kcalc
+    - konsole 
+    # krunner
+    - kwrite
+    - neofetch
+    - partitionmanager
+    - kde-plasma-desktop
+    - qbittorrent
+    - screen
+    - sddm
+    - spice-vdagent
+    - wget
+    - zenity
+
+  accessories:
+    - eggs-dev
+
+customize:
+  dirs: true
+  scripts:
+  # standard
+  - ../../scripts/config_desktop_link.sh
+  #- ../../scripts/config_lightdm.sh
+  - ../../scripts/hostname.sh
+  
+reboot: true

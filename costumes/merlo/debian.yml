@@ -1,0 +1,36 @@
+# wardrobe: .
+# costume: /merlo
+---
+name: merlo
+description: >-
+  desktop mate plus all that I need to develop eggs, firmwares and anydesk
+  repos
+author: artisan
+release: 0.0.1
+distributions:
+  - bookworm
+sequence:
+  repositories:
+    sources_list:
+      - main
+    update: true
+    upgrade: true
+  packages:
+    - firefox-esr
+    - lightdm
+    - lightdm-gtk-greeter
+    - mate-desktop-environment-extra 
+    - network-manager-gnome
+    - spice-vdagent
+  accessories:
+    - base
+    - eggs-dev
+customize:
+  dirs: true
+  scripts:
+    - ../../scripts/config_desktop_link.sh
+    - ./config_lightdm.sh
+    - ../../scripts/config_g4.sh
+    - ../../scripts/hostname.sh
+reboot: true
+

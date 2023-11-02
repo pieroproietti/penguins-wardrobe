@@ -1,0 +1,66 @@
+# owl
+---
+name: owl
+description: Owl is a clone of quirinux by Charlie Martinez
+author: artisan
+release: 0.9.0
+distributions:
+  - bookworm
+  - bullseye
+  - chimaera
+sequence:
+  repositories:
+    sources_list:
+      - main
+      - contrib
+      - non-free
+    sources_list_d:
+      - rm -f /etc/apt/sources.list.d/quirinux.list
+      - wget -O - https://repo.quirinux.org/gpg/quirinux.asc | apt-key add -
+      - >-
+        echo "deb https://repo.quirinux.org quirinux main" | tee
+        /etc/apt/sources.list.d/quirinux.list > /dev/null
+    update: true
+    upgrade: true
+  packages:
+    - adwaita-qt
+    - firefox-esr
+    - libxfce4ui-utils
+    - lightdm
+    - lightdm-gtk-greeter # mandatory for ubuntu, without it will install gdm3
+    - mutt
+    - network-manager-gnome
+    - qt5ct
+    - spice-vdagent
+    - tango-icon-theme
+    - thunar
+    - thunderbird
+    - xarchiver
+    - xfce4-appfinder
+    - xfce4-panel
+    - xfce4-pulseaudio-plugin
+    - xfce4-session
+    - xfce4-settings
+    - xfce4-terminal
+    - xfce4-whiskermenu-plugin
+    - xfconf
+    - xfdesktop4
+    - xfwm4
+    - yad
+    # lightdm-autologin-greeter # ubuntu seem to need it, Debian install it automatically
+  accessories:
+    - grafica
+    - multimedia
+    - office
+    - base
+    - eggs-dev
+  try_accessories:
+    # firmwares
+    # liquorix
+customize:
+  dirs: true
+  scripts:
+    - ../../scripts/config_desktop_link.sh
+    - ../../scripts/config_lightdm.sh
+    - ../../scripts/hostname.sh
+reboot: true

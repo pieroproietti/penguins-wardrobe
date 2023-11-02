@@ -1,0 +1,41 @@
+# wardrobe: penguins-wardrobe
+# costume: duck
+# note: non crea le user_dirs
+---
+name: duck
+description: desktop cinnamon plus all that we need to enjoy at home and office
+author: artisan
+release: 0.9.2
+distributions:
+  - bookworm
+  - bullseye
+  - chimaera
+sequence:
+  repositories:
+    sources_list:
+      - main
+      # contrib
+      # non-free
+      # non-free-firmware
+    update: true
+    upgrade: true
+  packages:
+    - cinnamon-desktop-environment
+    - firefox-esr
+    - lightdm
+    - spice-vdagent
+  accessories:
+    - base
+    - grafica
+    - multimedia
+    - office
+  try_accessories:
+    # liquorix
+    - firmwares
+customize:
+  dirs: true
+  scripts:
+    - ../../scripts/config_desktop_link.sh
+    - ../../scripts/config_lightdm.sh
+    - ../../scripts/hostname.sh
+reboot: true

@@ -1,0 +1,36 @@
+---
+componentName: rhino
+
+welcomeExpandingLogo:   true
+windowExpanding:    normal
+windowSize: 1280px,665px
+windowPlacement: center
+navigation: widget
+
+strings:
+    productName:         Rhino Linux
+    shortProductName:    Rhino Linux
+    version:             (beta)
+    shortVersion:        devel
+    versionedName:       Rhino Linux (beta)
+    shortVersionedName:  Rhino Linux
+    bootloaderEntryName: Ubuntu
+    productUrl:          https://rhinolinux.org/
+    supportUrl:          https://rhinolinux.org/wiki/
+    releaseNotesUrl:     https://rhinolinux.org/news/
+    donateUrl:           https://ko-fi.com/rhinolinux
+
+images:
+    productBanner:       "welcome.png"
+    productIcon:         "logo.png"
+    productLogo:         "logo.png"
+    productWallpaper:    "waves.png"
+
+slideshow:               "show.qml"
+slideshowAPI: 2
+
+style:
+   SidebarBackground:    "#2d2d2d"
+   SidebarText:          "#FFFFFF"
+   SidebarTextSelect:    "#0068C8"
+

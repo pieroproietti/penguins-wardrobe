@@ -1,0 +1,19 @@
+# liquorix
+---
+name: liquorix
+description: install liquorix kernel Debian/Devuan/Ubuntu
+author: artisan
+distributions:
+  - bookworm
+  - bullseye
+  - buster
+  - chimaera
+  - daedalus
+  - focal
+  - jammy
+  - kinetic
+sequence:
+  try_accessories:
+    - ./debian
+    - ./devuan
+    - ./ubuntu

@@ -1,0 +1,22 @@
+# firmwares/video-amd
+---
+name: firmwares/video-amd
+description: install drivers video-amd
+author: artisan
+distributions:
+  - bookworm
+  - bullseye
+  - buster
+  - chimaera
+  - daedalus
+sequence:
+  drivers_video_amd:
+    - libdrm-amdgpu1
+    - libvulkan1
+    - mesa-opencl-icd
+    - mesa-vulkan-drivers
+    - vulkan-tools
+    - vulkan-validationlayers
+    - xserver-xorg-video-amdgpu
+    - firmware-amd-graphics   # firmware for AMD/ATI graphics chips supported by the radeon, amdgpu and r128 drivers
+

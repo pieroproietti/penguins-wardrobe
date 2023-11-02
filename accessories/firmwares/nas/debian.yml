@@ -1,0 +1,16 @@
+# network-wifi
+---
+name: network-wifi
+description: install firmware drivers network-wifi
+author: artisan
+release: 0.0.1
+distributions:
+  - bookworm
+  - bullseye
+  - buster
+  - chimaera
+  - daedalus
+
+sequence:
+  packages:
+    - dns323-firmware-tools # (otherosfs): build and manipulate firmware images for a range of NAS devices

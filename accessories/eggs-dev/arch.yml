@@ -1,0 +1,26 @@
+# eggs-dev
+---
+name: eggs-dev
+description: 'add repositories: nodesource, code, install: nodejs, code'
+author: artisan
+distributions:
+  - rolling
+sequence:
+  repositories:
+    sources_list:
+
+    sources_list_d:
+
+    update: true
+    
+    upgrade: true
+  packages:
+    - code
+    - nodejs
+customize:
+  scripts:
+    - echo -e "\n# wardrobe\nfs.inotify.max_user_watches=524288" >> /etc/sysctl.conf
+    - npm i pnpm -g
+    - sudo -u ${SUDO_USER} pnpm install-completion bash
+    - ../../scripts/tools-jq.sh
+    

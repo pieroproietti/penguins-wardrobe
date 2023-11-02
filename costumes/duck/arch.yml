@@ -1,0 +1,64 @@
+# wardrobe: penguins-wardrobe
+# costume: /duck
+---
+name: duck
+description: desktop cinnamon plus all that we need to enjoy at home and office
+author: artisan
+release: 0.9.1
+distributions:
+  - rolling
+sequence:
+  repositories:
+    sources_list:
+    update: true
+    upgrade: true
+  packages:
+    # cinnamon
+    - cinnamon 
+    - firefox
+    - gnome-terminal
+    - lightdm
+    - lightdm-gtk-greeter
+    - network-manager-applet
+    - polkit-gnome
+    - shellcheck
+    - spice-vdagent
+    - unzip
+    - xarchiver
+    - xdg-user-dirs
+    - xorg-apps
+    - xorg-server
+    - zenity
+
+    # others stuffs
+    - gedit
+    - gnome-system-monitor
+    - pavucontrol
+    - pulseaudio
+    - pulseaudio-alsa
+    - thunderbird 
+
+    # icons
+    - mate-icon-theme-faenza
+
+  accessories:
+    - base
+    - grafica
+    - multimedia
+    - office
+customize:
+  dirs: true
+  scripts:
+    # Arch
+    - systemctl enable NetworkManager
+    - systemctl enable lightdm
+
+    # add user on autologin group
+    - groupadd -r autologin
+    - gpasswd -a "${SUDO_USER}" autologin
+
+    # standard
+    - ../../scripts/config_desktop_link.sh
+    - ../../scripts/config_lightdm.sh
+    - ../../scripts/hostname.sh
+reboot: true

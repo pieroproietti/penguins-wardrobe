@@ -1,0 +1,44 @@
+# seagull
+# again to solve dependencies gtk4
+---
+name: seagull
+description: gnome/wayland/waydroid
+author: artisan
+release: 0.0.2
+distributions: 
+- jammy
+sequence:
+  repositories:
+    update: true
+    upgrade: true
+  packages_no_install_recommends:
+    - cmake
+    - firefox
+    - gdm3
+    - gnome-control-center
+    - gnome-keyring
+    - gnome-session
+    - gnome-terminal
+    - libgnome-desktop-4-dev
+    - libibus-1.0-dev
+    - libmutter-11-dev
+    - libsystemd-dev
+    - meson
+    - nautilus
+    - pkg-config
+    - spice-vdagent
+    - translate-toolkit
+    - zenity
+  accessories:
+    - base
+    - eggs-dev
+    # firmwares-light
+    - waydroid
+customize:
+  dirs: true
+  scripts:
+    - ../../scripts/config_desktop_link.sh
+    - ../../scripts/config_gdm3.sh
+    - ../../scripts/hostname.sh
+    
+reboot: true

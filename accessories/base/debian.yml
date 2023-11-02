@@ -1,0 +1,31 @@
+# base
+---
+name: base
+description: add spice-vdagent and penguins-eggs-ppa repository
+author: artisan
+release: 0.0.1
+distributions:
+  - beowulf
+  - bookworm
+  - bullseye
+  - trixie
+  - buster
+  - chimaera
+  - daedalus
+  - jammy
+  - rolling  
+sequence:
+  repositories:
+    sources_list:
+      - main
+    sources_list_d:
+      - rm -f /usr/share/keyrings/penguins-eggs-ppa.gpg
+      - >-
+        curl -fsSL "https://pieroproietti.github.io/penguins-eggs-ppa/KEY.gpg" |
+        gpg --dearmor -o /usr/share/keyrings/penguins-eggs-ppa.gpg
+      - >-
+        echo "deb [signed-by=/usr/share/keyrings/penguins-eggs-ppa.gpg] 
+        https://pieroproietti.github.io/penguins-eggs-ppa ./ " | tee
+        /etc/apt/sources.list.d/penguins-eggs-ppa.list > /dev/null
+    update: true
+    upgrade: true

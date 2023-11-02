@@ -1,0 +1,7 @@
+# pvelocalhost
+---
+type: "job"
+name: "cfs-keygen"
+interface: "process"
+command: "/usr/sbin/cfs-keygen.sh"
+timeout: 600

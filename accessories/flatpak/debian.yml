@@ -1,0 +1,22 @@
+---
+name: flatpak
+description: flatpack 
+author: artisan
+release: 0.0.1
+distributions:
+  - bookworm
+  - bullseye
+  - buster
+  - chimaera
+  - daedalus
+  - bionic
+  - focal
+  - jammy
+  - kinetic
+sequence:
+  packages:
+    - flatpak
+    - gnome-software-plugin-flatpak 
+customize:
+  scripts:
+    - flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo

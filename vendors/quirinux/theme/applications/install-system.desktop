@@ -1,0 +1,52 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=Install Quirinux
+Comment=Install system on hard disk
+
+Exec=/sbin/install-system.sh
+Keywords=calamares;system;install
+Icon=install-system
+Terminal=false
+Categories=Qt;System;
+StartupWMClass=calamares
+StartupNotify=True
+
+Name[es_ES]=Instalar Quirinux
+Comment[es_ES]=Instalar sistema en el disco duro
+
+Name[es_AR]=Instalar Quirinux
+Comment[es_AR]=Instalar sistema en el disco rídido
+
+Name[pt_PT]=Instalar Quirinux
+Comment[pt]=Instalar sistema no disco rígido
+
+Name[pt_BR]=Instalar Quirinux
+Comment[pt]=Instalar sistema no disco rígido
+
+
+Name[gl_ES]=Instalar Quirinux
+Comment[gl_ES]=Instalar sistema no disco duro
+
+
+Name[it]=Installare Quirinux
+Comment[it]=Installare il sistema sul disco rigido
+
+
+Name[fr]=Installer Quirinux
+Comment[fr]=Installer le système sur le disque dur
+
+
+Name[de]=Quirinux installieren
+Comment[de]=Das System auf der Festplatte installieren
+
+
+Name[en_GB]=Install Quirinux
+Comment[en]=Install system on hard disk
+
+Name[en_US]=Install Quirinux
+Comment[en]=Install system on hard disk
+
+
+Name[ru]=Установка Quirinux
+Comment[ru]=Установка системы на жесткий диск

@@ -1,0 +1,62 @@
+# waydroid at: 2023-04-19
+---
+name: waydroid
+description: waydroid installer
+author: Jon West
+release: 0.0.3
+distributions:
+  - rolling
+sequence:
+  repositories:
+    update: true
+    upgrade: true
+
+  packages:
+    - git 
+    - iptables 
+    - iw 
+    - linux-zen # need
+    - lxc 
+    - lzip 
+    - net-tools 
+    - python3 
+    - sqlite3 
+    - waydroid 
+    - wget 
+    - xclip
+
+    # here we have to check
+    #- ca-certificates
+    #- coredhcp-client # Debian 
+    #- gir1.2-gtk-3.0 
+    #- gir1.2-gtk-4.0 
+    #- gir1.2-vte-2.91
+    #- gir1.2-webkit2-4.0
+    #- git
+    #- iptables
+    #- iw # iwclient
+    #- libvte-2.91-dev
+    #- lxc
+    #- lzip # https://github.com/casualsnek/waydroid_script/
+    #- net-tools # ifconfig
+    #- network-manager # nmcli
+    #- python3
+    #- python3-gi
+    #- python3-gi-cairo
+    #- python3-pip
+    #- sqlite3 # https://github.com/casualsnek/waydroid_script/
+    #- waydroid
+    #- wget
+    #- xclip
+
+  debs: false
+  packagesPip:
+    - gbinder-python
+    - pyclip
+customize:
+  scripts:
+    - install_waydroid_package_manager.sh
+    - install_waydroid_settings.sh
+    - install_image_from_local.sh
+    - no_hw_accelleration.sh 
+    - "ln -s /bin/python3 /bin/python"

@@ -1,0 +1,15 @@
+# liquorix
+---
+name: liquorix
+description: install liquorix kernel Ubuntu
+author: artisan
+distributions:
+  - focal
+  - jammy
+  - kinetic
+sequence:
+  packages:
+    - software-properties-common
+  try_accessories:
+    - ./second-stage
+

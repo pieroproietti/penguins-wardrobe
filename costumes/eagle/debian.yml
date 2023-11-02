@@ -1,0 +1,82 @@
+# wardrobe: penguins-wardrobe
+# costume: /eagle
+---
+name: eagle
+description: desktop xfce4 plus proxmox-ve
+author: artisan
+release: 0.9.1
+distributions:
+  - bookworm
+architecture: # NOT_USED FOR NOW
+  - amd64
+sequence:
+  repositories:
+    sources_list:
+      - main
+    sources_list_d:
+      - >-
+        echo "#deb https://enterprise.proxmox.com/debian/pve $(lsb_release -cs)
+        pve-enterprise"| tee /etc/apt/sources.list.d/pve-enterprise.list >
+        /dev/null
+
+      - rm -f /usr/share/keyrings/proxmox-release-bookworm.gpg
+      - >-
+        curl -fsSL
+        "http://download.proxmox.com/debian/proxmox-release-bookworm.gpg" | gpg
+        --dearmor -o /usr/share/keyrings/proxmox-release-bookworm.gpg
+      - >-
+        echo "deb [signed-by=/usr/share/keyrings/proxmox-release-bookworm.gpg]
+        http://download.proxmox.com/debian/pve $(lsb_release -cs)
+        pve-no-subscription" | tee
+        /etc/apt/sources.list.d/pve-no-subscription.list > /dev/null
+    update: true
+    upgrade: true
+  preinst: 
+    - hostnamectl set-hostname
+    - pve-live.sh
+  packages:
+    # packages: Desktop
+    - adwaita-qt
+    - firefox-esr
+    - libxfce4ui-utils
+    - lightdm
+    - spice-vdagent
+    - tango-icon-theme
+    - thunar
+    - xarchiver
+    - xfce4-appfinder
+    - xfce4-panel
+    - xfce4-pulseaudio-plugin
+    - xfce4-session
+    - xfce4-settings
+    - xfce4-terminal
+    - xfce4-whiskermenu-plugin
+    - xfconf
+    - xfdesktop4
+    - xfwm4
+
+    # packages: proxmox-ve
+    - open-iscsi
+    - postfix
+    - proxmox-ve
+    - virt-viewer
+
+  accessories:
+    - base
+    - eggs-dev
+    # firmwares/network-cable # no-need installing from proxmox-ve
+    #- firmwares/network-wifi 
+    #- firmwares/video-amd
+customize:
+  dirs: true
+  scripts:
+    - ../../scripts/config_desktop_link.sh
+    - ../../scripts/config_lightdm.sh
+
+    # typical Proxmox VE
+    - systemctl enable pveproxy
+    - cp /usr/lib/penguins-eggs/addons/eggs/pve/applications/eggs-pve.desktop /home/${SUDO_USER}/Desktop
+    - chmod +x /home/${SUDO_USER}/Desktop/eggs-pve.desktop
+    - chown ${SUDO_USER}:${SUDO_USER} /home/${SUDO_USER}/Desktop/eggs-pve.desktop
+    - cp /usr/lib/penguins-eggs/addons/eggs/pve/artwork/eggs-pve.png /usr/share/icons/
+reboot: true

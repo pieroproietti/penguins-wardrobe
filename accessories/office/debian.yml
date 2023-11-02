@@ -1,0 +1,19 @@
+# office
+---
+name: office
+description: install libreoffice, gimp, vlc
+author: artisan
+distributions:
+  - bookworm
+  - bullseye
+  - buster
+  - chimaera
+  - daedalus
+  - bionic
+  - focal
+  - jammy
+sequence:
+  packages:
+    - gimp
+    - libreoffice
+    - vlc

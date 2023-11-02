@@ -1,0 +1,27 @@
+# multimedia
+---
+name: multimedia
+description: a selection of usefull multimedia packages
+author: artisan
+release: 0.0.1
+distributions:
+  - bookworm
+  - bullseye
+  - buster
+  - chimaera
+  - daedalus
+  - bionic
+  - focal
+  - jammy
+  - rolling
+sequence:
+  packages:
+    - audacity
+    - brasero
+    - exfalso
+    - kazam
+    - kdenlive
+    - mediainfo
+    - quodlibet
+    - vlc
+    - xfburn

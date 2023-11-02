@@ -1,0 +1,32 @@
+# liquorix
+---
+name: liquorix
+description: install liquorix kernel Debian
+author: artisan
+distributions:
+  - bookworm
+  - bullseye
+  - buster
+sequence:
+  repositories:
+    sources_list:
+      - main
+      - contrib
+      - non-free
+    sources_list_d:
+      # per bookworm `lsb_release -cs`
+      - rm -f /etc/apt/trusted.gpg.d/liquorix-keyring.gpg
+      - >-
+        curl -o /etc/apt/trusted.gpg.d/liquorix-keyring.gpg
+        'https://liquorix.net/liquorix-keyring.gpg'
+
+      # we can use: `lsb_release -cs`, but devuan don't have repos
+      - >-
+        echo -e "deb http://liquorix.net/debian $(lsb_release -cs)
+        main\ndeb-src http://liquorix.net/debian $(lsb_release -cs)
+        main" | tee /etc/apt/sources.list.d/liquorix.list > /dev/null
+    update: true
+    upgrade: true
+  packages:
+    - linux-headers-liquorix-amd64
+    - linux-image-liquorix-amd64

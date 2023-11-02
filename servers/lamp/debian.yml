@@ -1,0 +1,36 @@
+# base
+---
+name: lamp
+description: LAMP configuration you can extend
+author: artisan
+release: 0.0.1
+distributions:
+  - bookworm
+  - bullseye
+  - buster
+  - chimaera
+  - focal
+  - jammy
+sequence:
+  repositories:
+    sources_list:
+      - main
+      # contrib
+      # non-free
+      # non-free-firmware
+    update: true
+    upgrade: true
+  packages:
+  - apache2
+  - libapache2-mod-php
+  - mariadb-server
+  - openssh-server # need just to help configuration
+  - php
+  - php-mysql
+  
+customize:
+  dirs: true
+  scripts:  
+    - ../../scripts/hostname.sh
+
+reboot: true
