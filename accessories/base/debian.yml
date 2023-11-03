@@ -5,14 +5,21 @@ description: add spice-vdagent and penguins-eggs-ppa repository
 author: artisan
 release: 0.0.1
 distributions:
-  - beowulf
-  - bookworm
-  - bullseye
-  - trixie
+  # debian
   - buster
+  - bullseye
+  - bookworm
+  - trixie
+  # devuan
+  - beowulf
   - chimaera
   - daedalus
+  # ubuntu
+  - focal
   - jammy
+  - mantic
+  - noble
+  # arch
   - rolling  
 sequence:
   repositories:

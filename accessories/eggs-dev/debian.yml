@@ -4,13 +4,20 @@ name: eggs-dev
 description: 'add repositories: nodesource, code, install: nodejs, code'
 author: artisan
 distributions:
-  - beowulf
-  - bookworm
+  # debian
+  - buster
   - bullseye
+  - bookworm
   - trixie
+  # devuan
+  - beowulf
   - chimaera
   - daedalus
+  # ubuntu
+  - focal
   - jammy
+  - mantic
+  - noble
 sequence:
   repositories:
     sources_list:
