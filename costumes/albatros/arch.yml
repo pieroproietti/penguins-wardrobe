@@ -15,6 +15,7 @@ sequence:
     upgrade: true
 
   packages:
+
     - alsa-utils 
     - ark
     - audacious
@@ -32,18 +33,16 @@ sequence:
     - openssh
     - packagekit-qt5
     - partitionmanager
+    - plasma
+    - plasma-wayland-session
     - qbittorrent
     - screen
+    - sddm
     - spectacle
     - spice-vdagent
     - wget
-    - zenity
-
-    - sddm
     - xorg
-    - plasma
-    - plasma-wayland-session
-    
+    - zenity
 
   accessories:
     - eggs-dev
