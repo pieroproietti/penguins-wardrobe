@@ -35,6 +35,7 @@ sequence:
     - packagekit-qt5
     - partitionmanager
     - plasma-desktop # cnanged from plasma
+    - plasma-wayland-session
     - qbittorrent
     - screen
     - sddm
