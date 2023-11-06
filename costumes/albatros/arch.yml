@@ -30,6 +30,7 @@ sequence:
     - krunner
     - kwrite
     - neofetch
+    - networkmanager # In arch serve
     - openssh
     - packagekit-qt5
     - partitionmanager
