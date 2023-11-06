@@ -34,7 +34,7 @@ sequence:
     - openssh
     - packagekit-qt5
     - partitionmanager
-    - plasma
+    - plasma-desktop # cnanged from plasma
     - qbittorrent
     - screen
     - sddm
@@ -42,7 +42,6 @@ sequence:
     - spice-vdagent
     - wget
     - zenity
-    - xorg
 
   accessories:
     - eggs-dev
