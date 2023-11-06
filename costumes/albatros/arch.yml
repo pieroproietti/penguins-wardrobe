@@ -42,6 +42,7 @@ sequence:
     - spice-vdagent
     - wget
     - zenity
+    - xorg
 
   accessories:
     - eggs-dev
