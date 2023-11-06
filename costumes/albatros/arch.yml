@@ -15,34 +15,37 @@ sequence:
     upgrade: true
 
   packages:
-    - alsa-utils 
-    - ark
-    - audacious
-    - bluez 
-    - bluez-utils
-    - cups
-    - discover
-    - dolphin 
-    - firefox 
-    - git
-    - kcalc
+    #- alsa-utils 
+    #- ark
+    #- audacious
+    #- bluez 
+    #- bluez-utils
+    #- cups
+    #- discover
+    #- dolphin 
+    #- firefox 
+    #- git
+    #- kcalc
     - konsole 
-    - krunner
-    - kwrite
+    #- krunner
+    #- kwrite
     - neofetch
-    - networkmanager # In arch serve
-    - openssh
-    - packagekit-qt5
-    - partitionmanager
-    - plasma-desktop # cnanged from plasma
-    - plasma-wayland-session
-    - qbittorrent
-    - screen
+    #- networkmanager # In arch serve
+    #- openssh
+    #- packagekit-qt5
+    #- partitionmanager
+    #- qbittorrent
+    #- screen
+    #- spectacle
+    #- spice-vdagent
+    #- wget
+    #- zenity
+
     - sddm
-    - spectacle
-    - spice-vdagent
-    - wget
-    - zenity
+    - xorg
+    - plasma
+    - plasma-wayland-session
+    
 
   accessories:
     - eggs-dev
