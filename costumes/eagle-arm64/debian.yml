@@ -24,7 +24,6 @@ sequence:
       - >-
         echo 'deb [ signed-by=/usr/share/keyrings/vscodium-archive-keyring.gpg ] https://download.vscodium.com/debs vscodium main' \
         | tee /etc/apt/sources.list.d/vscodium.list
-
       # proxmox: this is a temporary solution, we need to take
       #          the correct values from curl as for codium
       - rm -f /etc/apt/trusted.gpg.d/pveport.gpg
