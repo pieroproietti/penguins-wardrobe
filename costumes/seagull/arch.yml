@@ -13,7 +13,12 @@ sequence:
     upgrade: true
   packages:
     - gnome
+    - gnome-terminal    
     - gdm
+    - meson
+    - nautilus
+    - networkmanager
+    - pkg-config
     - zenity
   accessories:
     - base
