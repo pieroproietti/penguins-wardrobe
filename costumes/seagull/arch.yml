@@ -12,23 +12,24 @@ sequence:
     update: true
     upgrade: true
   packages:
-    - cmake
-    - firefox
+    #- cmake
+    #- firefox
     - gdm
     - gnome
     - gnome-control-center
     - gnome-keyring
     - gnome-session
     - gnome-terminal
-    - meson
+    - linux-zen
+    #- meson
     - nautilus
     - networkmanager
-    - pkg-config
+    #- pkg-config
     - spice-vdagent
-    - translate-toolkit
-    - zenity
+    #- translate-toolkit
     - waydroid
-    - waydroid-image
+    - waydroid-image-gapps
+    #- zenity
   accessories:
     - base
     - eggs-dev
