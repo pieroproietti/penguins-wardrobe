@@ -43,6 +43,9 @@ customize:
   - systemctl enable gdm
   - groupadd -r autologin
   - gpasswd -a "${SUDO_USER}" autologin
+  # per prendere zen
+  - grub-mkconfig -o /boot/grub/grub.cfg 
+
   # standard
   - ../../scripts/config_desktop_link.sh
   - ../../scripts/config_gdm3.sh
