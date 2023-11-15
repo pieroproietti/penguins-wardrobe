@@ -3,5 +3,3 @@
 From linuxmint
 
 LMDE5 Live installer
-
-
