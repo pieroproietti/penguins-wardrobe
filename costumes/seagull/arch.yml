@@ -21,6 +21,7 @@ sequence:
     - gnome-session
     - gnome-terminal
     - linux-zen
+    - linux-zen-headers
     #- meson
     - nautilus
     - networkmanager
@@ -32,7 +33,7 @@ sequence:
     #- zenity
   accessories:
     - base
-    - eggs-dev
+    # eggs-dev
     # firmwares-light
 customize:
   dirs: true
