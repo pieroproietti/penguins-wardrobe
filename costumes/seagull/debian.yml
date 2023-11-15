@@ -34,11 +34,10 @@ sequence:
     - spice-vdagent
     - translate-toolkit
     - zenity
-    - waydroid
-    - waydroid-image
   accessories:
     - base
     - eggs-dev
+    - waydroid
 customize:
   dirs: true
   scripts:
