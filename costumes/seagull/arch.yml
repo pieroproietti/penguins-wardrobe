@@ -12,13 +12,19 @@ sequence:
     update: true
     upgrade: true
   packages:
-    - gnome
-    - gnome-terminal    
+    - cmake
+    - firefox
     - gdm
+    - gnome
+    - gnome-control-center
+    - gnome-keyring
+    - gnome-session
+    - gnome-terminal
     - meson
     - nautilus
     - networkmanager
     - pkg-config
+    - translate-toolkit
     - zenity
   accessories:
     - base
