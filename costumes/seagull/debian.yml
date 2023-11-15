@@ -34,11 +34,11 @@ sequence:
     - spice-vdagent
     - translate-toolkit
     - zenity
+    - waydroid
+    - waydroid-image
   accessories:
     - base
     - eggs-dev
-    # firmwares-light
-    - waydroid
 customize:
   dirs: true
   scripts:

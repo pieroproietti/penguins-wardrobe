@@ -24,6 +24,7 @@ sequence:
     - nautilus
     - networkmanager
     - pkg-config
+    - spice-vdagent
     - translate-toolkit
     - zenity
   accessories:
