@@ -12,57 +12,16 @@ sequence:
     update: true
     upgrade: true
   packages:
-    #- cmake
-    #- firefox
-    # - gdm
-    # - gnome
-    # - gnome-control-center
-    # - gnome-keyring
-    # - gnome-session
-    # - gnome-terminal
+    - gdm
+    - gnome
     - linux-zen
     - linux-zen-headers
-    #- meson
-    # - nautilus
     - networkmanager
-    #- pkg-config
-    # - spice-vdagent
-    #- translate-toolkit
-
-    - alsa-utils 
-    - ark
-    - audacious
-    - bluez 
-    - bluez-utils
-    - cups
-    - discover
-    - dolphin 
-    - firefox 
-    - kcalc
-    - konsole 
-    - krunner
-    - kwrite
-    - neofetch
-    - openssh
-    - packagekit-qt5
-    - partitionmanager
-    - plasma
-    - plasma-wayland-session
-    - qbittorrent
-    - screen
-    - sddm
-    - spectacle
-    - spice-vdagent
-    - wget
-    - xorg
-    - zenity
     - waydroid
     - waydroid-image-gapps
-    #- zenity
+    - zenity
   accessories:
     - base
-    # eggs-dev
-    # firmwares-light
 customize:
   dirs: true
   scripts:
@@ -71,7 +30,7 @@ customize:
   - systemctl enable gdm
   - groupadd -r autologin
   - gpasswd -a "${SUDO_USER}" autologin
-  # per prendere zen
+  # linux-zen
   - grub-mkconfig -o /boot/grub/grub.cfg 
 
   # standard
