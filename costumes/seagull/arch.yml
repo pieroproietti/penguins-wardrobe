@@ -12,30 +12,25 @@ sequence:
     update: true
     upgrade: true
   packages:
-    - gdm
     - gnome
     - linux-zen
     - linux-zen-headers
     - networkmanager
     - waydroid
-    - waydroid-image-gapps
-    - zenity
-  accessories:
-    - base
+    - waydroid-image
 customize:
   dirs: true
   scripts:
   # arch
-  - systemctl enable NetworkManager
-  - systemctl enable gdm
-  - groupadd -r autologin
   - gpasswd -a "${SUDO_USER}" autologin
-  # linux-zen
+  - groupadd -r autologin
   - grub-mkconfig -o /boot/grub/grub.cfg 
+  - systemctl enable gdm
+  - systemctl enable NetworkManager
 
   # standard
-  - ../../scripts/config_desktop_link.sh
-  - ../../scripts/config_gdm3.sh
+  # - ../../scripts/config_desktop_link.sh
+  # - ../../scripts/config_gdm3.sh
   - ../../scripts/hostname.sh
     
 reboot: true
