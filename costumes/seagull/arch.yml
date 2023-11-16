@@ -14,20 +14,48 @@ sequence:
   packages:
     #- cmake
     #- firefox
-    - gdm
-    - gnome
-    - gnome-control-center
-    - gnome-keyring
-    - gnome-session
-    - gnome-terminal
+    # - gdm
+    # - gnome
+    # - gnome-control-center
+    # - gnome-keyring
+    # - gnome-session
+    # - gnome-terminal
     - linux-zen
     - linux-zen-headers
     #- meson
-    - nautilus
+    # - nautilus
     - networkmanager
     #- pkg-config
-    - spice-vdagent
+    # - spice-vdagent
     #- translate-toolkit
+
+    - alsa-utils 
+    - ark
+    - audacious
+    - bluez 
+    - bluez-utils
+    - cups
+    - discover
+    - dolphin 
+    - firefox 
+    - kcalc
+    - konsole 
+    - krunner
+    - kwrite
+    - neofetch
+    - openssh
+    - packagekit-qt5
+    - partitionmanager
+    - plasma
+    - plasma-wayland-session
+    - qbittorrent
+    - screen
+    - sddm
+    - spectacle
+    - spice-vdagent
+    - wget
+    - xorg
+    - zenity
     - waydroid
     - waydroid-image-gapps
     #- zenity
