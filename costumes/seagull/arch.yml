@@ -12,7 +12,7 @@ sequence:
     update: true
     upgrade: true
   packages:
-    - gnome-extra
+    - gnome
     - linux-zen
     - linux-zen-headers
     - networkmanager
