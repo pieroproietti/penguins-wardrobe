@@ -10,6 +10,14 @@ Presentation
         presentation.goToNextSlide();
     }
 
+    Timer {
+        id: timer
+        interval: 5000
+        running: false
+        repeat: true
+        onTriggered: nextSlide()
+    }
+
     Slide {
         Image {
             id: slide-1
