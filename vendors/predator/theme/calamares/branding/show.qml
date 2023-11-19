@@ -20,8 +20,8 @@ Presentation
 
     Slide {
         Image {
-            id: slide-1
-            source: "slide-1.png"
+            id: slide_1
+            source: "slide_1.png"
             anchors.centerIn: parent
             anchors.top: background.bottom
             width: 810
@@ -32,8 +32,8 @@ Presentation
 
     Slide {
         Image {
-            id: slide-2
-            source: "slide-2.png"
+            id: slide_2
+            source: "slide_2.png"
             anchors.centerIn: parent
             anchors.top: background.bottom
             width: 810
@@ -44,8 +44,8 @@ Presentation
 
     Slide {
         Image {
-            id: slide-3
-            source: "slide-3.png"
+            id: slide_3
+            source: "slide_3.png"
             anchors.centerIn: parent
             anchors.top: background.bottom
             width: 810
@@ -56,8 +56,8 @@ Presentation
 
     Slide {
         Image {
-            id: slide-4
-            source: "slide-4.png"
+            id: slide_4
+            source: "slide_4.png"
             anchors.centerIn: parent
             anchors.top: background.bottom
             width: 810
@@ -68,8 +68,8 @@ Presentation
 
     Slide {
         Image {
-            id: slide-5
-            source: "slide-5.png"
+            id: slide_5
+            source: "slide_5.png"
             anchors.centerIn: parent
             anchors.top: background.bottom
             width: 810
@@ -80,8 +80,8 @@ Presentation
 
     Slide {
         Image {
-            id: slide-6
-            source: "slide-6.png"
+            id: slide_6
+            source: "slide_6.png"
             anchors.centerIn: parent
             anchors.top: background.bottom
             width: 810
@@ -92,8 +92,8 @@ Presentation
 
     Slide {
         Image {
-            id: slide-7
-            source: "slide-7.png"
+            id: slide_7
+            source: "slide_7.png"
             anchors.centerIn: parent
             anchors.top: background.bottom
             width: 810
@@ -104,8 +104,8 @@ Presentation
 
     Slide {
         Image {
-            id: slide-8
-            source: "slide-8.png"
+            id: slide_8
+            source: "slide_8.png"
             anchors.centerIn: parent
             anchors.top: background.bottom
             width: 810
@@ -116,8 +116,8 @@ Presentation
 
     Slide {
         Image {
-            id: slide-9
-            source: "slide-9.png"
+            id: slide_9
+            source: "slide_9.png"
             anchors.centerIn: parent
             anchors.top: background.bottom
             width: 810
@@ -128,8 +128,8 @@ Presentation
 
     Slide {
         Image {
-            id: slide-10
-            source: "slide-10.png"
+            id: slide_10
+            source: "slide_10.png"
             anchors.centerIn: parent
             anchors.top: background.bottom
             width: 810
@@ -140,8 +140,8 @@ Presentation
 
     Slide {
         Image {
-            id: slide-11
-            source: "slide-11.png"
+            id: slide_11
+            source: "slide_11.png"
             anchors.centerIn: parent
             anchors.top: background.bottom
             width: 810
@@ -152,8 +152,8 @@ Presentation
 
     Slide {
         Image {
-            id: slide-12
-            source: "slide-12.png"
+            id: slide_12
+            source: "slide_12.png"
             anchors.centerIn: parent
             anchors.top: background.bottom
             width: 810
@@ -164,8 +164,8 @@ Presentation
 
     Slide {
         Image {
-            id: slide-13
-            source: "slide-13.png"
+            id: slide_13
+            source: "slide_13.png"
             anchors.centerIn: parent
             anchors.top: background.bottom
             width: 810
@@ -189,4 +189,3 @@ Presentation
         console.log("QML Component (default slideshow) deactivated");
     }
 }
-
