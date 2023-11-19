@@ -9,107 +9,8 @@ Presentation
         console.log("QML Component (default slideshow) Next slide");
         presentation.goToNextSlide();
     }
-
-
-
-    Slide {
-        Image {
-            id: reproductiveSystem
-            source: "1-reproductive-system.png"
-            anchors.centerIn: parent
-            anchors.top: background.bottom
-            width: 810
-            height: 485
-            fillMode: Image.PreserveAspectFit
-        }
-          Text {
-            font.family: "Helvetica"
-            font.pixelSize : 22
-            color: "#aa3333"
-            anchors.horizontalCenter: reproductiveSystem.horizontalCenter
-            anchors.top: background.top
-            text: qsTr("<h1>Use arrow key to navigation</h1><br/>")
-            wrapMode: Text.WordWrap
-            width: 800
-            horizontalAlignment: Text.Center
-        }
-    }
-    Slide {
-        Image {
-            id: startReproduction
-            source: "2-start-reproduction.png"
-            anchors.centerIn: parent
-            anchors.top: background.bottom
-            width: 810
-            height: 485
-            fillMode: Image.PreserveAspectFit
-        }
-    }
-
-    Slide {
-        Image {
-            id: itsYourSystem
-            source: "3-its-your-system.png"
-            anchors.centerIn: parent
-            anchors.top: background.bottom
-            width: 810
-            height: 485
-            fillMode: Image.PreserveAspectFit
-        }
-    }
-
-    Slide {
-        Image {
-            id: eggsPresentation
-            source: "4-eggs-presentation.png"
-            anchors.centerIn: parent
-            anchors.top: background.bottom
-            width: 810
-            height: 485
-            fillMode: Image.PreserveAspectFit
-        }
-    }
-
-    Slide {
-        Image {
-            id: waitHatching
-            source: "5-wait-hatching.png"
-            anchors.centerIn: parent
-            anchors.top: background.bottom
-            width: 810
-            height: 485
-            fillMode: Image.PreserveAspectFit
-        }
-    }
-
-    Slide {
-        Image {
-            id: followPenguins
-            source: "6-follow-penguins.png"
-            anchors.centerIn: parent
-            anchors.top: background.bottom
-            width: 810
-            height: 485
-            fillMode: Image.PreserveAspectFit
-        }
-
-    }
-
-    Slide {
-        Image {
-            id: createdBy
-            source: "7-created-by.png"
-            anchors.centerIn: parent
-            anchors.top: background.bottom
-            width: 810
-            height: 485
-            fillMode: Image.PreserveAspectFit
-        }
-
-    }
     
-    
-        Slide {
+    Slide {
         Image {
             id: createdBy8
             source: "8-created-by.png"
@@ -123,7 +24,7 @@ Presentation
     }
     
     
-        Slide {
+    Slide {
         Image {
             id: createdBy9
             source: "9-created-by.png"
@@ -137,7 +38,7 @@ Presentation
     }
     
     
-            Slide {
+    Slide {
         Image {
             id: createdBy10
             source: "10-created-by.png"
@@ -161,12 +62,11 @@ Presentation
             height: 485
             fillMode: Image.PreserveAspectFit
         }
-        
     }
  
  
     
-      Slide {
+    Slide {
         Image {
             id: createdBy12
             source: "12-created-by.png"
@@ -179,7 +79,7 @@ Presentation
         
     }
     
-          Slide {
+    Slide {
         Image {
             id: createdBy13
             source: "13-created-by.png"
