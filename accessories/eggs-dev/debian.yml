@@ -53,10 +53,13 @@ sequence:
     - python-dev
     - python-pip
     - python-venv
+    # ruby
+    - ruby
 customize:
   scripts:
     - echo -e "\n# wardrobe\nfs.inotify.max_user_watches=524288" >> /etc/sysctl.conf
     - npm i pnpm -g
     - sudo -u ${SUDO_USER} pnpm install-completion bash
+    - gem install fpm
     - ../../scripts/tools-jq.sh
     
