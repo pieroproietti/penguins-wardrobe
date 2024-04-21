@@ -50,9 +50,9 @@ sequence:
     - libxcb-cursor0
     - patchelf
     - python-is-python3
-    - python-dev
-    - python-pip
-    - python-venv
+    - python3-dev
+    - python3-pip
+    - python3-venv
     # ruby
     - ruby
 customize:
