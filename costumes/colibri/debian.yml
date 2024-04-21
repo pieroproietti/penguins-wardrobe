@@ -20,15 +20,6 @@ sequence:
       # contrib
       # non-free
       # non-free-firmware
-    sources_list_d:
-      - rm -f /usr/share/keyrings/anydesk-stable.gpg
-      - >-
-        curl -fsSL "https://keys.anydesk.com/repos/DEB-GPG-KEY" | gpg --dearmor
-        -o /usr/share/keyrings/anydesk-stable.gpg
-      - >-
-        echo "deb [signed-by=/usr/share/keyrings/anydesk-stable.gpg]
-        http://deb.anydesk.com/ all main" | tee
-        /etc/apt/sources.list.d/anydesk-stable.list > /dev/null    
     update: true
     upgrade: true
   packages:
@@ -42,6 +33,7 @@ sequence:
     - spice-vdagent
     - tango-icon-theme
     - thunar
+    - thunar-archive-plugin 
     - xarchiver
     - xfce4-appfinder
     - xfce4-notifyd
