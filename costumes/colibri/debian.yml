@@ -39,6 +39,7 @@ sequence:
     - xfce4-notifyd
     - xfce4-panel
     - xfce4-pulseaudio-plugin
+    - xfce4-screenshooter
     - xfce4-session
     - xfce4-settings
     - xfce4-terminal
