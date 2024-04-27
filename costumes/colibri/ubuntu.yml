@@ -6,25 +6,17 @@ description: >-
   desktop xfce4 plus all that I need to develop eggs, firmwares and anydesk
   repos
 author: artisan
-release: 0.9.1
+release: 0.9.2
 distributions:
   - focal
   - jammy
+  - noble
 sequence:
   repositories:
     sources_list:
       - main
       - contrib
       - non-free
-    sources_list_d:
-      - rm -f /usr/share/keyrings/anydesk-stable.gpg
-      - >-
-        curl -fsSL "https://keys.anydesk.com/repos/DEB-GPG-KEY" | gpg --dearmor
-        -o /usr/share/keyrings/anydesk-stable.gpg
-      - >-
-        echo "deb [signed-by=/usr/share/keyrings/anydesk-stable.gpg]
-        http://deb.anydesk.com/ all main" | tee
-        /etc/apt/sources.list.d/anydesk-stable.list > /dev/null    
     update: true
     upgrade: true
   packages:
