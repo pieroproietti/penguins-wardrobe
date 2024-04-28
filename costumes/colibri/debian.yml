@@ -47,6 +47,9 @@ sequence:
     - xfconf
     - xfdesktop4
     - xfwm4
+    # plymouth
+    - plymouth
+    - plymouth-themes
     # Added gio command
     - libglib2.0-bin
   accessories:
@@ -63,5 +66,6 @@ customize:
     - ../../scripts/config_lightdm.sh
     - ../../scripts/config_g4.sh
     - ../../scripts/hostname.sh
+    - plymouth-set-default-theme bgrt
 reboot: true
 

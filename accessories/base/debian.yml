@@ -3,7 +3,7 @@
 name: base
 description: add spice-vdagent and penguins-eggs-ppa repository
 author: artisan
-release: 0.0.1
+release: 0.2.1
 distributions:
   # debian
   - buster
