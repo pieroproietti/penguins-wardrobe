@@ -67,5 +67,6 @@ customize:
     - ../../scripts/config_g4.sh
     - ../../scripts/hostname.sh
     - plymouth-set-default-theme bgrt
+    - update-initramfs -u
 reboot: true
 

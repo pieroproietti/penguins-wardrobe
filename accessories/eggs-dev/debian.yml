@@ -17,7 +17,6 @@ distributions:
   - focal
   - jammy
   - mantic
-  - noble
 sequence:
   repositories:
     sources_list:
@@ -59,7 +58,8 @@ customize:
   scripts:
     - echo -e "\n# wardrobe\nfs.inotify.max_user_watches=524288" >> /etc/sysctl.conf
     - npm i pnpm -g
-    - sudo -u ${SUDO_USER} pnpm install-completion bash
+    - sudo -u ${SUDO_USER} pnpm completion bash > ~/completion-for-pnpm.bash
+    - sudo -u ${SUDO_USER} echo 'source ~/completion-for-pnpm.bash' >> ~/.bashrc
     - gem install fpm
     - ../../scripts/tools-jq.sh
     
