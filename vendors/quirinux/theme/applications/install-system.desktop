@@ -4,7 +4,7 @@ Version=1.0
 Name=Install Quirinux
 Comment=Install system on hard disk
 
-Exec=/sbin/install-system.sh
+Exec=/usr/sbin/install-system.sh
 Keywords=calamares;system;install
 Icon=install-system
 Terminal=false
