@@ -1,0 +1,29 @@
+componentName: lastos
+images:
+  productIcon: lastos-logo.png
+  productLogo: lastos-logo.png
+  productWelcome: welcome.png
+slideshow: show.qml
+slideshowAPI: 1
+strings:
+  bootloaderEntryName: LinuxMint
+  knownIssuesUrl: https://github.com/pieroproietti/penguins-eggs/issues/
+  productName: LASTOSLINUX
+  productUrl: https://www.linuxmint.com/
+  releaseNotesUrl: http://linuxmint-troubleshooting-guide.readthedocs.io/en/latest/
+  shortProductName: LastOSLinux
+  shortVersion: 2024.06.23
+  shortVersionedName: LASTOSLINUX 2024-06-23
+  supportUrl: https://forums.linuxmint.com/
+  version: '2024-06-23'
+  versionedName: LastOSLinux (2024.06.23)
+style:
+  SidebarBackground: '#292F34'
+  SidebarBackgroundCurrent: '#D35400'
+  SidebarText: '#FFFFFF'
+  SidebarTextCurrent: '#292F34'
+  sidebarBackground: '#292F34'
+  sidebarBackgroundCurrent: '#D35400'
+  sidebarText: '#FFFFFF'
+  sidebarTextCurrent: '#292F34'
+welcomeStyleCalamares: true
