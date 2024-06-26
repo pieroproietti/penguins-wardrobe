@@ -1,0 +1,9 @@
+# custom.yaml
+---
+root_passwd: root
+snapshot_basename: Linux
+snapshot_prefix: LastOS
+user_opt_passwd: live
+user_opt: live
+timezone: Australia/Hobart
+
