@@ -16,7 +16,7 @@ distributions:
   # ubuntu
   - focal
   - jammy
-  - mantic
+  - noble
 sequence:
   repositories:
     sources_list:
