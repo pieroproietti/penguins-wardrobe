@@ -9,6 +9,7 @@ author: artisan
 release: 0.0.1
 distributions:
   - bookworm
+  - noble
 sequence:
   repositories:
     sources_list:
