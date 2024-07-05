@@ -1,0 +1,21 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Install Peppermint
+Name[bg]=Инсталиране на Peppermint
+Name[es]=Instale Peppermint
+Name[fr]= Installer Peppermint
+Name[hu]=Telepítse a Peppermint
+Name[it]=Installare Peppermint
+Name[ja]=インストール  Peppermint
+Name[pt]=Instalar Peppermint
+Name[pt_BR]=Instalar Peppermint
+Name[ru]=Установить Peppermint
+Exec=install-peppermint
+Icon=/usr/share/pixmaps/install-debian.png
+Terminal=false
+Categories=Settings
+Comment=Calamares — Installer for Peppermint Live
+Keywords=calamares;system;install;peppermint;installer
+StartupNotify=True
+StartupWMClass=calamares

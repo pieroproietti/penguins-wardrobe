@@ -1,0 +1,163 @@
+/*########Current Calamares Styles##########*/
+/* These "Q's" are master styles for overall colours */
+#mainApp {background-color: #C0C0C0;
+          font-family: Cantarell;
+          font-weight: bold;
+          color: #000000
+          }
+
+/* Set the entire Font and Background color */
+QWidget { color: #000000 ;
+          background-color: #C0C0C0;
+          font-family: Cantarell;
+          font: 14px; }
+
+#globalStorageTab { background-color: #C0C0C0 }
+
+/* Set Drop Down Font and Background color */
+QComboBox { font: 14px ;
+            color: #000000 ;
+            background-color: #ffffff ;
+            padding: 2px ;
+            border-radius: 10px
+            }
+
+#languageWidget { font: 14px ;
+                  color: #111111 ;
+                  background-color: #ffffff ;
+                  text-align: center ;
+                  border-radius: 6px
+                  }
+
+/* Set the inline Text box edit Font and Background color */
+QLineEdit { font: 14px;
+            color: #111111;
+            background-color: #ffffff;
+            border-color: #000000
+            }
+
+/* Set List box Font and Background color */
+QListView { font: 14px;
+            color: #000000;
+            background-color: #ffffff;
+            alternate-background-color: #C0C0C0;
+            padding: 2px;
+            border-radius: 4px
+            }
+
+#layoutSelector {}
+
+/* Set the TreeView Font and Background color */
+QTreeView { color: #000000;
+            background-color: #ffffff;
+            border-radius: 14px
+            }
+
+/* Set buttons Font and Background color */
+QPushButton { font: 14px;
+              color: #000000;
+              background-color: #C0C0C0;
+              border-color: #000000;
+              border-width: 10px;}
+
+#view-button-back { font: 14px;
+                    background-color: #C0C0C0
+                    }
+#view-button-back:hover { font: 14px;
+                          color: #000000;
+                          background-color: #ffffff;
+                          border-color: #000000
+                          }
+#view-button-next { font: 14px;
+                    background-color: #C0C0C0;
+                    border-color: #000000
+                    }
+#view-button-next:hover { font: 14px;
+                          color: #000000;
+                          background-color: #ffffff;
+                          border-color: #000000
+                          }
+#view-button-cancel { font: 14px;
+                      background-color: #C0C0C0;
+                      border-color: #000000
+                      }
+#view-button-cancel:hover { font: 14px;
+                            color: #000000;
+                            background-color: #ffffff;
+                            border-color: #000000;
+                            }
+#view-button-install { font: 14px;
+                       color: #C0C0C0;
+                       border-color: #000000
+                       }
+#view-button-done { font: 14px;
+                    color: #000000;
+                    border-color: #000000
+                   }
+
+/* Set the color in the keyboard selection */
+#layoutSelector { selection-background-color: #F62817 }
+#variantSelector { selection-background-color: #F62817 }
+
+/* Set the CheckBox size and Background color */
+QCheckBox { color: #000000;
+            background-color: #C0C0C0;
+            border-width: 2px;
+            border-color: #000000
+            }
+
+m_encryptCheckBox { font: 14px;
+                    color: #F62817;
+                    background-color: #C0C0C0;
+                    border-radius: 4px;
+                    padding: 6px
+                    }
+
+checkBoxDoAutoLogin { font: 14px;
+                      color: #000000;
+                      background-color: #C0C0C0;
+                      padding: 4px
+                      }
+
+restartCheckBox { font: 14px;
+                  color: #000000;
+                  background-color: #C0C0C0;
+                  border-color: #000000;
+                  border-radius: 8px;
+                  height: 16px;
+                  width: 100px;
+                  padding: 4px
+                  }
+
+#QCheckBox#restartCheckBox::indicator:checked { image: url(/usr/share/pixmaps/ckm.png) }
+
+/* Set the color when selected */
+QRadioButton { color: #000000;
+               background-color: #C0C0C0;
+               padding: 4px;
+               border-radius: 4px
+               }
+QComboBoxPrivateContainer { background-color: #ffffff }
+QComboBoxListView { background-color: #ffffff }
+qt_scrollarea_hcontainer { background-color: #ffffff }
+qt_scrollarea_vcontainer { background-color: #ffffff }
+QRadioButton::indicator { width: 18px ; height: 18px }
+QRadioButton::indicator::checked { image: url(/usr/share/pixmaps/peppermint.png) }
+QRadioButton::indicator::checked:hover { image: url(/usr/share/pixmaps/peppermint-fm-20.png) }
+QRadioButton::indicator::unchecked:hover { image: url(/usr/share/pixmaps/peppermint-inst.png) }
+
+/* Set the tip Font and Background color */
+QToolTip { font: 14px;
+           color: #000000;
+           background-color: #ffffff;
+           padding: 4px;
+           border-radius: 4px
+           }
+
+/* Set the Progress Bar alignment and load color */
+QProgressBar { text-align: center }
+QProgressBar::chunk { background-color: #F62817 }
+
+#debugButton {font: }
+#sidebarMenuApp{ background-color: #C0C0C0 }
+#tabWidget { background-color: #C0C0C0 }

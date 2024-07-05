@@ -1,0 +1,34 @@
+---
+componentName:   peppermint
+welcomeStyleCalamares: false
+welcomeExpandingLogo: true
+windowExpanding: normal
+windowSize: 700,450
+windowPlacement: center
+
+strings:
+    productName:         Peppermint
+    shortProductName:    Peppermint
+    version:             00
+    shortVersion:        00
+    versionedName:       Peppermint
+    shortVersionedName:  Peppermint
+    bootloaderEntryName: Peppermint
+    productUrl:          https://peppermintos.com
+    supportUrl:          https://sourceforge.net/p/peppermintos/pepos/
+    releaseNotesUrl:     https://peppermintos.com
+
+images:
+    productLogo:         "pep-logo.png"
+    productIcon:         "pep-logo.png"
+    productWelcome:      "welcome.png"
+
+slideshow:               "show.qml"
+
+style:
+   sidebarBackground:    "#C0C0C0"
+   sidebarText:          "#000000"
+   sidebarTextSelect:    "#ffffff"
+   sidebarTextHighlight: "#f62817"
+
+
