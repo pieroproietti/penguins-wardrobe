@@ -1,0 +1,9 @@
+# custom.yaml
+---
+root_passwd: root
+snapshot_basename: predator-os
+snapshot_prefix: ''
+user_opt_passwd: user
+user_opt: user
+timezone: Europe/Rome
+
