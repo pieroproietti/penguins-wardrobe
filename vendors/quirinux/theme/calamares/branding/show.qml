@@ -40,7 +40,7 @@ text: qsTr("<h1>Quirinux GNU/Linux Versión 2.0</h1>"+
 
 "<h3>https://www.quirinux.org/</h3><br/>"+
 
-"<b>Versión:</b> 2.0 Estable 07-08-2024<br/><br/>"+
+"<b>Versión:</b> 2.0 RC 14-06-2024<br/><br/>"+
 
 "<b>Autor:</b> Charlie Martínez.<br/><br/>"+
 
@@ -51,8 +51,8 @@ text: qsTr("<h1>Quirinux GNU/Linux Versión 2.0</h1>"+
 "<b>Agradecimiento a usuarios, colaboradores y beta-testers:</b><br/>"+
 "Alicia Coria, Axel Oil, Facundo Redoni (AnimaTics), Gustavo Deveze, Gustav González (Tupi),<br/>"+
 "Jeremy Bullock, Leonardo Bensingor, Luis Federichi (qepd), Manong John (Tahoma2D),<br/>"+
-"Manuel González, Martín Figuera, Noelia Gerbaudo, Pablo López (Etertics), Patricia Mengui,<br/>"+
-"Riky Linux, Sela González.<br/><br/>"+
+"Manuel González, Martín Figuera, Noelia Gerbaudo, Pablo López (Etertics),<br/>"+
+"Patricia Mengui, Riky Linux, Sela González.<br/><br/>"+
 
 "<b>Hecho en:</b> Buenos Aires (Argentina), Misiones (Argentina), Roma (Italia) y Stgo. de Compostela (Galicia, España).<br/>"+
 "<b>Quirinux</b> es Marca Registrada.<b> Distribuidor oficial:</b> CREALIB TECNOLOGÍA SOSTENIBLE.<br/>"+
