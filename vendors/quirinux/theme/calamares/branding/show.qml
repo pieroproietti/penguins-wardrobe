@@ -31,20 +31,30 @@ Presentation
          Text {
             font.family: "Ubuntu"
             font.pixelSize : 12
-            color: "#aa3333"
+            color: "#6d526b"
             anchors.horizontalCenter: slide1.horizontalCenter
-text: qsTr("<h1>Quirinux GNU/Linux Versión 2.0</h1>"+
-"<h2>Basado en Devuan (Debian) GNU/Linux</h2>"+
-"<h3>https://www.quirinux.org/</h3><br/>"+
-"Autor: Charlie Martínez. Logotipo Quirinux: Thomas Gaya.<br/><br/>"+
-"Agradecimientos a: Alicia Coria, Gustav González (Tupi), Gustavo Deveze, Jeremy Bullock, <br/>"+
-"Luis Federichi, Manong John (Tahoma2D), Pablo López (Etertics), Patricia Mengui, Riky Linux<br/><br/>"+
-"Beta-testers: Facundo Redoni (AnimaTics),  Martín Figuera, Gustavo Deveze,<br/>Noelia Gerbaudo, Leonardo Bensingor, y Sela González<br/><br/>"+
-"Capacitación interna y asesoramiento técnico al desarrollo: Javier Obregón<br/><br/>"+
-"Sistema de creación ISO usado en pruebas de concepto: Penguins' Eggs, de Piero Proietti.<br/>"+
-"Wallpapers: Beatriz Barcelona, Charlie Martínez, Ernesto Bazzano, Geri Ratcliffe, Leonardo Bensingor y Noelia Gerbaudo<br/><br/>"+
-"Hecho en Buenos Aires (Argentina), Roma (Italia) y Santiago de Compostela (Galicia, España).<br/>"+
-"Dedicado a Emilio Gorini (qepd).")
+
+text: qsTr("<h1>Quirinux GNU/Linux Versión 2.0</h1>" + 
+
+"<h2>Basado en Devuan (Debian) GNU/Linux</h2>" + 
+
+"<h3>https://www.quirinux.org/</h3><br/>" +
+
+"<b>Versión:</b> 2.0 RC 14-06-2024<br/><br/>" +
+
+"<b>Autor:</b> Charlie Martínez.<br/><br/>" +
+
+"<b>Logotipo Quirinux:</b> Thomas Gaya.<br/>"+
+"<b>Sistema de Creación ISO:</b> Penguins' Eggs, de Piero Proietti.<br/>"+
+"<b>Capacitación y Auditoria Técnica Interna:</b> Javier Obregón.<br/><br/>"+
+
+"Agradecimiento a la comunidad de usuarios que colaboraron<br/>"+ 
+"como beta-testers y en la difusión del proyecto.<br/><br/>" +
+
+"<b>Hecho en:</b> Buenos Aires (Argentina), Misiones (Argentina), Roma (Italia) y Stgo. de Compostela (Galicia, España).<br/>"+
+"<b>Quirinux</b> es Marca Registrada.<b> Distribuidor oficial:</b> CREALIB TECNOLOGÍA SOSTENIBLE.<br/>"+
+
+"<b>Dedicado a Emilio Gorini (qepd).</b>")
             wrapMode: Text.WordWrap
             width: kde.width
             horizontalAlignment: Text.Center
