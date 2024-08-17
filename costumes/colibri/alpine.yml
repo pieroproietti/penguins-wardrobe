@@ -23,37 +23,13 @@ sequence:
     - mesa-dri-gallium
 
     # alpine 
-    - adwaita-qt
-    - firefox
-    - libxfce4ui-utils
-    - lightdm
-    - lightdm-gtk-greeter
-    - network-manager-gnome
-    - qt5ct
-    - spice-vdagent
-    - tango-icon-theme
-    - thunar
-    - thunar-archive-plugin 
-    - xarchiver
-    - xfce4-appfinder
-    - xfce4-notifyd
-    - xfce4-panel
-    - xfce4-pulseaudio-plugin
-    - xfce4-screenshooter
-    - xfce4-session
-    - xfce4-settings
-    - xfce4-terminal
-    - xfce4-whiskermenu-plugin
-    - xfconf
-    - xfdesktop4
-    - xfwm4
-    # plymouth
-    - plymouth
-    - plymouth-themes
-    # da alpine
+    - xfce4
     - consolekit2
     - gvfs
+    - lightdm
+    - lightdm-gtk-greeter
     - polkit
+    - xfce4-terminal
     - neofetch
 
   accessories:
