@@ -29,11 +29,15 @@ sequence:
     - xrandr
 
     # xfce4
+    - adwaita-qt
     - consolekit2
+    - firefox
     - gvfs
     - lightdm
     - lightdm-gtk-greeter
     - polkit
+    - qt5ct
+    - setxkbmap
     - tango-icon-theme
     - thunar
     - thunar-archive-plugin 
