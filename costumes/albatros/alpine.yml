@@ -15,6 +15,13 @@ sequence:
     upgrade: true
 
   packages:
+    # setup-xord-base
+    - xorg-server
+    - xf86-input-libinput
+    - xinit 
+    - eudev 
+    - mesa-dri-gallium
+
     - ark
     - bluedevil
     - breeze
@@ -68,6 +75,8 @@ sequence:
 customize:
   dirs: true
   scripts:
+  # setup-xorg-base
+  - setup-devd udev
   # alpine
   - rc-update add dbus
   - rc-update add sddm
