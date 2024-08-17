@@ -28,14 +28,29 @@ sequence:
     - xdg-user-dirs
     - xrandr
 
-    # alpine 
-    - xfce4
+    # xfce4
     - consolekit2
     - gvfs
     - lightdm
     - lightdm-gtk-greeter
     - polkit
+    - tango-icon-theme
+    - thunar
+    - thunar-archive-plugin 
+    - xarchiver
+    - xfce4
+    - xfce4-appfinder
+    - xfce4-notifyd
+    - xfce4-panel
+    - xfce4-pulseaudio-plugin
+    - xfce4-screenshooter
+    - xfce4-session
+    - xfce4-settings
     - xfce4-terminal
+    - xfce4-whiskermenu-plugin
+    - xfwm4
+
+    # neofetch
     - neofetch
 
   accessories:
