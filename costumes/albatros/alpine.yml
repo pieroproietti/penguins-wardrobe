@@ -1,0 +1,86 @@
+# wardrobe: .
+# distro: arch
+# costume: albatros
+---
+name: albatros
+description: >-
+  desktop kde plus all that I need to develop eggs, firmwares
+author: artisan
+release: 0.0.1
+distributions:
+  - alpine
+sequence:
+  repositories:
+    update: true
+    upgrade: true
+
+  packages:
+    - ark
+    - bluedevil
+    - breeze
+    - breeze-gtk
+    - dbus
+    - discover
+    - drkonqi
+    - font-noto
+    - gwenview
+    - kate
+    - kde-cli-tools
+    - kde-gtk-config
+    - kde-icons
+    - kdeplasma-addons
+    - kgamma
+    - kinfocenter
+    - kio-fuse
+    - kmenuedit
+    - konsole
+    - kscreen
+    - ksshaskpass
+    - kwallet-pam
+    - kwayland-integration
+    - pinentry-qt
+    - pipewire-alsa
+    - pipewire-pulse
+    - plasma-browser-integration
+    - plasma-desktop
+    - plasma-disks
+    - plasma-nm
+    - plasma-pa
+    - plasma-systemmonitor
+    - plasma-vault
+    - plasma-welcome
+    - plasma-workspace-wallpapers
+    - polkit-elogind
+    - polkit-kde-agent-1
+    - powerdevil
+    - print-manager
+    - sddm-breeze
+    - sddm-kcm
+    - spectacle
+    - systemsettings
+    - udisks2
+    - xdg-desktop-portal-kde
+    - xdg-user-dirs
+  
+  #accessories:
+  #  - eggs-dev
+
+customize:
+  dirs: true
+  scripts:
+  # alpine
+  - rc-update add dbus
+  - rc-update add sddm
+
+  # standard
+  - ../../scripts/config_desktop_link.sh
+  #- ../../scripts/config_lightdm.sh
+  - ../../scripts/hostname.sh
+
+reboot: true
+
+
+  
+			
+		;;
+
