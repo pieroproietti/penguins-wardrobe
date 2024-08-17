@@ -10,9 +10,9 @@ sequence:
     update: true
     upgrade: true
   packages:
-    - code-oss@edge
+    - code-oss@testing
     - nodejs
-    - pnpm
+    - pnpm@edge
 customize:
   scripts:
     - echo -e "\n# wardrobe\nfs.inotify.max_user_watches=524288" >> /etc/sysctl.conf
