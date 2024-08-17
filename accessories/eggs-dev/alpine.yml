@@ -14,4 +14,8 @@ sequence:
     - code-oss@testing
     - nodejs
     - pnpm@edge
+  customize:
+    scripts:
+      - ln -s /usr/bin/code /usr/bin/code-oss
+
     
