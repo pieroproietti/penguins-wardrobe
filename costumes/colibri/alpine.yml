@@ -25,6 +25,7 @@ sequence:
     # spice-vdagent
     - spice-vdagent
     - spice-vdagent-openrc
+    - xdg-user-dirs
     - xrandr
 
     # alpine 
