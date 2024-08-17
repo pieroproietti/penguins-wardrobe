@@ -1,0 +1,20 @@
+# eggs-dev
+---
+name: eggs-dev
+description: 'add repositories: nodesource, code, install: nodejs, code'
+author: artisan
+distributions:
+  - alpine
+sequence:
+  repositories:
+    update: true
+    upgrade: true
+  packages:
+    - code-oss@edge
+    - nodejs
+    - pnpm
+customize:
+  scripts:
+    - echo -e "\n# wardrobe\nfs.inotify.max_user_watches=524288" >> /etc/sysctl.conf
+    - doas -u ${DOAS_USER} pnpm install-completion bash
+    

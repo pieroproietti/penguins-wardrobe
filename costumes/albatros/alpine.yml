@@ -69,8 +69,8 @@ sequence:
     - xdg-desktop-portal-kde
     - xdg-user-dirs
   
-  #accessories:
-  #  - eggs-dev
+  accessories:
+    - eggs-dev
 
 customize:
   dirs: true
