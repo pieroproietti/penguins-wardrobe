@@ -24,12 +24,12 @@ sequence:
 
     # alpine xfce4 https://gitlab.alpinelinux.org/alpine/alpine-conf/-/blob/master/setup-desktop.in?ref_type=heads
     - firefox
-	  - consolekit2
-		- gvfs
-		- lightdm
-		- lightdm-gtk-greeter
-		- polkit
-		- xfce4-terminal
+    - consolekit2
+    - gvfs
+    - lightdm
+    - lightdm-gtk-greeter
+    - polkit
+    - xfce4-terminal
     - neofetch
 
   accessories:
@@ -42,7 +42,7 @@ customize:
   - setup-devd udev
   # alpine
   - rc-update add dbus
-	- rc-update add lightdm
+  - rc-update add lightdm
 
 
   # standard
