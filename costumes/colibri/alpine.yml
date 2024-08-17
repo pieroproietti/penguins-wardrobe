@@ -36,7 +36,7 @@ sequence:
     - lightdm
     - lightdm-gtk-greeter
     - polkit
-    - qt5ct
+    - qt5ct@testing
     - setxkbmap
     - tango-icon-theme
     - thunar
