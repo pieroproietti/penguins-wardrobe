@@ -10,7 +10,7 @@ sequence:
     update: true
     upgrade: true
   packages:
-    - electron
+    #- electron # problem on code-oss
     - code-oss@testing
     - nodejs
     - pnpm@edge
