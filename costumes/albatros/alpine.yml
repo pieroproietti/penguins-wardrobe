@@ -22,6 +22,11 @@ sequence:
     - eudev 
     - mesa-dri-gallium
 
+    # spice-vdagent
+    - spice-vdagent
+    - spice-vdagent-openrc
+    - xrandr
+
     - ark
     - bluedevil
     - breeze
@@ -77,6 +82,10 @@ customize:
   scripts:
   # setup-xorg-base
   - setup-devd udev
+
+  # setup spice-vdagentd
+  - rc-update add spice-vdagentd
+
   # alpine
   - rc-update add dbus
   - rc-update add sddm

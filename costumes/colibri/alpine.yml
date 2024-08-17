@@ -25,6 +25,7 @@ sequence:
     # spice-vdagent
     - spice-vdagent
     - spice-vdagent-openrc
+    - xrandr
 
     # alpine 
     - xfce4
@@ -44,8 +45,9 @@ customize:
   scripts:
   # setup-xorg-base
   - setup-devd udev
+
+  # setup spice-vdagentd
   - rc-update add spice-vdagentd
-  #- rc-service spice-vdagentd start
 
   # alpine
   - rc-update add dbus
