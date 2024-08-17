@@ -78,9 +78,3 @@ customize:
   - ../../scripts/hostname.sh
 
 reboot: true
-
-
-  
-			
-		;;
-
