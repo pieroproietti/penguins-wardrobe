@@ -4,7 +4,7 @@
 ---
 name: colibri
 description: >-
-  desktop xfce4 plus all that I need to develop eggs, firmwares
+  desktop xfce4 plus all that I need to develop eggs, no firmwares
 author: artisan
 release: 0.0.1
 distributions:
@@ -78,5 +78,5 @@ customize:
   - ../../scripts/config_desktop_link.sh
   - ../../scripts/config_lightdm.sh
   - ../../scripts/hostname.sh
-
+  - ../../scripts/config_g4.sh
 reboot: true

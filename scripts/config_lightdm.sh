@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# doas compatibile
+if [[ -n "$DOAS_USER" ]]; then
+    SUDO_USER="$DOAS_USER"
+fi
+
 COSTUME=$1
 BACKGROUND=$(ls /usr/share/backgrounds/"${COSTUME}"/*.jpg)
 

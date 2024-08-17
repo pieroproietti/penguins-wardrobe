@@ -3,8 +3,7 @@
 ---
 name: colibri
 description: >-
-  desktop xfce4 plus all that I need to develop eggs, firmwares and anydesk
-  repos
+  desktop xfce4 plus all that I need to develop eggs, firmwares
 author: artisan
 release: 0.9.1
 distributions:
