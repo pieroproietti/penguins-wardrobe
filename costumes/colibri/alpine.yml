@@ -22,6 +22,10 @@ sequence:
     - eudev 
     - mesa-dri-gallium
 
+    # spice-vdagent
+    - spice-vdagent
+    - spice-vdagent-openrc
+
     # alpine 
     - xfce4
     - consolekit2
@@ -40,6 +44,9 @@ customize:
   scripts:
   # setup-xorg-base
   - setup-devd udev
+  - rc-update add spice-vdagentd
+  #- rc-service spice-vdagentd start
+
   # alpine
   - rc-update add dbus
   - rc-update add lightdm
