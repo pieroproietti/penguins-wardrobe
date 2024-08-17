@@ -24,7 +24,7 @@ sequence:
 
     # alpine 
       - adwaita-qt
-      - firefox-esr
+      - firefox
       - libxfce4ui-utils
       - lightdm
       - lightdm-gtk-greeter
@@ -52,8 +52,8 @@ sequence:
       - plymouth-themes
       # da alpine
       - consolekit2
-			- gvfs
-			- polkit
+      - gvfs
+      - polkit
       - neofetch
 
   accessories:
