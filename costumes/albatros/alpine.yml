@@ -73,6 +73,11 @@ sequence:
     - udisks2
     - xdg-desktop-portal-kde
     - xdg-user-dirs
+
+    # some
+    - firefox
+    - vlc
+    - vlc-qt
   
   accessories:
     - eggs-dev
