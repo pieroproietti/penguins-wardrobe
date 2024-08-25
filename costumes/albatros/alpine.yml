@@ -85,7 +85,6 @@ sequence:
 customize:
   dirs: true
   scripts:
-  # setup-xorg-base
   - setup-devd udev
 
   # setup spice-vdagentd

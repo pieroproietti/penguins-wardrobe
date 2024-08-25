@@ -1,7 +1,7 @@
 # eggs-dev
 ---
 name: eggs-dev
-description: 'add repositories: nodesource, code, install: nodejs, code'
+description: 'install: nodejs, npm, code'
 author: artisan
 distributions:
   - alpine
@@ -10,9 +10,9 @@ sequence:
     update: true
     upgrade: true
   packages:
-    #- electron # problem on code-oss
     - code-oss@testing
     - nodejs
+    - npm
     - pnpm@edge
   customize:
     scripts:
