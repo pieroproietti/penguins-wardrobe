@@ -21,6 +21,6 @@ customize:
   scripts:
     - echo -e "\n# wardrobe\nfs.inotify.max_user_watches=524288" >> /etc/sysctl.conf
     - npm i pnpm -g
-    - sudo -u ${SUDO_USER} pnpm install-completion bash
+    # sudo -u ${SUDO_USER} pnpm install-completion bash
     - ../../scripts/tools-jq.sh
     
