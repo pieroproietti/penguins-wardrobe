@@ -34,7 +34,7 @@ sequence:
     - packagekit-qt5
     - partitionmanager
     - plasma
-    - plasma-wayland-session
+    # plasma-wayland-session not exists more
     - qbittorrent
     - screen
     - sddm
