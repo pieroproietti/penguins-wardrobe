@@ -1,0 +1,50 @@
+# wardrobe: .
+# distro: fedora
+# costume: albatros
+---
+name: albatros
+description: >-
+  desktop kde plus all that I need to develop eggs, firmwares
+author: artisan
+release: 0.0.1
+distributions:
+  - fedora
+sequence:
+  repositories:
+    update: true
+    upgrade: true
+
+  packages:
+    # KDE
+    - plasma-workspace-wayland
+    - sddm 
+    - sddm-breeze
+    - konsole
+    - dolphin
+    - ark
+    - kwrite
+    - kio-fuse
+    - plasma-systemmonitor
+    - kscreen
+    - kinfocenter 
+    - plasma-nm
+
+    # others
+    - firefox
+    - vlc
+    - vlc-qt
+  
+  accessories:
+    - eggs-dev
+
+customize:
+  dirs: true # here are customizations
+  scripts:
+  # sddm
+  - systemctl enable sddm
+
+  # standard
+  - ../../scripts/config_desktop_link.sh
+  - ../../scripts/hostname.sh
+
+reboot: true
