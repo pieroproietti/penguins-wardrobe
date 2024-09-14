@@ -17,6 +17,8 @@ sequence:
   packages:
     # KDE
     - plasma-workspace-wayland
+    - plasma-desktop
+    - plasma-settings
     - sddm 
     - sddm-breeze
     - konsole
