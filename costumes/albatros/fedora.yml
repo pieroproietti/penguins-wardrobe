@@ -37,6 +37,9 @@ sequence:
   
   accessories:
     - eggs-dev
+    - grafica
+    - multimedia
+    - office
 
 customize:
   dirs: true # here are customizations
