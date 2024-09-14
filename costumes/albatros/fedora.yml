@@ -32,7 +32,6 @@ sequence:
     # others
     - firefox
     - vlc
-    - vlc-qt
   
   accessories:
     - eggs-dev
