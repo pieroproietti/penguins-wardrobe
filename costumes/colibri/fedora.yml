@@ -1,0 +1,51 @@
+# wardrobe: .
+# distro: fedora
+# costume: colibri
+---
+name: colibri
+description: >-
+  desktop xfce4 plus all that I need to develop eggs, no firmwares
+author: artisan
+release: 0.0.1
+distributions:
+  - fedora
+sequence:
+  repositories:
+    update: true
+    upgrade: true
+
+  packages:
+    # xfce4
+    - lightdm-gtk-greeter
+    - spice-vdagent
+    - xfce4-settings
+    - xfce4-screensaver
+    - xfce4-terminal
+    - xfce4-whiskermenu-plugin
+
+    # spice-vdagent
+    - spice-vdagent
+    - xrandr 
+
+    # stuffs
+    - firefox
+    - neofetch
+
+  #accessories:
+  #  - eggs-dev
+
+customize:
+  dirs: true
+  scripts:
+  # fedora
+  - systemctl set-default graphical.target 
+  - systemctl enable lightdm
+  - systemctl enable spice-vdagentd
+
+
+  # standard
+  - ../../scripts/config_desktop_link.sh
+  - ../../scripts/config_lightdm.sh
+  - ../../scripts/hostname.sh
+  - ../../scripts/config_g4.sh
+reboot: true
