@@ -17,7 +17,7 @@ sequence:
     - lightdm
     - spice-vdagent
   accessories:
-    # grafica
+    - grafica
     # multimedia
     # office
   try_accessories:
