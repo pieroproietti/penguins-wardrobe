@@ -17,15 +17,18 @@ sequence:
     - lightdm
     - spice-vdagent
   accessories:
-    - grafica
-    - multimedia
-    - office
+    # grafica
+    # multimedia
+    # office
   try_accessories:
     # liquorix
     # firmwares
 customize:
   dirs: true
   scripts:
+    - systemctl set-default graphical.target 
+    - systemctl enable lightdm
+    - systemctl enable spice-vdagentd
     - ../../scripts/config_desktop_link.sh
     - ../../scripts/config_lightdm.sh
     - ../../scripts/hostname.sh
