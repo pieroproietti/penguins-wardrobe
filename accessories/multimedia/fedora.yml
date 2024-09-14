@@ -1,0 +1,19 @@
+# multimedia
+---
+name: multimedia
+description: a selection of usefull multimedia packages
+author: artisan
+release: 0.0.1
+distributions:
+  - fedora
+sequence:
+  packages:
+    - audacity
+    - brasero
+    - exfalso
+    - kazam
+    - kdenlive
+    - mediainfo
+    - quodlibet
+    - vlc
+    - xfburn
