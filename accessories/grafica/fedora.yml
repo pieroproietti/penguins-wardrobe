@@ -1,0 +1,20 @@
+# grafica
+---
+name: grafica
+description: grafics packages
+author: artisan
+release: 0.0.1
+distributions:
+  - fedora
+
+sequence:
+  packages:
+    - converseen
+    - dia
+    - gimp
+    - imagemagick
+    - kde-config-tablet
+    - okular
+    - pinta
+    - ristretto
+    - shotwell

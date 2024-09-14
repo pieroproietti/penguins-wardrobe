@@ -14,7 +14,6 @@ distributions:
   - focal
   - jammy
   - rolling
-  - fedora
 sequence:
   sources_list_d:
     - rm -f /etc/apt/sources.list.d/quirinux.list
