@@ -1,8 +1,8 @@
 # wardrobe: penguins-wardrobe
-# costume: duck
+# costume: owl
 ---
 name: duck
-description: desktop cinnamon plus all that we need to enjoy at home and office
+description: Owl is a clone of quirinux by Charlie Martinez
 author: artisan
 release: 0.9.2
 distributions:
@@ -12,17 +12,26 @@ sequence:
     update: true
     upgrade: true
   packages:
-    - '@cinnamon-desktop'
-    - firefox
-    - lightdm
+    # xfce4
+    - lightdm-gtk-greeter
     - spice-vdagent
+    - xfce4-settings
+    - xfce4-screensaver
+    - xfce4-terminal
+    - xfce4-whiskermenu-plugin
+
+    # spice-vdagent
+    - spice-vdagent
+    - xrandr 
+
+    # stuffs
+    - firefox
+    - neofetch
+
   accessories:
     - grafica
     - multimedia
     - office
-  try_accessories:
-    # liquorix
-    # firmwares
 customize:
   dirs: true
   scripts:
