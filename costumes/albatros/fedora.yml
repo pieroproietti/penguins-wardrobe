@@ -28,9 +28,12 @@ sequence:
     - kscreen
     - kinfocenter 
     - plasma-nm
+    - kcmshell
+
 
     # others
     - firefox
+    - neofetch    
     - vlc
   
   accessories:
