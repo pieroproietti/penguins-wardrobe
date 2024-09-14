@@ -12,8 +12,8 @@ sequence:
     - converseen
     - dia
     - gimp
-    - imagemagick
-    - kde-config-tablet
+    # imagemagick
+    # kde-config-tablet
     - okular
     - pinta
     - ristretto
