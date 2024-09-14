@@ -12,8 +12,8 @@ sequence:
     update: true
     upgrade: true
   packages:
-    - cinnamon-desktop-environment
-    - firefox-esr
+    - '@cinnamon-desktop'
+    - firefox
     - lightdm
     - spice-vdagent
   accessories:
