@@ -31,8 +31,8 @@ sequence:
     - firefox
     - neofetch
 
-  #accessories:
-  #  - eggs-dev
+  accessories:
+    - eggs-dev
 
 customize:
   dirs: true
