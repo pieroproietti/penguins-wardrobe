@@ -43,7 +43,7 @@ sequence:
 
   accessories:
     - base
-    - grafica
+    - graphics
     - multimedia
     - office
 customize:

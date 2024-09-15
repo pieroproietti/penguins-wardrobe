@@ -27,7 +27,7 @@ sequence:
   - spice-vdagent
   accessories:
   - base
-  - grafica
+  - graphics
   - multimedia
   - office
   # firmwares

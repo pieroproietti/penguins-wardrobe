@@ -1,7 +1,7 @@
 # grafica
 ---
-name: grafica
-description: grafics packages
+name: graphics
+description: graphics packages
 author: artisan
 release: 0.0.1
 distributions:

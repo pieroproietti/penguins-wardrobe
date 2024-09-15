@@ -49,7 +49,7 @@ sequence:
     - yad
     # lightdm-autologin-greeter # ubuntu seem to need it, Debian install it automatically
   accessories:
-    - grafica
+    - graphics
     - multimedia
     - office
     - base

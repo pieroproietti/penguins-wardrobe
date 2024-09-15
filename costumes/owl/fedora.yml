@@ -29,7 +29,7 @@ sequence:
     - neofetch
 
   accessories:
-    - grafica
+    - graphics
     - multimedia
     - office
 customize:
