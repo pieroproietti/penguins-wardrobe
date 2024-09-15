@@ -49,11 +49,11 @@ sequence:
     - yad
     # lightdm-autologin-greeter # ubuntu seem to need it, Debian install it automatically
   accessories:
+    - base
+    - eggs-dev
     - graphics
     - multimedia
     - office
-    - base
-    - eggs-dev
   try_accessories:
     # firmwares
     # liquorix

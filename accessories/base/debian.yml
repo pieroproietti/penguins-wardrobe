@@ -19,8 +19,6 @@ distributions:
   - jammy
   - mantic
   - noble
-  # arch
-  - rolling  
 sequence:
   repositories:
     sources_list:

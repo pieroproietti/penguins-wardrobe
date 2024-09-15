@@ -42,7 +42,6 @@ sequence:
     - mate-icon-theme-faenza
 
   accessories:
-    - base
     - graphics
     - multimedia
     - office
