@@ -26,6 +26,6 @@ You can contact me by [mail](mailto://pieroproietti@gmail.com) or follow me on
 
 # Copyright and licenses
 
-Copyright (c) 2017, 2023
+Copyright (c) 2017, 2024
 [Piero Proietti](https://penguins-eggs.net/about-me.html), dual licensed under
 the MIT or GPL Version 2 licenses.
