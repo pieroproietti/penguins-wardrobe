@@ -4,9 +4,9 @@
 ---
 name: albatros
 description: >-
-  desktop kde plus all that I need to develop eggs, firmwares
+  desktop kde plus all that I need to develop eggs
 author: artisan
-release: 0.0.1
+release: 0.0.2
 distributions:
   - fedora
 sequence:
@@ -16,24 +16,22 @@ sequence:
 
   packages:
     # KDE
+    - ark
+    - dolphin
+    - kinfocenter 
+    - kio-fuse
+    - konsole
+    - kscreen
+    - kwrite
+    - plasma-nm
+    - plasma-systemmonitor
     - plasma-workspace-wayland
     - sddm 
     - sddm-breeze
-    - konsole
-    - dolphin
-    - ark
-    - kwrite
-    - kio-fuse
-    - plasma-systemmonitor
-    - kscreen
-    - kinfocenter 
-    - plasma-nm
-
 
     # others
     - firefox
     - neofetch    
-    - vlc
   
   accessories:
     - eggs-dev

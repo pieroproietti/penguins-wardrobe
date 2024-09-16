@@ -15,9 +15,6 @@ sequence:
   repositories:
     sources_list:
       - main
-      # contrib
-      # non-free
-      # non-free-firmware
     update: true
     upgrade: true
   packages:

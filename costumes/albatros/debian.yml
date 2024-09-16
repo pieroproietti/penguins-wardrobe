@@ -32,7 +32,7 @@ sequence:
     - git
     - kcalc
     - konsole 
-    # krunner
+    - krunner
     - kwrite
     - neofetch
     - partitionmanager

@@ -15,7 +15,6 @@ sequence:
     upgrade: true
 
   packages:
-
     - alsa-utils 
     - ark
     - audacious
@@ -34,7 +33,6 @@ sequence:
     - packagekit-qt5
     - partitionmanager
     - plasma
-    # plasma-wayland-session not exists more
     - qbittorrent
     - screen
     - sddm
@@ -64,7 +62,6 @@ customize:
 
   # standard
   - ../../scripts/config_desktop_link.sh
-  #- ../../scripts/config_lightdm.sh
   - ../../scripts/hostname.sh
 
 reboot: true

@@ -15,7 +15,7 @@ sequence:
     upgrade: true
 
   packages:
-    # setup-xord-base
+    # setup-xorg-base
     - xorg-server
     - xf86-input-libinput
     - xinit 
@@ -27,6 +27,7 @@ sequence:
     - spice-vdagent-openrc
     - xrandr
 
+    # kde plasma
     - ark
     - bluedevil
     - breeze

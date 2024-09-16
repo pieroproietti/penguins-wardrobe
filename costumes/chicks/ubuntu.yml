@@ -9,13 +9,9 @@ release: 0.0.3
 distributions:
   - focal
   - jammy
+  - noble
 sequence:
   repositories:
-    sources_list:
-      - main 
-      - universe
-      - restricted
-      - multiverse
     update: true
     upgrade: true
   packages:

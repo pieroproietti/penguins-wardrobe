@@ -48,15 +48,12 @@ sequence:
     - xfdesktop4
     - xfwm4
     - yad
-    # lightdm-autologin-greeter # ubuntu seem to need it, Debian install it automatically
   accessories:
     - graphics
     - multimedia
     - office
     - base
     - eggs-dev
-    # firmwares
-    # liquorix
 customize:
   dirs: true
   scripts:
