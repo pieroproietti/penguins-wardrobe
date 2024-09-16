@@ -85,7 +85,7 @@ sequence:
 
 customize:
   dirs: true
-  scripts:
+  cmds:
   - setup-devd udev
 
   # setup spice-vdagentd

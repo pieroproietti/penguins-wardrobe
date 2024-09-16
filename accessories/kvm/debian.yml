@@ -20,5 +20,5 @@ sequence:
     - virtinst
     - virt-manager 
 customize:
-  scripts:
+  cmds:
     - adduser ${SUDO_USER} libvirt

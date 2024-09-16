@@ -50,7 +50,7 @@ sequence:
 
 customize:
   dirs: true
-  scripts:
+  cmds:
   - adduser ${SUDO_USER} epoptes
   - ../../scripts/config_desktop_link.sh
   - ../../scripts/config_lightdm.sh

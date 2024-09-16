@@ -31,7 +31,7 @@ sequence:
         /etc/apt/sources.list.d/pve-no-subscription.list > /dev/null
     update: true
     upgrade: true
-  preinst: 
+  cmds: 
     - hostnamectl set-hostname
     - pve-live.sh
   packages:
@@ -69,7 +69,7 @@ sequence:
     #- firmwares/video-amd
 customize:
   dirs: true
-  scripts:
+  cmds:
     - ../../scripts/config_desktop_link.sh
     - ../../scripts/config_lightdm.sh
 

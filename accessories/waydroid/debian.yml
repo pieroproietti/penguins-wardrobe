@@ -55,7 +55,7 @@ sequence:
     - gbinder-python
     - pyclip
 customize:
-  scripts:
+  cmds:
     - install_waydroid_package_manager.sh
     - install_waydroid_settings.sh
     - install_image_from_local.sh

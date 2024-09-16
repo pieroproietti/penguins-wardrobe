@@ -41,7 +41,7 @@ sequence:
 
 customize:
   dirs: true # here are customizations
-  scripts:
+  cmds:
   - systemctl set-default graphical.target
   - systemctl enable sddm
 

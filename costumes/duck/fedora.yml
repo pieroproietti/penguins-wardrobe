@@ -25,7 +25,7 @@ sequence:
     # firmwares
 customize:
   dirs: true
-  scripts:
+  cmds:
     - systemctl set-default graphical.target 
     - systemctl enable lightdm
     - systemctl enable spice-vdagentd

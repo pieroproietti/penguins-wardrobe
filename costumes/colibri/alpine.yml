@@ -62,7 +62,7 @@ sequence:
 
 customize:
   dirs: true
-  scripts:
+  cmds:
   # setup-xorg-base
   - setup-devd udev
 

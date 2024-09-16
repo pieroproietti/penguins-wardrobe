@@ -47,7 +47,7 @@ sequence:
     - office
 customize:
   dirs: true
-  scripts:
+  cmds:
     # Arch
     - systemctl enable NetworkManager
     - systemctl enable lightdm

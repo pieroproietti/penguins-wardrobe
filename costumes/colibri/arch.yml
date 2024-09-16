@@ -44,7 +44,7 @@ sequence:
 
 customize:
   dirs: true
-  scripts:
+  cmds:
   # arch
   - groupadd -r autologin
   - gpasswd -a "${SUDO_USER}" autologin

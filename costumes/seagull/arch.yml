@@ -20,7 +20,7 @@ sequence:
     - waydroid-image
 customize:
   dirs: true
-  scripts:
+  cmds:
   # arch
   - gpasswd -a "${SUDO_USER}" autologin
   - groupadd -r autologin

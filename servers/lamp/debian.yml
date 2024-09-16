@@ -30,7 +30,7 @@ sequence:
   
 customize:
   dirs: true
-  scripts:  
+  cmds:  
     - ../../scripts/hostname.sh
 
 reboot: true

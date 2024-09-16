@@ -31,7 +31,7 @@ sequence:
       - echo "deb [arch=arm64] https://mirrors.apqa.cn/proxmox/debian/pve bookworm port">/etc/apt/sources.list.d/pveport.list
     update: true
     upgrade: true
-  preinst: 
+  cmds: 
     - hostnamectl set-hostname
     - pve-live.sh
   packages:
@@ -68,7 +68,7 @@ sequence:
     - base
 customize:
   dirs: true
-  scripts:
+  cmds:
     - ../../scripts/config_desktop_link.sh
     - ../../scripts/config_lightdm.sh
 

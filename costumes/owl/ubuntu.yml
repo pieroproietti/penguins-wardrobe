@@ -56,7 +56,7 @@ sequence:
     - eggs-dev
 customize:
   dirs: true
-  scripts:
+  cmds:
     - ../../scripts/config_desktop_link.sh
     - ../../scripts/config_lightdm.sh
     - ../../scripts/hostname.sh

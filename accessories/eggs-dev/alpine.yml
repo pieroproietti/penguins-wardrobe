@@ -15,7 +15,7 @@ sequence:
     - npm
     - pnpm@edge
   customize:
-    scripts:
+    cmds:
       - ln -s /usr/bin/code-oss /usr/bin/code
 
     

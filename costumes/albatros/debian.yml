@@ -52,7 +52,7 @@ sequence:
 
 customize:
   dirs: true
-  scripts:
+  cmds:
   # standard
   - ../../scripts/config_desktop_link.sh
   #- ../../scripts/config_lightdm.sh

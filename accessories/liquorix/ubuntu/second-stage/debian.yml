@@ -7,7 +7,7 @@ distributions:
   - focal
   - jammy
 sequence:
-  preinst:
+  cmds:
    - add-apt-repository ppa:damentz/liquorix -y && sudo apt-get update
   packages:
    - linux-image-liquorix-amd64 

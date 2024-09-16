@@ -60,7 +60,7 @@ sequence:
     # python3-dev
 customize:
   dirs: true
-  scripts:
+  cmds:
     - ../../scripts/config_desktop_link.sh
     - ../../scripts/config_lightdm.sh
     - ../../scripts/config_g4.sh
