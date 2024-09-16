@@ -10,6 +10,6 @@ distributions:
 sequence:
   packages:
     - software-properties-common
-  try_accessories:
+  accessories:
     - ./second-stage
 

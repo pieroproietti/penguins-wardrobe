@@ -13,7 +13,7 @@ distributions:
   - jammy
   - kinetic
 sequence:
-  try_accessories:
+  accessories:
     - ./debian
     - ./devuan
     - ./ubuntu

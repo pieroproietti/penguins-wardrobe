@@ -20,7 +20,6 @@ sequence:
     - graphics
     - multimedia
     - office
-  try_accessories:
     # liquorix
     # firmwares
 customize:

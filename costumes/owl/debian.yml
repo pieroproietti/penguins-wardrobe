@@ -54,8 +54,6 @@ sequence:
     - graphics
     - multimedia
     - office
-
-  try_accessories:
     # firmwares
     # liquorix
 

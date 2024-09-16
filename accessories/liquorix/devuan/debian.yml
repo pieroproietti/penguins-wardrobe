@@ -7,6 +7,6 @@ distributions:
   - chimaera
   - daedalus
 sequence:
-  try_accessories:
+  accessories:
     - ./chimaera
     - ./daedalus
