@@ -31,8 +31,8 @@ sequence:
     - office
     # liquorix
     - firmwares
-customize:
-  dirs: true
+finalize:
+  customize: true
   cmds:
     - ../../scripts/config_desktop_link.sh
     - ../../scripts/config_lightdm.sh

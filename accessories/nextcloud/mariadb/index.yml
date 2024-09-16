@@ -9,7 +9,7 @@ sequence:
   packages:
   - mariadb-server
   - mariadb-client
-customize:
+finalize:
   cmds:
     - mysql_secure_installation
     - mysql -u root -p < create-database.nextcloud.sql

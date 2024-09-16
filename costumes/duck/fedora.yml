@@ -22,8 +22,8 @@ sequence:
     - office
     # liquorix
     # firmwares
-customize:
-  dirs: true
+finalize:
+  customize: true
   cmds:
     - systemctl set-default graphical.target 
     - systemctl enable lightdm

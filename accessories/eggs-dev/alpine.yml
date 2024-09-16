@@ -14,7 +14,7 @@ sequence:
     - nodejs
     - npm
     - pnpm@edge
-  customize:
+  finalize:
     cmds:
       - ln -s /usr/bin/code-oss /usr/bin/code
 

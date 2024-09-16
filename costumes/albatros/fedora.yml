@@ -39,8 +39,8 @@ sequence:
     - multimedia
     - office
 
-customize:
-  dirs: true # here are customizations
+finalize:
+  customize: true # here are customizations
   cmds:
   - systemctl set-default graphical.target
   - systemctl enable sddm

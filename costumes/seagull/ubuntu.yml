@@ -34,8 +34,8 @@ sequence:
     - eggs-dev
     # firmwares-light
     - waydroid
-customize:
-  dirs: true
+finalize:
+  customize: true
   cmds:
     - ../../scripts/config_desktop_link.sh
     - ../../scripts/config_gdm3.sh

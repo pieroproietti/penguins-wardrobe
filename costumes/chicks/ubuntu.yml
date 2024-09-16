@@ -48,8 +48,8 @@ sequence:
     - educational
     - office
 
-customize:
-  dirs: true
+finalize:
+  customize: true
   cmds:
   - adduser ${SUDO_USER} epoptes
   - ../../scripts/config_desktop_link.sh

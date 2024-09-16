@@ -32,8 +32,8 @@ sequence:
     - graphics
     - multimedia
     - office
-customize:
-  dirs: true
+finalize:
+  customize: true
   cmds:
     - systemctl set-default graphical.target 
     - systemctl enable lightdm

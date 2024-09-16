@@ -50,8 +50,8 @@ sequence:
     - multimedia
     - office
 
-customize:
-  dirs: true
+finalize:
+  customize: true
   cmds:
   # standard
   - ../../scripts/config_desktop_link.sh

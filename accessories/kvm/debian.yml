@@ -19,6 +19,6 @@ sequence:
     - libvirt-daemon-system
     - virtinst
     - virt-manager 
-customize:
+finalize:
   cmds:
     - adduser ${SUDO_USER} libvirt

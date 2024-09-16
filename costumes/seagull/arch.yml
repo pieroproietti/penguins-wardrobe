@@ -18,8 +18,8 @@ sequence:
     - networkmanager
     - waydroid
     - waydroid-image
-customize:
-  dirs: true
+finalize:
+  customize: true
   cmds:
   # arch
   - gpasswd -a "${SUDO_USER}" autologin

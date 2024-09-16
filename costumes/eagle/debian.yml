@@ -67,8 +67,8 @@ sequence:
     # firmwares/network-cable # no-need installing from proxmox-ve
     #- firmwares/network-wifi 
     #- firmwares/video-amd
-customize:
-  dirs: true
+finalize:
+  customize: true
   cmds:
     - ../../scripts/config_desktop_link.sh
     - ../../scripts/config_lightdm.sh

@@ -28,5 +28,5 @@ sequence:
   - adduser
   - rsync
   debs: true
-customize:
-  dirs: true
+finalize:
+  customize: true

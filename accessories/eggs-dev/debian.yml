@@ -54,7 +54,7 @@ sequence:
     - python3-venv
     # ruby 
     - ruby
-customize:
+finalize:
   cmds:
     - echo -e "\n# wardrobe\nfs.inotify.max_user_watches=524288" >> /etc/sysctl.conf
     - npm i pnpm -g

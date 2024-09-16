@@ -28,8 +28,8 @@ sequence:
   - php
   - php-mysql
   
-customize:
-  dirs: true
+finalize:
+  customize: true
   cmds:  
     - ../../scripts/hostname.sh
 

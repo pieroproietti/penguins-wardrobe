@@ -24,6 +24,6 @@ sequence:
 
   - apache2 
   - libapache2-mod-php
-customize:
+finalize:
   cmds:
     - adduser ${SUDO_USER} libvirt

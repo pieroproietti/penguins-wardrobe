@@ -46,7 +46,7 @@ sequence:
   packagesPip:
     - gbinder-python
     - pyclip
-customize:
+finalize:
   cmds:
     - install_waydroid_package_manager.sh
     - install_waydroid_settings.sh

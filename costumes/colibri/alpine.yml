@@ -60,8 +60,8 @@ sequence:
   accessories:
     - eggs-dev
 
-customize:
-  dirs: true
+finalize:
+  customize: true
   cmds:
   # setup-xorg-base
   - setup-devd udev

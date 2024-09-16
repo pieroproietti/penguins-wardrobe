@@ -34,8 +34,8 @@ sequence:
     - educational
     - office
 
-customize:
-  dirs: true
+finalize:
+  customize: true
   cmds:
   # arch
   - systemctl enable NetworkManager

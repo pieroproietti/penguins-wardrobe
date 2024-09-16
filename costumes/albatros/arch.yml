@@ -48,8 +48,8 @@ sequence:
     - multimedia
     - office
 
-customize:
-  dirs: true
+finalize:
+  customize: true
   cmds:
   # arch
   - groupadd -r autologin
