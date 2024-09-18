@@ -16,8 +16,7 @@ sequence:
 
   packages:
     # xfce4
-    - lightdm-gtk-greeter
-    - spice-vdagent
+    - lightdm
     - xfce4-settings
     - xfce4-screensaver
     - xfce4-terminal
