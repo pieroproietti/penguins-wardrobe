@@ -17,6 +17,7 @@ distributions:
   - focal
   - jammy
   - noble
+  - oracular
 sequence:
   repositories:
     sources_list:

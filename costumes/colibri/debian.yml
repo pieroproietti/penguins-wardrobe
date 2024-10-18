@@ -12,6 +12,8 @@ distributions:
   - trixie
   - chimaera
   - daedalus
+  - noble
+  - oracular
 sequence:
   repositories:
     sources_list:

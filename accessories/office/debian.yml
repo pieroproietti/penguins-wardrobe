@@ -12,6 +12,8 @@ distributions:
   - bionic
   - focal
   - jammy
+  - noble
+  - oracular
 sequence:
   packages:
     - gimp

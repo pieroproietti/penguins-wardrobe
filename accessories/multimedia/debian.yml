@@ -13,6 +13,8 @@ distributions:
   - bionic
   - focal
   - jammy
+  - noble
+  - oracular
   - rolling
 sequence:
   packages:

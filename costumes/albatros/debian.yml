@@ -10,6 +10,7 @@ release: 0.0.1
 distributions:
   - bookworm
   - noble
+  - oracular
 sequence:
   repositories:
     sources_list:

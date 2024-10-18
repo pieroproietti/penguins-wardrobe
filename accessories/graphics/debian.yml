@@ -13,6 +13,7 @@ distributions:
   - bionic
   - focal
   - jammy
+  - oracular
   - rolling
 sequence:
   sources_list_d:
