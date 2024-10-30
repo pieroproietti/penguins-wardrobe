@@ -1,10 +1,9 @@
-# wardrobe: .
-# distro: fedora
+# wardrobe: 
 # costume: colibri
 ---
 name: colibri
 description: >-
-  desktop xfce4 plus all that I need to develop eggs, no firmwares
+  desktop xfce4 plus all that I need to develop eggs, firmwares
 author: artisan
 release: 0.0.1
 distributions:
@@ -28,7 +27,7 @@ sequence:
 
     # stuffs
     - firefox
-    - neofetch
+    # neofetch
 
   accessories:
     - eggs-dev
