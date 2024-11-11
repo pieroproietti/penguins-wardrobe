@@ -8,7 +8,6 @@ author: artisan
 release: 0.0.1
 distributions:
   - fedora
-  - RockyLinux
 sequence:
   repositories:
     update: true
