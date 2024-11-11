@@ -14,13 +14,19 @@ sequence:
     upgrade: true
 
   packages:
+    # X
+    - xorg-x11-server-Xorg
+    - xorg-x11-xinit
+    - xorg-x11-drv-evdev
+    - xorg-x11-drv-libinput
+
     # xfce4
     - lightdm
     - xfce4-settings
     - xfce4-screensaver
     - xfce4-terminal
     - xfce4-whiskermenu-plugin
-
+  
     # spice-vdagent
     - spice-vdagent
     - xrandr 
