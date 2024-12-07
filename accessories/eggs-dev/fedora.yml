@@ -6,15 +6,14 @@ author: artisan
 distributions:
   - fedora
 sequence:
-  repositories:
-    update: true
-    upgrade: true
+  #repositories:
+  #  update: true
+  #  upgrade: true
 
-  # add repository with rpm is good on preinst
+  # repositories: Add repo for rpm
   cmds:
     - /usr/bin/rpm --import https://packages.microsoft.com/keys/microsoft.asc
     - echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" | sudo tee /etc/yum.repos.d/vscode.repo > /dev/null
-    # echo -e "[code]|echo "name=Visual Studio Code"|echo "baseurl=https://packages.microsoft.com/yumrepos/vscode"|echo "enabled=1" | echo "gpgcheck=1"| echo "gpgkey=https://packages.microsoft.com/keys/microsoft.asc" | tee /etc/yum.repos.d/vscode.repo > /dev/null
     - dnf update
     
   packages:
