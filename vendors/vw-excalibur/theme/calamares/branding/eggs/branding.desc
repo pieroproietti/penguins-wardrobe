@@ -1,0 +1,31 @@
+# branding.desc on Vendefoul penguins-eggs 10.0.57
+---
+componentName: eggs
+images:
+  productIcon: logo.png
+  productLogo: logo.png
+  productWelcome: welcome.png
+slideshow: show.qml
+slideshowAPI: 1
+strings:
+  bootloaderEntryName: Vendefoul Wolf
+  knownIssuesUrl: https://github.com/pieroproietti/penguins-eggs/issues/
+  productName: VENDEFOUL WOLF EXCALIBUR
+  productUrl: https://vendefoulwolf.wordpress.com
+  releaseNotesUrl: https://bugs.devuan.org/
+  shortProductName: Vendefoul Wolf Excalibur
+  shortVersion: 2025
+  shortVersionedName: EXCALIBUR  2025
+  supportUrl: https://t.me/vendefoulwolf
+  version: '2025'
+  versionedName: Vendefoul Wolf Excalibur (2025)
+style:
+  SidebarBackground: '#292F34'
+  SidebarBackgroundCurrent: '#D35400'
+  SidebarText: '#FFFFFF'
+  SidebarTextCurrent: '#292F34'
+  sidebarBackground: '#292F34'
+  sidebarBackgroundCurrent: '#D35400'
+  sidebarText: '#FFFFFF'
+  sidebarTextCurrent: '#292F34'
+welcomeStyleCalamares: true
