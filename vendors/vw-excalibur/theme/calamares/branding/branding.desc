@@ -2,8 +2,8 @@
 ---
 componentName: eggs
 images:
-  productIcon: logo.png
-  productLogo: logo.png
+  productIcon: vw-excalibur-logo.png
+  productLogo: vw-excalibur-logo.png
   productWelcome: welcome.png
 slideshow: show.qml
 slideshowAPI: 1
