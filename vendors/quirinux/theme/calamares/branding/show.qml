@@ -40,18 +40,18 @@ text: qsTr("<h1>Quirinux GNU/Linux Versión 2.0</h1>" +
 
 "<h3>https://www.quirinux.org/</h3><br/>" +
 
-"<b>Versión:</b> 2.0 RC 14-06-2024<br/><br/>" +
+"<b>Versión:</b> 2.0 ESTABLE 09-11-2024 | Rev. 8 [02-02-2025]<br/><br/>" +
 
 "<b>Autor:</b> Charlie Martínez.<br/><br/>" +
 
 "<b>Logotipo Quirinux:</b> Thomas Gaya.<br/>"+
 "<b>Sistema de Creación ISO:</b> Penguins' Eggs, de Piero Proietti.<br/>"+
-"<b>Capacitación y Auditoria Técnica Interna:</b> Javier Obregón.<br/><br/>"+
+"<b>Capacitación y Auditoria Técnica Interna:</b> Javier Obregón.<br/>"+
+"<b>Pruebas de compatibilidad en Mac:</b> Sela González. <br/><br/>"+
+"Agradecimiento a toda la comunidad que colaboró<br/>"+ 
+"como beta-tester y en la difusión del proyecto.<br/><br/>" +
 
-"Agradecimiento a la comunidad de usuarios que colaboraron<br/>"+ 
-"como beta-testers y en la difusión del proyecto.<br/><br/>" +
-
-"<b>Hecho en:</b> Buenos Aires (Argentina), Misiones (Argentina), Roma (Italia) y Stgo. de Compostela (Galicia, España).<br/>"+
+"<b>Hecho en:</b> Stgo. de Compostela (Galicia, España), Misiones (Argentina) y Roma (Italia).<br/>"+
 "<b>Quirinux</b> es Marca Registrada.<b> Distribuidor oficial:</b> CREALIB TECNOLOGÍA SOSTENIBLE.<br/>"+
 
 "<b>Dedicado a Emilio Gorini (qepd).</b>")
