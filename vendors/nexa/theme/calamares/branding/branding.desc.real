@@ -161,8 +161,8 @@ strings:
 # These filenames can also use substitutions from os-release (see above).
 images:
     productBanner:       "banner.png"
-    productIcon:         "squid.png"
-    productLogo:         "squid.png"
+    productIcon:         "nexa-logo.png"
+    productLogo:         "nexa-logo.png"
     productWallpaper:    "wallpaper.png"
     productWelcome:      "welcome.png"
 
