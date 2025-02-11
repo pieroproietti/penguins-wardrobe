@@ -54,17 +54,6 @@ Presentation
             height: 485
             fillMode: Image.PreserveAspectFit
         }
-         Text {
-            font.family: "Helvetica"
-            font.pixelSize : 20
-            color: "#fcfcfc"
-            anchors.horizontalCenter: kde.horizontalCenter
-            anchors.top: background.top
-            text: qsTr("<h2>One Blue Marble - a community of creators around the globe</h2>")
-            wrapMode: Text.WordWrap
-            width: kde.width
-            horizontalAlignment: Text.Center
-        }
     }
     Slide {
         Image {
@@ -75,17 +64,6 @@ Presentation
             width: 810
             height: 485
             fillMode: Image.PreserveAspectFit
-        }
-         Text {
-            font.family: "Helvetica"
-            font.pixelSize : 20
-            color: "#fcfcfc"
-            anchors.horizontalCenter: neon.horizontalCenter
-            anchors.top: background.top
-            text: qsTr("<h2>KDE neon - the latest and greatest from the KDE community</h2>")
-            wrapMode: Text.WordWrap
-            width: neon.width
-            horizontalAlignment: Text.Center
         }
     }
 
@@ -98,17 +76,6 @@ Presentation
             width: 810
             height: 485
             fillMode: Image.PreserveAspectFit
-        }
-         Text {
-            font.family: "Helvetica"
-            font.pixelSize : 20
-            color: "#aa3333"
-            anchors.horizontalCenter: plasma.horizontalCenter
-            anchors.top: background.top
-            text: qsTr("<h2>Plasma Desktop, simple by default and powerful when needed</h2>")
-            wrapMode: Text.WordWrap
-            width: plasma.width
-            horizontalAlignment: Text.Center
         }
     }
 
