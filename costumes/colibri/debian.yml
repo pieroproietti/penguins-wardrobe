@@ -53,6 +53,7 @@ sequence:
     - plymouth-themes
     # Added gio command
     - libglib2.0-bin
+    - gnome-disk-utility
   accessories:
     - base
     - eggs-dev
