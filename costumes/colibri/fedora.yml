@@ -33,6 +33,7 @@ sequence:
 
     # stuffs
     - firefox
+    - gnome-disk-utility    
     # neofetch
 
   accessories:

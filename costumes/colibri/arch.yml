@@ -38,6 +38,7 @@ sequence:
     - cups
     - gvfs # per automomunt
     - neofetch
+    - gnome-disk-utility    
 
   accessories:
     - eggs-dev
