@@ -50,8 +50,8 @@ Presentation
             source: "slideshow/step1.png"
             anchors.centerIn: parent
             anchors.top: background.bottom
-            width: 810
-            height: 485
+            width: 800
+            height: 520
             fillMode: Image.PreserveAspectFit
         }
     }
@@ -61,8 +61,8 @@ Presentation
             source: "slideshow/step2.png"
             anchors.centerIn: parent
             anchors.top: background.bottom
-            width: 810
-            height: 485
+            width: 800
+            height: 520
             fillMode: Image.PreserveAspectFit
         }
     }
@@ -73,8 +73,8 @@ Presentation
             source: "slideshow/step3.png"
             anchors.centerIn: parent
             anchors.top: background.bottom
-            width: 810
-            height: 485
+            width: 800
+            height: 520
             fillMode: Image.PreserveAspectFit
         }
     }
