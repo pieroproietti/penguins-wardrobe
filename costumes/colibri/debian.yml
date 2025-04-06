@@ -54,6 +54,10 @@ sequence:
     # Added gio command
     - libglib2.0-bin
     - gnome-disk-utility
+    # pacman packages
+    - ruby-deb
+    - libarchive-too
+    
   accessories:
     - base
     - eggs-dev
