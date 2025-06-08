@@ -30,7 +30,7 @@ sequence:
 
     # xfce4
     - adwaita-qt
-    - consolekit2
+    # consolekit2
     - firefox
     - gvfs
     - lightdm
@@ -53,12 +53,6 @@ sequence:
     - xfce4-terminal
     - xfce4-whiskermenu-plugin
     - xfwm4
-
-    # neofetch
-    - neofetch
-
-  accessories:
-    - eggs-dev
 
 finalize:
   customize: true
