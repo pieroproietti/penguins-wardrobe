@@ -29,8 +29,7 @@ sequence:
     - xrandr
 
     # xfce4
-    - adwaita-qt
-    # consolekit2
+    - adwaita-icon-theme
     - firefox
     - gvfs
     - lightdm
