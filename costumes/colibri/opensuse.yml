@@ -33,15 +33,15 @@ sequence:
     - xrandr 
 
     # stuffs
-    - firefox
+    # firefox
 
   accessories:
-    - eggs-dev
+    # eggs-dev
 
 finalize:
   customize: true
   cmds:
-  # fedora
+  # opensuse
   - systemctl set-default graphical.target 
   - systemctl enable lightdm
   - systemctl enable spice-vdagentd
