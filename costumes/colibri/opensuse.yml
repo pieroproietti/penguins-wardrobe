@@ -36,7 +36,7 @@ sequence:
     - firefox
 
   accessories:
-    # eggs-dev
+    - eggs-dev
 
 finalize:
   customize: true
