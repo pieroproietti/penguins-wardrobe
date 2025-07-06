@@ -37,8 +37,8 @@ sequence:
     # stuffs
     - firefox
 
-  accessories:
-    - eggs-dev
+  #accessories:
+    # eggs-dev
 
 finalize:
   customize: true
