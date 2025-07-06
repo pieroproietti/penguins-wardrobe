@@ -31,6 +31,8 @@ sequence:
     # spice-vdagent
     - spice-vdagent
     - xrandr
+    # serve
+    - sysvinit-tools
 
     # stuffs
     - firefox
