@@ -34,7 +34,7 @@ sequence:
     - spice-vdagent
     - tango-icon-theme
     - thunar
-    - thunar-archive-plugin 
+    - thunar-archive-plugin
     - xarchiver
     - xfce4-appfinder
     - xfce4-notifyd
@@ -57,7 +57,7 @@ sequence:
     # pacman packages
     - ruby-deb
     - libarchive-too
-    
+
   accessories:
     - base
     - eggs-dev
@@ -75,4 +75,3 @@ finalize:
     - plymouth-set-default-theme bgrt
     - update-initramfs -u
 reboot: true
-

@@ -1,4 +1,4 @@
-# wardrobe: 
+# wardrobe:
 # costume: colibri
 ---
 name: colibri
@@ -15,22 +15,22 @@ sequence:
 
   packages:
     # X
-    - xorg-x11-server 
-    - xinit 
+    - xorg-x11-server
+    - xinit
     - xorg-x11-fonts
 
     # xfce4
     - lightdm
-    - xfce4-session 
-    - xfwm4 
-    - xfce4-panel 
+    - xfce4-session
+    - xfwm4
+    - xfce4-panel
     - xfce4-settings
-    - thunar 
+    - thunar
     - xfce4-terminal
-  
+
     # spice-vdagent
     - spice-vdagent
-    - xrandr 
+    - xrandr
 
     # stuffs
     - firefox
@@ -41,15 +41,14 @@ sequence:
 finalize:
   customize: true
   cmds:
-  # opensuse
-  - systemctl set-default graphical.target 
-  - systemctl enable lightdm
-  - systemctl enable spice-vdagentd
+    # opensuse
+    - systemctl set-default graphical.target
+    - systemctl enable lightdm
+    - systemctl enable spice-vdagentd
 
-
-  # standard
-  - ../../scripts/config_desktop_link.sh
-  - ../../scripts/config_lightdm.sh
-  - ../../scripts/hostname.sh
-  - ../../scripts/config_g4.sh
+    # standard
+    - ../../scripts/config_desktop_link.sh
+    - ../../scripts/config_lightdm.sh
+    - ../../scripts/hostname.sh
+    - ../../scripts/config_g4.sh
 reboot: true

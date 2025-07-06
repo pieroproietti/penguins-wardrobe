@@ -18,8 +18,8 @@ sequence:
     # setup-xord-base
     - xorg-server
     - xf86-input-libinput
-    - xinit 
-    - eudev 
+    - xinit
+    - eudev
     - mesa-dri-gallium
 
     # spice-vdagent
@@ -38,7 +38,7 @@ sequence:
     - setxkbmap
     - tango-icon-theme
     - thunar
-    - thunar-archive-plugin 
+    - thunar-archive-plugin
     - xarchiver
     - xfce4
     - xfce4-appfinder
@@ -55,20 +55,19 @@ sequence:
 finalize:
   customize: true
   cmds:
-  # setup-xorg-base
-  - setup-devd udev
+    # setup-xorg-base
+    - setup-devd udev
 
-  # setup spice-vdagentd
-  - rc-update add spice-vdagentd
+    # setup spice-vdagentd
+    - rc-update add spice-vdagentd
 
-  # alpine
-  - rc-update add dbus
-  - rc-update add lightdm
+    # alpine
+    - rc-update add dbus
+    - rc-update add lightdm
 
-
-  # standard
-  - ../../scripts/config_desktop_link.sh
-  - ../../scripts/config_lightdm.sh
-  - ../../scripts/hostname.sh
-  - ../../scripts/config_g4.sh
+    # standard
+    - ../../scripts/config_desktop_link.sh
+    - ../../scripts/config_lightdm.sh
+    - ../../scripts/hostname.sh
+    - ../../scripts/config_g4.sh
 reboot: true

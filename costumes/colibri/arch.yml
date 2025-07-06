@@ -15,30 +15,30 @@ sequence:
     upgrade: true
 
   packages:
-    - firefox 
-    - lightdm 
-    - lightdm-gtk-greeter     
-    - network-manager-applet 
-    - polkit-gnome 
-    - shellcheck 
-    - spice-vdagent 
-    - unzip 
-    - xarchiver 
-    - xdg-user-dirs 
+    - firefox
+    - lightdm
+    - lightdm-gtk-greeter
+    - network-manager-applet
+    - polkit-gnome
+    - shellcheck
+    - spice-vdagent
+    - unzip
+    - xarchiver
+    - xdg-user-dirs
     - xfce4
     - xfce4-goodies
     - xorg-apps
-    - xorg-server 
+    - xorg-server
     - zenity
 
     # various
-    - alsa-utils 
-    - bluez 
+    - alsa-utils
+    - bluez
     - bluez-utils
     - cups
     - gvfs # per automomunt
     - neofetch
-    - gnome-disk-utility    
+    - gnome-disk-utility
 
   accessories:
     - eggs-dev
@@ -46,18 +46,18 @@ sequence:
 finalize:
   customize: true
   cmds:
-  # arch
-  - groupadd -r autologin
-  - gpasswd -a "${SUDO_USER}" autologin
-  - systemctl enable NetworkManager
-  - systemctl enable udisks2.service
-  - systemctl enable lightdm
-  - systemctl enable cups.service
-  - systemctl enable bluetooth.service
+    # arch
+    - groupadd -r autologin
+    - gpasswd -a "${SUDO_USER}" autologin
+    - systemctl enable NetworkManager
+    - systemctl enable udisks2.service
+    - systemctl enable lightdm
+    - systemctl enable cups.service
+    - systemctl enable bluetooth.service
 
-  # standard
-  - ../../scripts/config_desktop_link.sh
-  - ../../scripts/config_lightdm.sh
-  - ../../scripts/hostname.sh
+    # standard
+    - ../../scripts/config_desktop_link.sh
+    - ../../scripts/config_lightdm.sh
+    - ../../scripts/hostname.sh
 
 reboot: true

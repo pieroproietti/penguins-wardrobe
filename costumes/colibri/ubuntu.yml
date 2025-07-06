@@ -57,4 +57,3 @@ finalize:
     - ../../scripts/config_g4.sh
     - ../../scripts/hostname.sh
 reboot: true
-
