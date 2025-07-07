@@ -7,8 +7,9 @@ distributions:
   - opensuse
 sequence:
   # uso cmds: zypper refresh per l'aggiornamento
+  
   cmds:
-    - rpm --import https://packages.microsoft.com/keys/microsoft.asc
+    - /usr/bin/rpm --import https://packages.microsoft.com/keys/microsoft.asc
     - zypper addrepo https://packages.microsoft.com/yumrepos/vscode vscode
     - zypper refresh
     
