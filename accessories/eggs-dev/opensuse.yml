@@ -16,6 +16,4 @@ sequence:
   packages:
     - code
     - nodejs
-    - npm
-    - pnpm
    
