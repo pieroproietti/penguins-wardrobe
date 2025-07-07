@@ -23,6 +23,7 @@ sequence:
     # xfce4
     - lightdm
     - xfce4-power-manager
+    - xfce4-pulseaudio-plugin
     - xfce4-screensaver
     - xfce4-settings
     - xfce4-terminal
