@@ -22,11 +22,11 @@ sequence:
 
     # xfce4
     - lightdm
-    - xfce4-settings
+    - xfce4-power-manager
     - xfce4-screensaver
+    - xfce4-settings
     - xfce4-terminal
     - xfce4-whiskermenu-plugin
-    - xfce4-power-manager
   
     # spice-vdagent
     - spice-vdagent
