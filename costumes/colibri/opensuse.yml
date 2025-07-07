@@ -35,9 +35,6 @@ sequence:
     # occorre
     - sysvinit-tools
 
-    # stuffs
-    - firefox
-
   accessories:
     - eggs-dev
 

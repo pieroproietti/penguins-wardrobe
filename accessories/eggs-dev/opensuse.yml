@@ -6,11 +6,7 @@ author: artisan
 distributions:
   - opensuse
 sequence:
-  #repositories:
-  #  update: true
-  #  upgrade: true
-
-  # repositories: Add repo for rpm
+  # uso cmds: zypper refresh per l'aggiornamento
   cmds:
     - rpm --import https://packages.microsoft.com/keys/microsoft.asc
     - zypper addrepo https://packages.microsoft.com/yumrepos/vscode vscode
