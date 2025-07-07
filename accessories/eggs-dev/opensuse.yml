@@ -1,0 +1,24 @@
+# eggs-dev
+---
+name: eggs-dev
+description: 'install: nodejs, npm, code'
+author: artisan
+distributions:
+  - opensuse
+sequence:
+  #repositories:
+  #  update: true
+  #  upgrade: true
+
+  # repositories: Add repo for rpm
+  cmds:
+    - rpm --import https://packages.microsoft.com/keys/microsoft.asc
+    - zypper addrepo https://packages.microsoft.com/yumrepos/vscode vscode
+    - zypper refresh
+    
+  packages:
+    - code
+    - nodejs
+    - npm
+    - pnpm
+   

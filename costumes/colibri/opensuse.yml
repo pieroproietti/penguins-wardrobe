@@ -31,14 +31,15 @@ sequence:
     # spice-vdagent
     - spice-vdagent
     - xrandr
-    # serve
+    
+    # occorre
     - sysvinit-tools
 
     # stuffs
     - firefox
 
-  #accessories:
-    # eggs-dev
+  accessories:
+    - eggs-dev
 
 finalize:
   customize: true
