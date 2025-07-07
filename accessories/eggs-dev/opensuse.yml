@@ -9,9 +9,9 @@ sequence:
   # uso cmds: zypper refresh per l'aggiornamento
   
   cmds:
-    - /usr/bin/rpm --import https://packages.microsoft.com/keys/microsoft.asc # comment
-    - zypper addrepo https://packages.microsoft.com/yumrepos/vscode vscode # comment
-    - zypper refresh # comment
+    - /usr/bin/rpm --import https://packages.microsoft.com/keys/microsoft.asc
+    - zypper addrepo https://packages.microsoft.com/yumrepos/vscode vscode
+    - zypper refresh
     
   packages:
     - code
