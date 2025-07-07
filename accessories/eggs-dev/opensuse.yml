@@ -16,4 +16,9 @@ sequence:
   packages:
     - code
     - nodejs
+
+finalize:
+  cmds:
+    - npm i pnpm -g
+
    
