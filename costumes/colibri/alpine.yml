@@ -52,6 +52,11 @@ sequence:
     - xfce4-whiskermenu-plugin
     - xfwm4
 
+    # spegnimento
+    - elogind 
+    - polkit-elogind 
+    - dbus
+
 finalize:
   customize: true
   cmds:
