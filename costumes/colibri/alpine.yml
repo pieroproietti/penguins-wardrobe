@@ -52,10 +52,13 @@ sequence:
     - xfce4-whiskermenu-plugin
     - xfwm4
 
-    # spegnimento
-    - elogind 
-    - polkit-elogind 
+    # spegnimento e pkexec
     - dbus
+    - elogind 
+    - polkit
+    - polkit-elogind 
+    - polkit-gnome
+
 
 finalize:
   customize: true
