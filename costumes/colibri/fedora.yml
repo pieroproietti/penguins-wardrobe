@@ -38,6 +38,12 @@ sequence:
     - gnome-disk-utility    
     # neofetch
 
+    # build rpm
+    - gcc-c++ 
+    - make 
+    - rpm-build
+    - rpmdevtools
+
   accessories:
     - eggs-dev
 
