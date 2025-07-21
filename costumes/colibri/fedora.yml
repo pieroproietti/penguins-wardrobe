@@ -36,7 +36,9 @@ sequence:
     # stuffs
     - firefox
     - gnome-disk-utility    
-    # neofetch
+
+    # per rocky
+    - setxkbmap
 
     # build rpm
     - gcc-c++ 
