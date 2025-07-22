@@ -37,14 +37,14 @@ sequence:
     - firefox
     - gnome-disk-utility    
 
-    # per rocky
+    # rocky
     - setxkbmap
 
-    # build rpm
-    - gcc-c++ 
-    - make 
-    - rpm-build
-    - rpmdevtools
+    # build rpm 
+    #- gcc-c++ 
+    #- make 
+    #- rpm-build
+    #- rpmdevtools
 
   accessories:
     - eggs-dev
