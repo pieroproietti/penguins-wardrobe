@@ -34,9 +34,10 @@ sequence:
     - xrandr 
 
     # stuffs
-    - xdg-user-dirs
     - firefox
     - gnome-disk-utility    
+    - rpm-build
+    - xdg-user-dirs
 
     # rocky
     - setxkbmap
