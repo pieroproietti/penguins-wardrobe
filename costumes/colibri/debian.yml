@@ -12,15 +12,13 @@ distributions:
   - trixie
   - chimaera
   - daedalus
-  - noble
-  - oracular
 sequence:
   repositories:
     sources_list:
       - main
-      # contrib
-      # non-free
-      # non-free-firmware
+      - contrib
+      - non-free
+      - non-free-firmware
     update: true
     upgrade: true
   packages:
@@ -30,6 +28,8 @@ sequence:
     - lightdm
     - lightdm-gtk-greeter
     - network-manager-gnome
+    - pipewire-pulse
+    - policykit-1-gnome
     - qt5ct
     - spice-vdagent
     - tango-icon-theme
@@ -39,6 +39,7 @@ sequence:
     - xfce4-appfinder
     - xfce4-notifyd
     - xfce4-panel
+    - xfce4-power-manager
     - xfce4-pulseaudio-plugin
     - xfce4-screenshooter
     - xfce4-session
