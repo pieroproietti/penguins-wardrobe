@@ -21,7 +21,7 @@ sequence:
     upgrade: true
   packages:
     - adwaita-qt
-    - firefox
+    # firefox removed
     - libxfce4ui-utils
     - lightdm
     - lightdm-gtk-greeter
@@ -52,8 +52,26 @@ sequence:
 finalize:
   customize: true
   cmds:
-    # Rimuove gdm3 se è stato installato come dipendenza
+   # --- Blocco 1: Rimozione GDM3 e impostazione LightDM ---
     - apt-get remove --purge -y gdm3
+    - echo "/usr/sbin/lightdm" > /etc/X11/default-display-manager
+
+    # --- Blocco 2: Rimozione completa di Snapd ---
+    - systemctl stop snapd.service
+    - systemctl disable snapd.service
+    - apt-get remove --purge -y snapd
+    - rm -rf /var/cache/snapd/
+    - rm -rf ~/snap
+
+    # --- Blocco 3: Installazione Firefox nativo da PPA Mozilla ---
+    - apt-get install -y software-properties-common apt-transport-https gpg
+    - add-apt-repository -y ppa:mozillateam/ppa
+    - sh -c 'echo "Package: firefox*" > /etc/apt/preferences.d/mozillateam'
+    - sh -c 'echo "Pin: release o=LP-PPA-mozillateam" >> /etc/apt/preferences.d/mozillateam'
+    - sh -c 'echo "Pin-Priority: 1001" >> /etc/apt/preferences.d/mozillateam'
+    - apt-get update
+    - apt-get install -y firefox
+
     # Imposta lightdm come display manager di default in modo non interattivo
     - echo "/usr/sbin/lightdm" > /etc/X11/default-display-manager  
     - ../../scripts/config_desktop_link.sh
