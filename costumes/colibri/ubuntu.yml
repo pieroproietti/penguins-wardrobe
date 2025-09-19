@@ -52,6 +52,10 @@ sequence:
 finalize:
   customize: true
   cmds:
+    # Rimuove gdm3 se è stato installato come dipendenza
+    - apt-get remove --purge -y gdm3
+    # Imposta lightdm come display manager di default in modo non interattivo
+    - echo "/usr/sbin/lightdm" > /etc/X11/default-display-manager  
     - ../../scripts/config_desktop_link.sh
     - ../../scripts/config_lightdm.sh
     - ../../scripts/config_g4.sh
