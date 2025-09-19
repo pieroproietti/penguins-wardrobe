@@ -31,8 +31,18 @@ sequence:
     - xorg-server
     - zenity
 
-    # various
+    # sezione fonts
+    - noto-fonts # Un set di font completo e moderno di Google
+    - noto-fonts-emoji # Per il supporto alle emoji
+
+    # sezione audio
     - alsa-utils
+    - pipewire
+    - pipewire-pulse # Fornisce compatibilità per le app che si aspettano PulseAudio
+    - wireplumber      # Session manager per PipeWire
+    - pipewire-alsa    # Per reindirizzare le app che usano ALSA a PipeWire
+
+    # various
     - bluez
     - bluez-utils
     - cups
