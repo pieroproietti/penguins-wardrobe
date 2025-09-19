@@ -34,6 +34,7 @@ sequence:
     - xrandr 
 
     # stuffs
+    - xdg-user-dirs
     - firefox
     - gnome-disk-utility    
 
