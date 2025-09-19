@@ -56,9 +56,10 @@ finalize:
     - apt-get remove --purge -y gdm3
     - echo "/usr/sbin/lightdm" > /etc/X11/default-display-manager
 
-    # --- Blocco 2: Rimozione completa di Snapd ---
+    # --- Blocco 2: Rimozione e blocco completo di Snapd ---
     - systemctl stop snapd.service
     - systemctl disable snapd.service
+    - apt-mark hold snapd
     - apt-get remove --purge -y snapd
     - rm -rf /var/cache/snapd/
     - rm -rf ~/snap
