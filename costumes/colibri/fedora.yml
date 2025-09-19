@@ -33,10 +33,14 @@ sequence:
     - spice-vdagent
     - xrandr 
 
+    # RPM build
+    - gcc-c++
+    - rpm-build
+    - rpmdevtools
+
     # stuffs
     - firefox
     - gnome-disk-utility    
-    - rpm-build
     - xdg-user-dirs
 
     # rocky
