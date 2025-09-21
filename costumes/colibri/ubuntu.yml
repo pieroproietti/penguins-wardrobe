@@ -64,6 +64,10 @@ finalize:
     - rm -rf /var/cache/snapd/
     - rm -rf ~/snap
 
+    # poiche usiamo network-mananger 
+    - systemctl stop systemd-network
+    - systemctl disable systemd-network
+    
     # --- Blocco 3: Installazione Firefox nativo da PPA Mozilla ---
     - apt-get install -y software-properties-common apt-transport-https gpg
     - add-apt-repository -y ppa:mozillateam/ppa
