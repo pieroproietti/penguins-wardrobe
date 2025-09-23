@@ -42,7 +42,7 @@ sequence:
     - xfconf
     - xfdesktop4
     - xfwm4
-    - language-selector-common
+    - language-selector-gnome
     
   accessories:
     - base
