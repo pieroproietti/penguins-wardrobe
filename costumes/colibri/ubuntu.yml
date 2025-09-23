@@ -42,6 +42,8 @@ sequence:
     - xfconf
     - xfdesktop4
     - xfwm4
+    - language-selector-common
+    
   accessories:
     - base
     - eggs-dev
