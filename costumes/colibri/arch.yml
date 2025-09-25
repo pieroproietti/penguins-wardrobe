@@ -28,14 +28,15 @@ sequence:
     - xorg-xrandr
 
     # xfce-minimal
-    - xfce4-session
-    - xfwm4
+    - thunar
     - xfce4-panel
-    - xfdesktop
-    - thunar 
+    - xfce4-pulseaudio-plugin 
+    - xfce4-session
     - xfce4-settings 
     - xfce4-terminal
     - xfce4-whiskermenu-plugin
+    - xfdesktop
+    - xfwm4
     - xorg-server
     - zenity
 
