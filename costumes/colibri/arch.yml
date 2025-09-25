@@ -35,6 +35,7 @@ sequence:
     - thunar 
     - xfce4-settings 
     - xfce4-terminal
+    - xfce4-whiskermenu-plugin
     - xorg-server
     - zenity
 
