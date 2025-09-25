@@ -32,7 +32,6 @@ sequence:
     - thunar 
     - xfce4-settings 
     - xfce4-terminal
-    - xorg-apps
     - xorg-server
     - zenity
 
@@ -41,18 +40,17 @@ sequence:
     - noto-fonts-emoji # Per il supporto alle emoji
 
     # sezione audio
-    - alsa-utils
-    - pipewire
-    - pipewire-pulse   # Fornisce compatibilità per le app che si aspettano PulseAudio
-    - wireplumber      # Session manager per PipeWire
-    - pipewire-alsa    # Per reindirizzare le app che usano ALSA a PipeWire
+    #- alsa-utils
+    #- pipewire
+    #- pipewire-pulse   # Fornisce compatibilità per le app che si aspettano PulseAudio
+    #- wireplumber      # Session manager per PipeWire
+    #- pipewire-alsa    # Per reindirizzare le app che usano ALSA a PipeWire
 
     # various
     - bluez
     - bluez-utils
     - cups
     - gvfs # per automomunt
-    - neofetch
     - gnome-disk-utility
 
   accessories:
