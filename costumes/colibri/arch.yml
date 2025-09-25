@@ -25,6 +25,8 @@ sequence:
     - unzip
     - xarchiver
     - xdg-user-dirs
+
+    # xfce-minimal
     - xfce4-session
     - xfwm4
     - xfce4-panel
@@ -40,11 +42,11 @@ sequence:
     - noto-fonts-emoji # Per il supporto alle emoji
 
     # sezione audio
-    #- alsa-utils
-    #- pipewire
-    #- pipewire-pulse   # Fornisce compatibilità per le app che si aspettano PulseAudio
-    #- wireplumber      # Session manager per PipeWire
-    #- pipewire-alsa    # Per reindirizzare le app che usano ALSA a PipeWire
+    - alsa-utils
+    - pipewire
+    - pipewire-pulse   # Fornisce compatibilità per le app che si aspettano PulseAudio
+    - wireplumber      # Session manager per PipeWire
+    - pipewire-alsa    # Per reindirizzare le app che usano ALSA a PipeWire
 
     # various
     - bluez
