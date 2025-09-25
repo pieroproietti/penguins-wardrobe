@@ -25,6 +25,7 @@ sequence:
     - unzip
     - xarchiver
     - xdg-user-dirs
+    - xorg-xrandr
 
     # xfce-minimal
     - xfce4-session
@@ -37,11 +38,11 @@ sequence:
     - xorg-server
     - zenity
 
-    # sezione fonts
+    # fonts
     - noto-fonts # Un set di font completo e moderno di Google
     - noto-fonts-emoji # Per il supporto alle emoji
 
-    # sezione audio
+    # audio
     - alsa-utils
     - pipewire
     - pipewire-pulse   # Fornisce compatibilità per le app che si aspettano PulseAudio
