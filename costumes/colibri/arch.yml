@@ -25,8 +25,13 @@ sequence:
     - unzip
     - xarchiver
     - xdg-user-dirs
-    - xfce4
-    - xfce4-goodies
+    - xfce4-session
+    - xfwm4
+    - xfce4-panel
+    - xfdesktop
+    - thunar 
+    - xfce4-settings 
+    - xfce4-terminal
     - xorg-apps
     - xorg-server
     - zenity
@@ -38,7 +43,7 @@ sequence:
     # sezione audio
     - alsa-utils
     - pipewire
-    - pipewire-pulse # Fornisce compatibilità per le app che si aspettano PulseAudio
+    - pipewire-pulse   # Fornisce compatibilità per le app che si aspettano PulseAudio
     - wireplumber      # Session manager per PipeWire
     - pipewire-alsa    # Per reindirizzare le app che usano ALSA a PipeWire
 
