@@ -6,7 +6,7 @@ name: colibri
 description: >-
   desktop xfce4 plus all that I need to develop eggs, firmwares
 author: artisan
-release: 0.0.1
+release: 0.9.0
 distributions:
   - rolling
 sequence:
@@ -15,17 +15,8 @@ sequence:
     upgrade: true
 
   packages:
-    - firefox
     - lightdm
     - lightdm-gtk-greeter
-    - network-manager-applet
-    - polkit-gnome
-    - shellcheck
-    - spice-vdagent
-    - unzip
-    - xarchiver
-    - xdg-user-dirs
-    - xorg-xrandr
 
     # xfce-minimal
     - thunar
@@ -55,8 +46,17 @@ sequence:
     - bluez
     - bluez-utils
     - cups
-    - gvfs # per automomunt
+    - firefox
     - gnome-disk-utility
+    - gvfs # per automomunt
+    - network-manager-applet
+    - polkit-gnome
+    - shellcheck
+    - spice-vdagent
+    - unzip
+    - xarchiver
+    - xdg-user-dirs
+    - xorg-xrandr
 
   accessories:
     - eggs-dev
