@@ -1,3 +1,4 @@
+![](./penguins-wardrobe.png)
 # penguins-wardrobe
 
 It is a repository mainly consisting of .yaml files and simple bash scripts used
