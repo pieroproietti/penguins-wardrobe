@@ -61,8 +61,8 @@ finalize:
     # --- Blocco 2: Rimozione e blocco completo di Snapd ---
     - systemctl stop snapd.service
     - systemctl disable snapd.service
-    - apt-mark hold snapd
     - apt-get remove --purge -y snapd
+    - apt-mark hold snapd
     - rm -rf /var/cache/snapd/
     - rm -rf ~/snap
 
@@ -77,7 +77,7 @@ finalize:
     - sh -c 'echo "Pin: release o=LP-PPA-mozillateam" >> /etc/apt/preferences.d/mozillateam'
     - sh -c 'echo "Pin-Priority: 1001" >> /etc/apt/preferences.d/mozillateam'
     - apt-get update
-    - apt-get install -y firefox
+    - apt-get install -y firefox-esr
 
     # Imposta lightdm come display manager di default in modo non interattivo
     - echo "/usr/sbin/lightdm" > /etc/X11/default-display-manager  
