@@ -1,17 +1,14 @@
 # wardrobe: .
-# costume: /colibri
+# costume: /gypaetus
 ---
-name: colibri
+name: gypaetus
 description: >-
-  desktop xfce4 plus all that I need to develop eggs, firmwares
+  desktop xfce4 plus all for crytpo
 author: artisan
-release: 0.9.1
+release: 0..1
 distributions:
-  - bullseye
-  - bookworm
   - trixie
-  - chimaera
-  - daedalus
+  - excalibur
 sequence:
   repositories:
     sources_list:
@@ -63,17 +60,10 @@ sequence:
     # Added gio command
     - libglib2.0-bin
     - gnome-disk-utility
-    # pacman packages
-    - ruby-deb
-    - libarchive-too
 
   accessories:
     - base
     - eggs-dev
-    # firmwares
-    # firmwares-light
-    # flatpak
-    # python3-dev
 finalize:
   customize: true
   cmds:
