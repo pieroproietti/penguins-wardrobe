@@ -19,7 +19,6 @@ sequence:
     update: true
     upgrade: true
   packages:
-    - firefox-esr
     - libxfce4ui-utils
     - lightdm
     - lightdm-gtk-greeter
@@ -63,10 +62,19 @@ sequence:
 
   accessories:
     - base
-    - eggs-dev
+    # eggs-dev
 finalize:
   customize: true
   cmds:
+    - mkdir /opt/gypaetus -p
+    - wget https://github.com/floating/frame/releases/download/v0.6.11/Frame-0.6.11.AppImage -O /opt/gypaetus/Frame.AppImage
+    - wget https://download.electrum.org/4.5.8/electrum-4.5.8-x86_64.AppImage -O /opt/gypaetus/Electrum.AppImage
+    - chmod +x /opt/gypaetus/*.AppImage
+    - ln -sf /opt/gypaetus/Frame.AppImage /usr/local/bin/frame
+    - ln -sf /opt/gypaetus/Electrum.AppImage /usr/local/bin/electrum
+    - curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
+    - echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main" | sudo tee /etc/apt/sources.list.d/brave-browser.list
+    - apt update && sudo apt install brave-browser -y    
     - ../../scripts/config_desktop_link.sh
     - ../../scripts/config_lightdm.sh
     - ../../scripts/config_g4.sh
