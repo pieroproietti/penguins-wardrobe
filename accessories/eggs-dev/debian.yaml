@@ -1,11 +1,10 @@
 # eggs-dev
 ---
 name: eggs-dev
-description: 'add repositories: nodesource, code, install: nodejs, code'
+description: "add repositories: nodesource, antigravity, install: nodejs, antigravity"
 author: artisan
 distributions:
   # debian
-  - buster
   - bullseye
   - bookworm
   - trixie
@@ -17,33 +16,33 @@ distributions:
   - focal
   - jammy
   - noble
-  - oracular
+  - raccoon
 sequence:
   repositories:
     sources_list:
       - main
     sources_list_d:
-      - rm -f /usr/share/keyrings/packages.microsoft.gpg
+      - rm -f /usr/share/keyrings/antigravity.gpg
       - >-
-        curl -fsSL "https://packages.microsoft.com/keys/microsoft.asc" | gpg
-        --dearmor -o /usr/share/keyrings/packages.microsoft.gpg
+          curl -fsSL "https://us-central1-apt.pkg.dev/doc/repo-signing-key.gpg" | gpg
+          --dearmor -o /usr/share/keyrings/antigravity.gpg
       - >-
-        echo "deb [signed-by=/usr/share/keyrings/packages.microsoft.gpg
-        arch=amd64] http://packages.microsoft.com/repos/code stable main" | tee
-        /etc/apt/sources.list.d/vscode.list > /dev/null
+          echo "deb [signed-by=/usr/share/keyrings/antigravity.gpg]
+          https://us-central1-apt.pkg.dev/projects/antigravity-auto-updater-dev/ antigravity-debian main" | tee
+          /etc/apt/sources.list.d/antigravity.list > /dev/null
 
       - rm -f /usr/share/keyrings/nodesource.gpg
       - >-
-        curl -fsSL https://deb.nodesource.com/gpgkey/nodesource.gpg.key | gpg
-        --dearmor -o /usr/share/keyrings/nodesource.gpg > /dev/null
+          curl -fsSL https://deb.nodesource.com/gpgkey/nodesource.gpg.key | gpg
+          --dearmor -o /usr/share/keyrings/nodesource.gpg > /dev/null
       - >-
-        echo "deb [signed-by=/usr/share/keyrings/nodesource.gpg]
-        https://deb.nodesource.com/node_20.x bullseye main" | tee
-        /etc/apt/sources.list.d/nodesource.list > /dev/null
+          . /etc/os-release && echo "deb [signed-by=/usr/share/keyrings/nodesource.gpg]
+          https://deb.nodesource.com/node_22.x ${VERSION_CODENAME} main" | tee
+          /etc/apt/sources.list.d/nodesource.list > /dev/null
     update: true
     upgrade: true
   packages:
-    - code
+    - antigravity
     - nodejs
     # python tools for pengui
     - ccache
@@ -53,7 +52,7 @@ sequence:
     - python3-dev
     - python3-pip
     - python3-venv
-    # ruby 
+    # ruby
     - ruby
 finalize:
   cmds:
@@ -63,4 +62,3 @@ finalize:
     - sudo -u ${SUDO_USER} echo 'source ~/completion-for-pnpm.bash' >> ~/.bashrc
     - gem install fpm
     - ../../scripts/tools-jq.sh
-    
