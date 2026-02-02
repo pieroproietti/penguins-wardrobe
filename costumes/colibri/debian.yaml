@@ -67,6 +67,16 @@ sequence:
     - ruby-deb
     - libarchive-too
 
+    # wifi
+    - firmware-atheros
+    - firmware-brcm80211
+    - firmware-iwlwifi
+    - firmware-libertas
+    - firmware-misc-nonfree
+    - firmware-realtek
+    - wireless-tools
+    - wpasupplicant
+
   accessories:
     - base
     - eggs-dev
