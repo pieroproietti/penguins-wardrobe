@@ -1,7 +1,7 @@
 [Desktop Entry]
 Categories=Qt;System;
 Comment=Install Nexa Linux
-Exec=/usr/sbin/install-system.sh
+Exec=install-system.sh
 GenericName=Install Nexa Linux
 Icon=/etc/nexa/calamares-install.png
 Keywords=calamares;system;install
