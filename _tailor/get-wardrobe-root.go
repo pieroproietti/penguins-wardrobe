@@ -11,8 +11,8 @@ import (
 	"strings"
 )
 
-// getWardrobeRoot returns ~/.oa-wardrobe for the "real" user behind this
-// elevated process.
+// getWardrobeRoot returns ~/.wardrobe (or ~/.oa-wardrobe for backward compatibility)
+// for the "real" user behind this elevated process.
 //
 // Priority order:
 // 1. SUDO_USER  -- set by sudo, identifies the calling user reliably.
@@ -59,7 +59,13 @@ func getWardrobeRoot() (string, error) {
 		homeDir = home
 	}
 
-	return filepath.Join(homeDir, ".oa-wardrobe"), nil
+	// Check if ~/.oa-wardrobe already exists (legacy), otherwise ~/.wardrobe
+	legacyPath := filepath.Join(homeDir, ".oa-wardrobe")
+	if _, err := os.Stat(legacyPath); err == nil {
+		return legacyPath, nil
+	}
+
+	return filepath.Join(homeDir, ".wardrobe"), nil
 }
 
 // firstHumanUser scans /etc/passwd for the first real (non-system) user:

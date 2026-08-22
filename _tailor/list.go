@@ -17,10 +17,10 @@ func List() error {
 	costumesDir := filepath.Join(root, "costumes")
 	entries, err := os.ReadDir(costumesDir)
 	if err != nil {
-		return fmt.Errorf("unable to read costumes: %v", err)
+		return fmt.Errorf("unable to read costumes in %s: %v (run 'wardrobe get' first)", costumesDir, err)
 	}
 
-	utils.LogNormal(utils.ColorCyan + "Available costumes in oa-wardrobe:" + utils.ColorReset)
+	utils.LogNormal(utils.ColorCyan + "Available costumes in wardrobe:" + utils.ColorReset)
 	for _, entry := range entries {
 		if entry.IsDir() {
 			yamlPath := findYaml(filepath.Join(costumesDir, entry.Name()))
