@@ -1,0 +1,26 @@
+# Maintainer: Piero Proietti <piero.proietti@gmail.com>
+pkgname=penguins-wardrobe
+pkgver={{.BaseVersion}}
+pkgrel={{.Rel}}
+pkgdesc="penguins-wardrobe: dress up your Linux distribution"
+arch=('x86_64')
+url="https://github.com/pieroproietti/penguins-wardrobe"
+license=('GPL3')
+options=('!debug')
+
+depends=(
+	'git'
+	'rsync'
+)
+
+provides=('penguins-wardrobe')
+
+package() {
+	mkdir -p "${pkgdir}/usr"
+
+	cp -a "${startdir}/usr/"* "${pkgdir}/usr/"
+	if [ -d "${startdir}/etc" ]; then
+		mkdir -p "${pkgdir}/etc"
+		cp -a "${startdir}/etc/"* "${pkgdir}/etc/"
+	fi
+}

@@ -1,0 +1,36 @@
+# Maintainer: Piero Proietti <piero.proietti@gmail.com>
+pkgname=penguins-wardrobe
+pkgver={{.BaseVersion}}
+pkgrel={{.Rel}}
+pkgdesc="penguins-wardrobe: dress up your Linux distribution"
+url="https://github.com/pieroproietti/penguins-wardrobe"
+arch="x86_64"
+license="GPL-3.0-only"
+
+depends="
+    git
+    rsync
+"
+
+options="!check"
+
+doc() { return 0; }
+bashcomp() { return 0; }
+zshcomp() { return 0; }
+fishcomp() { return 0; }
+
+package() {
+    mkdir -p "$pkgdir/usr"
+
+    cp -a "$startdir/usr/"* "$pkgdir/usr/"
+    if [ -d "$startdir/etc" ]; then
+        mkdir -p "$pkgdir/etc"
+        cp -a "$startdir/etc/"* "$pkgdir/etc/"
+    fi
+
+    find "$pkgdir/usr/share" -type f -exec chmod 644 {} + 2>/dev/null || true
+
+    if [ -d "$pkgdir/usr/share/man/man1" ]; then
+        gzip -9 "$pkgdir"/usr/share/man/man1/*.1
+    fi
+}
