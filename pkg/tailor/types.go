@@ -4,6 +4,10 @@ package tailor
 type WardrobeInfo struct {
 	Name        string `yaml:"name"`
 	Description string `yaml:"description"`
+	// DisplayManagerNotice, when true, prints a localized note at the end of
+	// wear explaining that the vendor ships LightDM by design and removed
+	// other display managers, so the user does not mistake it for a bug.
+	DisplayManagerNotice bool `yaml:"display_manager_notice"`
 }
 
 // Suit rappresenta il nuovo standard index.yaml
@@ -16,7 +20,8 @@ type Suit struct {
 	Distributions []string         `yaml:"distributions"`
 	Sequence      *Sequence        `yaml:"sequence"`
 	Finalize      *Finalize        `yaml:"finalize"`
-	Reboot        bool             `yaml:"reboot"`
+	Reboot               bool             `yaml:"reboot"`
+	DisplayManagerNotice bool             `yaml:"display_manager_notice"`
 	// PackagesManifest points to a file (relative to the costume dir)
 	// listing the COMPLETE, exact set of packages the system should end
 	// up with -- either plain "one package name per line" or the output

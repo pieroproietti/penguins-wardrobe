@@ -2,13 +2,12 @@ package tailor
 
 import (
 	"bufio"
+	"github.com/pieroproietti/penguins-wardrobe/pkg/utils"
 	"fmt"
 	"os"
 	"os/exec"
 	"strings"
 	"time"
-
-	"github.com/pieroproietti/penguins-wardrobe/pkg/utils"
 )
 
 // wearReport holds the full, per-package outcome of a wardrobe wear run.
@@ -21,16 +20,16 @@ type wearReport struct {
 }
 
 // writeWearReport writes the detailed, per-package outcome of a wardrobe
-// wear run to a timestamped text file under /var/log/wardrobe/, and returns
+// wear run to a timestamped text file under /var/log/coa/, and returns
 // its path. The detail lives in the file, not on screen: a costume like
 // quirinux2 touches hundreds of packages, and dumping every single name
 // to the terminal buries the one or two things a user actually needs to
 // act on.
 func writeWearReport(r wearReport) (string, error) {
-	if err := os.MkdirAll("/var/log/wardrobe", 0755); err != nil {
+	if err := os.MkdirAll("/var/log/coa", 0755); err != nil {
 		return "", err
 	}
-	path := fmt.Sprintf("/var/log/wardrobe/wardrobe-report-%s.txt", time.Now().Format("20060102-150405"))
+	path := fmt.Sprintf("/var/log/coa/wardrobe-report-%s.txt", time.Now().Format("20060102-150405"))
 
 	f, err := os.Create(path)
 	if err != nil {
@@ -39,7 +38,7 @@ func writeWearReport(r wearReport) (string, error) {
 	defer f.Close()
 
 	w := bufio.NewWriter(f)
-	fmt.Fprintf(w, "wardrobe wear report -- %s\n", time.Now().Format("2006-01-02 15:04:05"))
+	fmt.Fprintf(w, "coa wardrobe wear report -- %s\n", time.Now().Format("2006-01-02 15:04:05"))
 	fmt.Fprintf(w, "Costume: %s\n\n", r.CostumeName)
 
 	section := func(title string, items []string) {
@@ -145,4 +144,38 @@ func clearScreen() {
 	cmd := exec.Command("clear")
 	cmd.Stdout = os.Stdout
 	cmd.Run()
+}
+
+// systemLang returns the two-letter language code from the environment
+// (LC_ALL / LC_MESSAGES / LANG), defaulting to "en".
+func systemLang() string {
+	for _, v := range []string{os.Getenv("LC_ALL"), os.Getenv("LC_MESSAGES"), os.Getenv("LANG")} {
+		if v != "" {
+			v = strings.SplitN(v, ".", 2)[0]
+			v = strings.SplitN(v, "_", 2)[0]
+			return strings.ToLower(v)
+		}
+	}
+	return "en"
+}
+
+// printDisplayManagerNotice prints a localized note explaining that the
+// vendor ships LightDM by design and removed other display managers, so the
+// user does not mistake the forced display manager for a bug.
+func printDisplayManagerNotice() {
+	msgs := map[string]string{
+		"es": "Quirinux utiliza LightDM como gestor de inicio de sesión, independientemente de la opción elegida durante la instalación. Otros gestores (slim, gdm, sddm, etc.) han sido desinstalados. Esto es intencional y no es un error.",
+		"gl": "Quirinux utiliza LightDM como xestor de inicio de sesión, independentemente da opción elixida durante a instalación. Outros xestores (slim, gdm, sddm, etc.) foron desinstalados. Isto é intencional e non é un erro.",
+		"it": "Quirinux utilizza LightDM come gestore di accesso, indipendentemente dall'opzione scelta durante l'installazione. Altri gestori (slim, gdm, sddm, ecc.) sono stati disinstallati. Questo è intenzionale e non è un errore.",
+		"fr": "Quirinux utilise LightDM comme gestionnaire de connexion, quelle que soit l'option choisie pendant l'installation. D'autres gestionnaires (slim, gdm, sddm, etc.) ont été désinstallés. Ceci est intentionnel et n'est pas un bug.",
+		"de": "Quirinux verwendet LightDM als Anmeldeverwalter, unabhängig von der bei der Installation gewählten Option. Andere Verwalter (slim, gdm, sddm usw.) wurden deinstalliert. Dies ist beabsichtigt und kein Fehler.",
+		"ru": "Quirinux использует LightDM в качестве менеджера входа независимо от варианта, выбранного при установке. Другие менеджеры (slim, gdm, sddm и др.) удалены. Это преднамеренно и не является ошибкой.",
+		"hu": "A Quirinux a LightDM-et használja bejelentkezéskezelőként, függetlenül a telepítéskor választott opciótól. A többi kezelő (slim, gdm, sddm stb.) eltávolításra került. Ez szándékos, nem hiba.",
+		"pt": "O Quirinux utiliza o LightDM como gestor de início de sessão, independentemente da opção escolhida durante a instalação. Outros gestores (slim, gdm, sddm, etc.) foram desinstalados. Isto é intencional e não é um erro.",
+	}
+	msg, ok := msgs[systemLang()]
+	if !ok {
+		msg = "Quirinux uses LightDM as the display manager, regardless of the option chosen during installation. Other display managers (slim, gdm, sddm, etc.) have been removed. This is intentional and not a bug."
+	}
+	utils.LogNormal(utils.ColorYellow+msg+utils.ColorReset)
 }

@@ -2,13 +2,12 @@ package tailor
 
 import (
 	"bufio"
+	"github.com/pieroproietti/penguins-wardrobe/pkg/utils"
 	"fmt"
 	"os"
 	"os/exec"
 	"path/filepath"
 	"strings"
-
-	"github.com/pieroproietti/penguins-wardrobe/pkg/utils"
 )
 
 // neverPurge is a small, hardcoded safety net of packages that must never
@@ -42,8 +41,6 @@ var neverPurgeBase = []string{
 	// remastering tools: the wardrobe must never uninstall itself
 	"penguins-eggs",
 	"coa",
-	"penguins-wardrobe",
-	"wardrobe",
 	// boot
 	"grub-pc",
 	"grub-common",
@@ -283,3 +280,24 @@ func findManifestPath(costumeDir, manifest string) string {
 	}
 	return path
 }
+
+// resolveDistroManifest returns the distribution-specific manifest for the
+// running codename when one exists (any file named "*_<codename>-packages.list",
+// e.g. "debian_bookworm-packages.list" or "quirinux_daedalus-packages.list"),
+// falling back to the generic manifest declared in index.yaml otherwise.
+// This lets a single costume ship authoritative manifests for several bases.
+func resolveDistroManifest(costumeDir, fallback string) string {
+	codename := currentDistroCodename()
+	if codename != "" {
+		suffix := "_" + codename + "-packages.list"
+		if entries, err := os.ReadDir(costumeDir); err == nil {
+			for _, e := range entries {
+				if !e.IsDir() && strings.HasSuffix(e.Name(), suffix) {
+					return filepath.Join(costumeDir, e.Name())
+				}
+			}
+		}
+	}
+	return findManifestPath(costumeDir, fallback)
+}
+

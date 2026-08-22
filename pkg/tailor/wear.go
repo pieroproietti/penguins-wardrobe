@@ -1,25 +1,19 @@
 package tailor
 
 import (
+	"github.com/pieroproietti/penguins-wardrobe/pkg/utils"
 	"fmt"
 	"os"
 	"os/exec"
 	"path/filepath"
 	"strings"
-
-	"github.com/pieroproietti/penguins-wardrobe/pkg/utils"
 )
 
 func Wear(costumeName string, noAcc bool, noFirm bool) error {
 	if os.Geteuid() != 0 {
-		utils.LogError("'wardrobe wear' needs to install packages and write to system paths; run it as root (e.g. 'su' first, or 'sudo wardrobe wear %s' if sudo is configured for your user).", costumeName)
+		utils.LogError("'coa wardrobe wear' needs to install packages and write to system paths; run it as root (e.g. 'su' first, or 'sudo coa wardrobe wear %s' if sudo is configured for your user).", costumeName)
 		return fmt.Errorf("must be run as root")
 	}
-
-	// DKMS safety: make sure the headers for the RUNNING kernel are in
-	// place before any package is unpacked, so DKMS postinsts that build
-	// for the current kernel do not abort mid-transaction.
-	ensureKernelHeaders()
 
 	utils.LogNormal("Starting costume application for: %s", costumeName)
 	root, err := getWardrobeRoot()
@@ -37,6 +31,19 @@ func Wear(costumeName string, noAcc bool, noFirm bool) error {
 	if err != nil {
 		return err
 	}
+
+	// Enforce distribution compatibility BEFORE anything else, including
+	// kernel header installation, so an incompatible system aborts cleanly
+	// without touching the machine or producing unrelated apt output.
+	if err := checkCostumeCompatibility(costumeDir, suit); err != nil {
+		return err
+	}
+
+	// DKMS safety: make sure the headers for the RUNNING kernel are in
+	// place before any package is unpacked, so DKMS postinsts that build
+	// for the current kernel do not abort mid-transaction. Only reached on
+	// compatible systems.
+	ensureKernelHeaders()
 
 	utils.LogNormal("--- Applying Costume: %s ---", suit.Name)
 
@@ -65,8 +72,10 @@ func Wear(costumeName string, noAcc bool, noFirm bool) error {
 
 	installedBefore, _ := currentlyInstalledPackages()
 
-	// Install everything in the manifest that's missing
-	if manifestPath := findManifestPath(costumeDir, suit.PackagesManifest); manifestPath != "" {
+	// Install everything in the manifest that's missing. The manifest is
+	// resolved per-distribution: a "*_<codename>-packages.list" file wins
+	// over the generic packages_manifest declared in index.yaml.
+	if manifestPath := resolveDistroManifest(costumeDir, suit.PackagesManifest); manifestPath != "" {
 		utils.LogNormal("--- Declarative manifest (authoritative install list): %s ---", manifestPath)
 		if targetManifest, err := loadPackageManifest(manifestPath); err == nil {
 			utils.LogNormal("[%s] Installing %d manifest packages...", suit.Name, len(targetManifest))
@@ -144,7 +153,72 @@ func Wear(costumeName string, noAcc bool, noFirm bool) error {
 		utils.LogNormal(utils.ColorYellow + "This costume recommends a reboot to finish applying all changes." + utils.ColorReset)
 	}
 	printKernelCleanupReminder()
+	if suit.DisplayManagerNotice {
+		printDisplayManagerNotice()
+	}
 	return nil
+}
+
+// checkCostumeCompatibility enforces the distribution compatibility declared
+// by the costume. It compares the "distributions" key from index.yaml
+// (already parsed into suit.Distributions) against the running distribution
+// codename. If the costume declares supported distributions and the running
+// one is not among them, the wear is aborted BEFORE any package is installed.
+// The wardrobe-check script, when present, is run only to print a localized
+// message; the enforcement does not depend on it.
+func checkCostumeCompatibility(costumeDir string, suit *Suit) error {
+	if len(suit.Distributions) == 0 {
+		// Costume does not declare supported distributions; assume compatible
+		// with any distribution (backward compatibility with older wardrobes)
+		return nil
+	}
+
+	current := currentDistroCodename()
+	if current == "" {
+		utils.LogNormal("WARNING: could not detect the running distribution; skipping compatibility check.")
+		return nil
+	}
+
+	for _, d := range suit.Distributions {
+		if strings.EqualFold(strings.TrimSpace(d), current) {
+			return nil
+		}
+	}
+
+	// Incompatible. Print ONE detailed explanation: the localized message
+	// from the wardrobe-check script when present, or a generic one otherwise.
+	script := filepath.Join(costumeDir, "wardrobe-check")
+	if _, err := os.Stat(script); err == nil {
+		cmd := exec.Command("bash", script)
+		cmd.Stdout = os.Stdout
+		cmd.Stderr = os.Stderr
+		_ = cmd.Run()
+	} else {
+		fmt.Fprintf(os.Stderr,
+			"This costume (%s) is only compatible with: %s. Detected distribution: %s.\n",
+			suit.Name, strings.Join(suit.Distributions, ", "), current)
+	}
+
+	// Short error: the detailed explanation was already printed above, so
+	// keep the returned error terse to avoid repeating the long text.
+	return fmt.Errorf("aborted: distribution %q not supported", current)
+}
+
+// currentDistroCodename reads /etc/os-release and returns the VERSION_CODENAME
+// value (e.g. "daedalus", "bookworm", "excalibur"), or an empty string if it
+// cannot be determined.
+func currentDistroCodename() string {
+	data, err := os.ReadFile("/etc/os-release")
+	if err != nil {
+		return ""
+	}
+	for _, line := range strings.Split(string(data), "\n") {
+		line = strings.TrimSpace(line)
+		if strings.HasPrefix(line, "VERSION_CODENAME=") {
+			return strings.Trim(strings.TrimPrefix(line, "VERSION_CODENAME="), `"`)
+		}
+	}
+	return ""
 }
 
 // ensureKernelHeaders installs the kernel headers matching the currently

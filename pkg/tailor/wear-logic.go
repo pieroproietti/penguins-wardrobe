@@ -2,6 +2,8 @@ package tailor
 
 import (
 	"bufio"
+	"github.com/pieroproietti/penguins-wardrobe/pkg/distro"
+	"github.com/pieroproietti/penguins-wardrobe/pkg/utils"
 	"fmt"
 	"os"
 	"os/exec"
@@ -9,14 +11,12 @@ import (
 	"strings"
 	"time"
 
-	"github.com/pieroproietti/penguins-wardrobe/pkg/distro"
-	"github.com/pieroproietti/penguins-wardrobe/pkg/utils"
 	"gopkg.in/yaml.v3"
 )
 
 func logToFile(message string) {
 	utils.LogNormal("%s", message)
-	logPath := "/var/log/wardrobe-tailor.log"
+	logPath := "/var/log/coa-tailor.log"
 	f, err := os.OpenFile(logPath, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
 		return
@@ -200,7 +200,7 @@ func installBatchWithFallback(batch []string, retries int, flags string) []strin
 	// dpkg/debconf inherit our own stdio directly instead, which is the
 	// documented workaround for this class of bug.
 	pkgString := strings.Join(batch, " ")
-	cmd := fmt.Sprintf("DEBIAN_FRONTEND=readline apt-get install -o Dpkg::Options::='--force-confold' -o Dpkg::Use-Pty=0 %s %s", flags, pkgString)
+	cmd := fmt.Sprintf("DEBIAN_FRONTEND=noninteractive apt-get install -o Dpkg::Options::='--force-confold' -o Dpkg::Use-Pty=0 %s %s", flags, pkgString)
 	logToFile(fmt.Sprintf("Installing batch of %d packages...", len(batch)))
 	if err := utils.Exec(cmd); err == nil {
 		logToFile("✅ Batch installed.")
@@ -222,7 +222,7 @@ func installBatchWithFallback(batch []string, retries int, flags string) []strin
 	for attempt := 1; attempt <= retries && len(pending) > 0; attempt++ {
 		var stillFailing []string
 		for _, pkg := range pending {
-			singleCmd := fmt.Sprintf("DEBIAN_FRONTEND=readline apt-get install -o Dpkg::Options::='--force-confold' -o Dpkg::Use-Pty=0 %s %s", flags, pkg)
+			singleCmd := fmt.Sprintf("DEBIAN_FRONTEND=noninteractive apt-get install -o Dpkg::Options::='--force-confold' -o Dpkg::Use-Pty=0 %s %s", flags, pkg)
 			if err := utils.Exec(singleCmd); err != nil {
 				// apt-get's exit code alone is not reliable evidence that
 				// THIS package failed: dpkg processes deferred triggers
@@ -343,12 +343,12 @@ func removePackages(packages []string) {
 	}
 
 	pkgString := strings.Join(safe, " ")
-	cmd := fmt.Sprintf("DEBIAN_FRONTEND=readline apt-get remove -o Dpkg::Options::='--force-confold' -o Dpkg::Use-Pty=0 -y %s", pkgString)
+	cmd := fmt.Sprintf("DEBIAN_FRONTEND=noninteractive apt-get remove -o Dpkg::Options::='--force-confold' -o Dpkg::Use-Pty=0 -y %s", pkgString)
 	logToFile(fmt.Sprintf("Removing packages: %s", pkgString))
 	if err := utils.Exec(cmd); err != nil {
 		logToFile(fmt.Sprintf("⚠️  Some packages could not be removed (may not be installed): %v", err))
 	}
-	utils.Exec("DEBIAN_FRONTEND=readline apt-get autoremove -o Dpkg::Use-Pty=0 -y")
+	utils.Exec("DEBIAN_FRONTEND=noninteractive apt-get autoremove -o Dpkg::Use-Pty=0 -y")
 }
 
 func printAiPrompt(packages []string) {
