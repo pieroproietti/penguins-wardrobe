@@ -1,17 +1,18 @@
 package tailor
 
 import (
-	"github.com/pieroproietti/penguins-wardrobe/pkg/utils"
 	"fmt"
 	"os"
 	"os/exec"
 	"path/filepath"
 	"strings"
+
+	"github.com/pieroproietti/penguins-wardrobe/pkg/utils"
 )
 
 func Wear(costumeName string, noAcc bool, noFirm bool) error {
 	if os.Geteuid() != 0 {
-		utils.LogError("'coa wardrobe wear' needs to install packages and write to system paths; run it as root (e.g. 'su' first, or 'sudo coa wardrobe wear %s' if sudo is configured for your user).", costumeName)
+		utils.LogError("'wardrobe wear' needs to install packages and write to system paths; run it as root (e.g. 'su' first, or 'sudo wardrobe wear %s' if sudo is configured for your user).", costumeName)
 		return fmt.Errorf("must be run as root")
 	}
 

@@ -1,10 +1,11 @@
 package tailor
 
 import (
-	"github.com/pieroproietti/penguins-wardrobe/pkg/utils"
 	"os"
 	"regexp"
 	"strings"
+
+	"github.com/pieroproietti/penguins-wardrobe/pkg/utils"
 )
 
 // setupRepositories applica la sezione "repositories" della forma annidata:

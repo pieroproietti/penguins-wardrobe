@@ -2,8 +2,6 @@ package tailor
 
 import (
 	"bufio"
-	"github.com/pieroproietti/penguins-wardrobe/pkg/distro"
-	"github.com/pieroproietti/penguins-wardrobe/pkg/utils"
 	"fmt"
 	"os"
 	"os/exec"
@@ -11,12 +9,14 @@ import (
 	"strings"
 	"time"
 
+	"github.com/pieroproietti/penguins-wardrobe/pkg/distro"
+	"github.com/pieroproietti/penguins-wardrobe/pkg/utils"
 	"gopkg.in/yaml.v3"
 )
 
 func logToFile(message string) {
 	utils.LogNormal("%s", message)
-	logPath := "/var/log/coa-tailor.log"
+	logPath := "/var/log/wardrobe.log"
 	f, err := os.OpenFile(logPath, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
 		return

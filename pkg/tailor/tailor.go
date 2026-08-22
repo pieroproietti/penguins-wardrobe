@@ -1,8 +1,9 @@
 package tailor
 
 import (
-	"github.com/pieroproietti/penguins-wardrobe/pkg/utils"
 	"path/filepath"
+
+	"github.com/pieroproietti/penguins-wardrobe/pkg/utils"
 )
 
 func Show(costumeName string) error {

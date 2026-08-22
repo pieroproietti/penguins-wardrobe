@@ -2,12 +2,13 @@ package tailor
 
 import (
 	"bufio"
-	"github.com/pieroproietti/penguins-wardrobe/pkg/utils"
 	"fmt"
 	"os"
 	"os/exec"
 	"strings"
 	"time"
+
+	"github.com/pieroproietti/penguins-wardrobe/pkg/utils"
 )
 
 // wearReport holds the full, per-package outcome of a wardrobe wear run.
@@ -20,16 +21,16 @@ type wearReport struct {
 }
 
 // writeWearReport writes the detailed, per-package outcome of a wardrobe
-// wear run to a timestamped text file under /var/log/coa/, and returns
+// wear run to a timestamped text file under /var/log/wardrobe/, and returns
 // its path. The detail lives in the file, not on screen: a costume like
 // quirinux2 touches hundreds of packages, and dumping every single name
 // to the terminal buries the one or two things a user actually needs to
 // act on.
 func writeWearReport(r wearReport) (string, error) {
-	if err := os.MkdirAll("/var/log/coa", 0755); err != nil {
+	if err := os.MkdirAll("/var/log/wardrobe", 0755); err != nil {
 		return "", err
 	}
-	path := fmt.Sprintf("/var/log/coa/wardrobe-report-%s.txt", time.Now().Format("20060102-150405"))
+	path := fmt.Sprintf("/var/log/wardrobe/wardrobe-report-%s.txt", time.Now().Format("20060102-150405"))
 
 	f, err := os.Create(path)
 	if err != nil {
@@ -38,7 +39,7 @@ func writeWearReport(r wearReport) (string, error) {
 	defer f.Close()
 
 	w := bufio.NewWriter(f)
-	fmt.Fprintf(w, "coa wardrobe wear report -- %s\n", time.Now().Format("2006-01-02 15:04:05"))
+	fmt.Fprintf(w, "wardrobe wear report -- %s\n", time.Now().Format("2006-01-02 15:04:05"))
 	fmt.Fprintf(w, "Costume: %s\n\n", r.CostumeName)
 
 	section := func(title string, items []string) {
