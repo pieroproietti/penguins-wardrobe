@@ -1,3 +1,12 @@
+# nota per Charlie
+
+ho creato questa nuovo branch new-version nella repo: penguins-wardrobe.
+
+Ho estratto da penguins-eggs il wardrobe ed il necessario per farlo compilare. poi lo ho aggiornato con la tua versione https://github.com/charliemartinez/penguins-eggs al 22 agosto 2026.
+
+Si compila con ./m e niente, dovrebbe essere semplicemente allineato al tuo.
+
+
 # penguins-wardrobe
 
 **penguins-wardrobe** is a standalone, lightweight tool written in Go to manage and apply system configurations, desktop environments, and themes ("costumes") to Linux distributions.
