@@ -1,6 +1,8 @@
 # nota per Charlie
 
-ho creato questa nuovo branch new-version nella repo: penguins-wardrobe.
+ho creato questa nuova nuova repo penguins-wardrobe.
+
+Attenzione: adesso la repo contiene sia il programma che il wardarobe sotto v2.
 
 Ho estratto da penguins-eggs il wardrobe ed il necessario per farlo compilare. poi lo ho aggiornato con la tua versione https://github.com/charliemartinez/penguins-eggs al 22 agosto 2026.
 
