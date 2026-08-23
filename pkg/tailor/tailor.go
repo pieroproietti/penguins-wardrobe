@@ -1,19 +1,37 @@
 package tailor
 
 import (
+	"fmt"
+	"os"
 	"path/filepath"
+	"strings"
 
 	"github.com/pieroproietti/penguins-wardrobe/pkg/utils"
 )
 
 func Show(costumeName string) error {
-	root, err := getWardrobeRoot()
+	v2Dir, err := getWardrobeV2Dir()
 	if err != nil {
 		return err
 	}
 
-	costumeDir := filepath.Join(root, "costumes", costumeName)
+	costumeDir := filepath.Join(v2Dir, "costumes", costumeName)
+	if _, err := os.Stat(costumeDir); os.IsNotExist(err) {
+		if strings.HasPrefix(costumeName, "accessories/") || strings.HasPrefix(costumeName, "costumes/") {
+			costumeDir = filepath.Join(v2Dir, costumeName)
+		} else {
+			accDir := filepath.Join(v2Dir, "accessories", costumeName)
+			if _, errAcc := os.Stat(accDir); errAcc == nil {
+				costumeDir = accDir
+			}
+		}
+	}
+
 	yamlPath := findYaml(costumeDir)
+	if yamlPath == "" {
+		return fmt.Errorf("costume '%s' not found in %s", costumeName, v2Dir)
+	}
+
 	suit, err := loadSuit(yamlPath)
 	if err != nil {
 		return err

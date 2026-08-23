@@ -1,0 +1,63 @@
+#!/usr/bin/python3
+import sys
+import subprocess
+import datetime
+
+# Get the grub title from Mint info file
+info_file = "/etc/linuxmint/info"
+grub_title = "LMDE"
+
+# Log current datetime
+now = str(datetime.datetime.now())
+with open("/var/log/debian-system-adjustments-adjust-grub-title.log", "w") as log_file:
+    log_file.write("%s\n" % now)
+
+    try:
+        with open(info_file) as f:
+            for line in f:
+                if ("GRUB_TITLE" in line):
+                    grub_title = line.strip().split("=")[1]
+    except Exception as e:
+        # Best effort, default to generic title
+        log_file.write("Error when looking for info title: %s\n" % e)
+
+    log_file.write("Info title found: %s\n" % grub_title)
+
+    # Adjust the grub title
+    try:
+        buffer = []
+        existing_title = None
+        needs_modification = False
+        with open("/boot/grub/grub.cfg") as grub_file:
+            in_10_linux_section = False
+            for line in grub_file:
+                if ("BEGIN /etc/grub.d/10_linux" in line):
+                    in_10_linux_section = True
+                elif ("END /etc/grub.d/10_linux" in line):
+                    in_10_linux_section = False
+                if (in_10_linux_section):
+                    if ("menuentry" in line) or ("submenu" in line):
+                        # Get the existing title from the 1st menuentry in the 10_linux section
+                        if existing_title is None:
+                            if "'" in line:
+                                existing_title = line.split("'")[1]
+                            elif '"' in line:
+                                existing_title = line.split('"')[1]
+
+                            existing_title = existing_title.split(",")[0]
+                            log_file.write("Grub title found: %s\n" % existing_title)
+                        if (existing_title != grub_title):
+                            needs_modification = True
+                            line = line.replace(existing_title, grub_title)
+                        if "--class debian" in line:
+                            needs_modification = True
+                            line = line.replace("class debian", "class linuxmint")
+
+                buffer.append(line)
+        if (needs_modification):
+            with open("/boot/grub/grub.cfg", "w") as grub_file:
+                grub_file.writelines(buffer)
+                log_file.write("Replaced title in /boot/grub/grub.cfg\n")
+    except Exception as e:
+        # Best effort, whatever happens, don't fail the boot sequence
+        log_file.write("Error when looking for grub title or replacing it: %s\n" % e)

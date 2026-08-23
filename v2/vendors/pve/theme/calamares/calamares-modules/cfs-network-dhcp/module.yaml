@@ -1,0 +1,7 @@
+# pvelocalhost
+---
+type: "job"
+name: "cfs-network-dhcp"
+interface: "process"
+command: "/usr/sbin/cfs-network-dhcp.sh"
+timeout: 600

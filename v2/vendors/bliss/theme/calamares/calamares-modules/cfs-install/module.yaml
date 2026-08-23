@@ -1,0 +1,8 @@
+# Debian Buster
+# sources-yolk
+---
+type: "job"
+name: "cfs-install"
+interface: "process"
+command: "/usr/sbin/cfs-install.sh"
+timeout: 600

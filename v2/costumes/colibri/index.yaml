@@ -1,0 +1,64 @@
+name: colibri
+description: "desktop xfce4 plus all that I need to develop oa, firmwares"
+
+sequence:
+  repositories:
+    update: true
+
+  packages:
+    - firefox-esr
+    - libxfce4ui-utils
+    - lightdm
+    - lightdm-gtk-greeter
+    - network-manager-gnome
+    - pipewire-pulse
+    - policykit-1-gnome
+    - qt5ct
+    - spice-vdagent
+    - tango-icon-theme
+    - thunar
+    - thunar-archive-plugin
+    - xarchiver
+    - xfce4-appfinder
+    - xfce4-notifyd
+    - xfce4-panel
+    - xfce4-power-manager
+    - xfce4-pulseaudio-plugin
+    - xfce4-screenshooter
+    - xfce4-session
+    - xfce4-settings
+    - xfce4-terminal
+    - xfce4-whiskermenu-plugin
+    - xfconf
+    - xfdesktop4
+    - xfwm4
+    - adwaita-icon-theme-full
+    - adwaita-qt
+    - fonts-font-awesome
+    - fonts-noto-color-emoji
+    - gnome-icon-theme
+    - plymouth
+    - plymouth-themes
+    - libglib2.0-bin
+    - gnome-disk-utility
+    #- ruby-deb
+    - libarchive-tools
+    #- firmware-atheros
+    #- firmware-brcm80211
+    #- firmware-iwlwifi
+    #- firmware-libertas
+    #- firmware-misc-nonfree
+    #- firmware-realtek
+    #- wireless-tools
+    #- wpasupplicant
+
+  accessories:
+    - base
+    - eggs-dev
+  cmds:
+    - "../../scripts/config_desktop_link.sh"
+    - "../../scripts/config_lightdm.sh"
+    - "../../scripts/config_g4.sh"
+    - "../../scripts/hostname.sh"
+    - "plymouth-set-default-theme bgrt"
+    - "update-initramfs -u"

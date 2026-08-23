@@ -1,18 +1,28 @@
 package tailor
 
 import (
+	"os"
 	"path/filepath"
 	"testing"
 )
 
 func TestFindYamlAndLoadSuit(t *testing.T) {
-	root, err := getWardrobeRoot()
+	v2Dir, err := getWardrobeV2Dir()
 	if err != nil {
-		t.Fatalf("getWardrobeRoot error: %v", err)
+		t.Fatalf("getWardrobeV2Dir error: %v", err)
+	}
+
+	if _, err := os.Stat(v2Dir); os.IsNotExist(err) {
+		// Fallback to local repo v2 for test suite execution
+		if localV2, err := filepath.Abs("../../v2"); err == nil {
+			if _, err := os.Stat(localV2); err == nil {
+				v2Dir = localV2
+			}
+		}
 	}
 
 	// Test costume colibri
-	colibriDir := filepath.Join(root, "costumes", "colibri")
+	colibriDir := filepath.Join(v2Dir, "costumes", "colibri")
 	colibriYaml := findYaml(colibriDir)
 	if colibriYaml == "" {
 		t.Fatalf("findYaml failed for colibri at %s", colibriDir)
@@ -26,7 +36,7 @@ func TestFindYamlAndLoadSuit(t *testing.T) {
 	}
 
 	// Test accessory eggs-dev
-	eggsDevDir := filepath.Join(root, "accessories", "eggs-dev")
+	eggsDevDir := filepath.Join(v2Dir, "accessories", "eggs-dev")
 	eggsDevYaml := findYaml(eggsDevDir)
 	if eggsDevYaml == "" {
 		t.Fatalf("findYaml failed for eggs-dev at %s", eggsDevDir)
@@ -43,7 +53,7 @@ func TestFindYamlAndLoadSuit(t *testing.T) {
 	}
 
 	// Test accessory base
-	baseDir := filepath.Join(root, "accessories", "base")
+	baseDir := filepath.Join(v2Dir, "accessories", "base")
 	baseYaml := findYaml(baseDir)
 	if baseYaml == "" {
 		t.Fatalf("findYaml failed for base at %s", baseDir)

@@ -17,12 +17,22 @@ func Wear(costumeName string, noAcc bool, noFirm bool) error {
 	}
 
 	utils.LogNormal("Starting costume application for: %s", costumeName)
-	root, err := getWardrobeRoot()
+	v2Dir, err := getWardrobeV2Dir()
 	if err != nil {
 		utils.LogError("Wardrobe root error: %v", err)
 		return err
 	}
-	costumeDir := filepath.Join(root, "costumes", costumeName)
+	costumeDir := filepath.Join(v2Dir, "costumes", costumeName)
+	if _, err := os.Stat(costumeDir); os.IsNotExist(err) {
+		if strings.HasPrefix(costumeName, "accessories/") || strings.HasPrefix(costumeName, "costumes/") {
+			costumeDir = filepath.Join(v2Dir, costumeName)
+		} else {
+			accDir := filepath.Join(v2Dir, "accessories", costumeName)
+			if _, errAcc := os.Stat(accDir); errAcc == nil {
+				costumeDir = accDir
+			}
+		}
+	}
 	if _, err := os.Stat(costumeDir); os.IsNotExist(err) {
 		return fmt.Errorf("costume '%s' not found in %s", costumeName, costumeDir)
 	}
@@ -65,9 +75,9 @@ func Wear(costumeName string, noAcc bool, noFirm bool) error {
 			if strings.HasPrefix(accName, "./") || strings.HasPrefix(accName, "../") {
 				accDir = filepath.Join(costumeDir, accName)
 			} else if strings.HasPrefix(accName, "accessories/") {
-				accDir = filepath.Join(root, accName)
+				accDir = filepath.Join(v2Dir, accName)
 			} else {
-				accDir = filepath.Join(root, "accessories", accName)
+				accDir = filepath.Join(v2Dir, "accessories", accName)
 			}
 
 			if accYaml := findYaml(accDir); accYaml != "" {

@@ -1,0 +1,8 @@
+# Debian Buster
+# sources-yolk
+---
+type: "job"
+name: "cfs-bootloader"
+interface: "process"
+command: "/usr/sbin/cfs-bootloader.sh"
+timeout: 600

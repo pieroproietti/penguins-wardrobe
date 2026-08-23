@@ -1,0 +1,15 @@
+# /accessories/firmware/video-nvidia
+---
+name: video-nvidia
+description: install driver video-nvidia
+author: artisan
+release: 0.0.1
+distributions:
+  - bookworm
+  - bullseye
+  - buster
+  - chimaera
+  - daedalus
+sequence:
+  package:
+    - bumblebee

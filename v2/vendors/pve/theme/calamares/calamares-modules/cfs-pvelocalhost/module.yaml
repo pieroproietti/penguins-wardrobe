@@ -1,0 +1,7 @@
+# pvelocalhost
+---
+type: "job"
+name: "cfs-pvelocalhost"
+interface: "process"
+command: "/usr/sbin/cfs-pvelocalhost.sh"
+timeout: 600

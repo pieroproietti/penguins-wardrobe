@@ -1,0 +1,25 @@
+# eggs-dev
+---
+name: eggs-dev
+description: 'install: nodejs, npm, code, antigravity-cli'
+author: artisan
+distributions:
+  - opensuse
+sequence:
+  # uso cmds: zypper refresh per l'aggiornamento
+  
+  cmds:
+    - /usr/bin/rpm --import https://packages.microsoft.com/keys/microsoft.asc
+    - zypper addrepo https://packages.microsoft.com/yumrepos/vscode vscode
+    - zypper refresh
+    
+  packages:
+    - code
+    - nodejs
+
+finalize:
+  cmds:
+    - npm i pnpm -g
+    - curl -fsSL https://antigravity.google/cli/install.sh | bash -s -- --dir /usr/local/bin
+
+   

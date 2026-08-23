@@ -1,0 +1,24 @@
+# wardrobe: .
+# accessory: educational
+---
+name: educational
+description: >-
+  educational
+author: artisan
+release: 0.0.1
+distributions:
+  - bookworm
+  - bullseye
+  - chimaera
+  - daedalus
+sequence:
+  packages:
+    - gcompris
+    - gelemental
+    - granule # Leitner system flashcard utiltiy (text only)
+    - klavaro # touch typing
+    - littlewizard # development environment for children
+    - solfege #  ear training
+    - stellarium
+    - tuxtype # TypingTutor - touch typing plugin for gedit
+    - wordplay #  anagrams

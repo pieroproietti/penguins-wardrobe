@@ -1,0 +1,7 @@
+# bliss-dafa-img
+---
+type: "job"
+name: "cfs-data-img"
+interface: "process"
+command: "/usr/sbin/cfs-data-img.sh"
+timeout: 600

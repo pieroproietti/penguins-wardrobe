@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+# ======================================================================
+# Archivo:       xfce4-power-manager.xml
+# Ruta:          .config/xfce4/xfconf/xfce-perchannel-xml/
+# Autor:         Charlie Martínez® <cmartinez@quirinux.org>
+# Licencia:      https://www.gnu.org/licenses/gpl-2.0.txt
+# Propósito:     Configuración específica para Quirinux
+# Distribución:  Quirinux 2.x
+# ======================================================================
+
+#
+# Copyright (c) 2019-2025 Charlie Martínez, derechos reservados.
+# Licencia: https://www.gnu.org/licenses/gpl-2.0.txt
+# Usos autorizados y no autorizados de la marca Quirinux:
+# Ver https://www.quirinux.org/aviso-legal
+#
+-->
+
+<channel name="xfce4-power-manager" version="1.0">
+  <property name="xfce4-power-manager" type="empty">
+    <property name="power-button-action" type="empty"/>
+    <property name="show-tray-icon" type="bool" value="false"/>
+    <property name="brightness-switch" type="int" value="1"/>
+    <property name="brightness-switch-restore-on-exit" type="int" value="1"/>
+    <property name="brightness-on-ac" type="int" value="100"/>
+    <property name="brightness-on-battery" type="uint" value="9"/>
+
+    <!-- Apagar pantalla al cerrar tapa -->
+    <property name="lid-action-on-battery" type="uint" value="0"/> <!-- 1: Apagar pantalla al cerrar tapa en batería -->
+    <property name="lid-action-on-ac" type="uint" value="0"/> <!-- 1: Apagar pantalla al cerrar tapa en AC -->
+
+    <!-- Evitar el bloqueo de pantalla al suspender -->
+    <property name="logind-handle-lid-switch" type="bool" value="false"/>
+    <property name="lock-screen-suspend-hibernate" type="bool" value="false"/> <!-- No bloquear pantalla al suspender -->
+
+    <property name="dpms-enabled" type="bool" value="true"/>
+    <property name="blank-on-battery" type="int" value="0"/>
+    <property name="blank-on-ac" type="int" value="0"/>
+    <property name="handle-brightness-keys" type="bool" value="false"/>
+    <property name="inactivity-sleep-mode-on-battery" type="uint" value="1"/>
+    <property name="dpms-on-battery-sleep" type="uint" value="0"/>
+    <property name="dpms-on-battery-off" type="uint" value="0"/>
+    <property name="dpms-on-ac-sleep" type="uint" value="0"/>
+    <property name="dpms-on-ac-off" type="uint" value="0"/>
+  </property>
+</channel>

@@ -1,0 +1,24 @@
+version: 9.3.8
+snapshot_dir: /home/eggs/
+snapshot_prefix: ''
+snapshot_excludes: /usr/local/share/penguins-eggs/exclude.list
+snapshot_basename: 'EducaAndOS-plus'
+user_opt: live
+user_opt_passwd: evolution
+root_passwd: evolution
+theme: eggs
+force_installer: true
+make_efi: true
+make_md5sum: false
+make_isohybrid: true
+compression: zstd -b 256K -Xcompression-level 1
+ssh_pass: true
+timezone: Europe/Madris
+locales_default: es_ES.UTF-8
+locales:
+  - es_ES.UTF-8
+  - en_US.UTF-8
+pmount_fixed: false
+machine_id: 728f7791535d4d12ac5c5512f278f181
+vmlinuz: /boot/vmlinuz-5.4.0-66-generic
+initrd_img: /boot/initrd.img-5.4.0-66-generic

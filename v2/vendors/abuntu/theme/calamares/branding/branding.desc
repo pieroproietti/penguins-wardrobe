@@ -1,0 +1,36 @@
+---
+componentName: abuntu
+
+welcomeExpandingLogo:   true
+windowExpanding:    normal
+windowSize: 1280px,665px
+windowPlacement: center
+navigation: widget
+
+strings:
+    productName:         Abuntu
+    shortProductName:    Abuntu
+    version:             1.01
+    shortVersion:        Etherwave
+    versionedName:       Abuntu (alpha)
+    shortVersionedName:  Abuntu
+    bootloaderEntryName: Ubuntu
+    productUrl:          https://abuntu.net
+    supportUrl:          https://abuntu.foundation/
+    releaseNotesUrl:     https://abuntu.net/news
+    donateUrl:           https://abuntu.net/donate
+
+images:
+    productBanner:       "welcome.png"
+    productIcon:         "logo.png"
+    productLogo:         "logo.png"
+    productWallpaper:    "background.png"
+
+slideshow:               "show.qml"
+slideshowAPI: 2
+
+style:
+   SidebarBackground:    "#2d2d2d"
+   SidebarText:          "#FFFFFF"
+   SidebarTextSelect:    "#0068C8"
+

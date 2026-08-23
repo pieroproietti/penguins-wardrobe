@@ -1,0 +1,39 @@
+# network-wifi
+---
+name: network-wifi
+description: install firmware drivers network-wifi
+author: artisan
+release: 0.0.1
+distributions:
+  - bookworm
+  - bullseye
+  - buster
+  - chimaera
+  - daedalus
+
+sequence:
+  packages:
+    #- dahdi-firmware-nonfree  # (comm): DAHDI non-free firmware [non-free]
+    - firmware-misc-nonfree   # Binary firmware for various drivers in the Linux kernel [non-free]
+    - firmware-atheros        # Binary firmware for Qualcomm Atheros wireless cards non-free
+    #- firmware-b43-installer  # firmware installer for the b43 driver
+    #- firmware-b43legacy-installer # firmware installer for the b43legacy driver contrib
+    - firmware-brcm80211 # Binary firmware for Broadcom/Cypress 802.11 wireless card
+    #- firmware-cavium # Binary firmware for Cavium Ethernet adapters [non-free]
+    #- firmware-intel-sound # Binary firmware for Intel sound DSPs [non-free]
+    #- firmware-intelwimax # Binary firmware for Intel WiMAX Connection [non-free]
+    - firmware-ipw2x00 #  Binary firmware for Intel Pro Wireless 2100, 2200 and 2915 [non-free]
+    #- firmware-ivtv # Binary firmware for iTVC15-family MPEG codecs (ivtv and pvrusb2 drivers) [non-free]
+    - firmware-iwlwifi #  Binary firmware for Intel Wireless cards [non-free]
+    - firmware-libertas # inary firmware for Marvell wireless cards [non-free]
+    #- firmware-linux # (metapackages): Binary firmware for various drivers in the Linux kernel (metapackage) [non-free]
+    - firmware-linux-free #  (kernel): Binary firmware for various drivers in the Linux kernel
+    #- firmware-linux-nonfree # (metapackages): Binary firmware for various drivers in the Linux kernel (metapackage) [non-free]
+    #- firmware-qcom-media # Binary firmware for Qualcomm graphics/video (dummy package) [non-free]
+    - firmware-realtek # Binary firmware for Realtek wired/wifi/BT adapters [non-free]
+    #- firmware-siano #  Binary firmware for Siano MDTV receivers [non-free]
+    #- firmware-ti-connectivity #  Binary firmware for TI Connectivity wifi and BT/FM/GPS adapters [non-free]
+    - firmware-zd1211 # binary firmware for the zd1211rw wireless driver [non-free]
+    #- grub-firmware-qemu # GRUB firmware image for QEMU
+    #- hdmi2usb-fx2-firmware # (video): FX2 firmware for hdmi2usb board development
+

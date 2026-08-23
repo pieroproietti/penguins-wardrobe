@@ -14,12 +14,12 @@ func Get() error {
 	}
 
 	if _, err := os.Stat(root); os.IsNotExist(err) {
-		utils.LogNormal("Scaricamento di oa-wardrobe...")
-		cmd := fmt.Sprintf("git clone https://github.com/pieroproietti/oa-wardrobe.git %s", root)
+		utils.LogNormal("Downloading penguins-wardrobe...")
+		cmd := fmt.Sprintf("git clone https://github.com/pieroproietti/penguins-wardrobe.git %s", root)
 		return utils.Exec(cmd)
 	}
 
-	utils.LogNormal("oa-wardrobe already present in %s. Updating...", root)
+	utils.LogNormal("penguins-wardrobe already present in %s. Updating...", root)
 	cmd := fmt.Sprintf("git -C %s pull", root)
 	return utils.Exec(cmd)
 }
