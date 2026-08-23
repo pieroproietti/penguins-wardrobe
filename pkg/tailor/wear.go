@@ -56,14 +56,31 @@ func Wear(costumeName string, noAcc bool, noFirm bool) error {
 	if !noAcc && len(suit.Accessories) > 0 {
 		utils.LogNormal("--- Processing %d accessories ---", len(suit.Accessories))
 		for _, accName := range suit.Accessories {
-			accDir := filepath.Join(root, "accessories", accName)
+			if noFirm && (accName == "firmwares" || strings.Contains(accName, "firmware")) {
+				utils.LogNormal("Skipping firmware accessory (%s) due to --no-firmwares flag", accName)
+				continue
+			}
+
+			var accDir string
+			if strings.HasPrefix(accName, "./") || strings.HasPrefix(accName, "../") {
+				accDir = filepath.Join(costumeDir, accName)
+			} else if strings.HasPrefix(accName, "accessories/") {
+				accDir = filepath.Join(root, accName)
+			} else {
+				accDir = filepath.Join(root, "accessories", accName)
+			}
+
 			if accYaml := findYaml(accDir); accYaml != "" {
 				if accSuit, err := loadSuit(accYaml); err == nil {
-					utils.LogNormal("Accessory: %s", accName)
+					utils.LogNormal("Accessory: %s (%s)", accName, filepath.Base(accYaml))
 					accInstalled, accFailed, _ := applySuit(accDir, accSuit)
 					installedPackages = append(installedPackages, accInstalled...)
 					failedPackages = append(failedPackages, accFailed...)
+				} else {
+					utils.LogNormal(utils.ColorYellow+"WARNING: could not load accessory '%s': %v"+utils.ColorReset, accName, err)
 				}
+			} else {
+				utils.LogNormal(utils.ColorYellow+"WARNING: accessory '%s' not found in %s"+utils.ColorReset, accName, accDir)
 			}
 		}
 	}
@@ -352,6 +369,21 @@ func applySuit(dir string, suit *Suit) ([]string, []string, error) {
 		utils.LogNormal("[%s] Running %d post-installation commands...", suit.Name, len(suit.Cmds))
 		for _, command := range suit.Cmds {
 			utils.LogNormal("[%s] Executing: %s", suit.Name, command)
+			fields := strings.Fields(command)
+			if len(fields) > 0 {
+				relScript := filepath.Join(dir, fields[0])
+				if stat, err := os.Stat(relScript); err == nil && !stat.IsDir() {
+					rest := strings.TrimSpace(command[len(fields[0]):])
+					var fullCmd string
+					if rest != "" {
+						fullCmd = fmt.Sprintf("%s %s", relScript, rest)
+					} else {
+						fullCmd = fmt.Sprintf("%s %s", relScript, suit.Name)
+					}
+					utils.Exec(fullCmd)
+					continue
+				}
+			}
 			utils.Exec(command)
 		}
 	}

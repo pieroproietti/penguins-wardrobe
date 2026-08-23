@@ -21,6 +21,15 @@ func Show(costumeName string) error {
 
 	utils.LogNormal(utils.ColorCyan+"Costume: %s"+utils.ColorReset, suit.Name)
 	utils.LogNormal("Descrizione: %s", suit.Description)
+	if len(suit.Distributions) > 0 {
+		utils.LogNormal("Distribuzioni: %v", suit.Distributions)
+	}
 	utils.LogNormal("Pacchetti: %v", suit.Packages)
+	if len(suit.Accessories) > 0 {
+		utils.LogNormal("Accessori: %v", suit.Accessories)
+	}
+	if len(suit.Cmds) > 0 {
+		utils.LogNormal("Comandi: %v", suit.Cmds)
+	}
 	return nil
 }

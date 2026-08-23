@@ -19,6 +19,7 @@ func Get() error {
 		return utils.Exec(cmd)
 	}
 
-	utils.LogNormal("oa-wardrobe already present in %s. To update, use git pull manually.", root)
-	return nil
+	utils.LogNormal("oa-wardrobe already present in %s. Updating...", root)
+	cmd := fmt.Sprintf("git -C %s pull", root)
+	return utils.Exec(cmd)
 }

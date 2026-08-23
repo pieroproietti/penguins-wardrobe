@@ -27,16 +27,51 @@ func logToFile(message string) {
 }
 
 func findYaml(costumePath string) string {
-	fullPath := filepath.Join(costumePath, "index.yaml")
-	if _, err := os.Stat(fullPath); err == nil {
-		return fullPath
+	candidates := []string{
+		"index.yaml",
+		"index.yml",
 	}
+
+	d := distro.NewDistro()
+	if d != nil {
+		if d.DistroID != "" {
+			candidates = append(candidates, strings.ToLower(d.DistroID)+".yaml", strings.ToLower(d.DistroID)+".yml")
+		}
+		if d.DistroLike != "" {
+			candidates = append(candidates, strings.ToLower(d.DistroLike)+".yaml", strings.ToLower(d.DistroLike)+".yml")
+		}
+		if d.FamilyID != "" {
+			candidates = append(candidates, strings.ToLower(d.FamilyID)+".yaml", strings.ToLower(d.FamilyID)+".yml")
+		}
+		if strings.EqualFold(d.FamilyID, "archlinux") {
+			candidates = append(candidates, "arch.yaml", "arch.yml")
+		}
+		if strings.EqualFold(d.FamilyID, "debian") {
+			candidates = append(candidates, "debian.yaml", "debian.yml", "ubuntu.yaml", "devuan.yaml")
+		}
+	}
+
+	// Standard distro fallbacks
+	candidates = append(candidates, "debian.yaml", "debian.yml", "arch.yaml", "alpine.yaml", "fedora.yaml", "opensuse.yaml")
+
+	seen := make(map[string]struct{})
+	for _, c := range candidates {
+		if _, ok := seen[c]; ok {
+			continue
+		}
+		seen[c] = struct{}{}
+		fullPath := filepath.Join(costumePath, c)
+		if _, err := os.Stat(fullPath); err == nil {
+			return fullPath
+		}
+	}
+
 	return ""
 }
 
 func loadSuit(yamlFile string) (*Suit, error) {
 	if yamlFile == "" {
-		return nil, fmt.Errorf("file 'index.yaml' not found")
+		return nil, fmt.Errorf("costume/accessory definition yaml file not found")
 	}
 	data, err := os.ReadFile(yamlFile)
 	if err != nil {
