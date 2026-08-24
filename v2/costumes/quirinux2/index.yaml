@@ -51,7 +51,7 @@ sequence:
       - PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin" /usr/bin/dpkg -i /tmp/quirinux-keyring.deb || true
       - rm -f /tmp/quirinux-keyring.deb
       - /usr/bin/wget --no-check-certificate -O /tmp/quirinux-repo.deb https://repo.quirinux.org/pool/main/q/quirinux-repo/quirinux-repo_1.2.3+q2_all.deb
-      - PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin" /usr/bin/apt install -y /tmp/quirinux-repo.deb
+      - PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin" /usr/bin/dpkg -i /tmp/quirinux-repo.deb
       - rm -f /tmp/quirinux-repo.deb
     update: true
     upgrade: true
