@@ -9,7 +9,7 @@ Ho estratto da penguins-eggs il wardrobe ed il necessario per farlo compilare. p
 Si compila con ./m e niente, dovrebbe essere semplicemente allineato al tuo.
 
 
-# penguins-wardrobe
+# penguins-wardrobe/v2
 
 **penguins-wardrobe** is a standalone, lightweight tool written in Go to manage and apply system configurations, desktop environments, and themes ("costumes") to Linux distributions.
 

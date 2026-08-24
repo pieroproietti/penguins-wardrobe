@@ -11,7 +11,7 @@ import (
 	"strings"
 )
 
-// getWardrobeRoot returns ~/wardrobe for the "real" user behind this
+// getWardrobeRoot returns ~/.wardrobe for the "real" user behind this
 // elevated process.
 //
 // Priority order:
@@ -59,10 +59,10 @@ func getWardrobeRoot() (string, error) {
 		homeDir = home
 	}
 
-	return filepath.Join(homeDir, "wardrobe"), nil
+	return filepath.Join(homeDir, ".wardrobe"), nil
 }
 
-// getWardrobeV2Dir returns ~/wardrobe/v2 for the "real" user.
+// getWardrobeV2Dir returns ~/.wardrobe/v2 for the "real" user.
 func getWardrobeV2Dir() (string, error) {
 	root, err := getWardrobeRoot()
 	if err != nil {
