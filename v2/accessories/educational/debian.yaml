@@ -5,12 +5,11 @@ name: educational
 description: >-
   educational
 author: artisan
-release: 0.0.1
+release: 2.0.1
 distributions:
-  - bookworm
-  - bullseye
-  - chimaera
-  - daedalus
+  - trixie
+  - excalibur
+  - resolute
 sequence:
   packages:
     - gcompris

@@ -5,11 +5,12 @@
 name: duck
 description: desktop cinnamon plus all that we need to enjoy at home and office
 author: artisan
-release: 0.9.2
+release: 2.0.1
 distributions:
-  - bookworm
-  - bullseye
-  - chimaera
+  - trixie
+  - excalibur
+  - resolute
+  
 sequence:
   repositories:
     sources_list:

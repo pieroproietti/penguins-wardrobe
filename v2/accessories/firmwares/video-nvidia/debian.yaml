@@ -3,13 +3,12 @@
 name: video-nvidia
 description: install driver video-nvidia
 author: artisan
-release: 0.0.1
+release: 2.0.1
 distributions:
-  - bookworm
-  - bullseye
-  - buster
-  - chimaera
+  - trixie
   - daedalus
+  - excalibur
+  - resolute
 sequence:
   package:
     - bumblebee

@@ -6,11 +6,12 @@ name: albatros
 description: >-
   desktop kde plus all that I need to develop coa, firmwares
 author: artisan
-release: 0.0.1
+release: 2.0.1
 distributions:
-  - bookworm
-  - noble
-  - oracular
+  - trixie
+  - excalibur
+  - resolute
+
 sequence:
   repositories:
     sources_list:

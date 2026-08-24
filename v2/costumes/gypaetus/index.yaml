@@ -5,10 +5,12 @@ name: gypaetus
 description: >-
   desktop xfce4 plus all for crytpo
 author: artisan
-release: 0..1
+release: 2.0.1
 distributions:
   - trixie
   - excalibur
+  - resolute
+
 sequence:
   repositories:
     sources_list:

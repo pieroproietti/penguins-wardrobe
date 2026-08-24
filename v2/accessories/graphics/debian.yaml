@@ -3,18 +3,12 @@
 name: graphics
 description: graphics packages
 author: artisan
-release: 0.0.1
+release: 2.0.1
 distributions:
-  - bookworm
-  - bullseye
-  - buster
-  - chimaera
+  - trixie
   - daedalus
-  - bionic
-  - focal
-  - jammy
-  - oracular
-  - rolling
+  - excalibur
+  - resolute
 sequence:
   sources_list_d:
     - rm -f /etc/apt/sources.list.d/quirinux.list

@@ -3,8 +3,12 @@
 name: mariadb
 description: 'mariadb nextcloud'
 author: artisan
+release: 2.0.1
 distributions:
-  - bullseye
+  - trixie
+  - daedalus
+  - excalibur
+  - resolute
 sequence:
   packages:
   - mariadb-server
