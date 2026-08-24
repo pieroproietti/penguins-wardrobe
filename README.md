@@ -117,6 +117,13 @@ wardrobe export log -u artisan -i 192.168.1.50 -d /home/artisan/logs
 
 ---
 
+## 📖 Documentation
+
+A comprehensive guide is available in the documentation folder:
+- [Wardrobe Users' Guide (Italian)](./v2/DOCS/wardrobe-users-guide.md)
+
+---
+
 ## 📜 License
 
 MIT License. Copyright (c) 2026 Piero Proietti.

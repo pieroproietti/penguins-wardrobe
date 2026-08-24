@@ -55,8 +55,3 @@ sequence:
     - unpaper
     - xsltproc
 
-finalize:
-  cmds:
-  # cleaning cups configuration
-  - rm -f /etc/cups/printers.conf
-  - rm -fr /etc/cups/ppd/
