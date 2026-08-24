@@ -37,17 +37,43 @@ func Show(costumeName string) error {
 		return err
 	}
 
-	utils.LogNormal(utils.ColorCyan+"Costume: %s"+utils.ColorReset, suit.Name)
-	utils.LogNormal("Descrizione: %s", suit.Description)
-	if len(suit.Distributions) > 0 {
-		utils.LogNormal("Distribuzioni: %v", suit.Distributions)
+	isAcc := strings.Contains(costumeDir, "/accessories/")
+	icon := "👗"
+	titleType := "COSTUME"
+	if isAcc {
+		icon = "👝"
+		titleType = "ACCESSORY"
 	}
-	utils.LogNormal("Pacchetti: %v", suit.Packages)
+
+	versionStr := ""
+	if suit.Release != "" {
+		versionStr = fmt.Sprintf(" (v%s)", suit.Release)
+	}
+
+	utils.PrintBanner(icon, fmt.Sprintf("%s: %s%s", titleType, suit.Name, versionStr), suit.Description)
+	if suit.Author != "" {
+		fmt.Printf("  %-16s: %s\n", "Autore", suit.Author)
+	}
+	if len(suit.Distributions) > 0 {
+		fmt.Printf("  %-16s: %s\n", "Distribuzioni", strings.Join(suit.Distributions, ", "))
+	}
 	if len(suit.Accessories) > 0 {
-		utils.LogNormal("Accessori: %v", suit.Accessories)
+		fmt.Printf("  %-16s: %s\n", "Accessori", strings.Join(suit.Accessories, ", "))
+	}
+	if len(suit.Packages) > 0 {
+		limit := 5
+		if len(suit.Packages) < limit {
+			limit = len(suit.Packages)
+		}
+		preview := strings.Join(suit.Packages[:limit], ", ")
+		if len(suit.Packages) > limit {
+			preview += "..."
+		}
+		fmt.Printf("  %-16s: %d pacchetti (%s)\n", "Pacchetti", len(suit.Packages), preview)
 	}
 	if len(suit.Cmds) > 0 {
-		utils.LogNormal("Comandi: %v", suit.Cmds)
+		fmt.Printf("  %-16s: %d comandi di finalizzazione\n", "Comandi", len(suit.Cmds))
 	}
+	fmt.Println()
 	return nil
 }

@@ -217,17 +217,17 @@ func purgeExplicit(toRemove []string) {
 		return
 	}
 
-	utils.LogNormal("Explicit purge: removing %d packages declared absent from the vendor manifest...", len(list))
+	logToFile(fmt.Sprintf("Explicit purge: removing %d packages declared absent from the vendor manifest...", len(list)))
 	cmd := fmt.Sprintf("DEBIAN_FRONTEND=noninteractive apt-get purge -o Dpkg::Use-Pty=0 -o Dpkg::Options::='--force-confold' -y %s", strings.Join(list, " "))
-	if err := utils.Exec(cmd); err != nil {
-		utils.LogNormal("WARNING: bulk explicit purge reported an error; healing and retrying once...")
-		utils.Exec("dpkg --configure -a")
-		utils.Exec("DEBIAN_FRONTEND=noninteractive apt-get install -f -y")
-		utils.Exec(cmd)
+	if err := utils.ExecLog(cmd, wardrobeLogFile); err != nil {
+		logToFile("WARNING: bulk explicit purge reported an error; healing and retrying once...")
+		utils.ExecLog("dpkg --configure -a", wardrobeLogFile)
+		utils.ExecLog("DEBIAN_FRONTEND=noninteractive apt-get install -f -y", wardrobeLogFile)
+		utils.ExecLog(cmd, wardrobeLogFile)
 	}
 
-	utils.LogNormal("Sweeping orphaned dependencies of removed packages...")
-	utils.Exec("DEBIAN_FRONTEND=noninteractive apt-get autoremove -o Dpkg::Use-Pty=0 --purge -y")
+	logToFile("Sweeping orphaned dependencies of removed packages...")
+	utils.ExecLog("DEBIAN_FRONTEND=noninteractive apt-get autoremove -o Dpkg::Use-Pty=0 --purge -y", wardrobeLogFile)
 }
 
 // getInstallReason returns a human-readable string explaining why apt kept
