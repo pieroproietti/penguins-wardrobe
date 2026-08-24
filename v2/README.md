@@ -1,32 +1,51 @@
-![](./oa-wardrobe.png)
-# oa-wardrobe
+![](./penguins-wardrobe.png)
+# penguins-wardrobe / v2
 
-It is a repository mainly consisting of .yaml files and simple bash scripts used
-by coa to create customizations of Linux systems starting from a minimal
-image - referred to as "naked" - to achieve a complete system.
+This directory contains the **v2 wardrobe definitions**: costumes, accessories, scripts, and vendor configurations used by `penguins-wardrobe` to customize and dress Linux systems.
 
-It's too hard and long for me to have differents translation of this
-documentation, so I decided to write it in italian and give just a translation
-link.
+---
 
-## Documentation
+## 📁 Directory Layout
 
-Documentation of oa-wardrobe was moved to
-[oa-tools.net](https://oa-tools.net/docs/Tutorial/wardrobe-users-guide).
+- **`costumes/`**: Declarative desktop and system environment recipes (e.g. `colibri`, `eagle`, `duck`, `seagull`, `quirinux2`).
+- **`accessories/`**: Modular components that can be installed alongside costumes or standalone (e.g. `eggs-dev`, `base`, `live-installer`).
+- **`vendors/`**: Vendor-specific customizations and configurations.
+- **`scripts/`**: Utility and helper scripts executed during the wardrobe customization sequence.
+- **`DOCS/`**: Documentation and guides.
 
-# More informations
+---
 
-You can contact me by [mail](mailto://pieroproietti@gmail.com) or follow me on
-[blog](https://oa-tools.net),
-[facebook](https://www.facebook.com/groups/128861437762355/),
-[github](https://github.com/pieroproietti/penguins-krill),
-[jtsi](https://meet.jit.si/PenguinsEggsMeeting),
-[reddit](https://www.reddit.com/user/Artisan61),
-[telegram](https://t.me/penguins_coa),
-[twitter](https://twitter.com/pieroproietti).
+## 🚀 Quick Usage
 
-# Copyright and licenses
+```bash
+# Clone or update the wardrobe repository
+wardrobe get
 
-Copyright (c) 2017, 2024
-[Piero Proietti](https://oa-tools.net/about-me.html), dual licensed under
-the MIT or GPL Version 2 licenses.
+# List available costumes
+wardrobe list
+
+# Show detailed information about a costume
+wardrobe show colibri
+
+# Apply a costume to the current machine
+sudo wardrobe wear colibri
+
+# Export built packages or execution logs to remote server
+wardrobe export pkg
+wardrobe export log
+```
+
+---
+
+## ℹ️ More Information
+
+- **Main Repository**: [github.com/pieroproietti/penguins-wardrobe](https://github.com/pieroproietti/penguins-wardrobe)
+- **Website & Documentation**: [penguins-eggs.net](https://penguins-eggs.net)
+- **Author**: Piero Proietti <piero.proietti@gmail.com>
+
+---
+
+## 📜 Copyright and License
+
+Copyright (c) 2017-2026 Piero Proietti. Dual licensed under the MIT or GPL Version 2 licenses.
+

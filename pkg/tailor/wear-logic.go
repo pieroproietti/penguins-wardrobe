@@ -132,7 +132,7 @@ func normalizePkgName(name string) string {
 // Installing in smaller batches keeps each dpkg transaction's trigger
 // processing small, and each successfully completed batch is durably
 // installed on disk, so a crash mid-way only loses the current batch,
-// not everything: re-running `coa wardrobe wear` will see the earlier
+// not everything: re-running `wardrobe wear` will see the earlier
 // batches already satisfied (apt-get install on an installed package is
 // a fast no-op) and continue from where it died.
 const batchSize = 20

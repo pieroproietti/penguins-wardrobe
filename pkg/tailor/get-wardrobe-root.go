@@ -62,13 +62,17 @@ func getWardrobeRoot() (string, error) {
 	return filepath.Join(homeDir, ".wardrobe"), nil
 }
 
-// getWardrobeV2Dir returns ~/.wardrobe/v2 for the "real" user.
+// getWardrobeV2Dir returns ~/.wardrobe/v2 for the "real" user if present, or ~/.wardrobe.
 func getWardrobeV2Dir() (string, error) {
 	root, err := getWardrobeRoot()
 	if err != nil {
 		return "", err
 	}
-	return filepath.Join(root, "v2"), nil
+	v2 := filepath.Join(root, "v2")
+	if _, err := os.Stat(v2); err == nil {
+		return v2, nil
+	}
+	return root, nil
 }
 
 // firstHumanUser scans /etc/passwd for the first real (non-system) user:

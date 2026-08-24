@@ -83,24 +83,22 @@ func diffStr(all, exclude []string) []string {
 // reminder, translated. Shown after every wardrobe wear run because
 // costumes like quirinux2 routinely pull in a newer kernel, and old
 // kernel/header packages left behind just waste disk space once the
-// remaster is built with coa.
+// remaster is built with penguins-eggs.
 var kernelCleanupMessages = map[string]string{
-	"en": "After rebooting, it's a good idea to remove any old kernel and header package versions before creating the remaster with coa.",
-	"es": "Después de reiniciar, es recomendable eliminar las versiones anteriores del kernel y de los headers antes de crear el remaster con coa.",
-	"gl": "Despois de reiniciar, é recomendábel eliminar as versións anteriores do kernel e das cabeceiras (headers) antes de crear o remaster con coa.",
-	"it": "Dopo il riavvio, è consigliabile rimuovere le vecchie versioni del kernel e degli header prima di creare il remaster con coa.",
-	"fr": "Après le redémarrage, il est conseillé de supprimer les anciennes versions du noyau et des en-têtes avant de créer le remaster avec coa.",
-	"de": "Nach dem Neustart sollten alte Kernel- und Header-Paketversionen entfernt werden, bevor das Remaster mit coa erstellt wird.",
-	"ru": "После перезагрузки рекомендуется удалить старые версии ядра и заголовков перед созданием ремастера с помощью coa.",
-	"hu": "Újraindítás után érdemes eltávolítani a régi kernel- és fejléccsomag-verziókat, mielőtt a coa-val remastert készítenél.",
-	"pt": "Depois de reiniciar, é recomendável remover as versões antigas do kernel e dos headers antes de criar o remaster com o coa.",
+	"en": "After rebooting, it's a good idea to remove any old kernel and header package versions before creating the remaster with penguins-eggs.",
+	"es": "Después de reiniciar, es recomendable eliminar las versiones anteriores del kernel y de los headers antes de crear el remaster con penguins-eggs.",
+	"gl": "Despois de reiniciar, é recomendábel eliminar as versións anteriores do kernel e das cabeceiras (headers) antes de crear o remaster con penguins-eggs.",
+	"it": "Dopo il riavvio, è consigliabile rimuovere le vecchie versioni del kernel e degli header prima di creare il remaster con penguins-eggs.",
+	"fr": "Après le redémarrage, il est conseillé de supprimer les anciennes versions du noyau et des en-têtes avant de créer le remaster avec penguins-eggs.",
+	"de": "Nach dem Neustart sollten alte Kernel- und Header-Paketversionen entfernt werden, bevor das Remaster mit penguins-eggs erstellt wird.",
+	"ru": "После перезагрузки рекомендуется удалить старые версии ядра и заголовков перед созданием ремастера с помощью penguins-eggs.",
+	"hu": "Újraindítás után érdemes eltávolítani a régi kernel- és fejléccsomag-verziókat, mielőtt a penguins-eggs-szel remastert készítenél.",
+	"pt": "Depois de reiniciar, é recomendável remover as versões antigas do kernel e dos headers antes de criar o remaster com o penguins-eggs.",
 }
 
 // detectSystemLanguage returns the ISO 639-1 language code of the
 // system's configured locale (LC_ALL, then LANG -- the standard glibc
-// precedence order), or "" if neither is set / recognizable. Since coa
-// runs as root, this reflects root's environment; if wear was invoked
-// via `sudo`, that's normally inherited from the invoking user's shell.
+// precedence order), or "" if neither is set / recognizable.
 func detectSystemLanguage() string {
 	for _, envVar := range []string{"LC_ALL", "LANG"} {
 		val := os.Getenv(envVar)

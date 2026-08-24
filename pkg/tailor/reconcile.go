@@ -2,13 +2,12 @@ package tailor
 
 import (
 	"bufio"
+	"github.com/pieroproietti/penguins-wardrobe/pkg/utils"
 	"fmt"
 	"os"
 	"os/exec"
 	"path/filepath"
 	"strings"
-
-	"github.com/pieroproietti/penguins-wardrobe/pkg/utils"
 )
 
 // neverPurge is a small, hardcoded safety net of packages that must never
@@ -40,9 +39,9 @@ var neverPurgeBase = []string{
 	"e2fsprogs",
 	"mount",
 	// remastering tools: the wardrobe must never uninstall itself
-	"penguins-eggs",
 	"penguins-wardrobe",
 	"wardrobe",
+	"penguins-eggs",
 	"coa",
 	// boot
 	"grub-pc",
