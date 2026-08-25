@@ -1,0 +1,14 @@
+[Desktop Entry]
+Name=Web Apps
+Name[es]=Aplicaciones web
+Comment=Run websites as if they were apps
+Comment[es]=Ejecutar sitios web como si fueran aplicaciones
+Exec=webapp-manager
+Icon=webapp-manager
+Terminal=false
+Type=Application
+Encoding=UTF-8
+Categories=Application;Network;
+StartupNotify=false
+NotShowIn=KDE;
+X-XFCE-Source=file:///usr/share/applications/webapp-manager.desktop

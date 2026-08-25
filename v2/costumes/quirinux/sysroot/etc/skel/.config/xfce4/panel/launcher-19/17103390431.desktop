@@ -1,0 +1,13 @@
+[Desktop Entry]
+Name=Screen Ruler
+Name[es]=Regla para la pantalla
+GenericName=Screen Ruler
+GenericName[es]=Regla para la pantalla
+Comment[es]=Medir pixeles
+X-DocPath=kruler/index.html
+Exec=kruler
+Type=Application
+Icon=kruler
+StartupNotify=true
+Categories=Qt;KDE;Graphics;X-KDE-More;
+X-XFCE-Source=file:///usr/share/applications/org.kde.kruler.desktop
