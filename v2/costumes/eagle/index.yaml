@@ -4,11 +4,9 @@
 name: eagle
 description: desktop xfce4 plus proxmox-ve
 author: artisan
-release: 0.9.1
+release: 2.0.1
 distributions:
-  - bookworm
-architecture: # NOT_USED FOR NOW
-  - amd64
+  - trixie
 sequence:
   repositories:
     sources_list:

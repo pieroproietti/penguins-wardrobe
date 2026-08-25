@@ -1,17 +1,16 @@
 package tailor
 
 import (
-	"github.com/pieroproietti/penguins-wardrobe/pkg/utils"
+	"fmt"
 	"os"
 	"regexp"
 	"strings"
+
+	"github.com/pieroproietti/penguins-wardrobe/pkg/utils"
 )
 
-// setupRepositories applica la sezione "repositories" della forma annidata:
-// abilita i componenti richiesti (main, contrib, non-free...), esegue i
-// comandi letterali di sources_list_d (aggiunta repo di terze parti) e
-// lancia update/upgrade se richiesti.
-func setupRepositories(repos *Repositories, suitName string) {
+// setupRepositories applica la sezione "repositories" della forma annidata
+func setupRepositories(repos *Repositories, suitName string, sp *utils.Spinner) {
 	if repos == nil {
 		return
 	}
@@ -24,8 +23,11 @@ func setupRepositories(repos *Repositories, suitName string) {
 
 	if len(repos.SourcesListD) > 0 {
 		logToFile(WarnPrefix(suitName) + "running third-party repository setup commands...")
-		for _, command := range repos.SourcesListD {
-			if err := utils.Exec(command); err != nil {
+		for idx, command := range repos.SourcesListD {
+			if sp != nil {
+				sp.UpdateSubtext(fmt.Sprintf("Third-party repo [%d/%d]", idx+1, len(repos.SourcesListD)))
+			}
+			if err := utils.ExecLog(command, wardrobeLogFile); err != nil {
 				logToFile(WarnPrefix(suitName) + "repository command failed: " + command + ": " + err.Error())
 			}
 		}
@@ -33,12 +35,29 @@ func setupRepositories(repos *Repositories, suitName string) {
 
 	if repos.Update {
 		logToFile(WarnPrefix(suitName) + "apt-get update...")
-		utils.Exec("apt-get update")
+		if sp != nil {
+			sp.UpdateSubtext("Updating package index...")
+		}
+		onLine := func(line string) {
+			if sp != nil {
+				if clean := cleanAptProgress(line); clean != "" {
+					sp.UpdateSubtext(clean)
+				}
+			}
+		}
+		utils.ExecLogMonitor("apt-get update", wardrobeLogFile, onLine)
 	}
 
 	if repos.Upgrade {
 		logToFile(WarnPrefix(suitName) + "apt-get upgrade...")
-		utils.Exec("DEBIAN_FRONTEND=noninteractive apt-get -o Dpkg::Options::='--force-confold' upgrade -y")
+		if sp != nil {
+			sp.UpdateSubtext("Upgrading packages...")
+		}
+		utils.ExecLog("DEBIAN_FRONTEND=noninteractive apt-get -o Dpkg::Options::='--force-confold' upgrade -y", wardrobeLogFile)
+	}
+
+	if sp != nil {
+		sp.UpdateSubtext("")
 	}
 }
 
@@ -47,10 +66,7 @@ func WarnPrefix(suitName string) string {
 	return "[" + suitName + "] "
 }
 
-// enableAptComponents assicura che i componenti richiesti (contrib, non-free,
-// non-free-firmware...) siano abilitati sulle righe "deb" del sources.list
-// classico. Formato deb822 (/etc/apt/sources.list.d/*.sources) non e'
-// gestito qui: viene lasciato intatto e segnalato nel log.
+// enableAptComponents assicura che i componenti richiesti siano abilitati
 func enableAptComponents(components []string) error {
 	const path = "/etc/apt/sources.list"
 

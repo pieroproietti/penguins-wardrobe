@@ -1,5 +1,10 @@
 name: colibri
 description: "desktop xfce4 plus all that I need to develop oa, firmwares"
+release: 2.0.1
+distributions:
+  - trixie
+  - excalibur
+  - resolute
 
 sequence:
   repositories:

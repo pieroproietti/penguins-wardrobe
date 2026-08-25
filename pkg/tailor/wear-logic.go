@@ -14,9 +14,13 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
+const wardrobeLogFile = "/var/log/wardrobe.log"
+
 func logToFile(message string) {
-	utils.LogNormal("%s", message)
-	logPath := "/var/log/wardrobe.log"
+	logPath := wardrobeLogFile
+	if err := os.MkdirAll(filepath.Dir(logPath), 0755); err != nil {
+		// fallback
+	}
 	f, err := os.OpenFile(logPath, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
 		return
@@ -110,9 +114,7 @@ func getAvailablePackages() map[string]struct{} {
 	return available
 }
 
-// normalizePkgName strips the ":arch" multi-arch qualifier some package
-// listings include (e.g. "zlib1g:amd64" -> "zlib1g"), so comparisons
-// against apt-cache pkgnames output line up correctly.
+// normalizePkgName strips the ":arch" multi-arch qualifier
 func normalizePkgName(name string) string {
 	name = strings.TrimSpace(name)
 	if i := strings.Index(name, ":"); i != -1 {
@@ -133,37 +135,73 @@ func isInteractiveTerminal() bool {
 }
 
 // batchSize caps how many packages go into a single apt-get invocation.
-// A single apt-get install with hundreds of packages runs dpkg's trigger
-// processing (initramfs regeneration, DKMS module builds, icon/mime
-// caches, etc.) for the whole batch in one shot at the end, which can be
-// a serious memory/CPU spike on modest VMs and, worse, if the machine
-// dies mid-transaction (OOM, crash) there is no way to know how far it
-// got and no partial progress to resume from on the next run -- the
-// whole multi-hundred-package install has to restart from scratch.
 // Installing in smaller batches keeps each dpkg transaction's trigger
 // processing small, and each successfully completed batch is durably
-// installed on disk, so a crash mid-way only loses the current batch,
-// not everything: re-running `wardrobe wear` will see the earlier
-// batches already satisfied (apt-get install on an installed package is
-// a fast no-op) and continue from where it died.
+// installed on disk, so a crash mid-way only loses the current batch.
 const batchSize = 20
 
-// installWithRetries installs packages, falling back to one-by-one
-// installation on bulk failure so a single broken package does not
-// prevent the rest from being installed. Returns the packages that
-// could not be installed (including any not found in apt's cache),
-// so the caller can report them to the user.
-func installWithRetries(packages []string, retries int) []string {
-	return installPackagesImpl(packages, retries, false)
+func cleanAptProgress(line string) string {
+	line = strings.TrimSpace(line)
+	if strings.HasPrefix(line, "Get:") {
+		fields := strings.Fields(line)
+		if len(fields) >= 2 {
+			return "Download " + fields[1]
+		}
+		return "Download..."
+	}
+	if strings.HasPrefix(line, "Unpacking ") {
+		fields := strings.Fields(line)
+		if len(fields) >= 2 {
+			return "Unpack " + fields[1]
+		}
+		return "Unpack..."
+	}
+	if strings.HasPrefix(line, "Setting up ") {
+		fields := strings.Fields(line)
+		if len(fields) >= 2 {
+			return "Setup " + fields[1]
+		}
+		return "Setup..."
+	}
+	if strings.HasPrefix(line, "Processing triggers for ") {
+		pkg := strings.TrimPrefix(line, "Processing triggers for ")
+		if i := strings.Index(pkg, " "); i != -1 {
+			pkg = pkg[:i]
+		}
+		return "Trigger (" + pkg + ")"
+	}
+	if strings.HasPrefix(line, "Preparing to unpack ") {
+		fields := strings.Fields(line)
+		if len(fields) >= 4 {
+			return "Prep " + fields[3]
+		}
+	}
+	if strings.HasPrefix(line, "Selecting ") {
+		fields := strings.Fields(line)
+		if len(fields) >= 4 {
+			return "Select " + fields[3]
+		}
+	}
+	if strings.HasPrefix(line, "Hit:") || strings.HasPrefix(line, "Ign:") {
+		fields := strings.Fields(line)
+		if len(fields) >= 2 {
+			return "Fetch " + fields[1]
+		}
+	}
+	return ""
 }
 
-// installNoRecommends installs packages with --no-install-recommends.
-// Returns the packages that could not be installed.
-func installNoRecommends(packages []string) []string {
-	return installPackagesImpl(packages, 3, true)
+// installWithRetries installs packages, falling back to one-by-one on failure
+func installWithRetries(packages []string, retries int, sp *utils.Spinner) []string {
+	return installPackagesImpl(packages, retries, false, sp)
 }
 
-func installPackagesImpl(packages []string, retries int, noRecommends bool) []string {
+// installNoRecommends installs packages with --no-install-recommends
+func installNoRecommends(packages []string, sp *utils.Spinner) []string {
+	return installPackagesImpl(packages, 3, true, sp)
+}
+
+func installPackagesImpl(packages []string, retries int, noRecommends bool, sp *utils.Spinner) []string {
 	if len(packages) == 0 {
 		return nil
 	}
@@ -177,10 +215,6 @@ func installPackagesImpl(packages []string, retries int, noRecommends bool) []st
 	var missing []string
 	if available != nil {
 		for _, pkg := range packages {
-			// FIX: strip ":amd64" before checking the cache. apt-cache
-			// pkgnames outputs bare names, but manifests exported from
-			// `dpkg -l` include arch qualifiers; without this every such
-			// package was silently skipped as "not found in repository".
 			cleanPkg := normalizePkgName(pkg)
 			if _, ok := available[cleanPkg]; ok {
 				toInstall = append(toInstall, pkg)
@@ -207,7 +241,7 @@ func installPackagesImpl(packages []string, retries int, noRecommends bool) []st
 
 	totalBatches := (len(toInstall) + batchSize - 1) / batchSize
 	if totalBatches > 1 {
-		logToFile(fmt.Sprintf("Installing %d packages in %d batches of up to %d, so a crash mid-install only loses the current batch...", len(toInstall), totalBatches, batchSize))
+		logToFile(fmt.Sprintf("Installing %d packages in %d batches of up to %d...", len(toInstall), totalBatches, batchSize))
 	}
 
 	var failed []string
@@ -218,20 +252,21 @@ func installPackagesImpl(packages []string, retries int, noRecommends bool) []st
 		}
 		batch := toInstall[start:end]
 		batchNum := start/batchSize + 1
-		if totalBatches > 1 {
-			logToFile(fmt.Sprintf("Batch %d/%d (packages %d-%d of %d): %v", batchNum, totalBatches, start+1, end, len(toInstall), batch))
+		if sp != nil && totalBatches > 1 {
+			sp.UpdateText("Installing packages (batch %d/%d)...", batchNum, totalBatches)
 		}
-		failed = append(failed, installBatchWithFallback(batch, retries, flags)...)
+		logToFile(fmt.Sprintf("Batch %d/%d (packages %d-%d of %d): %v", batchNum, totalBatches, start+1, end, len(toInstall), batch))
+		failed = append(failed, installBatchWithFallback(batch, retries, flags, sp)...)
+	}
+	if sp != nil {
+		sp.UpdateSubtext("")
 	}
 	return append(missing, failed...)
 }
 
 // installBatchWithFallback installs a single batch in bulk, falling back
-// to one-by-one installation within the batch if the bulk call fails, so
-// that one broken package in a batch doesn't take the rest of that batch
-// down with it. Packages that still fail after `retries` individual
-// attempts are given up on and returned to the caller.
-func installBatchWithFallback(batch []string, retries int, flags string) []string {
+// to one-by-one installation within the batch if the bulk call fails.
+func installBatchWithFallback(batch []string, retries int, flags string, sp *utils.Spinner) []string {
 	// License-prompt packages must never go through the noninteractive
 	// path: their preinst aborts and poisons dpkg for every later batch.
 	var clean []string
@@ -245,59 +280,48 @@ func installBatchWithFallback(batch []string, retries int, flags string) []strin
 		return nil
 	}
 	
-	// Use readline frontend if we have an interactive terminal, so that
-	// critical prompts (like firmware licenses) are shown to the user.
-	// Fall back to noninteractive if there's no terminal to avoid hanging.
+	// Use readline frontend if we have an interactive terminal
 	debconfFrontend := "readline"
 	if !isInteractiveTerminal() {
 		debconfFrontend = "noninteractive"
 	}
 	
-	// readline: accepts low-priority defaults automatically but shows
-	// critical prompts (e.g. firmware license agreements) to the user.
-	//
-	// Dpkg::Use-Pty=0: apt normally runs dpkg inside its own internal
-	// pseudo-terminal so it can both show the output live and log a copy
-	// to /var/log/apt/term.log. That mirroring has known bugs (Debian
-	// #765687, #860931) where the copy written to term.log succeeds but
-	// the live mirror to the real terminal is silently dropped -- the
-	// user never sees the prompt (or sees it truncated, e.g. "[Más]"
-	// glued to the next shell prompt) even though stdin/stdout are
-	// correctly wired to a real tty. Disabling apt's internal pty makes
-	// dpkg/debconf inherit our own stdio directly instead, which is the
-	// documented workaround for this class of bug.
 	pkgString := strings.Join(batch, " ")
 	cmd := fmt.Sprintf("DEBIAN_FRONTEND=%s apt-get install -o Dpkg::Options::='--force-confold' -o Dpkg::Use-Pty=0 %s %s", debconfFrontend, flags, pkgString)
 	logToFile(fmt.Sprintf("Installing batch of %d packages...", len(batch)))
-	if err := utils.Exec(cmd); err == nil {
+
+	onLine := func(line string) {
+		if sp != nil {
+			if clean := cleanAptProgress(line); clean != "" {
+				sp.UpdateSubtext(clean)
+			}
+		}
+	}
+
+	if err := utils.ExecLogMonitor(cmd, wardrobeLogFile, onLine); err == nil {
 		logToFile("✅ Batch installed.")
+		if sp != nil {
+			sp.UpdateSubtext("")
+		}
 		return nil
 	}
 
-	// A failed postinst (dkms build, debconf, etc.) can leave dpkg in an
-	// interrupted state that makes EVERY subsequent apt-get call fail in
-	// cascade. Heal the state before the per-package fallback.
+	// Heal dpkg state before retrying
 	healDpkgState()
 
-	// Fallback: install one by one so a single broken package does not
-	// prevent the rest of the batch from being installed. Packages that
-	// still fail after `retries` individual attempts are given up on.
 	logToFile("⚠️  Retrying package by package to isolate failures...")
 	pending := batch
 	for attempt := 1; attempt <= retries && len(pending) > 0; attempt++ {
 		var stillFailing []string
 		for _, pkg := range pending {
+			if sp != nil {
+				sp.UpdateSubtext("Retry " + pkg)
+			}
 			singleCmd := fmt.Sprintf("DEBIAN_FRONTEND=%s apt-get install -o Dpkg::Options::='--force-confold' -o Dpkg::Use-Pty=0 %s %s", debconfFrontend, flags, pkg)
-			if err := utils.Exec(singleCmd); err != nil {
-				// apt-get's exit code alone is not reliable evidence that
-				// THIS package failed: dpkg processes deferred triggers
-				// from unrelated packages during this same invocation, and
-				// a trigger failure poisons the exit code of whatever
-				// install call happened to flush it, even though the
-				// package we actually asked for installed correctly.
-				// Double-check with dpkg before believing the failure.
+			if err := utils.ExecLog(singleCmd, wardrobeLogFile); err != nil {
+				// Double-check with dpkg before believing the failure
 				if isPackageInstalled(pkg) {
-					logToFile(fmt.Sprintf("ℹ️  apt-get reported an error installing %s, but dpkg confirms it is installed correctly (likely an unrelated deferred trigger) -- not counting as failed.", pkg))
+					logToFile(fmt.Sprintf("ℹ️  apt-get reported an error installing %s, but dpkg confirms it is installed correctly.", pkg))
 				} else {
 					stillFailing = append(stillFailing, pkg)
 				}
@@ -309,6 +333,9 @@ func installBatchWithFallback(batch []string, retries int, flags string) []strin
 		}
 	}
 
+	if sp != nil {
+		sp.UpdateSubtext("")
+	}
 	if len(pending) > 0 {
 		logToFile(fmt.Sprintf("⚠️  %d packages could not be installed: %v", len(pending), pending))
 	} else {
@@ -317,11 +344,7 @@ func installBatchWithFallback(batch []string, retries int, flags string) []strin
 	return pending
 }
 
-// isPackageInstalled reports whether dpkg considers pkg to be correctly
-// and fully installed. Reads the dpkg status file directly: the previous
-// subprocess-based version returned false on the test VM whenever the
-// capture failed, which turned every already-installed package into a
-// "could not be installed" report during the per-package fallback.
+// isPackageInstalled reports whether dpkg considers pkg to be correctly and fully installed.
 func isPackageInstalled(pkg string) bool {
 	installed, err := currentlyInstalledPackages()
 	if err != nil {
@@ -332,13 +355,6 @@ func isPackageInstalled(pkg string) bool {
 }
 
 // installInteractive installs packages without suppressing debconf prompts.
-// Use this for packages that require user interaction (e.g. license acceptance).
-// Dpkg::Use-Pty=0 avoids apt's internal pty-mirroring bug that can drop the
-// live prompt from the real terminal (see the comment in installBatchWithFallback).
-// Returns the packages that could not be installed (missing from apt's
-// cache, or the whole batch if the bulk apt-get call failed -- interactive
-// packages are typically few and license-related, so we don't attempt the
-// one-by-one isolation used for regular packages).
 func installInteractive(packages []string) []string {
 	if len(packages) == 0 {
 		return nil
@@ -392,9 +408,6 @@ func installInteractive(packages []string) []string {
 }
 
 // removePackages removes packages that the vendor does not want on the system.
-// Errors are logged but do not abort the process -- a package may simply
-// not be installed on this particular machine. The currently running kernel
-// is always protected, even if a vendor lists it by mistake.
 func removePackages(packages []string) {
 	if len(packages) == 0 {
 		return
@@ -416,10 +429,10 @@ func removePackages(packages []string) {
 	pkgString := strings.Join(safe, " ")
 	cmd := fmt.Sprintf("DEBIAN_FRONTEND=noninteractive apt-get remove -o Dpkg::Options::='--force-confold' -o Dpkg::Use-Pty=0 -y %s", pkgString)
 	logToFile(fmt.Sprintf("Removing packages: %s", pkgString))
-	if err := utils.Exec(cmd); err != nil {
-		logToFile(fmt.Sprintf("⚠️  Some packages could not be removed (may not be installed): %v", err))
+	if err := utils.ExecLog(cmd, wardrobeLogFile); err != nil {
+		logToFile(fmt.Sprintf("⚠️  Some packages could not be removed: %v", err))
 	}
-	utils.Exec("DEBIAN_FRONTEND=noninteractive apt-get autoremove -o Dpkg::Use-Pty=0 -y")
+	utils.ExecLog("DEBIAN_FRONTEND=noninteractive apt-get autoremove -o Dpkg::Use-Pty=0 -y", wardrobeLogFile)
 }
 
 func printAiPrompt(packages []string) {
@@ -489,18 +502,13 @@ func isLicensePrompt(pkg string) bool {
 	return false
 }
 
-// healDpkgState repairs a poisoned dpkg state. dpkg --configure -a and
-// apt-get install -f alone cannot recover when a maintainer script fails
-// under noninteractive (typical: firmware license prompts), so as last
-// resort we purge the offending half-configured packages; the interactive
-// pass (real terminal) can bring them back afterwards.
+// healDpkgState repairs a poisoned dpkg state.
 func healDpkgState() {
 	// First try to configure what we can without interaction
 	utils.Exec("DEBIAN_FRONTEND=noninteractive dpkg --configure -a --force-confold")
 	utils.Exec("DEBIAN_FRONTEND=noninteractive apt-get install -f -y")
 	
-	// Then try with readline if we have a terminal, to handle packages
-	// that require user interaction (like license prompts)
+	// Then try with readline if we have a terminal
 	if isInteractiveTerminal() {
 		utils.Exec("DEBIAN_FRONTEND=readline dpkg --configure -a")
 	}

@@ -3,13 +3,12 @@
 name: printers
 description: install driver printers
 author: artisan
-release: 0.0.1
+release: 2.0.1
 distributions:
-  - bookworm
-  - bullseye
-  - buster
-  - chimaera
+  - trixie
   - daedalus
+  - excalibur
+  - resolute
 
 sequence:
   packages:
@@ -55,3 +54,4 @@ sequence:
     - tix
     - unpaper
     - xsltproc
+

@@ -3,11 +3,12 @@
 name: nextcloud
 description: 'nextcloud'
 author: artisan
+release: 2.0.1
 distributions:
-  - bullseye
-  - bookworm
-  - chimaera
+  - trixie
   - daedalus
+  - excalibur
+  - resolute
 sequence:
   packages:
   - mariadb-server

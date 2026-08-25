@@ -20,16 +20,17 @@ func List() error {
 		return fmt.Errorf("unable to read costumes: %v (have you run 'wardrobe get'?)", err)
 	}
 
-	utils.LogNormal(utils.ColorCyan + "Available costumes in penguins-wardrobe:" + utils.ColorReset)
+	utils.PrintBanner("👗", "AVAILABLE COSTUMES", "Costumes and desktop recipes available in penguins-wardrobe")
 	for _, entry := range entries {
 		if entry.IsDir() {
 			yamlPath := findYaml(filepath.Join(costumesDir, entry.Name()))
 			if yamlPath != "" {
 				if suit, err := loadSuit(yamlPath); err == nil {
-					utils.LogNormal("- %-12s: %s", utils.ColorYellow+entry.Name()+utils.ColorReset, suit.Description)
+					fmt.Printf("  • %s%-12s%s : %s\n", utils.ColorBold+utils.ColorYellow, entry.Name(), utils.ColorReset, suit.Description)
 				}
 			}
 		}
 	}
+	fmt.Println()
 	return nil
 }

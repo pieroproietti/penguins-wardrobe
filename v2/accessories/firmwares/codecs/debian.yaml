@@ -3,17 +3,13 @@
 name: codecs
 description: install codecs
 author: artisan
-release: 0.0.1
+release: 2.0.1
 distributions:
-  - bookworm
-  - bullseye
-  - buster
-  - chimaera
+  - trixie
   - daedalus
-  - focal
-  - impish
-  - jammy
-  - kinetic
+  - excalibur
+  - resolute
+
 sequence:
   packages:
     - unace-nonfree # (utils): extract, test and view .ace archives (non-free version) [non-free]

@@ -11,7 +11,7 @@ This directory contains the **v2 wardrobe definitions**: costumes, accessories, 
 - **`accessories/`**: Modular components that can be installed alongside costumes or standalone (e.g. `eggs-dev`, `base`, `live-installer`).
 - **`vendors/`**: Vendor-specific customizations and configurations.
 - **`scripts/`**: Utility and helper scripts executed during the wardrobe customization sequence.
-- **`DOCS/`**: Documentation and guides.
+- **`DOCS/`**: Documentation and guides (see [Wardrobe Users' Guide](./DOCS/wardrobe-users-guide.md)).
 
 ---
 

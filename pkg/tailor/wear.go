@@ -12,11 +12,10 @@ import (
 
 func Wear(costumeName string, noAcc bool, noFirm bool) error {
 	if os.Geteuid() != 0 {
-		utils.LogError("'wardrobe wear' needs to install packages and write to system paths; run it as root (e.g. 'su' first, or 'sudo wardrobe wear %s' if sudo is configured for your user).", costumeName)
+		utils.LogError("'wardrobe wear' needs to install packages and write to system paths; run it as root (e.g. 'sudo wardrobe wear %s').", costumeName)
 		return fmt.Errorf("must be run as root")
 	}
 
-	utils.LogNormal("Starting costume application for: %s", costumeName)
 	v2Dir, err := getWardrobeV2Dir()
 	if err != nil {
 		utils.LogError("Wardrobe root error: %v", err)
@@ -43,21 +42,32 @@ func Wear(costumeName string, noAcc bool, noFirm bool) error {
 		return err
 	}
 
-	// Enforce distribution compatibility BEFORE anything else, including
-	// kernel header installation, so an incompatible system aborts cleanly
-	// without touching the machine or producing unrelated apt output.
+	// Enforce distribution compatibility BEFORE anything else
 	if err := checkCostumeCompatibility(costumeDir, suit); err != nil {
 		utils.LogError("%s", incompatibleDistroMessage(suit.Name, suit.Distributions, currentDistroName()))
 		return err
 	}
 
-	// DKMS safety: make sure the headers for the RUNNING kernel are in
-	// place before any package is unpacked, so DKMS postinsts that build
-	// for the current kernel do not abort mid-transaction. Only reached on
-	// compatible systems.
-	ensureKernelHeaders()
+	isDirectAccessory := strings.HasPrefix(costumeName, "accessories/") || (suit.Name != "" && !strings.Contains(costumeDir, "/costumes/"))
 
-	utils.LogNormal("--- Applying Costume: %s ---", suit.Name)
+	if !isDirectAccessory {
+		versionStr := ""
+		if suit.Release != "" {
+			versionStr = fmt.Sprintf(" (v%s)", suit.Release)
+		}
+		utils.PrintBanner("👗", fmt.Sprintf("COSTUME: %s%s", suit.Name, versionStr), suit.Description)
+	} else {
+		utils.PrintBanner("👝", fmt.Sprintf("ACCESSORY: %s", suit.Name), suit.Description)
+	}
+
+	// DKMS safety: ensure headers for running kernel are present
+	spHeaders := utils.NewSpinner("Checking kernel headers for DKMS...")
+	spHeaders.Start()
+	if err := ensureKernelHeaders(); err != nil {
+		spHeaders.Warn("Kernel headers verification completed with warnings")
+	} else {
+		spHeaders.Success("Kernel headers verified")
+	}
 
 	SetLicensePromptPackages(suit.PackagesInteractive)
 
@@ -67,10 +77,10 @@ func Wear(costumeName string, noAcc bool, noFirm bool) error {
 	}
 
 	if !noAcc && len(suit.Accessories) > 0 {
-		utils.LogNormal("--- Processing %d accessories ---", len(suit.Accessories))
-		for _, accName := range suit.Accessories {
+		utils.PrintSection("👝", fmt.Sprintf("ACCESSORIES (%d items)", len(suit.Accessories)))
+		for idx, accName := range suit.Accessories {
 			if noFirm && (accName == "firmwares" || strings.Contains(accName, "firmware")) {
-				utils.LogNormal("Skipping firmware accessory (%s) due to --no-firmwares flag", accName)
+				fmt.Printf("\n  %s[INFO] Skipping firmware accessory '%s' due to --no-firm flag%s\n", utils.ColorYellow, accName, utils.ColorReset)
 				continue
 			}
 
@@ -85,15 +95,15 @@ func Wear(costumeName string, noAcc bool, noFirm bool) error {
 
 			if accYaml := findYaml(accDir); accYaml != "" {
 				if accSuit, err := loadSuit(accYaml); err == nil {
-					utils.LogNormal("Accessory: %s (%s)", accName, filepath.Base(accYaml))
+					utils.PrintSubSection("-->", fmt.Sprintf("[%d/%d] Accessory: %s", idx+1, len(suit.Accessories), accName))
 					accInstalled, accFailed, _ := applySuit(accDir, accSuit)
 					installedPackages = append(installedPackages, accInstalled...)
 					failedPackages = append(failedPackages, accFailed...)
 				} else {
-					utils.LogNormal(utils.ColorYellow+"WARNING: could not load accessory '%s': %v"+utils.ColorReset, accName, err)
+					fmt.Printf("  %s[WARN] Could not load accessory '%s': %v%s\n", utils.ColorYellow, accName, err, utils.ColorReset)
 				}
 			} else {
-				utils.LogNormal(utils.ColorYellow+"WARNING: accessory '%s' not found in %s"+utils.ColorReset, accName, accDir)
+				fmt.Printf("  %s[WARN] Accessory '%s' not found in %s%s\n", utils.ColorYellow, accName, accDir, utils.ColorReset)
 			}
 		}
 	}
@@ -103,31 +113,38 @@ func Wear(costumeName string, noAcc bool, noFirm bool) error {
 
 	installedBefore, _ := currentlyInstalledPackages()
 
-	// Install everything in the manifest that's missing. The manifest is
-	// resolved per-distribution: a "*_<codename>-packages.list" file wins
-	// over the generic packages_manifest declared in index.yaml.
+	// Install everything in the manifest that's missing
 	if manifestPath := resolveDistroManifest(costumeDir, suit.PackagesManifest); manifestPath != "" {
-		utils.LogNormal("--- Declarative manifest (authoritative install list): %s ---", manifestPath)
+		utils.PrintSection("📋", "DECLARATIVE MANIFEST RECONCILIATION")
 		if targetManifest, err := loadPackageManifest(manifestPath); err == nil {
-			utils.LogNormal("[%s] Installing %d manifest packages...", suit.Name, len(targetManifest))
-			manifestFailed := installWithRetries(targetManifest, 3)
+			spMan := utils.NewSpinner(fmt.Sprintf("Reconciling %d manifest packages...", len(targetManifest)))
+			spMan.Start()
+			manifestFailed := installWithRetries(targetManifest, 3, spMan)
 			failedPackages = append(failedPackages, manifestFailed...)
 			installedPackages = append(installedPackages, diffStr(targetManifest, manifestFailed)...)
+			if len(manifestFailed) > 0 {
+				spMan.Warn("Manifest reconciled with %d missing packages", len(manifestFailed))
+			} else {
+				spMan.Success("Manifest packages reconciled (%d packages)", len(targetManifest))
+			}
 		} else {
-			utils.LogNormal(utils.ColorYellow+"WARNING: could not read packages_manifest %s: %v"+utils.ColorReset, manifestPath, err)
+			fmt.Printf("  %s[WARN] Could not read packages_manifest %s: %v%s\n", utils.ColorYellow, manifestPath, err, utils.ColorReset)
 		}
 	}
 
 	// Load packages from external install file if specified
 	if installPath := findManifestPath(costumeDir, suit.PackagesInstallFile); installPath != "" {
-		utils.LogNormal("--- Loading packages from external install file: %s ---", installPath)
 		if filePackages, err := loadPackageManifest(installPath); err == nil {
-			utils.LogNormal("[%s] Installing %d packages from external file...", suit.Name, len(filePackages))
-			fileFailed := installWithRetries(filePackages, 3)
+			spExt := utils.NewSpinner(fmt.Sprintf("Installing %d packages from external file...", len(filePackages)))
+			spExt.Start()
+			fileFailed := installWithRetries(filePackages, 3, spExt)
 			failedPackages = append(failedPackages, fileFailed...)
 			installedPackages = append(installedPackages, diffStr(filePackages, fileFailed)...)
-		} else {
-			utils.LogNormal(utils.ColorYellow+"WARNING: could not read packages_install_file %s: %v"+utils.ColorReset, installPath, err)
+			if len(fileFailed) > 0 {
+				spExt.Warn("Installed external packages with %d failures", len(fileFailed))
+			} else {
+				spExt.Success("External file packages installed (%d packages)", len(filePackages))
+			}
 		}
 	}
 
@@ -135,22 +152,18 @@ func Wear(costumeName string, noAcc bool, noFirm bool) error {
 	var removeList []string
 	removeList = append(removeList, suit.PackagesRemove...)
 	if removePath := findManifestPath(costumeDir, suit.PackagesRemoveFile); removePath != "" {
-		utils.LogNormal("--- Declarative remove list: %s ---", removePath)
 		if fileRemove, err := loadPackageManifest(removePath); err == nil {
 			removeList = append(removeList, fileRemove...)
-		} else {
-			utils.LogNormal(utils.ColorYellow+"WARNING: could not read packages_remove_file %s: %v"+utils.ColorReset, removePath, err)
 		}
 	}
 	if len(removeList) > 0 {
+		spPurge := utils.NewSpinner(fmt.Sprintf("Purging %d packages absent from manifest...", len(removeList)))
+		spPurge.Start()
 		purgeExplicit(removeList)
+		spPurge.Success("Declarative purge completed")
 	}
 
-	// DKMS healing: the manifest usually installs a NEWER kernel, and DKMS
-	// postinsts run before that kernel's headers are on disk, aborting and
-	// leaving dpkg half-configured (which then poisons every later apt-get
-	// call, e.g. quirinux-firmware failing on dependencies). Repair the
-	// state and retry before writing the final report.
+	// DKMS healing
 	failedPackages = healAndRetryFailed(failedPackages)
 
 	installedAfter, _ := currentlyInstalledPackages()
@@ -162,7 +175,15 @@ func Wear(costumeName string, noAcc bool, noFirm bool) error {
 		}
 	}
 
-	copySkelToUser()
+	// User environment synchronization
+	targetUser := getTargetUsername()
+	if targetUser != "" && targetUser != "root" {
+		spUser := utils.NewSpinner(fmt.Sprintf("Synchronizing user environment (/etc/skel -> /home/%s)...", targetUser))
+		spUser.Start()
+		copySkelToUser()
+		spUser.Success("User environment synchronized (%s)", targetUser)
+	}
+
 	reportPath, reportErr := writeWearReport(wearReport{
 		CostumeName:   suit.Name,
 		Installed:     installedPackages,
@@ -171,17 +192,21 @@ func Wear(costumeName string, noAcc bool, noFirm bool) error {
 		FailedPurge:   failedPurges,
 	})
 
-	clearScreen()
-	utils.LogNormal("Costume '%s' applied. Installed: %d | Removed: %d | Could not be installed: %d | Could not be removed: %d",
-		suit.Name, len(installedPackages), len(purgedPackages), len(failedPackages), len(failedPurges))
-
-	if reportErr != nil {
-		utils.LogNormal(utils.ColorYellow+"WARNING: could not write detailed report: %v"+utils.ColorReset, reportErr)
-	} else {
-		utils.LogNormal("Detailed report: %s", reportPath)
+	summaryRows := [][2]string{
+		{"Costume / Oggetto", suit.Name},
+		{"Pacchetti installati", fmt.Sprintf("%d", len(installedPackages))},
+		{"Pacchetti rimossi", fmt.Sprintf("%d", len(purgedPackages))},
+		{"Non installati", fmt.Sprintf("%d", len(failedPackages))},
 	}
+	if reportErr == nil {
+		summaryRows = append(summaryRows, [2]string{"Report dettagliato", reportPath})
+	}
+	summaryRows = append(summaryRows, [2]string{"Log di sistema", wardrobeLogFile})
+
+	utils.PrintSummaryBox("✨ VESTIZIONE COMPLETATA!", summaryRows)
+
 	if suit.Reboot {
-		utils.LogNormal(utils.ColorYellow + "This costume recommends a reboot to finish applying all changes." + utils.ColorReset)
+		fmt.Printf("\n%s%s⚠ Questo costume consiglia di riavviare il sistema al termine.%s\n", utils.ColorYellow, utils.ColorBold, utils.ColorReset)
 	}
 	printKernelCleanupReminder()
 	if suit.DisplayManagerNotice {
@@ -190,23 +215,25 @@ func Wear(costumeName string, noAcc bool, noFirm bool) error {
 	return nil
 }
 
-// checkCostumeCompatibility enforces the distribution compatibility declared
-// by the costume. It compares the "distributions" key from index.yaml
-// (already parsed into suit.Distributions) against the running distribution
-// codename. If the costume declares supported distributions and the running
-// one is not among them, the wear is aborted BEFORE any package is installed.
-// The wardrobe-check script, when present, is run only to print a localized
-// message; the enforcement does not depend on it.
+func getTargetUsername() string {
+	if sudoUser := os.Getenv("SUDO_USER"); sudoUser != "" {
+		return sudoUser
+	}
+	if u := firstHumanUser(); u != nil {
+		return u.Username
+	}
+	return ""
+}
+
+// checkCostumeCompatibility enforces the distribution compatibility declared by the costume.
 func checkCostumeCompatibility(costumeDir string, suit *Suit) error {
 	if len(suit.Distributions) == 0 {
-		// Costume does not declare supported distributions; assume compatible
-		// with any distribution (backward compatibility with older wardrobes)
 		return nil
 	}
 
 	current := currentDistroCodename()
 	if current == "" {
-		utils.LogNormal("WARNING: could not detect the running distribution; skipping compatibility check.")
+		logToFile("WARNING: could not detect the running distribution; skipping compatibility check.")
 		return nil
 	}
 
@@ -216,8 +243,6 @@ func checkCostumeCompatibility(costumeDir string, suit *Suit) error {
 		}
 	}
 
-	// Incompatible. Print ONE detailed explanation: the localized message
-	// from the wardrobe-check script when present, or a generic one otherwise.
 	script := filepath.Join(costumeDir, "wardrobe-check")
 	if _, err := os.Stat(script); err == nil {
 		cmd := exec.Command("bash", script)
@@ -230,14 +255,10 @@ func checkCostumeCompatibility(costumeDir string, suit *Suit) error {
 			suit.Name, strings.Join(suit.Distributions, ", "), current)
 	}
 
-	// Short error: the detailed explanation was already printed above, so
-	// keep the returned error terse to avoid repeating the long text.
 	return fmt.Errorf("aborted: distribution %q not supported", current)
 }
 
 // currentDistroCodename reads /etc/os-release and returns the VERSION_CODENAME
-// value (e.g. "daedalus", "bookworm", "excalibur"), or an empty string if it
-// cannot be determined.
 func currentDistroCodename() string {
 	data, err := os.ReadFile("/etc/os-release")
 	if err != nil {
@@ -252,20 +273,16 @@ func currentDistroCodename() string {
 	return ""
 }
 
-// ensureKernelHeaders installs the kernel headers matching the currently
-// running kernel (plus the architecture meta-package) before any DKMS
-// package is unpacked. A DKMS postinst aborts the whole transaction when
-// the headers for a target kernel are missing, leaving dpkg in a
-// half-configured state.
-func ensureKernelHeaders() {
+// ensureKernelHeaders installs the kernel headers matching the currently running kernel.
+func ensureKernelHeaders() error {
 	out, err := exec.Command("uname", "-r").Output()
 	if err != nil {
-		utils.LogNormal("WARNING: could not determine running kernel version: %v", err)
-		return
+		logToFile(fmt.Sprintf("WARNING: could not determine running kernel version: %v", err))
+		return err
 	}
 	release := strings.TrimSpace(string(out))
 	if release == "" {
-		return
+		return nil
 	}
 	archOut, _ := exec.Command("dpkg", "--print-architecture").Output()
 	arch := strings.TrimSpace(string(archOut))
@@ -273,23 +290,19 @@ func ensureKernelHeaders() {
 		arch = "amd64"
 	}
 	pkgs := fmt.Sprintf("linux-headers-%s linux-headers-%s", release, arch)
-	utils.LogNormal("Ensuring kernel headers are present before DKMS installs: %s", pkgs)
-	utils.Exec("DEBIAN_FRONTEND=noninteractive apt-get install -o Dpkg::Use-Pty=0 -y " + pkgs)
+	logToFile(fmt.Sprintf("Ensuring kernel headers are present before DKMS installs: %s", pkgs))
+	return utils.ExecLog("DEBIAN_FRONTEND=noninteractive apt-get install -o Dpkg::Use-Pty=0 -y "+pkgs, wardrobeLogFile)
 }
 
-// healAndRetryFailed repairs the half-configured dpkg state that DKMS
-// packages leave behind when kernel headers were not yet in place, then
-// retries every failed package that actually exists in the apt cache.
-// Packages that are simply absent from the repositories stay in the
-// returned list so they keep being reported as failed.
+// healAndRetryFailed repairs the half-configured dpkg state and retries failed packages.
 func healAndRetryFailed(failed []string) []string {
 	if len(failed) == 0 {
 		return nil
 	}
 
-	utils.LogNormal("Healing dpkg state before retrying failed packages...")
-	utils.Exec("dpkg --configure -a")
-	utils.Exec("DEBIAN_FRONTEND=noninteractive apt-get install -f -o Dpkg::Use-Pty=0 -y")
+	logToFile("Healing dpkg state before retrying failed packages...")
+	utils.ExecLog("dpkg --configure -a", wardrobeLogFile)
+	utils.ExecLog("DEBIAN_FRONTEND=noninteractive apt-get install -f -o Dpkg::Use-Pty=0 -y", wardrobeLogFile)
 
 	available := getAvailablePackages()
 	var retry []string
@@ -306,8 +319,8 @@ func healAndRetryFailed(failed []string) []string {
 		return failed
 	}
 
-	utils.LogNormal("Retrying %d packages now that kernel headers are in place...", len(retry))
-	installWithRetries(retry, 1)
+	logToFile(fmt.Sprintf("Retrying %d packages now that kernel headers are in place...", len(retry)))
+	installWithRetries(retry, 1, nil)
 
 	var still []string
 	for _, p := range failed {
@@ -318,71 +331,98 @@ func healAndRetryFailed(failed []string) []string {
 	return still
 }
 
-// applySuit applies a costume/accessory and returns the list of packages
-// that could not be installed (across packages, packages_no_install_recommends
-// and packages_interactive), so the caller can report them to the user.
+// applySuit applies a costume or accessory definition with clean spinners
 func applySuit(dir string, suit *Suit) ([]string, []string, error) {
 	var installedPackages []string
 	var failedPackages []string
 
+	// Repositories
 	if suit.Sequence != nil && suit.Sequence.Repositories != nil {
-		setupRepositories(suit.Sequence.Repositories, suit.Name)
-		utils.LogNormal("[%s] Refreshing package index after repository changes...", suit.Name)
-		if err := utils.Exec("apt-get update"); err != nil {
-			utils.LogNormal("[%s] WARNING: apt-get update failed, newly added repositories may be unusable: %v", suit.Name, err)
+		spRepo := utils.NewSpinner("Configuring package repositories & updating cache...")
+		spRepo.Start()
+		setupRepositories(suit.Sequence.Repositories, suit.Name, spRepo)
+		spRepo.Success("Repositories configured & updated")
+	}
+
+	// Packages
+	if len(suit.Packages) > 0 {
+		spPkg := utils.NewSpinner(fmt.Sprintf("Installing packages (%d packages)...", len(suit.Packages)))
+		spPkg.Start()
+		failed := installWithRetries(suit.Packages, 3, spPkg)
+		failedPackages = append(failedPackages, failed...)
+		installed := diffStr(suit.Packages, failed)
+		installedPackages = append(installedPackages, installed...)
+		if len(failed) > 0 {
+			spPkg.Warn("Installed %d packages (%d could not be installed)", len(installed), len(failed))
+		} else {
+			spPkg.Success("Installed %d packages", len(installed))
 		}
 	}
 
-	if len(suit.Packages) > 0 {
-		utils.LogNormal("[%s] Attempting package installation: %v", suit.Name, suit.Packages)
-		failed := installWithRetries(suit.Packages, 3)
-		failedPackages = append(failedPackages, failed...)
-		installedPackages = append(installedPackages, diffStr(suit.Packages, failed)...)
-	} else {
-		utils.LogNormal("[%s] No packages to install.", suit.Name)
-	}
-
+	// Packages No Recommends
 	if len(suit.PackagesNoRecommends) > 0 {
-		utils.LogNormal("[%s] Installing packages without recommends: %v", suit.Name, suit.PackagesNoRecommends)
-		failed := installNoRecommends(suit.PackagesNoRecommends)
+		spNoRec := utils.NewSpinner(fmt.Sprintf("Installing packages without recommends (%d packages)...", len(suit.PackagesNoRecommends)))
+		spNoRec.Start()
+		failed := installNoRecommends(suit.PackagesNoRecommends, spNoRec)
 		failedPackages = append(failedPackages, failed...)
-		installedPackages = append(installedPackages, diffStr(suit.PackagesNoRecommends, failed)...)
+		installed := diffStr(suit.PackagesNoRecommends, failed)
+		installedPackages = append(installedPackages, installed...)
+		if len(failed) > 0 {
+			spNoRec.Warn("Installed %d packages without recommends (%d failed)", len(installed), len(failed))
+		} else {
+			spNoRec.Success("Installed %d packages without recommends", len(installed))
+		}
 	}
 
+	// Packages Interactive
 	if len(suit.PackagesInteractive) > 0 {
-		utils.LogNormal("[%s] Installing interactive packages (license prompts may appear): %v", suit.Name, suit.PackagesInteractive)
+		fmt.Printf("  %s[INFO] Installing interactive packages (prompts may appear):%s\n", utils.ColorCyan, utils.ColorReset)
 		failed := installInteractive(suit.PackagesInteractive)
 		failedPackages = append(failedPackages, failed...)
-		installedPackages = append(installedPackages, diffStr(suit.PackagesInteractive, failed)...)
+		installed := diffStr(suit.PackagesInteractive, failed)
+		installedPackages = append(installedPackages, installed...)
+		if len(failed) > 0 {
+			fmt.Printf("  %s[WARN] Some interactive packages could not be installed%s\n", utils.ColorYellow, utils.ColorReset)
+		} else {
+			fmt.Printf("  %s[OK] Interactive packages configured%s\n", utils.ColorGreen, utils.ColorReset)
+		}
 	}
 
+	// Packages Remove
 	if len(suit.PackagesRemove) > 0 {
-		utils.LogNormal("[%s] Removing packages not needed by this vendor: %v", suit.Name, suit.PackagesRemove)
+		spRem := utils.NewSpinner(fmt.Sprintf("Removing unwanted packages (%d packages)...", len(suit.PackagesRemove)))
+		spRem.Start()
 		removePackages(suit.PackagesRemove)
+		spRem.Success("Unwanted packages removed (%d packages)", len(suit.PackagesRemove))
 	}
 
+	// Sysroot Overlay
 	sysrootPath := filepath.Join(dir, "sysroot")
 	if _, err := os.Stat(sysrootPath); os.IsNotExist(err) {
 		sysrootPath = filepath.Join(dir, "dirs")
 	}
 	if _, err := os.Stat(sysrootPath); err == nil {
-		utils.LogNormal("[%s] Overlay folder found: %s", suit.Name, sysrootPath)
-		utils.LogNormal("[%s] Running rsync to root /...", suit.Name)
-		cmd := fmt.Sprintf("rsync -aAXv %s/ /", sysrootPath)
-		if err := utils.Exec(cmd); err != nil {
-			utils.LogNormal("[%s] Error during overlay: %v", suit.Name, err)
+		spSys := utils.NewSpinner("Applying filesystem overlay (sysroot)...")
+		spSys.Start()
+		cmd := fmt.Sprintf("rsync -aAX %s/ /", sysrootPath)
+		if err := utils.ExecLog(cmd, wardrobeLogFile); err != nil {
+			spSys.Warn("Filesystem overlay applied with warnings")
 		} else {
-			utils.LogNormal("[%s] Overlay completed successfully.", suit.Name)
+			spSys.Success("Filesystem overlay applied")
 		}
-	} else {
-		utils.LogNormal("[%s] No sysroot/dirs folder found, skipping overlay.", suit.Name)
 	}
 
+	// Finalization commands
 	if len(suit.Cmds) > 0 {
-		utils.LogNormal("[%s] Running %d post-installation commands...", suit.Name, len(suit.Cmds))
-		for _, command := range suit.Cmds {
-			utils.LogNormal("[%s] Executing: %s", suit.Name, command)
+		spCmds := utils.NewSpinner(fmt.Sprintf("Running finalization scripts (%d commands)...", len(suit.Cmds)))
+		spCmds.Start()
+		for idx, command := range suit.Cmds {
 			fields := strings.Fields(command)
+			cmdName := command
+			if len(fields) > 0 {
+				cmdName = filepath.Base(fields[0])
+			}
+			spCmds.UpdateSubtext(fmt.Sprintf("[%d/%d] %s", idx+1, len(suit.Cmds), cmdName))
 			if len(fields) > 0 {
 				relScript := filepath.Join(dir, fields[0])
 				if stat, err := os.Stat(relScript); err == nil && !stat.IsDir() {
@@ -393,12 +433,13 @@ func applySuit(dir string, suit *Suit) ([]string, []string, error) {
 					} else {
 						fullCmd = fmt.Sprintf("%s %s", relScript, suit.Name)
 					}
-					utils.Exec(fullCmd)
+					utils.ExecLog(fullCmd, wardrobeLogFile)
 					continue
 				}
 			}
-			utils.Exec(command)
+			utils.ExecLog(command, wardrobeLogFile)
 		}
+		spCmds.Success("Finalization completed")
 	}
 
 	return installedPackages, failedPackages, nil
@@ -415,11 +456,11 @@ func copySkelToUser() {
 	}
 
 	if targetUser == "" || targetUser == "root" {
-		utils.LogNormal("WARNING: unable to determine a non-root target user, skipping /etc/skel sync to avoid leaving files owned by root")
+		logToFile("WARNING: unable to determine a non-root target user, skipping /etc/skel sync")
 		return
 	}
 
-	utils.LogNormal("Syncing /etc/skel -> %s", userHome)
+	logToFile(fmt.Sprintf("Syncing /etc/skel -> %s", userHome))
 	cmd := fmt.Sprintf("rsync -a --no-o --no-g --chown=%s:%s /etc/skel/ %s/", targetUser, targetUser, userHome)
-	utils.Exec(cmd)
+	utils.ExecLog(cmd, wardrobeLogFile)
 }
