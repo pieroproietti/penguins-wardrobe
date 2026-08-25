@@ -62,16 +62,28 @@ func getWardrobeRoot() (string, error) {
 	return filepath.Join(homeDir, ".wardrobe"), nil
 }
 
-// getWardrobeV2Dir returns ~/.wardrobe/v2 for the "real" user if present, or ~/.wardrobe.
+// getWardrobeV2Dir returns ~/.wardrobe/v2 for the "real" user if present, or ~/.wardrobe,
+// falling back to local working directory ./v2 if present during development.
 func getWardrobeV2Dir() (string, error) {
 	root, err := getWardrobeRoot()
-	if err != nil {
-		return "", err
+	if err == nil {
+		v2 := filepath.Join(root, "v2")
+		if _, errStat := os.Stat(v2); errStat == nil {
+			return v2, nil
+		}
+		if _, errStat := os.Stat(root); errStat == nil {
+			return root, nil
+		}
 	}
-	v2 := filepath.Join(root, "v2")
-	if _, err := os.Stat(v2); err == nil {
-		return v2, nil
+
+	// Fallback to local working directory ./v2 if developing in repo
+	if stat, errStat := os.Stat("v2"); errStat == nil && stat.IsDir() {
+		if abs, errAbs := filepath.Abs("v2"); errAbs == nil {
+			return abs, nil
+		}
+		return "v2", nil
 	}
+
 	return root, nil
 }
 

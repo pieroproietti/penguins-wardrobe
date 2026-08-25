@@ -8,14 +8,18 @@ import (
 	"os"
 )
 
-// Colori ANSI
+// Colori e stili ANSI
 const (
-	ColorBlue   = "\033[1;34m"
-	ColorCyan   = "\033[36m"
-	ColorGreen  = "\033[1;32m"
-	ColorRed    = "\033[1;31m"
-	ColorReset  = "\033[0m"
-	ColorYellow = "\033[33m"
+	ColorBold    = "\033[1m"
+	ColorDim     = "\033[2m"
+	ColorBlue    = "\033[1;34m"
+	ColorCyan    = "\033[36m"
+	ColorGreen   = "\033[1;32m"
+	ColorRed     = "\033[1;31m"
+	ColorReset   = "\033[0m"
+	ColorYellow  = "\033[33m"
+	ColorMagenta = "\033[35m"
+	ColorWhite   = "\033[1;37m"
 )
 
 // DisableColors permette di disattivare i colori.
@@ -69,4 +73,45 @@ func LogError(format string, a ...interface{}) {
 func Fatal(format string, a ...interface{}) {
 	LogError(format, a...)
 	os.Exit(1)
+}
+
+// --- HELPER VISUALI PER FORMATTAZIONE E SEZIONI ---
+
+const sectionDivider = "============================================================"
+
+// PrintBanner stampa un'intestazione principale incorniciata
+func PrintBanner(icon, title, subtitle string) {
+	fmt.Println()
+	fmt.Printf("%s%s%s\n", colorize(ColorCyan), sectionDivider, colorize(ColorReset))
+	fmt.Printf("  %s %s%s%s\n", icon, colorize(ColorBold+ColorWhite), title, colorize(ColorReset))
+	if subtitle != "" {
+		fmt.Printf("  %s%s%s\n", colorize(ColorDim), subtitle, colorize(ColorReset))
+	}
+	fmt.Printf("%s%s%s\n", colorize(ColorCyan), sectionDivider, colorize(ColorReset))
+}
+
+// PrintSection stampa un separatore di sezione principale
+func PrintSection(icon, title string) {
+	fmt.Println()
+	fmt.Printf("%s%s%s\n", colorize(ColorCyan), sectionDivider, colorize(ColorReset))
+	fmt.Printf("  %s %s%s%s\n", icon, colorize(ColorBold+ColorWhite), title, colorize(ColorReset))
+	fmt.Printf("%s%s%s\n", colorize(ColorCyan), sectionDivider, colorize(ColorReset))
+}
+
+// PrintSubSection stampa un'intestazione di sotto-sezione (es. per singoli accessori)
+func PrintSubSection(icon, title string) {
+	fmt.Println()
+	fmt.Printf("%s%s%s %s%s%s\n", colorize(ColorCyan), icon, colorize(ColorReset), colorize(ColorBold), title, colorize(ColorReset))
+}
+
+// PrintSummaryBox stampa il riepilogo finale formattato
+func PrintSummaryBox(title string, rows [][2]string) {
+	fmt.Println()
+	fmt.Printf("%s%s%s\n", colorize(ColorGreen), sectionDivider, colorize(ColorReset))
+	fmt.Printf("  %s%s%s\n", colorize(ColorBold+ColorGreen), title, colorize(ColorReset))
+	fmt.Printf("%s%s%s\n", colorize(ColorGreen), sectionDivider, colorize(ColorReset))
+	for _, row := range rows {
+		fmt.Printf("  %-20s: %s%s%s\n", row[0], colorize(ColorWhite), row[1], colorize(ColorReset))
+	}
+	fmt.Printf("%s%s%s\n", colorize(ColorGreen), sectionDivider, colorize(ColorReset))
 }

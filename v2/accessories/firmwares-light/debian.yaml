@@ -3,12 +3,12 @@
 name: waydroid network-wifi
 description: install firmware drivers network-wifi
 author: artisan
-release: 0.0.1
+release: 2.0.1
 distributions:
-  - bullseye
-  - bookworm
-  - chimaera
+  - trixie
   - daedalus
+  - excalibur
+  - resolute
 
 sequence:
   packages:

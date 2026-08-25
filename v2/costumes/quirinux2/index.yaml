@@ -32,38 +32,42 @@ sequence:
       - non-free
       - non-free-firmware
     sources_list_d:
-      - export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-      - apt-get install -y debconf-utils
-      - update-alternatives --install /usr/bin/pager pager /bin/cat 200 || true
-      - echo "lightdm shared/default-x-display-manager select lightdm" | /usr/bin/debconf-set-selections
-      - echo "slim shared/default-x-display-manager select lightdm" | /usr/bin/debconf-set-selections
-      - echo "firmware-ipw2x00 firmware/ipw2x00/license/accepted boolean true" | /usr/bin/debconf-set-selections
-      - echo "firmware-ipw2x00 firmware/ipw2x00/license/type select accept" | /usr/bin/debconf-set-selections
-      - echo "firmware-ivtv firmware/ivtv/license/accepted boolean true" | /usr/bin/debconf-set-selections
-      - echo "firmware-b43-installer firmware/b43/license/accepted boolean true" | /usr/bin/debconf-set-selections
-      - echo "firmware-b43legacy-installer firmware/b43legacy/license/accepted boolean true" | /usr/bin/debconf-set-selections
-      - echo "b43-fwcutter firmware/b43/install_non_free boolean true" | /usr/bin/debconf-set-selections
-      - echo "libpaper libpaper/defaultpaper select a4" | /usr/bin/debconf-set-selections
-      - echo "ca-certificates ca-certificates/trust_new_crts select yes" | /usr/bin/debconf-set-selections
-      - echo "console-setup console-setup/charmap47 select UTF-8" | /usr/bin/debconf-set-selections
-      - echo "keyboard-configuration keyboard-configuration/layoutcode string es" | /usr/bin/debconf-set-selections
-      - echo "ufw ufw/enable select true" | /usr/bin/debconf-set-selections
-      - echo "cups cups/raw-print boolean true" | /usr/bin/debconf-set-selections
-      - echo "cups cups/backends multiselect lpd, socket, usb, snmp, dnssd" | /usr/bin/debconf-set-selections
-      - echo "dictionaries-common dictionaries-common/default-ispell select castellano8 (Spanish 8 bit)" | /usr/bin/debconf-set-selections
-      - echo "dictionaries-common dictionaries-common/default-wordlist select castellano (Spanish)" | /usr/bin/debconf-set-selections
-      - insserv -r slim || update-rc.d slim disable || true
-      - /usr/bin/wget --no-check-certificate -O /tmp/quirinux-keyring.deb https://repo.quirinux.org/pool/main/q/quirinux-keyring/quirinux-keyring_1.0.6+q2_all.deb
-      - PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin" /usr/bin/dpkg -i /tmp/quirinux-keyring.deb || true
-      - rm -f /tmp/quirinux-keyring.deb
-      - /usr/bin/wget --no-check-certificate -O /tmp/quirinux-repo.deb https://repo.quirinux.org/pool/main/q/quirinux-repo/quirinux-repo_1.2.3+q2_all.deb
-      - PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin" /usr/bin/apt install -y /tmp/quirinux-repo.deb
-      - rm -f /tmp/quirinux-repo.deb
     update: true
     upgrade: true
 finalize:
   customize: true
   cmds:
+    - export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - apt-get install -y debconf-utils
+      - update-alternatives --install /usr/bin/pager pager /bin/cat 200 || true
+      - |
+        cat <<EOF | debconf-set-selections
+        lightdm shared/default-x-display-manager select lightdm
+        slim shared/default-x-display-manager select lightdm
+        firmware-ipw2x00 firmware/ipw2x00/license/accepted boolean true
+        firmware-ipw2x00 firmware/ipw2x00/license/type select accept
+        firmware-ivtv firmware/ivtv/license/accepted boolean true
+        firmware-b43-installer firmware/b43/license/accepted boolean true
+        firmware-b43legacy-installer firmware/b43legacy/license/accepted boolean true
+        b43-fwcutter firmware/b43/install_non_free boolean true
+        libpaper libpaper/defaultpaper select a4
+        ca-certificates ca-certificates/trust_new_crts select yes
+        console-setup console-setup/charmap47 select UTF-8
+        keyboard-configuration keyboard-configuration/layoutcode string es
+        ufw ufw/enable select true
+        cups cups/raw-print boolean true
+        cups cups/backends multiselect lpd, socket, usb, snmp, dnssd
+        dictionaries-common dictionaries-common/default-ispell select castellano8 (Spanish 8 bit)
+        dictionaries-common dictionaries-common/default-wordlist select castellano (Spanish)
+        EOF
+      - insserv -r slim || update-rc.d slim disable || true
+      - /usr/bin/wget --no-check-certificate -O /tmp/quirinux-keyring.deb https://repo.quirinux.org/pool/main/q/quirinux-keyring/quirinux-keyring_1.0.6+q2_all.deb
+      - PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin" /usr/bin/dpkg -i /tmp/quirinux-keyring.deb || true
+      - rm -f /tmp/quirinux-keyring.deb
+      - /usr/bin/wget --no-check-certificate -O /tmp/quirinux-repo.deb https://repo.quirinux.org/pool/main/q/quirinux-repo/quirinux-repo_1.2.3+q2_all.deb
+      - PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin" /usr/bin/dpkg -i /tmp/quirinux-repo.deb
+      - rm -f /tmp/quirinux-repo.deb
+    
     - DEBIAN_FRONTEND=readline PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin" apt-get autoremove -y || true
     - dpkg --configure -a || true
     - echo "/usr/sbin/lightdm" > /etc/X11/default-display-manager

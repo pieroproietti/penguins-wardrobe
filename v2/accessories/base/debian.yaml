@@ -3,22 +3,11 @@
 name: base
 description: add spice-vdagent
 author: artisan
-release: 0.2.1
+release: 2.0.1
 distributions:
-  # debian
-  - buster
-  - bullseye
-  - bookworm
   - trixie
-  # devuan
-  - beowulf
-  - chimaera
-  - daedalus
-  # ubuntu
-  - focal
-  - jammy
-  - mantic
-  - noble
+  - excalibur
+  - resolute
 sequence:
   repositories:
     sources_list:

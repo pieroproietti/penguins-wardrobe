@@ -3,19 +3,12 @@
 name: multimedia
 description: a selection of usefull multimedia packages
 author: artisan
-release: 0.0.1
+release: 2.0.1
 distributions:
-  - bookworm
-  - bullseye
-  - buster
-  - chimaera
+  - trixie
   - daedalus
-  - bionic
-  - focal
-  - jammy
-  - noble
-  - oracular
-  - rolling
+  - excalibur
+  - resolute
 sequence:
   packages:
     - audacity

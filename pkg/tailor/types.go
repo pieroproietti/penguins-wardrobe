@@ -12,16 +12,18 @@ type WardrobeInfo struct {
 
 // Suit rappresenta il nuovo standard index.yaml
 type Suit struct {
-	Name          string           `yaml:"name"`
-	Description   string           `yaml:"description"`
-	Packages      []string         `yaml:"packages"`
-	Accessories   []string         `yaml:"accessories"`
-	Cmds          []string         `yaml:"cmds"`
-	Distributions []string         `yaml:"distributions"`
-	Sequence      *Sequence        `yaml:"sequence"`
-	Finalize      *Finalize        `yaml:"finalize"`
-	Reboot               bool             `yaml:"reboot"`
-	DisplayManagerNotice bool             `yaml:"display_manager_notice"`
+	Name                 string        `yaml:"name"`
+	Description          string        `yaml:"description"`
+	Author               string        `yaml:"author"`
+	Release              string        `yaml:"release"`
+	Packages             []string      `yaml:"packages"`
+	Accessories          []string      `yaml:"accessories"`
+	Cmds                 []string      `yaml:"cmds"`
+	Distributions        []string      `yaml:"distributions"`
+	Sequence             *Sequence     `yaml:"sequence"`
+	Finalize             *Finalize     `yaml:"finalize"`
+	Reboot               bool          `yaml:"reboot"`
+	DisplayManagerNotice bool          `yaml:"display_manager_notice"`
 	// PackagesManifest points to a file (relative to the costume dir)
 	// listing the COMPLETE, exact set of packages the system should end
 	// up with -- either plain "one package name per line" or the output
