@@ -1,0 +1,26 @@
+packages:
+  - adwaita-icon-theme
+  - desktop-base
+  - desktop-file-utils
+  - exo-utils
+  - glib-networking
+  - gnome-icon-theme
+  - gnome-themes-extra
+  - lightdm
+  - lightdm-gtk-greeter
+  - mousepad
+  - notification-daemon
+  - pavucontrol
+  - pulseaudio
+  - tango-icon-theme
+  - thunar
+  - tumbler
+  - xfburn
+  - xfce4
+  - xfconf
+  - xfdesktop4
+  - xfwm4
+  - xinit
+  - xorg
+  - xterm
+  - zenity

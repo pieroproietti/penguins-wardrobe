@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Captura de pantalla (pantallazo)
+Comment=Captura de pantalla
+Exec=xfce4-screenshooter
+Icon=applets-screenshooter
+Path=
+Terminal=false
+StartupNotify=false

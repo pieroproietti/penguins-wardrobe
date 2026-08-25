@@ -1,0 +1,78 @@
+---
+name: quirinux-daedalus
+description: Quirinux Animation distro, Devuan Daedalus (sysvinit).
+author: charliemartinez
+release: 2.4
+
+packages_manifest: quirinux_daedalus-packages.list
+packages_install_file: quirinux_daedalus-packages.list
+
+packages_interactive:
+  - firmware-ipw2x00
+  - firmware-ivtv
+  - firmware-b43-installer
+  - firmware-b43legacy-installer
+  - b43-fwcutter
+
+packages_remove_file: packages_remove.txt
+
+distributions:
+  - daedalus
+
+sequence:
+  repositories:
+    sources_list:
+      - main
+      - contrib
+      - non-free
+      - non-free-firmware
+    sources_list_d:
+      - export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - apt-get install -y debconf-utils curl gnupg
+      - update-alternatives --install /usr/bin/pager pager /bin/cat 200 || true
+      # Preconfiguración de Debconf
+      - echo "lightdm shared/default-x-display-manager select lightdm" | /usr/bin/debconf-set-selections
+      - echo "slim shared/default-x-display-manager select lightdm" | /usr/bin/debconf-set-selections
+      - echo "firmware-ipw2x00 firmware/ipw2x00/license/accepted boolean true" | /usr/bin/debconf-set-selections
+      - echo "firmware-ipw2x00 firmware/ipw2x00/license/type select accept" | /usr/bin/debconf-set-selections
+      - echo "firmware-ivtv firmware/ivtv/license/accepted boolean true" | /usr/bin/debconf-set-selections
+      - echo "firmware-b43-installer firmware/b43/license/accepted boolean true" | /usr/bin/debconf-set-selections
+      - echo "firmware-b43legacy-installer firmware/b43legacy/license/accepted boolean true" | /usr/bin/debconf-set-selections
+      - echo "b43-fwcutter firmware/b43/install_non_free boolean true" | /usr/bin/debconf-set-selections
+      - echo "libpaper libpaper/defaultpaper select a4" | /usr/bin/debconf-set-selections
+      - echo "ca-certificates ca-certificates/trust_new_crts select yes" | /usr/bin/debconf-set-selections
+      - echo "console-setup console-setup/charmap47 select UTF-8" | /usr/bin/debconf-set-selections
+      - echo "keyboard-configuration keyboard-configuration/layoutcode string es" | /usr/bin/debconf-set-selections
+      - echo "ufw ufw/enable select true" | /usr/bin/debconf-set-selections
+      - echo "cups cups/raw-print boolean true" | /usr/bin/debconf-set-selections
+      - echo "cups cups/backends multiselect lpd, socket, usb, snmp, dnssd" | /usr/bin/debconf-set-selections
+      - echo "dictionaries-common dictionaries-common/default-ispell select castellano8 (Spanish 8 bit)" | /usr/bin/debconf-set-selections
+      - echo "dictionaries-common dictionaries-common/default-wordlist select castellano (Spanish)" | /usr/bin/debconf-set-selections
+      # Deshabilitar SLIM (Sysvinit)
+      - insserv -r slim 2>/dev/null || update-rc.d slim disable 2>/dev/null || true
+      # Instalación moderna del repositorio de Quirinux (método Piero)
+      - rm -f /usr/share/keyrings/quirinux.gpg
+      - curl -fsSL https://repo.quirinux.org/gpg/quirinux.asc | gpg --dearmor -o /usr/share/keyrings/quirinux.gpg
+      - echo "deb [arch=amd64 signed-by=/usr/share/keyrings/quirinux.gpg] https://repo.quirinux.org/ daedalus main" | tee /etc/apt/sources.list.d/quirinux.list > /dev/null
+    update: true
+    upgrade: true
+
+finalize:
+  customize: true
+  cmds:
+    - DEBIAN_FRONTEND=readline PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin" apt-get autoremove -y || true
+    - dpkg --configure -a || true
+    - echo "/usr/sbin/lightdm" > /etc/X11/default-display-manager
+    # Limpieza de Display Managers antiguos (Sysvinit)
+    - for dm in slim gdm3 gdm sddm; do [ -f "/etc/init.d/$dm" ] && update-rc.d -f "$dm" remove >/dev/null 2>&1; done; true
+    # Habilitar LightDM (Sysvinit)
+    - update-rc.d lightdm defaults >/dev/null 2>&1 || insserv lightdm || true
+    - update-rc.d lightdm enable >/dev/null 2>&1 || true
+    # Restaurar Debconf y aplicar scripts de Quirinux
+    - echo "debconf debconf/frontend select Dialog" | /usr/bin/debconf-set-selections
+    - echo "debconf debconf/priority select high" | /usr/bin/debconf-set-selections
+    - /usr/local/bin/quirinux-apply-skel || true
+    - /usr/local/bin/quirinux-firmware-notice || true
+    - /usr/local/bin/quirinux-kernel-notice || true
+    - update-alternatives --remove pager /bin/cat || true
+reboot: true

@@ -47,6 +47,7 @@ func Wear(costumeName string, noAcc bool, noFirm bool) error {
 	// kernel header installation, so an incompatible system aborts cleanly
 	// without touching the machine or producing unrelated apt output.
 	if err := checkCostumeCompatibility(costumeDir, suit); err != nil {
+		utils.LogError("%s", incompatibleDistroMessage(suit.Name, suit.Distributions, currentDistroName()))
 		return err
 	}
 
@@ -57,6 +58,8 @@ func Wear(costumeName string, noAcc bool, noFirm bool) error {
 	ensureKernelHeaders()
 
 	utils.LogNormal("--- Applying Costume: %s ---", suit.Name)
+
+	SetLicensePromptPackages(suit.PackagesInteractive)
 
 	installedPackages, failedPackages, err := applySuit(costumeDir, suit)
 	if err != nil {

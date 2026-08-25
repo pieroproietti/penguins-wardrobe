@@ -1,0 +1,17 @@
+packages:
+  - argyll
+  - colord
+  - color-picker
+  - darktable
+  - displaycal
+  - enblend
+  - enfuse
+  - entangle
+  - gimp
+  - gnome-color-manager
+  - gphoto2
+  - graphicsmagick
+  - hugin
+  - imagemagick
+  - inkscape
+  - rawtherapee

@@ -41,6 +41,11 @@ var neverPurgeBase = []string{
 	// remastering tools: the wardrobe must never uninstall itself
 	"penguins-wardrobe",
 	"wardrobe",
+	// Init systems: never install/purge; each base system keeps its own.
+	"systemd", "systemd-sysv", "systemd-timesyncd", "libsystemd0", "libpam-systemd", "libnss-systemd",
+	"sysvinit", "sysvinit-core", "sysvinit-utils", "sysv-rc", "sysv-rc-conf", "insserv", "startpar",
+	"elogind", "libelogind0", "libelogind-compat", "libpam-elogind",
+	"eudev", "libeudev1", "libeudev-dev", "udev", "libudev1", "libudev-dev",
 	"penguins-eggs",
 	"coa",
 	// boot

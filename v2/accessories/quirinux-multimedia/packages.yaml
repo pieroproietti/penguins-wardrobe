@@ -1,0 +1,15 @@
+packages:
+  - ffmpeg
+  - ffmpegthumbnailer
+  - guvcview
+  - kazam
+  - kdenlive
+  - mediainfo
+  - melt
+  - mencoder
+  - mplayer
+  - shotwell
+  - vlc
+  - x264
+  - x265
+  - yt-dlp

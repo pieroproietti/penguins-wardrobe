@@ -121,6 +121,17 @@ func normalizePkgName(name string) string {
 	return name
 }
 
+// isInteractiveTerminal checks if stdin is connected to a real terminal.
+// This is used to decide whether to show interactive prompts or fall back
+// to noninteractive mode.
+func isInteractiveTerminal() bool {
+	fileInfo, err := os.Stdin.Stat()
+	if err != nil {
+		return false
+	}
+	return (fileInfo.Mode() & os.ModeCharDevice) != 0
+}
+
 // batchSize caps how many packages go into a single apt-get invocation.
 // A single apt-get install with hundreds of packages runs dpkg's trigger
 // processing (initramfs regeneration, DKMS module builds, icon/mime
@@ -221,6 +232,27 @@ func installPackagesImpl(packages []string, retries int, noRecommends bool) []st
 // down with it. Packages that still fail after `retries` individual
 // attempts are given up on and returned to the caller.
 func installBatchWithFallback(batch []string, retries int, flags string) []string {
+	// License-prompt packages must never go through the noninteractive
+	// path: their preinst aborts and poisons dpkg for every later batch.
+	var clean []string
+	for _, p := range batch {
+		if !isLicensePrompt(p) {
+			clean = append(clean, p)
+		}
+	}
+	batch = clean
+	if len(batch) == 0 {
+		return nil
+	}
+	
+	// Use readline frontend if we have an interactive terminal, so that
+	// critical prompts (like firmware licenses) are shown to the user.
+	// Fall back to noninteractive if there's no terminal to avoid hanging.
+	debconfFrontend := "readline"
+	if !isInteractiveTerminal() {
+		debconfFrontend = "noninteractive"
+	}
+	
 	// readline: accepts low-priority defaults automatically but shows
 	// critical prompts (e.g. firmware license agreements) to the user.
 	//
@@ -235,7 +267,7 @@ func installBatchWithFallback(batch []string, retries int, flags string) []strin
 	// dpkg/debconf inherit our own stdio directly instead, which is the
 	// documented workaround for this class of bug.
 	pkgString := strings.Join(batch, " ")
-	cmd := fmt.Sprintf("DEBIAN_FRONTEND=noninteractive apt-get install -o Dpkg::Options::='--force-confold' -o Dpkg::Use-Pty=0 %s %s", flags, pkgString)
+	cmd := fmt.Sprintf("DEBIAN_FRONTEND=%s apt-get install -o Dpkg::Options::='--force-confold' -o Dpkg::Use-Pty=0 %s %s", debconfFrontend, flags, pkgString)
 	logToFile(fmt.Sprintf("Installing batch of %d packages...", len(batch)))
 	if err := utils.Exec(cmd); err == nil {
 		logToFile("✅ Batch installed.")
@@ -245,9 +277,7 @@ func installBatchWithFallback(batch []string, retries int, flags string) []strin
 	// A failed postinst (dkms build, debconf, etc.) can leave dpkg in an
 	// interrupted state that makes EVERY subsequent apt-get call fail in
 	// cascade. Heal the state before the per-package fallback.
-	logToFile("⚠️  Batch install failed. Healing dpkg state before retrying...")
-	utils.Exec("dpkg --configure -a")
-	utils.Exec("DEBIAN_FRONTEND=noninteractive apt-get install -f -y")
+	healDpkgState()
 
 	// Fallback: install one by one so a single broken package does not
 	// prevent the rest of the batch from being installed. Packages that
@@ -257,7 +287,7 @@ func installBatchWithFallback(batch []string, retries int, flags string) []strin
 	for attempt := 1; attempt <= retries && len(pending) > 0; attempt++ {
 		var stillFailing []string
 		for _, pkg := range pending {
-			singleCmd := fmt.Sprintf("DEBIAN_FRONTEND=noninteractive apt-get install -o Dpkg::Options::='--force-confold' -o Dpkg::Use-Pty=0 %s %s", flags, pkg)
+			singleCmd := fmt.Sprintf("DEBIAN_FRONTEND=%s apt-get install -o Dpkg::Options::='--force-confold' -o Dpkg::Use-Pty=0 %s %s", debconfFrontend, flags, pkg)
 			if err := utils.Exec(singleCmd); err != nil {
 				// apt-get's exit code alone is not reliable evidence that
 				// THIS package failed: dpkg processes deferred triggers
@@ -337,8 +367,14 @@ func installInteractive(packages []string) []string {
 		return missing
 	}
 
+	// Use readline frontend for interactive packages so prompts are shown
+	debconfFrontend := "readline"
+	if !isInteractiveTerminal() {
+		debconfFrontend = "noninteractive"
+	}
+
 	pkgString := strings.Join(toInstall, " ")
-	cmd := fmt.Sprintf("apt-get install -o Dpkg::Options::='--force-confold' -o Dpkg::Use-Pty=0 -y %s", pkgString)
+	cmd := fmt.Sprintf("DEBIAN_FRONTEND=%s apt-get install -o Dpkg::Options::='--force-confold' -o Dpkg::Use-Pty=0 -y %s", debconfFrontend, pkgString)
 	logToFile(fmt.Sprintf("Installing interactive packages: %s", pkgString))
 	if err := utils.Exec(cmd); err != nil {
 		var stillFailing []string
@@ -434,4 +470,46 @@ func printAiPrompt(packages []string) {
 		logToFile(fmt.Sprintf("✅ AIPrompt.txt file generated at: %s", promptFile))
 		utils.LogNormal("Prompt file generated in Home: %s%s%s\n", utils.ColorYellow, promptFile, utils.ColorReset)
 	}
+}
+
+// licensePromptPackages holds suit.PackagesInteractive: packages whose
+// preinst asks a license question that cannot be answered noninteractively.
+var licensePromptPackages []string
+
+// SetLicensePromptPackages is called by Wear() before any install starts.
+func SetLicensePromptPackages(pkgs []string) { licensePromptPackages = pkgs }
+
+func isLicensePrompt(pkg string) bool {
+	c := normalizePkgName(pkg)
+	for _, p := range licensePromptPackages {
+		if normalizePkgName(p) == c {
+			return true
+		}
+	}
+	return false
+}
+
+// healDpkgState repairs a poisoned dpkg state. dpkg --configure -a and
+// apt-get install -f alone cannot recover when a maintainer script fails
+// under noninteractive (typical: firmware license prompts), so as last
+// resort we purge the offending half-configured packages; the interactive
+// pass (real terminal) can bring them back afterwards.
+func healDpkgState() {
+	// First try to configure what we can without interaction
+	utils.Exec("DEBIAN_FRONTEND=noninteractive dpkg --configure -a --force-confold")
+	utils.Exec("DEBIAN_FRONTEND=noninteractive apt-get install -f -y")
+	
+	// Then try with readline if we have a terminal, to handle packages
+	// that require user interaction (like license prompts)
+	if isInteractiveTerminal() {
+		utils.Exec("DEBIAN_FRONTEND=readline dpkg --configure -a")
+	}
+	
+	for _, p := range licensePromptPackages {
+		if !isPackageInstalled(p) {
+			logToFile(fmt.Sprintf("⚠️  Purging half-configured license package %s so the rest of the system can heal...", p))
+			utils.Exec(fmt.Sprintf("DEBIAN_FRONTEND=noninteractive dpkg --purge --force-remove-reinstreq --force-depends %s", p))
+		}
+	}
+	utils.Exec("DEBIAN_FRONTEND=noninteractive apt-get install -f -y")
 }
