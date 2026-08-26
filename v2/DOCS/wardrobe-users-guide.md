@@ -291,7 +291,10 @@ display_manager_notice: true
 * **`packages_install_file`**: File esterno contenente un elenco aggiuntivo di pacchetti da installare.
 * **`packages_remove_file`**: File esterno con l'elenco di pacchetti da rimuovere/purgare.
 
-#### 3. Sequenza (`sequence`)
+#### 3. Preseed Debconf Automatico (`packages.preseed`)
+* **`packages.preseed`**: Se presente nella cartella del costume o dell'accessorio, `wardrobe` applica automaticamente le risposte debconf tramite `debconf-set-selections` prima dell'installazione dei pacchetti. Questo file deve essere usato con parsimonia ed essere mirato **esclusivamente** ai pacchetti forniti da quel costume o accessorio (es. impostare LightDM in `quirinux-desktop`, accettare licenze firmware in `firmwares/network-wifi` o `quirinux-firmware`), mantenendo le ricette YAML completamente pulite.
+
+#### 4. Sequenza (`sequence`)
 * **`repositories`**:
   * `sources_list`: Abilita i rami di componenti desiderati (`main`, `contrib`, `non-free`, `non-free-firmware`).
   * `sources_list_d`: Comandi shell per inserire nuove repository PPA o di terze parti.
@@ -303,7 +306,7 @@ display_manager_notice: true
 * **`packages_remove`**: Pacchetti incompatibili o indesiderati da disinstallare con `apt-get purge`.
 * **`accessories`**: Elenco di accessori da concatenare (possono essere globali come `base` o locali con percorso relativo come `./firmwares`).
 
-#### 4. Finalizzazione (`finalize`)
+#### 5. Finalizzazione (`finalize`)
 * **`customize: true`**: Copia ricorsivamente il contenuto della directory `sysroot/` (o `dirs/`) all'interno della root del sistema (`/`) usando `rsync -aAXv`.
 * **`cmds`**: Array di comandi e script eseguiti nell'ordine indicato. Se il primo parametro corrisponde a un file di script relativo (es. `../../scripts/config_lightdm.sh` o `scripts/myscript.sh`), viene risolto ed eseguito correttamente.
 

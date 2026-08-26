@@ -20,25 +20,7 @@ sequence:
       - non-free-firmware
     sources_list_d:
       - export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-      - apt-get install -y debconf-utils curl gnupg unzip
-      - update-alternatives --install /usr/bin/pager pager /bin/cat 200 || true
-      - echo "lightdm shared/default-x-display-manager select lightdm" | /usr/bin/debconf-set-selections
-      - echo "slim shared/default-x-display-manager select lightdm" | /usr/bin/debconf-set-selections
-      - echo "firmware-ipw2x00 firmware/ipw2x00/license/accepted boolean true" | /usr/bin/debconf-set-selections
-      - echo "firmware-ipw2x00 firmware/ipw2x00/license/type select accept" | /usr/bin/debconf-set-selections
-      - echo "firmware-ivtv firmware/ivtv/license/accepted boolean true" | /usr/bin/debconf-set-selections
-      - echo "firmware-b43-installer firmware/b43/license/accepted boolean true" | /usr/bin/debconf-set-selections
-      - echo "firmware-b43legacy-installer firmware/b43legacy/license/accepted boolean true" | /usr/bin/debconf-set-selections
-      - echo "b43-fwcutter firmware/b43/install_non_free boolean true" | /usr/bin/debconf-set-selections
-      - echo "libpaper libpaper/defaultpaper select a4" | /usr/bin/debconf-set-selections
-      - echo "ca-certificates ca-certificates/trust_new_crts select yes" | /usr/bin/debconf-set-selections
-      - echo "console-setup console-setup/charmap47 select UTF-8" | /usr/bin/debconf-set-selections
-      - echo "keyboard-configuration keyboard-configuration/layoutcode string es" | /usr/bin/debconf-set-selections
-      - echo "ufw ufw/enable select true" | /usr/bin/debconf-set-selections
-      - echo "cups cups/raw-print boolean true" | /usr/bin/debconf-set-selections
-      - echo "cups cups/backends multiselect lpd, socket, usb, snmp, dnssd" | /usr/bin/debconf-set-selections
-      - echo "dictionaries-common dictionaries-common/default-ispell select castellano8 (Spanish 8 bit)" | /usr/bin/debconf-set-selections
-      - echo "dictionaries-common dictionaries-common/default-wordlist select castellano (Spanish)" | /usr/bin/debconf-set-selections
+      - apt-get install -y curl gnupg unzip
       - rm -f /usr/share/keyrings/quirinux.gpg
       - curl -fsSL https://repo.quirinux.org/gpg/quirinux.asc | gpg --dearmor -o /usr/share/keyrings/quirinux.gpg
       - echo "deb [arch=amd64 signed-by=/usr/share/keyrings/quirinux.gpg] https://repo.quirinux.org/ quirinux main" | tee /etc/apt/sources.list.d/quirinux.list > /dev/null

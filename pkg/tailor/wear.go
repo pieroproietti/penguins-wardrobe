@@ -336,6 +336,17 @@ func applySuit(dir string, suit *Suit) ([]string, []string, error) {
 	var installedPackages []string
 	var failedPackages []string
 
+	// Preseed (debconf-set-selections)
+	if preseedFile := findPreseed(dir); preseedFile != "" {
+		spPreseed := utils.NewSpinner(fmt.Sprintf("Applying preseed selections (%s)...", filepath.Base(preseedFile)))
+		spPreseed.Start()
+		if err := applyPreseed(preseedFile, suit.Name); err != nil {
+			spPreseed.Warn("Preseed selections applied with warnings")
+		} else {
+			spPreseed.Success("Preseed selections applied (%s)", filepath.Base(preseedFile))
+		}
+	}
+
 	// Repositories
 	if suit.Sequence != nil && suit.Sequence.Repositories != nil {
 		spRepo := utils.NewSpinner("Configuring package repositories & updating cache...")
