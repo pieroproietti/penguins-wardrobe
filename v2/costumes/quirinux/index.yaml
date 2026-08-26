@@ -3,9 +3,9 @@ description: Quirinux Animation Distro (compatible with Devuan Daedalus and Debi
 author: charliemartinez
 release: 2.5
 
-packages_manifest: packages-full.list
-packages_install_file: packages-full.list
-packages_remove_file: packages_remove.txt
+# packages_manifest: packages-full.list
+# packages_install_file: packages-full.list
+# packages_remove_file: packages_remove.txt
 
 distributions:
   - daedalus

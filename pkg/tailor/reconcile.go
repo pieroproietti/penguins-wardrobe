@@ -299,7 +299,7 @@ func resolveDistroManifest(costumeDir, fallback string) string {
 		suffix := "_" + codename + "-packages.list"
 		if entries, err := os.ReadDir(costumeDir); err == nil {
 			for _, e := range entries {
-				if !e.IsDir() && strings.HasSuffix(e.Name(), suffix) {
+				if !e.IsDir() && !strings.HasPrefix(e.Name(), ".") && !strings.HasPrefix(e.Name(), "_") && strings.HasSuffix(e.Name(), suffix) {
 					return filepath.Join(costumeDir, e.Name())
 				}
 			}
