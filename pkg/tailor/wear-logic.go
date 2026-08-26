@@ -192,16 +192,16 @@ func cleanAptProgress(line string) string {
 }
 
 // installWithRetries installs packages, falling back to one-by-one on failure
-func installWithRetries(packages []string, retries int, sp *utils.Spinner) []string {
-	return installPackagesImpl(packages, retries, false, sp)
+func installWithRetries(packages []string, retries int) []string {
+	return installPackagesImpl(packages, retries, false)
 }
 
 // installNoRecommends installs packages with --no-install-recommends
-func installNoRecommends(packages []string, sp *utils.Spinner) []string {
-	return installPackagesImpl(packages, 3, true, sp)
+func installNoRecommends(packages []string) []string {
+	return installPackagesImpl(packages, 3, true)
 }
 
-func installPackagesImpl(packages []string, retries int, noRecommends bool, sp *utils.Spinner) []string {
+func installPackagesImpl(packages []string, retries int, noRecommends bool) []string {
 	if len(packages) == 0 {
 		return nil
 	}
@@ -252,21 +252,18 @@ func installPackagesImpl(packages []string, retries int, noRecommends bool, sp *
 		}
 		batch := toInstall[start:end]
 		batchNum := start/batchSize + 1
-		if sp != nil && totalBatches > 1 {
-			sp.UpdateText("Installing packages (batch %d/%d)...", batchNum, totalBatches)
+		if ss := utils.GetSplitScreen(); ss != nil && totalBatches > 1 {
+			ss.SetAction("Installing packages (batch %d/%d)...", batchNum, totalBatches)
 		}
 		logToFile(fmt.Sprintf("Batch %d/%d (packages %d-%d of %d): %v", batchNum, totalBatches, start+1, end, len(toInstall), batch))
-		failed = append(failed, installBatchWithFallback(batch, retries, flags, sp)...)
-	}
-	if sp != nil {
-		sp.UpdateSubtext("")
+		failed = append(failed, installBatchWithFallback(batch, retries, flags)...)
 	}
 	return append(missing, failed...)
 }
 
 // installBatchWithFallback installs a single batch in bulk, falling back
 // to one-by-one installation within the batch if the bulk call fails.
-func installBatchWithFallback(batch []string, retries int, flags string, sp *utils.Spinner) []string {
+func installBatchWithFallback(batch []string, retries int, flags string) []string {
 	// License-prompt packages must never go through the noninteractive
 	// path: their preinst aborts and poisons dpkg for every later batch.
 	var clean []string
@@ -287,32 +284,11 @@ func installBatchWithFallback(batch []string, retries int, flags string, sp *uti
 	}
 	
 	pkgString := strings.Join(batch, " ")
-	if isInteractiveMode {
-		cmd := fmt.Sprintf("DEBIAN_FRONTEND=%s apt-get install -o Dpkg::Options::='--force-confold' %s %s", debconfFrontend, flags, pkgString)
-		logToFile(fmt.Sprintf("Installing batch of %d packages (interactive): %s", len(batch), pkgString))
-		if err := utils.ExecTee(cmd, wardrobeLogFile); err == nil {
-			logToFile("✅ Batch installed.")
-			return nil
-		}
-	} else {
-		cmd := fmt.Sprintf("DEBIAN_FRONTEND=%s apt-get install -o Dpkg::Options::='--force-confold' -o Dpkg::Use-Pty=0 %s %s", debconfFrontend, flags, pkgString)
-		logToFile(fmt.Sprintf("Installing batch of %d packages...", len(batch)))
-
-		onLine := func(line string) {
-			if sp != nil {
-				if clean := cleanAptProgress(line); clean != "" {
-					sp.UpdateSubtext(clean)
-				}
-			}
-		}
-
-		if err := utils.ExecLogMonitor(cmd, wardrobeLogFile, onLine); err == nil {
-			logToFile("✅ Batch installed.")
-			if sp != nil {
-				sp.UpdateSubtext("")
-			}
-			return nil
-		}
+	cmd := fmt.Sprintf("DEBIAN_FRONTEND=%s apt-get install -o Dpkg::Options::='--force-confold' %s %s", debconfFrontend, flags, pkgString)
+	logToFile(fmt.Sprintf("Installing batch of %d packages: %s", len(batch), pkgString))
+	if err := utils.ExecTee(cmd, wardrobeLogFile); err == nil {
+		logToFile("✅ Batch installed.")
+		return nil
 	}
 
 	// Heal dpkg state before retrying
@@ -323,19 +299,11 @@ func installBatchWithFallback(batch []string, retries int, flags string, sp *uti
 	for attempt := 1; attempt <= retries && len(pending) > 0; attempt++ {
 		var stillFailing []string
 		for _, pkg := range pending {
-			if sp != nil {
-				sp.UpdateSubtext("Retry " + pkg)
+			if ss := utils.GetSplitScreen(); ss != nil {
+				ss.SetAction("Retrying package: %s (attempt %d/%d)", pkg, attempt, retries)
 			}
-			var singleCmd string
-			var err error
-			if isInteractiveMode {
-				singleCmd = fmt.Sprintf("DEBIAN_FRONTEND=%s apt-get install -o Dpkg::Options::='--force-confold' %s %s", debconfFrontend, flags, pkg)
-				err = utils.ExecTee(singleCmd, wardrobeLogFile)
-			} else {
-				singleCmd = fmt.Sprintf("DEBIAN_FRONTEND=%s apt-get install -o Dpkg::Options::='--force-confold' -o Dpkg::Use-Pty=0 %s %s", debconfFrontend, flags, pkg)
-				err = utils.ExecLog(singleCmd, wardrobeLogFile)
-			}
-			if err != nil {
+			singleCmd := fmt.Sprintf("DEBIAN_FRONTEND=%s apt-get install -o Dpkg::Options::='--force-confold' %s %s", debconfFrontend, flags, pkg)
+			if err := utils.ExecTee(singleCmd, wardrobeLogFile); err != nil {
 				// Double-check with dpkg before believing the failure
 				if isPackageInstalled(pkg) {
 					logToFile(fmt.Sprintf("ℹ️  apt-get reported an error installing %s, but dpkg confirms it is installed correctly.", pkg))
@@ -350,9 +318,6 @@ func installBatchWithFallback(batch []string, retries int, flags string, sp *uti
 		}
 	}
 
-	if sp != nil {
-		sp.UpdateSubtext("")
-	}
 	if len(pending) > 0 {
 		logToFile(fmt.Sprintf("⚠️  %d packages could not be installed: %v", len(pending), pending))
 	} else {
@@ -407,9 +372,9 @@ func installInteractive(packages []string) []string {
 	}
 
 	pkgString := strings.Join(toInstall, " ")
-	cmd := fmt.Sprintf("DEBIAN_FRONTEND=%s apt-get install -o Dpkg::Options::='--force-confold' -o Dpkg::Use-Pty=0 -y %s", debconfFrontend, pkgString)
+	cmd := fmt.Sprintf("DEBIAN_FRONTEND=%s apt-get install -o Dpkg::Options::='--force-confold' -y %s", debconfFrontend, pkgString)
 	logToFile(fmt.Sprintf("Installing interactive packages: %s", pkgString))
-	if err := utils.Exec(cmd); err != nil {
+	if err := utils.ExecTee(cmd, wardrobeLogFile); err != nil {
 		var stillFailing []string
 		for _, pkg := range toInstall {
 			if !isPackageInstalled(pkg) {
@@ -444,12 +409,12 @@ func removePackages(packages []string) {
 	}
 
 	pkgString := strings.Join(safe, " ")
-	cmd := fmt.Sprintf("DEBIAN_FRONTEND=noninteractive apt-get remove -o Dpkg::Options::='--force-confold' -o Dpkg::Use-Pty=0 -y %s", pkgString)
+	cmd := fmt.Sprintf("DEBIAN_FRONTEND=readline apt-get remove -o Dpkg::Options::='--force-confold' -y %s", pkgString)
 	logToFile(fmt.Sprintf("Removing packages: %s", pkgString))
-	if err := utils.ExecLog(cmd, wardrobeLogFile); err != nil {
+	if err := utils.ExecTee(cmd, wardrobeLogFile); err != nil {
 		logToFile(fmt.Sprintf("⚠️  Some packages could not be removed: %v", err))
 	}
-	utils.ExecLog("DEBIAN_FRONTEND=noninteractive apt-get autoremove -o Dpkg::Use-Pty=0 -y", wardrobeLogFile)
+	_ = utils.ExecTee("DEBIAN_FRONTEND=readline apt-get autoremove -o Dpkg::Options::='--force-confold' -y", wardrobeLogFile)
 }
 
 func printAiPrompt(packages []string) {

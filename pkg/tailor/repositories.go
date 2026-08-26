@@ -10,7 +10,7 @@ import (
 )
 
 // setupRepositories applica la sezione "repositories" della forma annidata
-func setupRepositories(repos *Repositories, suitName string, sp *utils.Spinner) {
+func setupRepositories(repos *Repositories, suitName string) {
 	if repos == nil {
 		return
 	}
@@ -24,16 +24,10 @@ func setupRepositories(repos *Repositories, suitName string, sp *utils.Spinner) 
 	if len(repos.SourcesListD) > 0 {
 		logToFile(WarnPrefix(suitName) + "running third-party repository setup commands...")
 		for idx, command := range repos.SourcesListD {
-			if sp != nil {
-				sp.UpdateSubtext(fmt.Sprintf("Third-party repo [%d/%d]", idx+1, len(repos.SourcesListD)))
+			if ss := utils.GetSplitScreen(); ss != nil {
+				ss.SetAction(fmt.Sprintf("Third-party repo [%d/%d]", idx+1, len(repos.SourcesListD)))
 			}
-			var err error
-			if isInteractiveMode {
-				err = utils.ExecTee(command, wardrobeLogFile)
-			} else {
-				err = utils.ExecLog(command, wardrobeLogFile)
-			}
-			if err != nil {
+			if err := utils.ExecTee(command, wardrobeLogFile); err != nil {
 				logToFile(WarnPrefix(suitName) + "repository command failed: " + command + ": " + err.Error())
 			}
 		}
@@ -41,37 +35,18 @@ func setupRepositories(repos *Repositories, suitName string, sp *utils.Spinner) 
 
 	if repos.Update {
 		logToFile(WarnPrefix(suitName) + "apt-get update...")
-		if isInteractiveMode {
-			utils.ExecTee("apt-get update", wardrobeLogFile)
-		} else {
-			if sp != nil {
-				sp.UpdateSubtext("Updating package index...")
-			}
-			onLine := func(line string) {
-				if sp != nil {
-					if clean := cleanAptProgress(line); clean != "" {
-						sp.UpdateSubtext(clean)
-					}
-				}
-			}
-			utils.ExecLogMonitor("apt-get update", wardrobeLogFile, onLine)
+		if ss := utils.GetSplitScreen(); ss != nil {
+			ss.SetAction("Updating package index (apt-get update)...")
 		}
+		_ = utils.ExecTee("apt-get update", wardrobeLogFile)
 	}
 
 	if repos.Upgrade {
 		logToFile(WarnPrefix(suitName) + "apt-get upgrade...")
-		if isInteractiveMode {
-			utils.ExecTee("DEBIAN_FRONTEND=readline apt-get -o Dpkg::Options::='--force-confold' upgrade -y", wardrobeLogFile)
-		} else {
-			if sp != nil {
-				sp.UpdateSubtext("Upgrading packages...")
-			}
-			utils.ExecLog("DEBIAN_FRONTEND=noninteractive apt-get -o Dpkg::Options::='--force-confold' upgrade -y", wardrobeLogFile)
+		if ss := utils.GetSplitScreen(); ss != nil {
+			ss.SetAction("Upgrading packages (apt-get upgrade)...")
 		}
-	}
-
-	if sp != nil {
-		sp.UpdateSubtext("")
+		_ = utils.ExecTee("DEBIAN_FRONTEND=readline apt-get -o Dpkg::Options::='--force-confold' upgrade -y", wardrobeLogFile)
 	}
 }
 

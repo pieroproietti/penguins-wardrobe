@@ -122,15 +122,15 @@ Avvia il processo di **"vestizione"** del sistema. Questo comando richiede privi
 sudo wardrobe wear colibri
 ```
 
+Durante la vestizione, `wardrobe wear` adotta automaticamente un layout a **schermo diviso orizzontale**:
+* **Pannello superiore**: Mostra in modo chiaro e fisso il banner del costume, gli accessori e lo stato di avanzamento delle fasi `[OK]`.
+* **Pannello inferiore (Console Interattiva)**: Mostra lo stream in tempo reale dei comandi (`apt-get`, `dpkg`) e mantiene la tastiera attiva (`stdin`) per rispondere a eventuali prompt o conferme debconf.
+
 #### Opzioni disponibili (Flags):
-* `-i, --interactive`: Modalità interattiva con output diretto a schermo e tastiera (`stdin`) attiva per rispondere manualmente a prompt di debconf/dpkg, licenze o scelte di configurazione.
 * `--no-acc`: Salta l'installazione di tutti gli accessori dichiarati nel costume.
 * `--no-firm`: Salta l'installazione degli accessori legati ai firmware hardware proprietari.
 
 ```bash
-# Esempio: applica il costume in modalità completamente interattiva
-sudo wardrobe wear quirinux -i
-
 # Esempio: applica il costume colibri senza firmware proprietari
 sudo wardrobe wear colibri --no-firm
 ```
