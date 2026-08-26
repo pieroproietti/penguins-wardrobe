@@ -287,23 +287,32 @@ func installBatchWithFallback(batch []string, retries int, flags string, sp *uti
 	}
 	
 	pkgString := strings.Join(batch, " ")
-	cmd := fmt.Sprintf("DEBIAN_FRONTEND=%s apt-get install -o Dpkg::Options::='--force-confold' -o Dpkg::Use-Pty=0 %s %s", debconfFrontend, flags, pkgString)
-	logToFile(fmt.Sprintf("Installing batch of %d packages...", len(batch)))
+	if isInteractiveMode {
+		cmd := fmt.Sprintf("DEBIAN_FRONTEND=%s apt-get install -o Dpkg::Options::='--force-confold' %s %s", debconfFrontend, flags, pkgString)
+		logToFile(fmt.Sprintf("Installing batch of %d packages (interactive): %s", len(batch), pkgString))
+		if err := utils.ExecTee(cmd, wardrobeLogFile); err == nil {
+			logToFile("✅ Batch installed.")
+			return nil
+		}
+	} else {
+		cmd := fmt.Sprintf("DEBIAN_FRONTEND=%s apt-get install -o Dpkg::Options::='--force-confold' -o Dpkg::Use-Pty=0 %s %s", debconfFrontend, flags, pkgString)
+		logToFile(fmt.Sprintf("Installing batch of %d packages...", len(batch)))
 
-	onLine := func(line string) {
-		if sp != nil {
-			if clean := cleanAptProgress(line); clean != "" {
-				sp.UpdateSubtext(clean)
+		onLine := func(line string) {
+			if sp != nil {
+				if clean := cleanAptProgress(line); clean != "" {
+					sp.UpdateSubtext(clean)
+				}
 			}
 		}
-	}
 
-	if err := utils.ExecLogMonitor(cmd, wardrobeLogFile, onLine); err == nil {
-		logToFile("✅ Batch installed.")
-		if sp != nil {
-			sp.UpdateSubtext("")
+		if err := utils.ExecLogMonitor(cmd, wardrobeLogFile, onLine); err == nil {
+			logToFile("✅ Batch installed.")
+			if sp != nil {
+				sp.UpdateSubtext("")
+			}
+			return nil
 		}
-		return nil
 	}
 
 	// Heal dpkg state before retrying
@@ -317,8 +326,16 @@ func installBatchWithFallback(batch []string, retries int, flags string, sp *uti
 			if sp != nil {
 				sp.UpdateSubtext("Retry " + pkg)
 			}
-			singleCmd := fmt.Sprintf("DEBIAN_FRONTEND=%s apt-get install -o Dpkg::Options::='--force-confold' -o Dpkg::Use-Pty=0 %s %s", debconfFrontend, flags, pkg)
-			if err := utils.ExecLog(singleCmd, wardrobeLogFile); err != nil {
+			var singleCmd string
+			var err error
+			if isInteractiveMode {
+				singleCmd = fmt.Sprintf("DEBIAN_FRONTEND=%s apt-get install -o Dpkg::Options::='--force-confold' %s %s", debconfFrontend, flags, pkg)
+				err = utils.ExecTee(singleCmd, wardrobeLogFile)
+			} else {
+				singleCmd = fmt.Sprintf("DEBIAN_FRONTEND=%s apt-get install -o Dpkg::Options::='--force-confold' -o Dpkg::Use-Pty=0 %s %s", debconfFrontend, flags, pkg)
+				err = utils.ExecLog(singleCmd, wardrobeLogFile)
+			}
+			if err != nil {
 				// Double-check with dpkg before believing the failure
 				if isPackageInstalled(pkg) {
 					logToFile(fmt.Sprintf("ℹ️  apt-get reported an error installing %s, but dpkg confirms it is installed correctly.", pkg))

@@ -27,7 +27,13 @@ func setupRepositories(repos *Repositories, suitName string, sp *utils.Spinner) 
 			if sp != nil {
 				sp.UpdateSubtext(fmt.Sprintf("Third-party repo [%d/%d]", idx+1, len(repos.SourcesListD)))
 			}
-			if err := utils.ExecLog(command, wardrobeLogFile); err != nil {
+			var err error
+			if isInteractiveMode {
+				err = utils.ExecTee(command, wardrobeLogFile)
+			} else {
+				err = utils.ExecLog(command, wardrobeLogFile)
+			}
+			if err != nil {
 				logToFile(WarnPrefix(suitName) + "repository command failed: " + command + ": " + err.Error())
 			}
 		}
@@ -35,25 +41,33 @@ func setupRepositories(repos *Repositories, suitName string, sp *utils.Spinner) 
 
 	if repos.Update {
 		logToFile(WarnPrefix(suitName) + "apt-get update...")
-		if sp != nil {
-			sp.UpdateSubtext("Updating package index...")
-		}
-		onLine := func(line string) {
+		if isInteractiveMode {
+			utils.ExecTee("apt-get update", wardrobeLogFile)
+		} else {
 			if sp != nil {
-				if clean := cleanAptProgress(line); clean != "" {
-					sp.UpdateSubtext(clean)
+				sp.UpdateSubtext("Updating package index...")
+			}
+			onLine := func(line string) {
+				if sp != nil {
+					if clean := cleanAptProgress(line); clean != "" {
+						sp.UpdateSubtext(clean)
+					}
 				}
 			}
+			utils.ExecLogMonitor("apt-get update", wardrobeLogFile, onLine)
 		}
-		utils.ExecLogMonitor("apt-get update", wardrobeLogFile, onLine)
 	}
 
 	if repos.Upgrade {
 		logToFile(WarnPrefix(suitName) + "apt-get upgrade...")
-		if sp != nil {
-			sp.UpdateSubtext("Upgrading packages...")
+		if isInteractiveMode {
+			utils.ExecTee("DEBIAN_FRONTEND=readline apt-get -o Dpkg::Options::='--force-confold' upgrade -y", wardrobeLogFile)
+		} else {
+			if sp != nil {
+				sp.UpdateSubtext("Upgrading packages...")
+			}
+			utils.ExecLog("DEBIAN_FRONTEND=noninteractive apt-get -o Dpkg::Options::='--force-confold' upgrade -y", wardrobeLogFile)
 		}
-		utils.ExecLog("DEBIAN_FRONTEND=noninteractive apt-get -o Dpkg::Options::='--force-confold' upgrade -y", wardrobeLogFile)
 	}
 
 	if sp != nil {

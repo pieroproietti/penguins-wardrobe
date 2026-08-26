@@ -223,16 +223,27 @@ func purgeExplicit(toRemove []string) {
 	}
 
 	logToFile(fmt.Sprintf("Explicit purge: removing %d packages declared absent from the vendor manifest...", len(list)))
-	cmd := fmt.Sprintf("DEBIAN_FRONTEND=noninteractive apt-get purge -o Dpkg::Use-Pty=0 -o Dpkg::Options::='--force-confold' -y %s", strings.Join(list, " "))
-	if err := utils.ExecLog(cmd, wardrobeLogFile); err != nil {
-		logToFile("WARNING: bulk explicit purge reported an error; healing and retrying once...")
-		utils.ExecLog("dpkg --configure -a", wardrobeLogFile)
-		utils.ExecLog("DEBIAN_FRONTEND=noninteractive apt-get install -f -y", wardrobeLogFile)
-		utils.ExecLog(cmd, wardrobeLogFile)
+	if isInteractiveMode {
+		cmd := fmt.Sprintf("DEBIAN_FRONTEND=readline apt-get purge -o Dpkg::Options::='--force-confold' -y %s", strings.Join(list, " "))
+		if err := utils.ExecTee(cmd, wardrobeLogFile); err != nil {
+			logToFile("WARNING: bulk explicit purge reported an error; healing and retrying once...")
+			utils.ExecLog("dpkg --configure -a", wardrobeLogFile)
+			utils.ExecLog("DEBIAN_FRONTEND=noninteractive apt-get install -f -y", wardrobeLogFile)
+			utils.ExecTee(cmd, wardrobeLogFile)
+		}
+		logToFile("Sweeping orphaned dependencies of removed packages...")
+		utils.ExecTee("DEBIAN_FRONTEND=readline apt-get autoremove -o Dpkg::Options::='--force-confold' --purge -y", wardrobeLogFile)
+	} else {
+		cmd := fmt.Sprintf("DEBIAN_FRONTEND=noninteractive apt-get purge -o Dpkg::Use-Pty=0 -o Dpkg::Options::='--force-confold' -y %s", strings.Join(list, " "))
+		if err := utils.ExecLog(cmd, wardrobeLogFile); err != nil {
+			logToFile("WARNING: bulk explicit purge reported an error; healing and retrying once...")
+			utils.ExecLog("dpkg --configure -a", wardrobeLogFile)
+			utils.ExecLog("DEBIAN_FRONTEND=noninteractive apt-get install -f -y", wardrobeLogFile)
+			utils.ExecLog(cmd, wardrobeLogFile)
+		}
+		logToFile("Sweeping orphaned dependencies of removed packages...")
+		utils.ExecLog("DEBIAN_FRONTEND=noninteractive apt-get autoremove -o Dpkg::Use-Pty=0 --purge -y", wardrobeLogFile)
 	}
-
-	logToFile("Sweeping orphaned dependencies of removed packages...")
-	utils.ExecLog("DEBIAN_FRONTEND=noninteractive apt-get autoremove -o Dpkg::Use-Pty=0 --purge -y", wardrobeLogFile)
 }
 
 // getInstallReason returns a human-readable string explaining why apt kept

@@ -123,10 +123,14 @@ sudo wardrobe wear colibri
 ```
 
 #### Opzioni disponibili (Flags):
+* `-i, --interactive`: Modalità interattiva con output diretto a schermo e tastiera (`stdin`) attiva per rispondere manualmente a prompt di debconf/dpkg, licenze o scelte di configurazione.
 * `--no-acc`: Salta l'installazione di tutti gli accessori dichiarati nel costume.
 * `--no-firm`: Salta l'installazione degli accessori legati ai firmware hardware proprietari.
 
 ```bash
+# Esempio: applica il costume in modalità completamente interattiva
+sudo wardrobe wear quirinux -i
+
 # Esempio: applica il costume colibri senza firmware proprietari
 sudo wardrobe wear colibri --no-firm
 ```

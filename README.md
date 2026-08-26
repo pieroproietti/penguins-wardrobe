@@ -66,6 +66,7 @@ sudo make install
   sudo wardrobe wear colibri
   ```
   **Flags:**
+  - `-i, --interactive`: Run in full interactive mode with live terminal output and keyboard input for prompts.
   - `--no-acc`: Skip installing accessory packages.
   - `--no-firm`: Skip installing firmware accessories.
 

@@ -10,7 +10,21 @@ import (
 	"github.com/pieroproietti/penguins-wardrobe/pkg/utils"
 )
 
-func Wear(costumeName string, noAcc bool, noFirm bool) error {
+var isInteractiveMode bool
+
+// SetInteractiveMode enables or disables full interactive terminal mode
+func SetInteractiveMode(enabled bool) {
+	isInteractiveMode = enabled
+}
+
+// IsInteractiveMode returns whether interactive mode is currently active
+func IsInteractiveMode() bool {
+	return isInteractiveMode
+}
+
+func Wear(costumeName string, noAcc bool, noFirm bool, interactive bool) error {
+	SetInteractiveMode(interactive)
+
 	if os.Geteuid() != 0 {
 		utils.LogError("'wardrobe wear' needs to install packages and write to system paths; run it as root (e.g. 'sudo wardrobe wear %s').", costumeName)
 		return fmt.Errorf("must be run as root")
@@ -61,12 +75,21 @@ func Wear(costumeName string, noAcc bool, noFirm bool) error {
 	}
 
 	// DKMS safety: ensure headers for running kernel are present
-	spHeaders := utils.NewSpinner("Checking kernel headers for DKMS...")
-	spHeaders.Start()
-	if err := ensureKernelHeaders(); err != nil {
-		spHeaders.Warn("Kernel headers verification completed with warnings")
+	if isInteractiveMode {
+		fmt.Printf("  %s--> Checking kernel headers for DKMS...%s\n", utils.ColorCyan, utils.ColorReset)
+		if err := ensureKernelHeaders(); err != nil {
+			fmt.Printf("  %s[WARN] Kernel headers verification completed with warnings%s\n", utils.ColorYellow, utils.ColorReset)
+		} else {
+			fmt.Printf("  %s[OK] Kernel headers verified%s\n", utils.ColorGreen, utils.ColorReset)
+		}
 	} else {
-		spHeaders.Success("Kernel headers verified")
+		spHeaders := utils.NewSpinner("Checking kernel headers for DKMS...")
+		spHeaders.Start()
+		if err := ensureKernelHeaders(); err != nil {
+			spHeaders.Warn("Kernel headers verification completed with warnings")
+		} else {
+			spHeaders.Success("Kernel headers verified")
+		}
 	}
 
 	SetLicensePromptPackages(suit.PackagesInteractive)
@@ -117,15 +140,28 @@ func Wear(costumeName string, noAcc bool, noFirm bool) error {
 	if manifestPath := resolveDistroManifest(costumeDir, suit.PackagesManifest); manifestPath != "" {
 		utils.PrintSection("📋", "DECLARATIVE MANIFEST RECONCILIATION")
 		if targetManifest, err := loadPackageManifest(manifestPath); err == nil {
-			spMan := utils.NewSpinner(fmt.Sprintf("Reconciling %d manifest packages...", len(targetManifest)))
-			spMan.Start()
+			var spMan *utils.Spinner
+			if !isInteractiveMode {
+				spMan = utils.NewSpinner(fmt.Sprintf("Reconciling %d manifest packages...", len(targetManifest)))
+				spMan.Start()
+			} else {
+				fmt.Printf("  %s--> Reconciling %d manifest packages (%s)...%s\n", utils.ColorCyan, len(targetManifest), filepath.Base(manifestPath), utils.ColorReset)
+			}
 			manifestFailed := installWithRetries(targetManifest, 3, spMan)
 			failedPackages = append(failedPackages, manifestFailed...)
 			installedPackages = append(installedPackages, diffStr(targetManifest, manifestFailed)...)
-			if len(manifestFailed) > 0 {
-				spMan.Warn("Manifest reconciled with %d missing packages", len(manifestFailed))
+			if spMan != nil {
+				if len(manifestFailed) > 0 {
+					spMan.Warn("Manifest reconciled with %d missing packages", len(manifestFailed))
+				} else {
+					spMan.Success("Manifest packages reconciled (%d packages)", len(targetManifest))
+				}
 			} else {
-				spMan.Success("Manifest packages reconciled (%d packages)", len(targetManifest))
+				if len(manifestFailed) > 0 {
+					fmt.Printf("  %s[WARN] Manifest reconciled with %d missing packages%s\n", utils.ColorYellow, len(manifestFailed), utils.ColorReset)
+				} else {
+					fmt.Printf("  %s[OK] Manifest packages reconciled (%d packages)%s\n", utils.ColorGreen, len(targetManifest), utils.ColorReset)
+				}
 			}
 		} else {
 			fmt.Printf("  %s[WARN] Could not read packages_manifest %s: %v%s\n", utils.ColorYellow, manifestPath, err, utils.ColorReset)
@@ -275,6 +311,9 @@ func ensureKernelHeaders() error {
 	}
 	pkgs := fmt.Sprintf("linux-headers-%s linux-headers-%s", release, arch)
 	logToFile(fmt.Sprintf("Ensuring kernel headers are present before DKMS installs: %s", pkgs))
+	if isInteractiveMode {
+		return utils.ExecTee("DEBIAN_FRONTEND=readline apt-get install -o Dpkg::Options::='--force-confold' -y "+pkgs, wardrobeLogFile)
+	}
 	return utils.ExecLog("DEBIAN_FRONTEND=noninteractive apt-get install -o Dpkg::Use-Pty=0 -y "+pkgs, wardrobeLogFile)
 }
 
@@ -322,67 +361,124 @@ func applySuit(dir string, suit *Suit) ([]string, []string, error) {
 
 	// Preseed (debconf-set-selections)
 	if preseedFile := findPreseed(dir); preseedFile != "" {
-		spPreseed := utils.NewSpinner(fmt.Sprintf("Applying preseed selections (%s)...", filepath.Base(preseedFile)))
-		spPreseed.Start()
-		if err := applyPreseed(preseedFile, suit.Name); err != nil {
-			spPreseed.Warn("Preseed selections applied with warnings")
+		if isInteractiveMode {
+			fmt.Printf("  %s--> Applying preseed selections (%s)...%s\n", utils.ColorCyan, filepath.Base(preseedFile), utils.ColorReset)
+			if err := applyPreseed(preseedFile, suit.Name); err != nil {
+				fmt.Printf("  %s[WARN] Preseed selections applied with warnings%s\n", utils.ColorYellow, utils.ColorReset)
+			} else {
+				fmt.Printf("  %s[OK] Preseed selections applied (%s)%s\n", utils.ColorGreen, filepath.Base(preseedFile), utils.ColorReset)
+			}
 		} else {
-			spPreseed.Success("Preseed selections applied (%s)", filepath.Base(preseedFile))
+			spPreseed := utils.NewSpinner(fmt.Sprintf("Applying preseed selections (%s)...", filepath.Base(preseedFile)))
+			spPreseed.Start()
+			if err := applyPreseed(preseedFile, suit.Name); err != nil {
+				spPreseed.Warn("Preseed selections applied with warnings")
+			} else {
+				spPreseed.Success("Preseed selections applied (%s)", filepath.Base(preseedFile))
+			}
 		}
 	}
 
 	// Repositories
 	if suit.Sequence != nil && suit.Sequence.Repositories != nil {
-		spRepo := utils.NewSpinner("Configuring package repositories & updating cache...")
-		spRepo.Start()
+		var spRepo *utils.Spinner
+		if !isInteractiveMode {
+			spRepo = utils.NewSpinner("Configuring package repositories & updating cache...")
+			spRepo.Start()
+		} else {
+			fmt.Printf("  %s--> Configuring package repositories & updating cache...%s\n", utils.ColorCyan, utils.ColorReset)
+		}
 		setupRepositories(suit.Sequence.Repositories, suit.Name, spRepo)
-		spRepo.Success("Repositories configured & updated")
+		if spRepo != nil {
+			spRepo.Success("Repositories configured & updated")
+		} else {
+			fmt.Printf("  %s[OK] Repositories configured & updated%s\n", utils.ColorGreen, utils.ColorReset)
+		}
 	}
 
 	// Packages
 	if len(suit.Packages) > 0 {
-		spPkg := utils.NewSpinner(fmt.Sprintf("Installing packages (%d packages)...", len(suit.Packages)))
-		spPkg.Start()
+		var spPkg *utils.Spinner
+		if !isInteractiveMode {
+			spPkg = utils.NewSpinner(fmt.Sprintf("Installing packages (%d packages)...", len(suit.Packages)))
+			spPkg.Start()
+		} else {
+			fmt.Printf("  %s--> Installing %d packages...%s\n", utils.ColorCyan, len(suit.Packages), utils.ColorReset)
+		}
 		failed := installWithRetries(suit.Packages, 3, spPkg)
 		failedPackages = append(failedPackages, failed...)
 		installed := diffStr(suit.Packages, failed)
 		installedPackages = append(installedPackages, installed...)
-		if len(failed) > 0 {
-			spPkg.Warn("Installed %d packages (%d could not be installed)", len(installed), len(failed))
+		if spPkg != nil {
+			if len(failed) > 0 {
+				spPkg.Warn("Installed %d packages (%d could not be installed)", len(installed), len(failed))
+			} else {
+				spPkg.Success("Installed %d packages", len(installed))
+			}
 		} else {
-			spPkg.Success("Installed %d packages", len(installed))
+			if len(failed) > 0 {
+				fmt.Printf("  %s[WARN] Installed %d packages (%d failed)%s\n", utils.ColorYellow, len(installed), len(failed), utils.ColorReset)
+			} else {
+				fmt.Printf("  %s[OK] Installed %d packages%s\n", utils.ColorGreen, len(installed), utils.ColorReset)
+			}
 		}
 	}
 
 	// External install file
 	if installPath := findManifestPath(dir, suit.PackagesInstallFile); installPath != "" {
 		if filePackages, err := loadPackageManifest(installPath); err == nil {
-			spExt := utils.NewSpinner(fmt.Sprintf("Installing %d packages from external file (%s)...", len(filePackages), filepath.Base(installPath)))
-			spExt.Start()
+			var spExt *utils.Spinner
+			if !isInteractiveMode {
+				spExt = utils.NewSpinner(fmt.Sprintf("Installing %d packages from external file (%s)...", len(filePackages), filepath.Base(installPath)))
+				spExt.Start()
+			} else {
+				fmt.Printf("  %s--> Installing %d packages from external file (%s)...%s\n", utils.ColorCyan, len(filePackages), filepath.Base(installPath), utils.ColorReset)
+			}
 			failed := installWithRetries(filePackages, 3, spExt)
 			failedPackages = append(failedPackages, failed...)
 			installed := diffStr(filePackages, failed)
 			installedPackages = append(installedPackages, installed...)
-			if len(failed) > 0 {
-				spExt.Warn("Installed %d packages from external file (%d failed)", len(installed), len(failed))
+			if spExt != nil {
+				if len(failed) > 0 {
+					spExt.Warn("Installed %d packages from external file (%d failed)", len(installed), len(failed))
+				} else {
+					spExt.Success("External file packages installed (%d packages)", len(filePackages))
+				}
 			} else {
-				spExt.Success("External file packages installed (%d packages)", len(filePackages))
+				if len(failed) > 0 {
+					fmt.Printf("  %s[WARN] Installed %d packages from external file (%d failed)%s\n", utils.ColorYellow, len(installed), len(failed), utils.ColorReset)
+				} else {
+					fmt.Printf("  %s[OK] External file packages installed (%d packages)%s\n", utils.ColorGreen, len(installed), utils.ColorReset)
+				}
 			}
 		}
 	}
 
 	// Packages No Recommends
 	if len(suit.PackagesNoRecommends) > 0 {
-		spNoRec := utils.NewSpinner(fmt.Sprintf("Installing packages without recommends (%d packages)...", len(suit.PackagesNoRecommends)))
-		spNoRec.Start()
+		var spNoRec *utils.Spinner
+		if !isInteractiveMode {
+			spNoRec = utils.NewSpinner(fmt.Sprintf("Installing packages without recommends (%d packages)...", len(suit.PackagesNoRecommends)))
+			spNoRec.Start()
+		} else {
+			fmt.Printf("  %s--> Installing %d packages without recommends...%s\n", utils.ColorCyan, len(suit.PackagesNoRecommends), utils.ColorReset)
+		}
 		failed := installNoRecommends(suit.PackagesNoRecommends, spNoRec)
 		failedPackages = append(failedPackages, failed...)
 		installed := diffStr(suit.PackagesNoRecommends, failed)
 		installedPackages = append(installedPackages, installed...)
-		if len(failed) > 0 {
-			spNoRec.Warn("Installed %d packages without recommends (%d failed)", len(installed), len(failed))
+		if spNoRec != nil {
+			if len(failed) > 0 {
+				spNoRec.Warn("Installed %d packages without recommends (%d failed)", len(installed), len(failed))
+			} else {
+				spNoRec.Success("Installed %d packages without recommends", len(installed))
+			}
 		} else {
-			spNoRec.Success("Installed %d packages without recommends", len(installed))
+			if len(failed) > 0 {
+				fmt.Printf("  %s[WARN] Installed %d packages without recommends (%d failed)%s\n", utils.ColorYellow, len(installed), len(failed), utils.ColorReset)
+			} else {
+				fmt.Printf("  %s[OK] Installed %d packages without recommends%s\n", utils.ColorGreen, len(installed), utils.ColorReset)
+			}
 		}
 	}
 
@@ -402,10 +498,19 @@ func applySuit(dir string, suit *Suit) ([]string, []string, error) {
 
 	// Packages Remove
 	if len(suit.PackagesRemove) > 0 {
-		spRem := utils.NewSpinner(fmt.Sprintf("Removing unwanted packages (%d packages)...", len(suit.PackagesRemove)))
-		spRem.Start()
+		var spRem *utils.Spinner
+		if !isInteractiveMode {
+			spRem = utils.NewSpinner(fmt.Sprintf("Removing unwanted packages (%d packages)...", len(suit.PackagesRemove)))
+			spRem.Start()
+		} else {
+			fmt.Printf("  %s--> Removing unwanted packages (%d packages)...%s\n", utils.ColorCyan, len(suit.PackagesRemove), utils.ColorReset)
+		}
 		removePackages(suit.PackagesRemove)
-		spRem.Success("Unwanted packages removed (%d packages)", len(suit.PackagesRemove))
+		if spRem != nil {
+			spRem.Success("Unwanted packages removed (%d packages)", len(suit.PackagesRemove))
+		} else {
+			fmt.Printf("  %s[OK] Unwanted packages removed (%d packages)%s\n", utils.ColorGreen, len(suit.PackagesRemove), utils.ColorReset)
+		}
 	}
 
 	// Sysroot Overlay
@@ -414,27 +519,55 @@ func applySuit(dir string, suit *Suit) ([]string, []string, error) {
 		sysrootPath = filepath.Join(dir, "dirs")
 	}
 	if _, err := os.Stat(sysrootPath); err == nil {
-		spSys := utils.NewSpinner("Applying filesystem overlay (sysroot)...")
-		spSys.Start()
-		cmd := fmt.Sprintf("rsync -aAX %s/ /", sysrootPath)
-		if err := utils.ExecLog(cmd, wardrobeLogFile); err != nil {
-			spSys.Warn("Filesystem overlay applied with warnings")
+		var spSys *utils.Spinner
+		if !isInteractiveMode {
+			spSys = utils.NewSpinner("Applying filesystem overlay (sysroot)...")
+			spSys.Start()
 		} else {
-			spSys.Success("Filesystem overlay applied")
+			fmt.Printf("  %s--> Applying filesystem overlay (sysroot)...%s\n", utils.ColorCyan, utils.ColorReset)
+		}
+		cmd := fmt.Sprintf("rsync -aAX %s/ /", sysrootPath)
+		var err error
+		if isInteractiveMode {
+			err = utils.ExecTee(cmd, wardrobeLogFile)
+		} else {
+			err = utils.ExecLog(cmd, wardrobeLogFile)
+		}
+		if err != nil {
+			if spSys != nil {
+				spSys.Warn("Filesystem overlay applied with warnings")
+			} else {
+				fmt.Printf("  %s[WARN] Filesystem overlay applied with warnings%s\n", utils.ColorYellow, utils.ColorReset)
+			}
+		} else {
+			if spSys != nil {
+				spSys.Success("Filesystem overlay applied")
+			} else {
+				fmt.Printf("  %s[OK] Filesystem overlay applied%s\n", utils.ColorGreen, utils.ColorReset)
+			}
 		}
 	}
 
 	// Finalization commands
 	if len(suit.Cmds) > 0 {
-		spCmds := utils.NewSpinner(fmt.Sprintf("Running finalization scripts (%d commands)...", len(suit.Cmds)))
-		spCmds.Start()
+		var spCmds *utils.Spinner
+		if !isInteractiveMode {
+			spCmds = utils.NewSpinner(fmt.Sprintf("Running finalization scripts (%d commands)...", len(suit.Cmds)))
+			spCmds.Start()
+		} else {
+			fmt.Printf("  %s--> Running finalization scripts (%d commands)...%s\n", utils.ColorCyan, len(suit.Cmds), utils.ColorReset)
+		}
 		for idx, command := range suit.Cmds {
 			fields := strings.Fields(command)
 			cmdName := command
 			if len(fields) > 0 {
 				cmdName = filepath.Base(fields[0])
 			}
-			spCmds.UpdateSubtext(fmt.Sprintf("[%d/%d] %s", idx+1, len(suit.Cmds), cmdName))
+			if spCmds != nil {
+				spCmds.UpdateSubtext(fmt.Sprintf("[%d/%d] %s", idx+1, len(suit.Cmds), cmdName))
+			} else {
+				fmt.Printf("    [%d/%d] %s\n", idx+1, len(suit.Cmds), cmdName)
+			}
 			if len(fields) > 0 {
 				relScript := filepath.Join(dir, fields[0])
 				if stat, err := os.Stat(relScript); err == nil && !stat.IsDir() {
@@ -445,13 +578,25 @@ func applySuit(dir string, suit *Suit) ([]string, []string, error) {
 					} else {
 						fullCmd = fmt.Sprintf("%s %s", relScript, suit.Name)
 					}
-					utils.ExecLog(fullCmd, wardrobeLogFile)
+					if isInteractiveMode {
+						utils.ExecTee(fullCmd, wardrobeLogFile)
+					} else {
+						utils.ExecLog(fullCmd, wardrobeLogFile)
+					}
 					continue
 				}
 			}
-			utils.ExecLog(command, wardrobeLogFile)
+			if isInteractiveMode {
+				utils.ExecTee(command, wardrobeLogFile)
+			} else {
+				utils.ExecLog(command, wardrobeLogFile)
+			}
 		}
-		spCmds.Success("Finalization completed")
+		if spCmds != nil {
+			spCmds.Success("Finalization completed")
+		} else {
+			fmt.Printf("  %s[OK] Finalization completed%s\n", utils.ColorGreen, utils.ColorReset)
+		}
 	}
 
 	return installedPackages, failedPackages, nil

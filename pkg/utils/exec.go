@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"bytes"
 	"fmt"
+	"io"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -30,6 +31,31 @@ func Exec(command string) error {
 	cmd.Stdin = os.Stdin
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
+	return cmd.Run()
+}
+
+// ExecTee esegue un comando sh con stdin interattivo, inviando stdout e stderr
+// sia al terminale sia al file di log specificato.
+func ExecTee(command string, logFilePath string) error {
+	ensureRootPath()
+
+	if err := os.MkdirAll(filepath.Dir(logFilePath), 0755); err != nil {
+		// fallback
+	}
+
+	f, err := os.OpenFile(logFilePath, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	if err != nil {
+		return Exec(command)
+	}
+	defer f.Close()
+
+	timestamp := time.Now().Format("2006-01-02 15:04:05")
+	f.WriteString(fmt.Sprintf("[%s] EXEC: %s\n", timestamp, command))
+
+	cmd := exec.Command("sh", "-c", command)
+	cmd.Stdin = os.Stdin
+	cmd.Stdout = io.MultiWriter(os.Stdout, f)
+	cmd.Stderr = io.MultiWriter(os.Stderr, f)
 	return cmd.Run()
 }
 
