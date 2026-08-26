@@ -10,6 +10,7 @@ packages_remove_file: packages_remove.txt
 distributions:
   - daedalus
   - bookworm
+  - trixie
 
 sequence:
   repositories:
