@@ -202,7 +202,7 @@ distributions:
   - excalibur
 
 # Gestione dichiarativa autoritativa (opzionale)
-packages_manifest: packages.list
+# packages_manifest: packages.list
 
 # Sequenza atomica di preparazione e installazione
 sequence:
