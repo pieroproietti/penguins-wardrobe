@@ -27,6 +27,12 @@ sequence:
     update: true
     upgrade: true
 
+  packages:
+    - quirinux-firmware 
+    - quirinux-youdown 
+    - quirinux-youtubedown
+    # yoo know how to follow
+
   accessories:
     - quirinux-base
     - quirinux-desktop
