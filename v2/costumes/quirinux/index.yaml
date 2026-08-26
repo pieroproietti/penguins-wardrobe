@@ -10,7 +10,6 @@ release: 2.5
 distributions:
   - daedalus
   - bookworm
-  - trixie
 
 sequence:
   repositories:
@@ -120,8 +119,36 @@ sequence:
     - wget
     - whiptail
 
+    # che palle
+    - adwaita-icon-theme
+    - desktop-base
+    - desktop-file-utils
+    - exo-utils
+    - glib-networking
+    - gnome-icon-theme
+    - gnome-themes-extra
+    - lightdm
+    - lightdm-gtk-greeter
+    - mousepad
+    - notification-daemon
+    - pavucontrol
+    - pulseaudio
+    - tango-icon-theme
+    - thunar
+    - tumbler
+    - xfburn
+    - xfce4
+    - xfconf
+    - xfdesktop4
+    - xfwm4
+    - xinit
+    - xorg
+    - xterm
+    - zenity
+
+
   accessories:
-    - quirinux-desktop
+    # quirinux-desktop
     #- quirinux-firmware
     #- quirinux-utils
     #- quirinux-multimedia
@@ -129,7 +156,7 @@ sequence:
     #- quirinux-graphics
     #- quirinux-animation
     #- quirinux-office
-    #- quirinux-development
+    - quirinux-development
 
 finalize:
   customize: true
