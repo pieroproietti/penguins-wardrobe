@@ -1,0 +1,19 @@
+packages:
+  - autoconf
+  - automake
+  - autopoint
+  - autotools-dev
+  - binutils
+  - build-essential
+  - cpp
+  - debhelper
+  - dpkg-dev
+  - fakeroot
+  - g++
+  - gcc
+  - git
+  - make
+  - nodejs
+  - patch
+  - perl
+  - python3

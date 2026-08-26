@@ -44,6 +44,7 @@ func Wear(costumeName string, noAcc bool, noFirm bool) error {
 
 	// Enforce distribution compatibility BEFORE anything else
 	if err := checkCostumeCompatibility(costumeDir, suit); err != nil {
+		utils.LogError("%s", incompatibleDistroMessage(suit.Name, suit.Distributions, currentDistroName()))
 		return err
 	}
 
@@ -67,6 +68,8 @@ func Wear(costumeName string, noAcc bool, noFirm bool) error {
 	} else {
 		spHeaders.Success("Kernel headers verified")
 	}
+
+	SetLicensePromptPackages(suit.PackagesInteractive)
 
 	installedPackages, failedPackages, err := applySuit(costumeDir, suit)
 	if err != nil {
