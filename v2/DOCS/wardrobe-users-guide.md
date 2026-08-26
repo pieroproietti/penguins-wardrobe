@@ -30,7 +30,7 @@ Il concetto alla base di **Wardrobe** è quello di un vero e proprio guardaroba 
 └── DOCS/           # Documentazione e guide
 ```
 
-* **Costumes (`costumes`)**: sono gli "abiti completi". Rappresentano ricette esaustive per allestire un desktop environment (XFCE, Cinnamon, GNOME, Mate, ecc.) o un server tematico (es. `colibri`, `duck`, `eagle`, `quirinux2`, `chicks`).
+* **Costumes (`costumes`)**: sono gli "abiti completi". Rappresentano ricette esaustive per allestire un desktop environment (XFCE, Cinnamon, GNOME, Mate, ecc.) o un server tematico (es. `colibri`, `duck`, `eagle`, `quirinux`, `chicks`).
 * **Accessories (`accessories`)**: sono le "cinture, borse o scarpe". Componenti modulari che possono essere abbinati a un costume o installati da soli (es. `eggs-dev` per l'ambiente di sviluppo, `firmwares`, `flatpak`, `kvm`, `liquorix`, `office`, `multimedia`).
 * **Vendors (`vendors`)**: contengono le personalizzazioni visive del boot live (GRUB, Isolinux) e dell'installer grafico [Calamares](https://calamares.io) (branding, moduli, partizionamento, utenti).
 * **Scripts (`scripts`)**: script bash riutilizzabili per configurare display manager, collegamenti sul desktop, hostname e servizi di sistema.
@@ -95,7 +95,7 @@ Available costumes in penguins-wardrobe:
 - duck        : Desktop Cinnamon rifinito, ideale per chi proviene da Windows
 - eagle       : Ambiente completo con supporto multi-architettura
 - gypaetus    : Configurazione base minimale
-- quirinux2   : Distribuzione multimediale e per animatori grafici (Devuan/Debian)
+- quirinux    : Distribuzione multimediale e per animatori grafici (Devuan/Debian)
 - seagull     : Desktop essenziale e performante
 ```
 
@@ -385,7 +385,7 @@ Qualora `wardrobe wear` venga eseguito su un sistema privo di `apt-get`:
 | **`duck`** | Cinnamon | Interfaccia moderna e intuitiva in stile Windows/Mint, fornita con suite LibreOffice, GIMP e VLC. |
 | **`eagle`** | Multi-DE / Mate | Configurazione flessibile ed estesa, testata anche per architetture ARM64. |
 | **`chicks`** | Educativo / Leggero | Ambiente giocoso, colorato e sicuro con software per la didattica e la scuola. |
-| **`quirinux2`** | XFCE4 / Pro | Distribuzione specializzata per produzione multimediale, grafica 2D/3D e animazione (basata su Devuan/Debian). |
+| **`quirinux`** | XFCE4 / Pro | Distribuzione specializzata per produzione multimediale, grafica 2D/3D e animazione (basata su Devuan/Debian). |
 | **`gypaetus`** | Base minimale | Configurazione essenziale per server e sistemi headless. |
 | **`albatros`** | Personalizzato | Varianti ottimizzate per architetture e requisiti specifici. |
 
