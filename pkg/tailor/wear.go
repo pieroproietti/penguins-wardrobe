@@ -147,49 +147,21 @@ func Wear(costumeName string, noAcc bool, noFirm bool) error {
 
 	installedBefore, _ := currentlyInstalledPackages()
 
-	// Install everything in the manifest that's missing
-	if manifestPath := resolveDistroManifest(costumeDir, suit.PackagesManifest); manifestPath != "" {
-		if targetManifest, err := loadPackageManifest(manifestPath); err == nil {
-			if ss != nil {
-				ss.AddStep(fmt.Sprintf("📋 Manifest reconciliation (%s, %d packages)", filepath.Base(manifestPath), len(targetManifest)))
-				ss.SetAction("Reconciling %d manifest packages...", len(targetManifest))
-			} else {
-				utils.PrintSection("📋", "DECLARATIVE MANIFEST RECONCILIATION")
-			}
-			manifestFailed := installWithRetries(targetManifest, 3)
-			failedPackages = append(failedPackages, manifestFailed...)
-			installedPackages = append(installedPackages, diffStr(targetManifest, manifestFailed)...)
-			if ss != nil {
-				if len(manifestFailed) > 0 {
-					ss.AddStep(fmt.Sprintf("%s[WARN]%s Manifest reconciled (%d failed)", utils.ColorYellow, utils.ColorReset, len(manifestFailed)))
-				} else {
-					ss.AddStep(fmt.Sprintf("%s[OK]%s Manifest reconciled (%d packages)", utils.ColorGreen, utils.ColorReset, len(targetManifest)))
-				}
-			}
-		} else {
-			if ss != nil {
-				ss.AddStep(fmt.Sprintf("%s[WARN]%s Could not read manifest %s", utils.ColorYellow, utils.ColorReset, manifestPath))
-			} else {
-				fmt.Printf("  %s[WARN] Could not read packages_manifest %s: %v%s\n", utils.ColorYellow, manifestPath, err, utils.ColorReset)
-			}
-		}
-	}
-
-	// Deterministic removal: purge exactly the vendor's remove list
+	// Deterministic removal: purge unwanted packages if declared
 	var removeList []string
 	removeList = append(removeList, suit.PackagesRemove...)
-	if removePath := findManifestPath(costumeDir, suit.PackagesRemoveFile); removePath != "" {
-		if fileRemove, err := loadPackageManifest(removePath); err == nil {
+	if removePath := findPackageListFile(costumeDir, suit.PackagesRemoveFile); removePath != "" {
+		if fileRemove, err := loadPackageList(removePath); err == nil {
 			removeList = append(removeList, fileRemove...)
 		}
 	}
 	if len(removeList) > 0 {
 		if ss != nil {
-			ss.SetAction("Purging %d packages absent from manifest...", len(removeList))
+			ss.SetAction("Purging %d packages...", len(removeList))
 		}
 		purgeExplicit(removeList)
 		if ss != nil {
-			ss.AddStep(fmt.Sprintf("%s[OK]%s Declarative purge completed (%d packages)", utils.ColorGreen, utils.ColorReset, len(removeList)))
+			ss.AddStep(fmt.Sprintf("%s[OK]%s Purge completed (%d packages)", utils.ColorGreen, utils.ColorReset, len(removeList)))
 		}
 	}
 
@@ -429,8 +401,8 @@ func applySuit(dir string, suit *Suit) ([]string, []string, error) {
 	}
 
 	// External install file
-	if installPath := findManifestPath(dir, suit.PackagesInstallFile); installPath != "" {
-		if filePackages, err := loadPackageManifest(installPath); err == nil {
+	if installPath := findPackageListFile(dir, suit.PackagesInstallFile); installPath != "" {
+		if filePackages, err := loadPackageList(installPath); err == nil {
 			if ss != nil {
 				ss.SetAction("Installing %d packages from external file (%s)...", len(filePackages), filepath.Base(installPath))
 			}

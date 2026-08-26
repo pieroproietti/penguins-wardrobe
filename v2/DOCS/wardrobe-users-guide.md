@@ -205,8 +205,6 @@ distributions:
   - daedalus
   - excalibur
 
-# Gestione dichiarativa autoritativa (opzionale)
-# packages_manifest: packages.list
 
 # Sequenza atomica di preparazione e installazione
 sequence:
@@ -289,11 +287,9 @@ display_manager_notice: true
   > [!IMPORTANT]
   > **Controllo preventivo di compatibilità**: prima di toccare qualsiasi configurazione o pacchetto, `wardrobe` confronta il valore di `VERSION_CODENAME` in `/etc/os-release` con l'elenco `distributions`. Se il sistema non è supportato, l'esecuzione viene interrotta istantaneamente e in totale sicurezza.
 
-#### 2. Gestione Dichiarativa dei Pacchetti (`packages_manifest`)
-* **`packages_manifest`**: Consente di definire un file di testo (es. `packages.list` o l'output di `dpkg -l` / `dpkg-query -W`) contenente l'elenco esatto e autoritativo dei pacchetti desiderati.
-* **Risoluzione per distribuzione**: Se nella directory del costume è presente un file con suffisso `_<codename>-packages.list` (es. `debian_bookworm-packages.list` o `quirinux_daedalus-packages.list`), `wardrobe` lo individua e lo applica automaticamente.
-* **`packages_install_file`**: File esterno contenente un elenco aggiuntivo di pacchetti da installare.
-* **`packages_remove_file`**: File esterno con l'elenco di pacchetti da rimuovere/purgare.
+#### 2. File Esterni per i Pacchetti (`packages_install_file`, `packages_remove_file`)
+* **`packages_install_file`**: Consente di indicare un file esterno (es. `packages.yaml` o un file di testo con formati plain / `dpkg -l`) contenente l'elenco dei pacchetti da installare.
+* **`packages_remove_file`**: Consente di indicare un file esterno contenente l'elenco di pacchetti da rimuovere/purgare con `apt-get purge`.
 
 #### 3. Preseed Debconf Automatico (`packages.preseed`)
 * **`packages.preseed`**: Se presente nella cartella del costume o dell'accessorio, `wardrobe` applica automaticamente le risposte debconf tramite `debconf-set-selections` prima dell'installazione dei pacchetti. Questo file deve essere usato con parsimonia ed essere mirato **esclusivamente** ai pacchetti forniti da quel costume o accessorio (es. impostare LightDM in `quirinux-desktop`, accettare licenze firmware in `firmwares/network-wifi` o `quirinux-firmware`), mantenendo le ricette YAML completamente pulite.

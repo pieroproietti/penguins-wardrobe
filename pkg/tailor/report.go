@@ -51,7 +51,7 @@ func writeWearReport(r wearReport) (string, error) {
 	}
 
 	section("Installed", r.Installed)
-	section("Removed (not in manifest)", r.Purged)
+	section("Removed", r.Purged)
 	section("Could NOT be installed", r.FailedInstall)
 	section("Could NOT be removed", r.FailedPurge)
 

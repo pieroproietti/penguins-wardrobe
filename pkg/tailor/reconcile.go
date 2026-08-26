@@ -10,12 +10,8 @@ import (
 	"strings"
 )
 
-// neverPurge is a small, hardcoded safety net of packages that must never
-// be removed by manifest reconciliation, no matter what the manifest says
-// (or fails to say). This is defense-in-depth against a malformed or
-// incomplete manifest file bricking the machine -- it does not fight the
-// vendor's intent, since all of these are expected to be in any correct
-// manifest anyway.
+// neverPurgeBase is a safety net of packages that must never be removed
+// during package purges. This is defense-in-depth against accidental bricking.
 var neverPurgeBase = []string{
 	// package management
 	"dpkg",
@@ -64,10 +60,7 @@ var neverPurgeBase = []string{
 
 // currentKernelPackage returns the package that owns the currently
 // running kernel (e.g. "linux-image-6.1.0-10-amd64"), so it can be
-// protected from removal even if the manifest doesn't happen to list
-// this exact kernel version (e.g. because of a point-release bump).
-// Returns "" if it can't be determined -- callers should not treat that
-// as an error, just as "nothing extra to protect".
+// protected from removal.
 func currentKernelPackage() string {
 	out, err := exec.Command("uname", "-r").Output()
 	if err != nil {
@@ -84,13 +77,13 @@ func currentKernelPackage() string {
 	return pkg
 }
 
-// loadPackageManifest reads the target package set from path. It accepts
+// loadPackageList reads package names from a file. It accepts
 // multiple formats, auto-detected line by line:
 // - plain: one package name per line ("thunderbird")
 // - YAML-style: "    - thunderbird" or "- thunderbird"
 // - dpkg -l / dpkg-query -W style: "ii thunderbird 1:128.0-1 amd64 ..."
-// Blank lines and lines starting with '#' are ignored.
-func loadPackageManifest(path string) ([]string, error) {
+// Blank lines, headers and lines starting with '#' are ignored.
+func loadPackageList(path string) ([]string, error) {
 	f, err := os.Open(path)
 	if err != nil {
 		return nil, err
@@ -145,11 +138,7 @@ func isDpkgStatusCode(s string) bool {
 }
 
 // currentlyInstalledPackages reads the dpkg status database DIRECTLY from
-// /var/lib/dpkg/status instead of shelling out to dpkg-query. Shelling out
-// via utils.ExecCapture proved fragile on the test VM: an empty capture
-// made the cleanup run with an empty keep-list, which purged hundreds of
-// packages (lightdm, rsync, even penguins-eggs itself). Parsing the status
-// file needs no subprocess and cannot silently come back empty.
+// /var/lib/dpkg/status instead of shelling out to dpkg-query.
 func currentlyInstalledPackages() (map[string]struct{}, error) {
 	f, err := os.Open("/var/lib/dpkg/status")
 	if err != nil {
@@ -178,10 +167,9 @@ func currentlyInstalledPackages() (map[string]struct{}, error) {
 }
 
 // purgeExplicit purges exactly the given packages in a SINGLE apt
-// transaction (so apt can resolve removal cascades consistently), then
-// sweeps orphaned dependencies. Packages that are not installed, or that
-// belong to the safety net (neverPurgeBase / running kernel), are
-// silently skipped.
+// transaction, then sweeps orphaned dependencies. Packages that are not
+// installed, or that belong to the safety net (neverPurgeBase / running kernel),
+// are silently skipped.
 func purgeExplicit(toRemove []string) {
 	installedSet, err := currentlyInstalledPackages()
 	if err != nil {
@@ -222,7 +210,7 @@ func purgeExplicit(toRemove []string) {
 		return
 	}
 
-	logToFile(fmt.Sprintf("Explicit purge: removing %d packages declared absent from the vendor manifest...", len(list)))
+	logToFile(fmt.Sprintf("Explicit purge: removing %d packages...", len(list)))
 	cmd := fmt.Sprintf("DEBIAN_FRONTEND=readline apt-get purge -o Dpkg::Options::='--force-confold' -y %s", strings.Join(list, " "))
 	if err := utils.ExecTee(cmd, wardrobeLogFile); err != nil {
 		logToFile("WARNING: bulk explicit purge reported an error; healing and retrying once...")
@@ -235,76 +223,14 @@ func purgeExplicit(toRemove []string) {
 	_ = utils.ExecTee("DEBIAN_FRONTEND=readline apt-get autoremove -o Dpkg::Options::='--force-confold' --purge -y", wardrobeLogFile)
 }
 
-// getInstallReason returns a human-readable string explaining why apt kept
-// pkg installed even though it is not in the declarative manifest. Uses
-// aptitude if available (gives the full dependency chain, e.g.
-// "pkgA Recommends pkg"), falls back to apt-cache rdepends otherwise.
-func getInstallReason(pkg string) string {
-	// aptitude gives the cleanest answer ("A Recommends B")
-	if _, err := exec.LookPath("aptitude"); err == nil {
-		out, err := utils.ExecCapture(fmt.Sprintf("aptitude why -v %s 2>/dev/null", pkg))
-		if err == nil {
-			lines := strings.Split(strings.TrimSpace(out), "\n")
-			if len(lines) > 0 && lines[0] != "" {
-				// take only the first line, which is the dependency chain
-				first := strings.TrimSpace(lines[0])
-				if len(first) > 120 {
-					first = first[:117] + "..."
-				}
-				return first
-			}
-		}
-	}
-	// Fallback: apt-cache rdepends --installed lists the reverse deps
-	out, err := utils.ExecCapture(fmt.Sprintf("apt-cache rdepends --installed %s 2>/dev/null", pkg))
-	if err != nil {
-		return "unknown"
-	}
-	var deps []string
-	for _, line := range strings.Split(out, "\n") {
-		line = strings.TrimSpace(line)
-		if line == "" || line == pkg || strings.HasPrefix(line, "Reverse Depends:") {
-			continue
-		}
-		deps = append(deps, strings.TrimPrefix(line, "|"))
-		if len(deps) >= 3 {
-			break
-		}
-	}
-	if len(deps) == 0 {
-		return "orphan (autoremove missed it)"
-	}
-	return "kept by: " + strings.Join(deps, ", ")
-}
-
-func findManifestPath(costumeDir, manifest string) string {
-	if manifest == "" {
+func findPackageListFile(costumeDir, filename string) string {
+	if filename == "" {
 		return ""
 	}
-	path := filepath.Join(costumeDir, manifest)
+	path := filepath.Join(costumeDir, filename)
 	if _, err := os.Stat(path); err != nil {
 		return ""
 	}
 	return path
-}
-
-// resolveDistroManifest returns the distribution-specific manifest for the
-// running codename when one exists (any file named "*_<codename>-packages.list",
-// e.g. "debian_bookworm-packages.list" or "quirinux_daedalus-packages.list"),
-// falling back to the generic manifest declared in index.yaml otherwise.
-// This lets a single costume ship authoritative manifests for several bases.
-func resolveDistroManifest(costumeDir, fallback string) string {
-	codename := currentDistroCodename()
-	if codename != "" {
-		suffix := "_" + codename + "-packages.list"
-		if entries, err := os.ReadDir(costumeDir); err == nil {
-			for _, e := range entries {
-				if !e.IsDir() && !strings.HasPrefix(e.Name(), ".") && !strings.HasPrefix(e.Name(), "_") && strings.HasSuffix(e.Name(), suffix) {
-					return filepath.Join(costumeDir, e.Name())
-				}
-			}
-		}
-	}
-	return findManifestPath(costumeDir, fallback)
 }
 

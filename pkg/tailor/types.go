@@ -24,17 +24,6 @@ type Suit struct {
 	Finalize             *Finalize     `yaml:"finalize"`
 	Reboot               bool          `yaml:"reboot"`
 	DisplayManagerNotice bool          `yaml:"display_manager_notice"`
-	// PackagesManifest points to a file (relative to the costume dir)
-	// listing the COMPLETE, exact set of packages the system should end
-	// up with -- either plain "one package name per line" or the output
-	// of `dpkg -l` / `dpkg-query -W`. When set, wear() reconciles the
-	// system against it after the regular install steps: anything in the
-	// manifest that's missing gets installed, and anything installed on
-	// the system that is NOT in the manifest gets purged (except for a
-	// small hardcoded set of packages that are never safe to remove,
-	// e.g. the currently running kernel). This is what makes a wardrobe
-	// authoritative/declarative instead of purely additive.
-	PackagesManifest string `yaml:"packages_manifest"`
 	// PackagesInstallFile points to a file (relative to the costume dir)
 	// listing packages to install (plain, YAML-style or dpkg -l format).
 	PackagesInstallFile string `yaml:"packages_install_file"`
