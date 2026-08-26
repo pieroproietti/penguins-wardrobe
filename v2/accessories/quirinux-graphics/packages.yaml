@@ -1,6 +1,5 @@
 packages:
   - argyll
-  - colord
   - color-picker
   - darktable
   - displaycal

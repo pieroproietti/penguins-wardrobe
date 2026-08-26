@@ -3,7 +3,6 @@ description: Quirinux Animation Distro (compatible with Devuan Daedalus and Debi
 author: charliemartinez
 release: 2.5
 
-packages_remove_file: packages_remove.txt
 
 distributions:
   - daedalus
@@ -47,13 +46,27 @@ sequence:
     - quirinux-base
     - quirinux-desktop
     - quirinux-firmware
-    - quirinux-utils
     - quirinux-multimedia
     - quirinux-audio
     - quirinux-graphics
     - quirinux-animation
     - quirinux-office
     - quirinux-development
+    - quirinux-utils
+    - quirinux-drivers
+    - quirinux-python
+    - quirinux-devtools
+    - quirinux-kde-libs
+    - quirinux-gnome-libs
+    - quirinux-printing
+    - quirinux-vpn
+    - quirinux-filesystem
+    - quirinux-native
+    - quirinux-i18n
+    - quirinux-themes
+    - quirinux-xfce
+    - quirinux-fonts
+    - quirinux-libs
 
 finalize:
   customize: true

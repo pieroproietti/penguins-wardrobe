@@ -7,7 +7,6 @@ packages:
   - liblo7
   - quirinux-ardour
   - quirinux-notify
-  - sound-theme-freedesktop
   - sox
   - swh-plugins
   - vamp-plugin-sdk

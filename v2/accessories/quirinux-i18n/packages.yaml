@@ -1,0 +1,24 @@
+packages:
+  - ifrench-gut
+  - iitalian
+  - ingerman
+  - iportuguese
+  - manpages-de
+  - manpages-fr
+  - manpages-it
+  - task-french
+  - task-french-desktop
+  - task-galician
+  - task-galician-desktop
+  - task-german
+  - task-german-desktop
+  - task-italian
+  - task-italian-desktop
+  - task-laptop
+  - task-portuguese
+  - task-portuguese-desktop
+  - task-xfce-desktop
+  - wfrench
+  - witalian
+  - wngerman
+  - wportuguese
