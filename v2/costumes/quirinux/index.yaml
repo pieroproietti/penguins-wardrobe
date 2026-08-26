@@ -27,7 +27,7 @@ sequence:
     update: true
     upgrade: true
 
-  # ho messo quirinux-base
+  # ho messo quirinux-base e quirinux-desktop
   packages:
     - adduser
     - apt
@@ -119,7 +119,7 @@ sequence:
     - wget
     - whiptail
 
-    # che palle
+    # quirinux-desktop
     - adwaita-icon-theme
     - desktop-base
     - desktop-file-utils
@@ -147,7 +147,7 @@ sequence:
     - zenity
 
 
-  accessories:
+  # accessories:
     # quirinux-desktop
     #- quirinux-firmware
     #- quirinux-utils
@@ -156,11 +156,17 @@ sequence:
     #- quirinux-graphics
     #- quirinux-animation
     #- quirinux-office
-    - quirinux-development
+    #- quirinux-development
 
 finalize:
   customize: true
   cmds:
+    - "../../scripts/config_desktop_link.sh"
+    - "../../scripts/config_lightdm.sh"
+    - "../../scripts/config_g4.sh"
+    - "../../scripts/hostname.sh"
+    - "plymouth-set-default-theme bgrt"
+    - "update-initramfs -u"
     # - DEBIAN_FRONTEND=readline PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin" apt-get autoremove -y || true
     # - dpkg --configure -a || true
     # - curl -fsSL https://dl.deno.land/release/v1.40.0/deno-x86_64-unknown-linux-gnu.zip -o /tmp/deno.zip

@@ -132,22 +132,6 @@ func Wear(costumeName string, noAcc bool, noFirm bool) error {
 		}
 	}
 
-	// Load packages from external install file if specified
-	if installPath := findManifestPath(costumeDir, suit.PackagesInstallFile); installPath != "" {
-		if filePackages, err := loadPackageManifest(installPath); err == nil {
-			spExt := utils.NewSpinner(fmt.Sprintf("Installing %d packages from external file...", len(filePackages)))
-			spExt.Start()
-			fileFailed := installWithRetries(filePackages, 3, spExt)
-			failedPackages = append(failedPackages, fileFailed...)
-			installedPackages = append(installedPackages, diffStr(filePackages, fileFailed)...)
-			if len(fileFailed) > 0 {
-				spExt.Warn("Installed external packages with %d failures", len(fileFailed))
-			} else {
-				spExt.Success("External file packages installed (%d packages)", len(filePackages))
-			}
-		}
-	}
-
 	// Deterministic removal: purge exactly the vendor's remove list
 	var removeList []string
 	removeList = append(removeList, suit.PackagesRemove...)
@@ -367,6 +351,23 @@ func applySuit(dir string, suit *Suit) ([]string, []string, error) {
 			spPkg.Warn("Installed %d packages (%d could not be installed)", len(installed), len(failed))
 		} else {
 			spPkg.Success("Installed %d packages", len(installed))
+		}
+	}
+
+	// External install file
+	if installPath := findManifestPath(dir, suit.PackagesInstallFile); installPath != "" {
+		if filePackages, err := loadPackageManifest(installPath); err == nil {
+			spExt := utils.NewSpinner(fmt.Sprintf("Installing %d packages from external file (%s)...", len(filePackages), filepath.Base(installPath)))
+			spExt.Start()
+			failed := installWithRetries(filePackages, 3, spExt)
+			failedPackages = append(failedPackages, failed...)
+			installed := diffStr(filePackages, failed)
+			installedPackages = append(installedPackages, installed...)
+			if len(failed) > 0 {
+				spExt.Warn("Installed %d packages from external file (%d failed)", len(installed), len(failed))
+			} else {
+				spExt.Success("External file packages installed (%d packages)", len(filePackages))
+			}
 		}
 	}
 

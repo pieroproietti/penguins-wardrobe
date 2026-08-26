@@ -101,7 +101,7 @@ func loadPackageManifest(path string) ([]string, error) {
 	scanner := bufio.NewScanner(f)
 	for scanner.Scan() {
 		line := strings.TrimSpace(scanner.Text())
-		if line == "" || strings.HasPrefix(line, "#") {
+		if line == "" || strings.HasPrefix(line, "#") || strings.HasSuffix(line, ":") || line == "---" {
 			continue
 		}
 
