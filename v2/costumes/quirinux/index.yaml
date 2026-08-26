@@ -122,14 +122,14 @@ sequence:
 
   accessories:
     - quirinux-desktop
-    - quirinux-firmware
-    - quirinux-utils
-    - quirinux-multimedia
-    - quirinux-audio
-    - quirinux-graphics
-    - quirinux-animation
-    - quirinux-office
-    - quirinux-development
+    #- quirinux-firmware
+    #- quirinux-utils
+    #- quirinux-multimedia
+    #- quirinux-audio
+    #- quirinux-graphics
+    #- quirinux-animation
+    #- quirinux-office
+    #- quirinux-development
 
 finalize:
   customize: true
