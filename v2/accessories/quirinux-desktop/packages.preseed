@@ -1,0 +1,3 @@
+# Default display manager configuration
+lightdm shared/default-x-display-manager select lightdm
+slim shared/default-x-display-manager select lightdm

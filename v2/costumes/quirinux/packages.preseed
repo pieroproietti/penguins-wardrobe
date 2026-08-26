@@ -1,0 +1,5 @@
+# System base configuration
+libpaper libpaper/defaultpaper select a4
+ca-certificates ca-certificates/trust_new_crts select yes
+console-setup console-setup/charmap47 select UTF-8
+keyboard-configuration keyboard-configuration/layoutcode string es
