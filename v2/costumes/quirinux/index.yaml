@@ -120,7 +120,6 @@ sequence:
     - whiptail
 
   accessories:
-    # quirinux-base
     - quirinux-desktop
     - quirinux-firmware
     - quirinux-utils
@@ -134,23 +133,23 @@ sequence:
 finalize:
   customize: true
   cmds:
-    - DEBIAN_FRONTEND=readline PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin" apt-get autoremove -y || true
-    - dpkg --configure -a || true
-    - curl -fsSL https://dl.deno.land/release/v1.40.0/deno-x86_64-unknown-linux-gnu.zip -o /tmp/deno.zip
-    - unzip -o /tmp/deno.zip -d /usr/local/bin/
-    - chmod +x /usr/local/bin/deno
-    - rm -f /tmp/deno.zip
-    - apt-get remove -y broadcom-sta-dkms || true
-    - apt-get install -y --allow-downgrades --fix-broken || true
-    - apt-get install -y quirinux-firmware quirinux-youdown quirinux-youtubedown || true
-    - echo "/usr/sbin/lightdm" > /etc/X11/default-display-manager
-    - (command -v systemctl >/dev/null 2>&1 && systemctl disable slim.service 2>/dev/null && systemctl mask slim.service 2>/dev/null) || (insserv -r slim 2>/dev/null || update-rc.d slim disable 2>/dev/null) || true
-    - for dm in slim gdm3 gdm sddm; do if command -v systemctl >/dev/null 2>&1; then systemctl disable "$dm.service" 2>/dev/null || true; systemctl mask "$dm.service" 2>/dev/null || true; else [ -f "/etc/init.d/$dm" ] && update-rc.d -f "$dm" remove 2>/dev/null || true; fi; done
-    - if command -v systemctl >/dev/null 2>&1; then systemctl set-default graphical.target 2>/dev/null || true; systemctl enable lightdm.service 2>/dev/null || true; [ -d /lib/systemd/system ] && [ -f /lib/systemd/system/lightdm.service ] && ln -sf /lib/systemd/system/lightdm.service /etc/systemd/system/display-manager.service; else update-rc.d lightdm defaults 2>/dev/null || insserv lightdm 2>/dev/null || true; update-rc.d lightdm enable 2>/dev/null || true; fi
-    - echo "debconf debconf/frontend select Dialog" | /usr/bin/debconf-set-selections
-    - echo "debconf debconf/priority select high" | /usr/bin/debconf-set-selections
-    - /usr/local/bin/quirinux-apply-skel || true
-    - /usr/local/bin/quirinux-firmware-notice || true
-    - /usr/local/bin/quirinux-kernel-notice || true
-    - update-alternatives --remove pager /bin/cat || true
+    # - DEBIAN_FRONTEND=readline PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin" apt-get autoremove -y || true
+    # - dpkg --configure -a || true
+    # - curl -fsSL https://dl.deno.land/release/v1.40.0/deno-x86_64-unknown-linux-gnu.zip -o /tmp/deno.zip
+    # - unzip -o /tmp/deno.zip -d /usr/local/bin/
+    # - chmod +x /usr/local/bin/deno
+    # - rm -f /tmp/deno.zip
+    # - apt-get remove -y broadcom-sta-dkms || true
+    # - apt-get install -y --allow-downgrades --fix-broken || true
+    # - apt-get install -y quirinux-firmware quirinux-youdown quirinux-youtubedown || true
+    # - echo "/usr/sbin/lightdm" > /etc/X11/default-display-manager
+    # - (command -v systemctl >/dev/null 2>&1 && systemctl disable slim.service 2>/dev/null && systemctl mask slim.service 2>/dev/null) || (insserv -r slim 2>/dev/null || update-rc.d slim disable 2>/dev/null) || true
+    # - for dm in slim gdm3 gdm sddm; do if command -v systemctl >/dev/null 2>&1; then systemctl disable "$dm.service" 2>/dev/null || true; systemctl mask "$dm.service" 2>/dev/null || true; else [ -f "/etc/init.d/$dm" ] && update-rc.d -f "$dm" remove 2>/dev/null || true; fi; done
+    # - if command -v systemctl >/dev/null 2>&1; then systemctl set-default graphical.target 2>/dev/null || true; systemctl enable lightdm.service 2>/dev/null || true; [ -d /lib/systemd/system ] && [ -f /lib/systemd/system/lightdm.service ] && ln -sf /lib/systemd/system/lightdm.service /etc/systemd/system/display-manager.service; else update-rc.d lightdm defaults 2>/dev/null || insserv lightdm 2>/dev/null || true; update-rc.d lightdm enable 2>/dev/null || true; fi
+    # - echo "debconf debconf/frontend select Dialog" | /usr/bin/debconf-set-selections
+    # - echo "debconf debconf/priority select high" | /usr/bin/debconf-set-selections
+    # - /usr/local/bin/quirinux-apply-skel || true
+    # - /usr/local/bin/quirinux-firmware-notice || true
+    # - /usr/local/bin/quirinux-kernel-notice || true
+    # - update-alternatives --remove pager /bin/cat || true
 reboot: true
