@@ -1,8 +1,0 @@
-#!/usr/bin/make -f
-
-%:
-	dh $@
-
-override_dh_install:
-	mkdir -p debian/penguins-wardrobe/usr/bin
-	cp -a usr/bin/* debian/penguins-wardrobe/usr/bin/
