@@ -1,2 +1,2 @@
-# Firewall configuration
-ufw ufw/enable select true
+# Unattended upgrades
+unattended-upgrades unattended-upgrades/enable_auto_updates boolean false

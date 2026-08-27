@@ -4,3 +4,4 @@ firmware-ipw2x00 firmware/ipw2x00/license/type select accept
 firmware-ivtv firmware/ivtv/license/accepted boolean true
 firmware-b43-installer firmware/b43/license/accepted boolean true
 firmware-b43legacy-installer firmware/b43legacy/license/accepted boolean true
+b43-fwcutter firmware/b43/install_non_free boolean true

@@ -211,16 +211,16 @@ func purgeExplicit(toRemove []string) {
 	}
 
 	logToFile(fmt.Sprintf("Explicit purge: removing %d packages...", len(list)))
-	cmd := fmt.Sprintf("DEBIAN_FRONTEND=readline apt-get purge -o Dpkg::Options::='--force-confold' -y %s", strings.Join(list, " "))
+	cmd := fmt.Sprintf("UCF_FORCE_CONFFOLD=1 DEBIAN_FRONTEND=readline apt-get purge -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confold' -y %s", strings.Join(list, " "))
 	if err := utils.ExecTee(cmd, wardrobeLogFile); err != nil {
 		logToFile("WARNING: bulk explicit purge reported an error; healing and retrying once...")
 		_ = utils.ExecTee("dpkg --configure -a", wardrobeLogFile)
-		_ = utils.ExecTee("DEBIAN_FRONTEND=readline apt-get install -f -y", wardrobeLogFile)
+		_ = utils.ExecTee("UCF_FORCE_CONFFOLD=1 DEBIAN_FRONTEND=readline apt-get install -f -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confold' -y", wardrobeLogFile)
 		_ = utils.ExecTee(cmd, wardrobeLogFile)
 	}
 
 	logToFile("Sweeping orphaned dependencies of removed packages...")
-	_ = utils.ExecTee("DEBIAN_FRONTEND=readline apt-get autoremove -o Dpkg::Options::='--force-confold' --purge -y", wardrobeLogFile)
+	_ = utils.ExecTee("UCF_FORCE_CONFFOLD=1 DEBIAN_FRONTEND=readline apt-get autoremove -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confold' --purge -y", wardrobeLogFile)
 }
 
 func findPackageListFile(costumeDir, filename string) string {

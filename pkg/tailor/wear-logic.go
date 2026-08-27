@@ -284,7 +284,7 @@ func installBatchWithFallback(batch []string, retries int, flags string) []strin
 	}
 	
 	pkgString := strings.Join(batch, " ")
-	cmd := fmt.Sprintf("DEBIAN_FRONTEND=%s apt-get install -o Dpkg::Options::='--force-confold' %s %s", debconfFrontend, flags, pkgString)
+	cmd := fmt.Sprintf("UCF_FORCE_CONFFOLD=1 DEBIAN_FRONTEND=%s apt-get install -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confold' %s %s", debconfFrontend, flags, pkgString)
 	logToFile(fmt.Sprintf("Installing batch of %d packages: %s", len(batch), pkgString))
 	if err := utils.ExecTee(cmd, wardrobeLogFile); err == nil {
 		logToFile("✅ Batch installed.")
@@ -302,7 +302,7 @@ func installBatchWithFallback(batch []string, retries int, flags string) []strin
 			if ss := utils.GetSplitScreen(); ss != nil {
 				ss.SetAction("Retrying package: %s (attempt %d/%d)", pkg, attempt, retries)
 			}
-			singleCmd := fmt.Sprintf("DEBIAN_FRONTEND=%s apt-get install -o Dpkg::Options::='--force-confold' %s %s", debconfFrontend, flags, pkg)
+			singleCmd := fmt.Sprintf("UCF_FORCE_CONFFOLD=1 DEBIAN_FRONTEND=%s apt-get install -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confold' %s %s", debconfFrontend, flags, pkg)
 			if err := utils.ExecTee(singleCmd, wardrobeLogFile); err != nil {
 				// Double-check with dpkg before believing the failure
 				if isPackageInstalled(pkg) {

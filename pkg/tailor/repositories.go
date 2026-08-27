@@ -46,7 +46,7 @@ func setupRepositories(repos *Repositories, suitName string) {
 		if ss := utils.GetSplitScreen(); ss != nil {
 			ss.SetAction("Upgrading packages (apt-get upgrade)...")
 		}
-		_ = utils.ExecTee("DEBIAN_FRONTEND=readline apt-get -o Dpkg::Options::='--force-confold' upgrade -y", wardrobeLogFile)
+		_ = utils.ExecTee("UCF_FORCE_CONFFOLD=1 DEBIAN_FRONTEND=readline apt-get -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confold' upgrade -y", wardrobeLogFile)
 	}
 }
 

@@ -305,7 +305,7 @@ func ensureKernelHeaders() error {
 	}
 	pkgs := fmt.Sprintf("linux-headers-%s linux-headers-%s", release, arch)
 	logToFile(fmt.Sprintf("Ensuring kernel headers are present before DKMS installs: %s", pkgs))
-	return utils.ExecTee("DEBIAN_FRONTEND=readline apt-get install -o Dpkg::Options::='--force-confold' -y "+pkgs, wardrobeLogFile)
+	return utils.ExecTee("UCF_FORCE_CONFFOLD=1 DEBIAN_FRONTEND=readline apt-get install -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confold' -y "+pkgs, wardrobeLogFile)
 }
 
 // healAndRetryFailed repairs the half-configured dpkg state and retries failed packages.
@@ -316,7 +316,7 @@ func healAndRetryFailed(failed []string) []string {
 
 	logToFile("Healing dpkg state before retrying failed packages...")
 	_ = utils.ExecTee("dpkg --configure -a", wardrobeLogFile)
-	_ = utils.ExecTee("DEBIAN_FRONTEND=readline apt-get install -f -o Dpkg::Options::='--force-confold' -y", wardrobeLogFile)
+	_ = utils.ExecTee("UCF_FORCE_CONFFOLD=1 DEBIAN_FRONTEND=readline apt-get install -f -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confold' -y", wardrobeLogFile)
 
 	available := getAvailablePackages()
 	var retry []string
