@@ -3,7 +3,6 @@ description: Quirinux Animation Distro (compatible with Devuan Daedalus and Debi
 author: charliemartinez
 release: 2.5
 
-
 distributions:
   - daedalus
   - bookworm
@@ -26,79 +25,63 @@ sequence:
     upgrade: true
 
   accessories:
-  - quirinux-base
-  - quirinux-desktop
-  - quirinux-firmware
-  - quirinux-multimedia
-  - quirinux-audio
-  - quirinux-graphics
-  - quirinux-animation
-  - quirinux-office
-  - quirinux-development
-  - quirinux-utils
-  - quirinux-drivers
-  - quirinux-python
-  - quirinux-devtools
-  - quirinux-kde-libs
-  - quirinux-gnome-libs
-  - quirinux-printing
-  - quirinux-vpn
-  - quirinux-filesystem
-  - quirinux-native
-  - quirinux-i18n
-  - quirinux-themes
-  - quirinux-xfce
-  - quirinux-fonts
-  - quirinux-libs
-  - quirinux-audio-data
-  - quirinux-multimedia-codecs
-  - quirinux-archive
-  - quirinux-power
-  - quirinux-gtk-engines
-  - quirinux-system-monitoring
-  - quirinux-firewall
-  - quirinux-network-tools
-  - quirinux-flatpak
-  - quirinux-tcl-tk
-  - quirinux-mono
-  - quirinux-gnustep
-  - quirinux-gambas
-  - quirinux-nodejs
-  - quirinux-xorg-input
-  - quirinux-firefox-l10n
-  - quirinux-thumbnailers
-  - quirinux-opencl
-  - quirinux-graphics-libs
-  - quirinux-boot
+  - quirinux/quirinux-base
+  - quirinux/quirinux-desktop
+  - quirinux/quirinux-firmware
+  - quirinux/quirinux-multimedia
+  - quirinux/quirinux-audio
+  - quirinux/quirinux-graphics
+  - quirinux/quirinux-animation
+  - quirinux/quirinux-office
+  - quirinux/quirinux-development
+  - quirinux/quirinux-utils
+  - quirinux/quirinux-drivers
+  - quirinux/quirinux-python
+  - quirinux/quirinux-devtools
+  - quirinux/quirinux-kde-libs
+  - quirinux/quirinux-gnome-libs
+  - quirinux/quirinux-printing
+  - quirinux/quirinux-vpn
+  - quirinux/quirinux-filesystem
+  - quirinux/quirinux-native
+  - quirinux/quirinux-i18n
+  - quirinux/quirinux-themes
+  - quirinux/quirinux-xfce
+  - quirinux/quirinux-fonts
+  - quirinux/quirinux-libs
+  - quirinux/quirinux-audio-data
+  - quirinux/quirinux-multimedia-codecs
+  - quirinux/quirinux-archive
+  - quirinux/quirinux-power
+  - quirinux/quirinux-gtk-engines
+  - quirinux/quirinux-system-monitoring
+  - quirinux/quirinux-firewall
+  - quirinux/quirinux-network-tools
+  - quirinux/quirinux-flatpak
+  - quirinux/quirinux-tcl-tk
+  - quirinux/quirinux-mono
+  - quirinux/quirinux-gnustep
+  - quirinux/quirinux-gambas
+  - quirinux/quirinux-nodejs
+  - quirinux/quirinux-xorg-input
+  - quirinux/quirinux-firefox-l10n
+  - quirinux/quirinux-thumbnailers
+  - quirinux/quirinux-opencl
+  - quirinux/quirinux-graphics-libs
+  - quirinux/quirinux-boot
+
 finalize:
   customize: true
   cmds:
-  - DEBIAN_FRONTEND=readline PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-    apt-get autoremove -y || true
+  - DEBIAN_FRONTEND=readline PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin" apt-get autoremove -y || true
   - dpkg --configure -a || true
-  - curl -fsSL https://dl.deno.land/release/v1.40.0/deno-x86_64-unknown-linux-gnu.zip
-    -o /tmp/deno.zip
-  - unzip -o /tmp/deno.zip -d /usr/local/bin/
-  - chmod +x /usr/local/bin/deno
-  - rm -f /tmp/deno.zip
   - apt-get remove -y broadcom-sta-dkms || true
   - apt-get install -y --allow-downgrades --fix-broken || true
-  - apt-get install -y quirinux-firmware quirinux-youdown quirinux-youtubedown ||
-    true
+  - apt-get install -y quirinux-firmware quirinux-youdown quirinux-youtubown || true
   - echo "/usr/sbin/lightdm" > /etc/X11/default-display-manager
-  - (command -v systemctl >/dev/null 2>&1 && systemctl disable slim.service 2>/dev/null
-    && systemctl mask slim.service 2>/dev/null) || (insserv -r slim 2>/dev/null ||
-    update-rc.d slim disable 2>/dev/null) || true
-  - for dm in slim gdm3 gdm sddm; do if command -v systemctl >/dev/null 2>&1; then
-    systemctl disable "$dm.service" 2>/dev/null || true; systemctl mask "$dm.service"
-    2>/dev/null || true; else [ -f "/etc/init.d/$dm" ] && update-rc.d -f "$dm" remove
-    2>/dev/null || true; fi; done
-  - if command -v systemctl >/dev/null 2>&1; then systemctl set-default graphical.target
-    2>/dev/null || true; systemctl enable lightdm.service 2>/dev/null || true; [ -d
-    /lib/systemd/system ] && [ -f /lib/systemd/system/lightdm.service ] && ln -sf
-    /lib/systemd/system/lightdm.service /etc/systemd/system/display-manager.service;
-    else update-rc.d lightdm defaults 2>/dev/null || insserv lightdm 2>/dev/null ||
-    true; update-rc.d lightdm enable 2>/dev/null || true; fi
+  - (command -v systemctl >/dev/null 2>&1 && systemctl disable slim.service 2>/dev/null && systemctl mask slim.service 2>/dev/null) || (insserv -r slim 2>/dev/null || update-rc.d slim disable 2>/dev/null) || true
+  - for dm in slim gdm3 gdm sddm; do if command -v systemctl >/dev/null 2>&1; then systemctl disable "$dm.service" 2>/dev/null || true; systemctl mask "$dm.service" 2>/dev/null || true; else [ -f "/etc/init.d/$dm" ] && update-rc.d -f "$dm" remove 2>/dev/null || true; fi; done
+  - if command -v systemctl >/dev/null 2>&1; then systemctl set-default graphical.target 2>/dev/null || true; systemctl enable lightdm.service 2>/dev/null || true; [ -d /lib/systemd/system ] && [ -f /lib/systemd/system/lightdm.service ] && ln -sf /lib/systemd/system/lightdm.service /etc/systemd/system/display-manager.service; else update-rc.d lightdm defaults 2>/dev/null || insserv lightdm 2>/dev/null || true; update-rc.d lightdm enable 2>/dev/null || true; fi
   - echo "debconf debconf/frontend select Dialog" | /usr/bin/debconf-set-selections
   - echo "debconf debconf/priority select high" | /usr/bin/debconf-set-selections
   - /usr/local/bin/quirinux-apply-skel || true
