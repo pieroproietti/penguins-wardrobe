@@ -1,25 +1,30 @@
 name: quirinux
-description: Quirinux Animation Distro (compatible with Devuan Daedalus and Debian
-  Bookworm)
+description: Quirinux Animation Distro (compatible with Devuan Daedalus and Debian Bookworm)
 author: charliemartinez
 release: 2.5
+
+
 distributions:
-- daedalus
-- bookworm
+  - daedalus
+  - bookworm
+
 sequence:
   repositories:
     sources_list:
-    - main
-    - contrib
-    - non-free
-    - non-free-firmware
+      - main
+      - contrib
+      - non-free
+      - non-free-firmware
     sources_list_d:
-    - apt-get install -y curl gnupg
-    - rm -f /usr/share/keyrings/quirinux.gpg
-    - curl -fsSL https://repo.quirinux.org/gpg/quirinux.asc | gpg --dearmor -o /usr/share/keyrings/quirinux.gpg
-    - echo "deb [arch=amd64 signed-by=/usr/share/keyrings/quirinux.gpg] https://repo.quirinux.org/quirinux main" | tee /etc/apt/sources.list.d/quirinux.list > /dev/null
+      - export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - apt-get install -y curl gnupg unzip
+      - update-alternatives --install /usr/bin/pager pager /bin/cat 200 || true
+      - rm -f /usr/share/keyrings/quirinux.gpg
+      - curl -fsSL https://repo.quirinux.org/gpg/quirinux.asc | gpg --dearmor -o /usr/share/keyrings/quirinux.gpg
+      - echo "deb [arch=amd64 signed-by=/usr/share/keyrings/quirinux.gpg] https://repo.quirinux.org/ quirinux main" | tee /etc/apt/sources.list.d/quirinux.list > /dev/null
     update: true
     upgrade: true
+
   accessories:
   - quirinux-base
   - quirinux-desktop
