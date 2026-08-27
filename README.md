@@ -6,7 +6,7 @@ This directory contains the **v2 wardrobe definitions**: costumes, accessories, 
 ---
 
 ## 📁 Directory Layout
-
+- v2 (wardrobe v2 - actual root)
 - **`costumes/`**: Declarative desktop and system environment recipes (e.g. `colibri`, `eagle`, `duck`, `seagull`, `quirinux`).
 - **`accessories/`**: Modular components that can be installed alongside costumes or standalone (e.g. `eggs-dev`, `base`, `live-installer`).
 - **`vendors/`**: Vendor-specific customizations and configurations.
@@ -16,30 +16,34 @@ This directory contains the **v2 wardrobe definitions**: costumes, accessories, 
 ---
 
 ## 🚀 Quick Usage
+You need to install the package ]penguins-tailor](https://github.com/pieroproietti/penguins-tailor) and use it to intercat with this or yours wardrobe.
 
 ```bash
 # Clone or update the wardrobe repository
-wardrobe get
+tailor get
 
 # List available costumes
-wardrobe list
+tailor list
 
 # Show detailed information about a costume
-wardrobe show colibri
+tailor show colibri
 
 # Apply a costume to the current machine
-sudo wardrobe wear colibri
+sudo tailor wear colibri
 
 # Export built packages or execution logs to remote server
-wardrobe export pkg
-wardrobe export log
+tailor export pkg
+tailor export log
 ```
 
 ---
 
 ## ℹ️ More Information
 
-- **Main Repository**: [github.com/pieroproietti/penguins-wardrobe](https://github.com/pieroproietti/penguins-wardrobe)
+- **Package Repository**: [github.com/pieroproietti/penguins-tailor](https://github.com/pieroproietti/penguins-tailor)
+- **Sample basic wardrobe Repository**: [github.com/pieroproietti/penguins-wardrobe](https://github.com/pieroproietti/penguins-wardrobe)
+- **A more advanced wardrobe Repository**: [github.com/charliemartinez/atelier-quirinux](https://github.com/charliemartinez/atelier-quirinux)
+
 - **Website & Documentation**: [penguins-eggs.net](https://penguins-eggs.net)
 - **Author**: Piero Proietti <piero.proietti@gmail.com>
 
