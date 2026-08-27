@@ -1,2 +1,2 @@
 # Firmware non-free license acceptance
-b43-fwcutter firmware/b43/install_non_free boolean true
+b43-fwcutter b43-fwcutter/install_non_free boolean true
