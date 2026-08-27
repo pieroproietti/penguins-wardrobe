@@ -59,6 +59,9 @@ func Wear(costumeName string, noAcc bool, noFirm bool) error {
 		icon = "👝"
 		title = fmt.Sprintf("ACCESSORY: %s", suit.Name)
 	}
+	if findPreseed(costumeDir) != "" {
+		title += ". Preseed applied"
+	}
 
 	ss := utils.StartSplitScreen(icon, title, suit.Description)
 	if ss != nil {
@@ -117,10 +120,14 @@ func Wear(costumeName string, noAcc bool, noFirm bool) error {
 
 			if accYaml := findYaml(accDir); accYaml != "" {
 				if accSuit, err := loadSuit(accYaml); err == nil {
+					accPreseedSuffix := ""
+					if findPreseed(accDir) != "" {
+						accPreseedSuffix = ". Preseed applied"
+					}
 					if ss != nil {
-						ss.AddStep(fmt.Sprintf("%s--> [%d/%d] Accessory: %s%s", utils.ColorCyan, idx+1, len(suit.Accessories), accName, utils.ColorReset))
+						ss.AddStep(fmt.Sprintf("%s--> [%d/%d] Accessory: %s%s%s", utils.ColorCyan, idx+1, len(suit.Accessories), accName, accPreseedSuffix, utils.ColorReset))
 					} else {
-						utils.PrintSubSection("-->", fmt.Sprintf("[%d/%d] Accessory: %s", idx+1, len(suit.Accessories), accName))
+						utils.PrintSubSection("-->", fmt.Sprintf("[%d/%d] Accessory: %s%s", idx+1, len(suit.Accessories), accName, accPreseedSuffix))
 					}
 					accInstalled, accFailed, _ := applySuit(accDir, accSuit)
 					installedPackages = append(installedPackages, accInstalled...)
@@ -355,19 +362,9 @@ func applySuit(dir string, suit *Suit) ([]string, []string, error) {
 	if preseedFile := findPreseed(dir); preseedFile != "" {
 		if ss != nil {
 			ss.SetAction("Applying preseed selections (%s)...", filepath.Base(preseedFile))
-			if err := applyPreseed(preseedFile, suit.Name); err != nil {
-				ss.AddStep(fmt.Sprintf("%s[WARN]%s Preseed selections applied with warnings", utils.ColorYellow, utils.ColorReset))
-			} else {
-				ss.AddStep(fmt.Sprintf("%s[OK]%s Preseed selections applied (%s)", utils.ColorGreen, filepath.Base(preseedFile), utils.ColorReset))
-			}
-		} else {
-			spPreseed := utils.NewSpinner(fmt.Sprintf("Applying preseed selections (%s)...", filepath.Base(preseedFile)))
-			spPreseed.Start()
-			if err := applyPreseed(preseedFile, suit.Name); err != nil {
-				spPreseed.Warn("Preseed selections applied with warnings")
-			} else {
-				spPreseed.Success("Preseed selections applied (%s)", filepath.Base(preseedFile))
-			}
+		}
+		if err := applyPreseed(preseedFile, suit.Name); err != nil {
+			logToFile(WarnPrefix(suit.Name) + fmt.Sprintf("Preseed application warning: %v", err))
 		}
 	}
 
