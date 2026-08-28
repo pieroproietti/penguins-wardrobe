@@ -2,4 +2,3 @@ name: quirinux-graphics-libs
 description: Graphics libraries
 release: 2.5
 
-packages_install_file: packages.yaml

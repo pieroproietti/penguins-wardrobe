@@ -2,4 +2,3 @@ name: quirinux-native
 description: Quirinux native applications and scripts
 release: 2.5
 
-packages_install_file: packages.yaml

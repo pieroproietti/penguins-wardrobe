@@ -2,4 +2,3 @@ name: quirinux-fonts
 description: Font packages
 release: 2.5
 
-packages_install_file: packages.yaml

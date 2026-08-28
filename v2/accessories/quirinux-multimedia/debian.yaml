@@ -9,4 +9,3 @@ repositories:
     - non-free
     - non-free-firmware
 
-packages_install_file: packages.yaml

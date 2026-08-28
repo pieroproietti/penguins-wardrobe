@@ -2,4 +2,3 @@ name: quirinux-themes
 description: Desktop themes and icons
 release: 2.5
 
-packages_install_file: packages.yaml

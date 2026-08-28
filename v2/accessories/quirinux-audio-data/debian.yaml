@@ -2,4 +2,3 @@ name: quirinux-audio-data
 description: Audio application data (gimp, krita, ardour, blender)
 release: 2.5
 
-packages_install_file: packages.yaml

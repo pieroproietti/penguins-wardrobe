@@ -2,4 +2,3 @@ name: quirinux-vpn
 description: VPN and secure network tools
 release: 2.5
 
-packages_install_file: packages.yaml

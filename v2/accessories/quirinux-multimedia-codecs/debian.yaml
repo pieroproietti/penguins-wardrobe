@@ -2,4 +2,3 @@ name: quirinux-multimedia-codecs
 description: Audio/video codecs and pulseaudio modules
 release: 2.5
 
-packages_install_file: packages.yaml

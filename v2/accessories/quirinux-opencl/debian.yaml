@@ -2,4 +2,3 @@ name: quirinux-opencl
 description: OpenCL support
 release: 2.5
 
-packages_install_file: packages.yaml
