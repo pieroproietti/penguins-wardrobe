@@ -16,6 +16,18 @@ sequence:
       - non-free-firmware
     sources_list_d:
       - export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      
+      # 1. Inyección temprana de selecciones debconf para gestores de pantalla
+      - echo "slim shared/default-x-display-manager select lightdm" | debconf-set-selections
+      - echo "lightdm shared/default-x-display-manager select lightdm" | debconf-set-selections
+      - echo "gdm3 shared/default-x-display-manager select lightdm" | debconf-set-selections
+      - echo "sddm shared/default-x-display-manager select lightdm" | debconf-set-selections
+      
+      # 2. Actualizar caché e instalar lightdm explícitamente ANTES que los accesorios
+      - apt-get update
+      - DEBIAN_FRONTEND=noninteractive apt-get install -y lightdm
+      
+      # 3. Configuración del repositorio de Quirinux
       - apt-get install -y curl gnupg unzip
       - update-alternatives --install /usr/bin/pager pager /bin/cat 200 || true
       - rm -f /usr/share/keyrings/quirinux.gpg
@@ -77,7 +89,7 @@ finalize:
   - dpkg --configure -a || true
   - apt-get remove -y broadcom-sta-dkms || true
   - apt-get install -y --allow-downgrades --fix-broken || true
-  - apt-get install -y quirinux-firmware quirinux-youdown quirinux-youtubown || true
+  - apt-get install -y quirinux-firmware quirinux-youdown quirinux-youtubedown || true
   - echo "/usr/sbin/lightdm" > /etc/X11/default-display-manager
   - (command -v systemctl >/dev/null 2>&1 && systemctl disable slim.service 2>/dev/null && systemctl mask slim.service 2>/dev/null) || (insserv -r slim 2>/dev/null || update-rc.d slim disable 2>/dev/null) || true
   - for dm in slim gdm3 gdm sddm; do if command -v systemctl >/dev/null 2>&1; then systemctl disable "$dm.service" 2>/dev/null || true; systemctl mask "$dm.service" 2>/dev/null || true; else [ -f "/etc/init.d/$dm" ] && update-rc.d -f "$dm" remove 2>/dev/null || true; fi; done
