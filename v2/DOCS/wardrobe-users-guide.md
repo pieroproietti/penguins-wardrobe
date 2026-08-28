@@ -243,11 +243,6 @@ sequence:
   packages_interactive:
     - ttf-mscorefonts-installer
 
-  # Pacchetti da rimuovere esplicitamente
-  packages_remove:
-    - slim
-    - xterm
-
   # Accessori da applicare in sequenza
   accessories:
     - base
@@ -287,9 +282,8 @@ display_manager_notice: true
   > [!IMPORTANT]
   > **Controllo preventivo di compatibilità**: prima di toccare qualsiasi configurazione o pacchetto, `wardrobe` confronta il valore di `VERSION_CODENAME` in `/etc/os-release` con l'elenco `distributions`. Se il sistema non è supportato, l'esecuzione viene interrotta istantaneamente e in totale sicurezza.
 
-#### 2. File Esterni per i Pacchetti (`packages_install_file`, `packages_remove_file`)
-* **`packages_install_file`**: Consente di indicare un file esterno (es. `packages.yaml` o un file di testo con formati plain / `dpkg -l`) contenente l'elenco dei pacchetti da installare.
-* **`packages_remove_file`**: Consente di indicare un file esterno contenente l'elenco di pacchetti da rimuovere/purgare con `apt-get purge`.
+#### 2. Auto-Discovery dei Pacchetti Esterni (`packages.yaml`)
+* **`packages.yaml` / `packages.yml`**: Se presente nella cartella del costume o dell'accessorio, `wardrobe` ne scopre e carica automaticamente i pacchetti fondendoli con la lista principale.
 
 #### 3. Preseed Debconf Automatico (`packages.preseed`)
 * **`packages.preseed`**: Se presente nella cartella del costume o dell'accessorio, `wardrobe` applica automaticamente le risposte debconf tramite `debconf-set-selections` prima dell'installazione dei pacchetti. Questo file deve essere usato con parsimonia ed essere mirato **esclusivamente** ai pacchetti forniti da quel costume o accessorio (es. impostare LightDM in `quirinux-desktop`, accettare licenze firmware in `firmwares/network-wifi` o `quirinux-firmware`), mantenendo le ricette YAML completamente pulite.
@@ -303,7 +297,6 @@ display_manager_notice: true
 * **`packages`**: Array di pacchetti standard installati con gestione a blocchi e ripristino automatico.
 * **`packages_no_install_recommends`**: Pacchetti installati con flag `--no-install-recommends` per mantenere il sistema snello.
 * **`packages_interactive`**: Pacchetti che necessitano di interazione (accettazione licenze proprietarie, domande debconf). Vengono eseguiti preservando lo standard I/O reale del terminale.
-* **`packages_remove`**: Pacchetti incompatibili o indesiderati da disinstallare con `apt-get purge`.
 * **`accessories`**: Elenco di accessori da concatenare (possono essere globali come `base` o locali con percorso relativo come `./firmwares`).
 
 #### 5. Finalizzazione (`finalize`)
