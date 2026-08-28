@@ -88,4 +88,7 @@ finalize:
   - /usr/local/bin/quirinux-firmware-notice || true
   - /usr/local/bin/quirinux-kernel-notice || true
   - update-alternatives --remove pager /bin/cat || true
+  # autologin e rename hostname
+  - "../../scripts/config_lightdm.sh"
+  - "../../scripts/hostname.sh"
 reboot: true
