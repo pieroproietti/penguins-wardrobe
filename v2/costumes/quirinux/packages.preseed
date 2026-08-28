@@ -1,14 +1,5 @@
 # Quirinux preseed debconf selections
 
-# Display Manager
-lightdm shared/default-x-display-manager select lightdm
-slim shared/default-x-display-manager select lightdm
-gdm3 shared/default-x-display-manager select lightdm
-sddm shared/default-x-display-manager select lightdm
-xdm shared/default-x-display-manager select lightdm
-nodm shared/default-x-display-manager select lightdm
-lxdm shared/default-x-display-manager select lightdm
-
 # Firmware non-free license acceptance
 firmware-ipw2x00 firmware-ipw2x00/license/accepted boolean true
 firmware-ipw2x00 firmware-ipw2x00/license/type select accept
