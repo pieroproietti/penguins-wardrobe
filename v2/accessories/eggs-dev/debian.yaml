@@ -27,6 +27,11 @@ sequence:
   packages:
     - code
     - nodejs
+    - build-essential 
+    - dpkg-dev 
+    - git 
+    - golang
+
     # python tools for pengui
     #- ccache
     #- libxcb-cursor0
