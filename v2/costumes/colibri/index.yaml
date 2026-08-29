@@ -66,6 +66,7 @@ sequence:
     - base
     - eggs-dev
   cmds:
+    - "update-alternatives --set x-terminal-emulator /usr/bin/xfce4-terminal.wrapper"
     - "../../scripts/config_desktop_link.sh"
     - "../../scripts/config_lightdm.sh"
     - "../../scripts/config_g4.sh"
