@@ -47,7 +47,7 @@ sequence:
     - libglib2.0-bin
     - gnome-disk-utility
     #- ruby-deb
-    - libarchive-tools
+    #- libarchive-tools
     #- firmware-atheros
     #- firmware-brcm80211
     #- firmware-iwlwifi
