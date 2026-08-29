@@ -46,6 +46,11 @@ sequence:
     - plymouth-themes
     - libglib2.0-bin
     - gnome-disk-utility
+    - fonts-inter
+    - fonts-noto 
+    - fonts-roboto
+    - fonts-ubuntu
+    - fonts-jetbrains-mono
     #- ruby-deb
     #- libarchive-tools
     #- firmware-atheros
