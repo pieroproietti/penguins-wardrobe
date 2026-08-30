@@ -6,6 +6,7 @@ release: 2.5
 distributions:
   - daedalus
   - bookworm
+  - trixie
 
 sequence:
   repositories:
@@ -25,50 +26,50 @@ sequence:
     upgrade: true
 
   accessories:
-  - quirinux/quirinux-base
-  - quirinux/quirinux-desktop
-  - quirinux/quirinux-firmware
-  - quirinux/quirinux-multimedia
-  - quirinux/quirinux-audio
-  - quirinux/quirinux-graphics
-  - quirinux/quirinux-animation
-  - quirinux/quirinux-office
-  - quirinux/quirinux-development
-  - quirinux/quirinux-utils
-  - quirinux/quirinux-drivers
-  - quirinux/quirinux-python
-  - quirinux/quirinux-devtools
-  - quirinux/quirinux-kde-libs
-  - quirinux/quirinux-gnome-libs
-  - quirinux/quirinux-printing
-  - quirinux/quirinux-vpn
-  - quirinux/quirinux-filesystem
-  - quirinux/quirinux-native
-  - quirinux/quirinux-i18n
-  - quirinux/quirinux-themes
-  - quirinux/quirinux-xfce
-  - quirinux/quirinux-fonts
-  - quirinux/quirinux-libs
-  - quirinux/quirinux-audio-data
-  - quirinux/quirinux-multimedia-codecs
-  - quirinux/quirinux-archive
-  - quirinux/quirinux-power
-  - quirinux/quirinux-gtk-engines
-  - quirinux/quirinux-system-monitoring
-  - quirinux/quirinux-firewall
-  - quirinux/quirinux-network-tools
-  - quirinux/quirinux-flatpak
-  - quirinux/quirinux-tcl-tk
-  - quirinux/quirinux-mono
-  - quirinux/quirinux-gnustep
-  - quirinux/quirinux-gambas
-  - quirinux/quirinux-nodejs
-  - quirinux/quirinux-xorg-input
-  - quirinux/quirinux-firefox-l10n
-  - quirinux/quirinux-thumbnailers
-  - quirinux/quirinux-opencl
-  - quirinux/quirinux-graphics-libs
-  - quirinux/quirinux-boot
+  - ./accessories/quirinux-base
+  - ./accessories/quirinux-desktop
+  - ./accessories/quirinux-firmware
+  - ./accessories/quirinux-multimedia
+  - ./accessories/quirinux-audio
+  - ./accessories/quirinux-graphics
+  - ./accessories/quirinux-animation
+  - ./accessories/quirinux-office
+  - ./accessories/quirinux-development
+  - ./accessories/quirinux-utils
+  - ./accessories/quirinux-drivers
+  - ./accessories/quirinux-python
+  - ./accessories/quirinux-devtools
+  - ./accessories/quirinux-kde-libs
+  - ./accessories/quirinux-gnome-libs
+  - ./accessories/quirinux-printing
+  - ./accessories/quirinux-vpn
+  - ./accessories/quirinux-filesystem
+  - ./accessories/quirinux-native
+  - ./accessories/quirinux-i18n
+  - ./accessories/quirinux-themes
+  - ./accessories/quirinux-xfce
+  - ./accessories/quirinux-fonts
+  - ./accessories/quirinux-libs
+  - ./accessories/quirinux-audio-data
+  - ./accessories/quirinux-multimedia-codecs
+  - ./accessories/quirinux-archive
+  - ./accessories/quirinux-power
+  - ./accessories/quirinux-gtk-engines
+  - ./accessories/quirinux-system-monitoring
+  - ./accessories/quirinux-firewall
+  - ./accessories/quirinux-network-tools
+  - ./accessories/quirinux-flatpak
+  - ./accessories/quirinux-tcl-tk
+  - ./accessories/quirinux-mono
+  - ./accessories/quirinux-gnustep
+  - ./accessories/quirinux-gambas
+  - ./accessories/quirinux-nodejs
+  - ./accessories/quirinux-xorg-input
+  - ./accessories/quirinux-firefox-l10n
+  - ./accessories/quirinux-thumbnailers
+  - ./accessories/quirinux-opencl
+  - ./accessories/quirinux-graphics-libs
+  - ./accessories/quirinux-boot
 
 finalize:
   customize: true
