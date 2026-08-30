@@ -14,7 +14,10 @@ fi
 # 2. Verifica che il nome del repo sia stato passato
 if [ -z "$1" ]; then
     echo "Uso: $(basename "$0") [nome-repo]"
-    exit 1
+    LOGIN=pieroproietti
+    MAIL="piero.proietti@gmail.com"
+    AUTHOR="Piero Proietti"
+    EDITOR="nano"
 fi
 
 # 3. Esecuzione del clone
