@@ -1,6 +1,13 @@
 #!/bin/bash
 # g4setup - Inizializza l'ambiente Git leggendo da g4config
 
+# Se invocato con sudo/doas, recupera la HOME dell'utente chiamante
+if [ -n "$SUDO_USER" ]; then
+    HOME=$(getent passwd "$SUDO_USER" | cut -d: -f6)
+elif [ -n "$DOAS_USER" ]; then
+    HOME=$(getent passwd "$DOAS_USER" | cut -d: -f6)
+fi
+
 CONFIG_FILE="$HOME/forge/bin/g4config" # Adatta il path alla tua struttura
 
 if [ -f "$CONFIG_FILE" ]; then
@@ -22,10 +29,16 @@ git config --global github.user "$LOGIN"
 if [ "$1" = "-d" ]; then
     echo "🗑️ Disattivazione del salvataggio credenziali Git..."
     git config --global --unset credential.helper
-    rm -f ~/.git-credentials
+    rm -f "$HOME/.git-credentials"
     echo "✅ Password rimosse."
 else
     echo "💾 Abilitazione del salvataggio credenziali Git..."
     git config --global credential.helper store
     echo "✅ Credenziali pronte per essere salvate al prossimo inserimento."
+fi
+
+# Se invocato con sudo/doas, ripristina la proprietà dei file all'utente
+TARGET_USER="${SUDO_USER:-$DOAS_USER}"
+if [ -n "$TARGET_USER" ]; then
+    chown "$TARGET_USER":"$TARGET_USER" "$HOME/.gitconfig" 2>/dev/null
 fi
