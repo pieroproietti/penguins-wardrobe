@@ -7,6 +7,10 @@ packages:
   - gnome-software
   - gnome-system-tools
   - gparted
+  - speech-dispatcher
+  - speech-dispatcher-audio-plugins
+  - python3-uno
+  - libqt5webkit5
   - mint-common
   - mintinstall
   - mint-translations
