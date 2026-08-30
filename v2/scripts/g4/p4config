@@ -1,0 +1,41 @@
+# Configurazione Proxmox Padre per penguins-eggs
+PVE_NODE="father"              # Il nome del tuo nodo Proxmox
+PVE_TARGET="root@192.168.1.2"  # IP del Proxmox padre (con chiavi SSH già scambiate)
+PVE_STORAGE="father-zfs"       # Storage pool su Proxmox per i dischi VM
+PVE_GW="192.168.1.254"         # Gateway della rete locale
+
+# VMID, TEMPLATEID, MAC, IP, NAME
+VTMN_ALPINE="201,9001,BC:24:11:00:02:01,192.168.1.201,forge-alpine"
+VTMN_ARCH="202,9002,BC:24:11:00:02:02,192.168.1.202,forge-arch"
+VTMN_DEBIAN="203,9003,BC:24:11:00:02:03,192.168.1.203,forge-debian"
+VTMN_DEVUAN="204,9004,BC:24:11:00:02:04,192.168.1.204,forge-devuan"
+VTMN_FEDORA="205,9005,BC:24:11:00:02:05,192.168.1.205,forge-fedora"
+VTMN_MANJARO="206,9006,BC:24:11:00:02:06,192.168.1.206,forge-manjaro"
+VTMN_OPENSUSE="207,9007,BC:24:11:00:02:07,192.168.1.207,forge-opensuse"
+VTMN_UBUNTU="208,9008,BC:24:11:00:02:08,192.168.1.208,forge-ubuntu"
+
+# Nome dello snapshot "vergine" per i rollback (opzionale)
+SNAPSHOT_NAME="virgin"
+
+# Uso: check_ssh_keys <IP_BERSAGLIO> [UTENTE]
+check_ssh_keys() {
+    local target_ip=$1
+    local target_user=${2:-artisan} # Usa 'artisan' come default se non specificato
+
+    # Proviamo una finta connessione che fallisce subito se serve la password
+    if ! ssh -o BatchMode=yes -o ConnectTimeout=2 "${target_user}@${target_ip}" exit 2>/dev/null; then
+        echo "=========================================================================="
+        echo " ⚠️  AVVISO: Autenticazione automatica non configurata per $target_ip!"
+        echo " Ti verrà chiesta la password. Per eliminare definitivamente questa"
+        echo " scocciatura, interrompi (Ctrl+C) e lancia questi comandi una sola volta:"
+        echo ""
+        echo "# Genera la chiave (se non l'hai fatto):"
+        echo "ssh-keygen -t ed25519"
+        echo ""
+        echo "# Inviala alla macchina remota: "
+        echo "ssh-copy-id ${target_user}@${target_ip}"
+        echo "=========================================================================="
+        echo ""
+        sleep 2
+    fi
+}
