@@ -37,6 +37,8 @@ L'architettura si basa sulla metafora di un vero e proprio atelier sartoriale:
 * **Il Sarto (`tailor`)**: l'eseguibile che "prende le misure" dell'hardware e della distribuzione in uso, scarica il guardaroba e applica i vestiti desiderati. Può lavorare con il guardaroba ufficiale (`penguins-wardrobe`) oppure con atelier/guardaroba personalizzati di terze parti.
 * **Costumes (`v2/costumes/`)**: sono gli "abiti completi". Rappresentano ricette complete per allestire un Desktop Environment (XFCE, Cinnamon, MATE, GNOME, ecc.) o una configurazione tematica (es. `colibri`, `duck`, `eagle`, `quirinux`, `chicks`, `gypaetus`, `seagull`).
 * **Accessories (`v2/accessories/`)**: sono gli "accessori" modulari (cinture, borse, scarpe). Possono essere inclusi all'interno di un costume o applicati singolarmente (es. `eggs-dev`, `firmwares`, `flatpak`, `graphics`, `kvm`, `liquorix`, `office`, `multimedia`, `waydroid`).
+* **Preseed Debconf (`packages.preseed`)**: file posizionabile all'interno di **ogni costume o accessorio** per preconfigurare in modo del tutto automatico le risposte Debconf (tramite `debconf-set-selections`), eliminando qualsiasi richiesta o finestra interattiva a video durante l'installazione dei pacchetti.
+* **Auto-discovery Pacchetti (`packages.yaml`)**: file opzionale per dichiarare elenchi estesi o modulari di pacchetti separati dalla ricetta YAML principale.
 * **Vendors (`v2/vendors/`)**: contengono le personalizzazioni grafiche e di branding per il boot live (GRUB, Isolinux) e per l'installer grafico [Calamares](https://calamares.io) (moduli, branding, partizionamento, utenti).
 * **Scripts (`v2/scripts/`)**: script bash riutilizzabili per configurare display manager (LightDM, GDM, SDDM), collegamenti sul desktop, hostname e servizi di sistema.
 * **Sysroot Overlay (`sysroot` o `dirs`)**: directory presente all'interno di ciascun costume o accessorio che riproduce la gerarchia del filesystem reale (es. `etc/skel/`, `usr/share/backgrounds/`). Durante l'applicazione viene sovrapposta a `/` preservando attributi e permessi.
@@ -337,8 +339,89 @@ display_manager_notice: true
 #### 2. Auto-Discovery dei Pacchetti Esterni (`packages.yaml`)
 * Se nella directory del costume o dell'accessorio è presente un file `packages.yaml` o `packages.yml`, `tailor` ne scopre e carica automaticamente i pacchetti fondendoli con la lista principale senza duplicati.
 
-#### 3. Preseed Debconf Automatico (`packages.preseed`)
-* Se presente nella directory, `tailor` applica automaticamente le risposte debconf tramite `debconf-set-selections` prima dell'installazione dei pacchetti. Questo file deve essere mirato esclusivamente ai pacchetti forniti da quel costume/accessorio (es. impostare LightDM in `quirinux-desktop`, accettare licenze firmware in `firmwares`), mantenendo le ricette YAML pulite e dichiarative.
+#### 3. Preseed Debconf Automatico (`packages.preseed`) - Zero Interazione
+
+Durante l'installazione di determinati pacchetti su distribuzioni basate su Debian (Debian, Devuan, Ubuntu, Linux Mint, ecc.), APT e DPKG possono invocare `debconf` per porre domande all'utente tramite interfacce testuali (TUI). Queste interruzioni bloccano i processi di installazione non presidiati (*unattended*) o automatizzati. Esempi frequenti:
+* Scelta del Display Manager predefinito (LightDM, SDDM, GDM3).
+* Accettazione obbligatoria di contratti di licenza firmware (es. Wi-Fi Intel `firmware-ipw2x00`, `b43-fwcutter`) o font proprietari (`ttf-mscorefonts-installer`).
+* Selezione del layout di tastiera, charset della console e codepage (`keyboard-configuration`, `console-setup`).
+* Configurazione dei backend di stampa (`cups`, `libpaper`), firewall (`ufw`), o autorizzazioni di cattura pacchetti per utenti non-root (`wireshark-common`).
+
+Per eliminare radicalmente qualsiasi necessità di interazione umana, `penguins-tailor` supporta la presenza di un file **`packages.preseed`** all'interno della directory di **qualsiasi costume o accessorio**.
+
+##### Funzionamento in Tailor
+1. **Rilevamento e Isolamento Modulare**: Prima di installare i pacchetti di un costume o di un accessorio, `tailor` controlla se nella rispettiva cartella esiste `packages.preseed`. Ogni costume/accessorio dichiara esclusivamente le risposte per i pacchetti che include, garantendo isolamento, componibilità e pulizia.
+2. **Iniezione Debconf Preventiva**: Su sistemi Debian/Devuan/Ubuntu, `tailor` verifica che il tool `debconf-set-selections` sia disponibile (installando automaticamente il pacchetto `debconf-utils` se assente) ed applica le risposte nel database di configurazione Debconf prima del lancio di APT.
+3. **Installazione Silenziosa**: APT (`apt-get install` con `DEBIAN_FRONTEND=noninteractive`) procede all'installazione trovando le risposte già impostate, senza mostrare alcun prompt o bloccare l'esecuzione.
+
+##### Formato delle Direttive
+Il file `packages.preseed` utilizza la sintassi nativa di Debconf, strutturata in 4 campi separati da spazi o tabulazioni:
+```text
+<proprietario/pacchetto> <nome-template-debconf> <tipo-dato> <valore>
+```
+* **`<proprietario/pacchetto>`**: Nome del pacchetto Debian o namespace condiviso (es. `lightdm`, `firmware-ipw2x00`, `cups`).
+* **`<nome-template-debconf>`**: Identificatore della domanda o template Debconf.
+* **`<tipo-dato>`**: Tipo di dato atteso (`boolean`, `select`, `multiselect`, `string`, `password`, `note`).
+* **`<valore>`**: Risposta da preimpostare (es. `true`, `false`, `lightdm`, `a4`, `accept`).
+
+##### Esempi Pratici di Preseeding
+
+* **Display Manager predefinito (LightDM / SDDM):**
+  ```text
+  lightdm shared/default-x-display-manager select lightdm
+  ```
+
+* **Accettazione Licenze Firmware Non-Free (Wi-Fi Intel & Broadcom):**
+  ```text
+  firmware-ipw2x00 firmware-ipw2x00/license/accepted boolean true
+  firmware-ipw2x00 firmware-ipw2x00/license/type select accept
+  firmware-ivtv firmware-ivtv/license/accepted boolean true
+  firmware-b43-installer firmware-b43-installer/license/accepted boolean true
+  firmware-b43legacy-installer firmware-b43legacy-installer/license/accepted boolean true
+  b43-fwcutter b43-fwcutter/install_non_free boolean true
+  ```
+
+* **Accettazione EULA Microsoft TrueType Core Fonts:**
+  ```text
+  ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula boolean true
+  ```
+
+* **Cattura Pacchetti Wireshark per Utenti Normali:**
+  ```text
+  wireshark-common wireshark-common/install-setuid boolean true
+  ```
+
+* **Server di Stampa CUPS e Formato Pagina:**
+  ```text
+  libpaper libpaper/defaultpaper select a4
+  cups cups/raw-print boolean true
+  cups cups/backends multiselect lpd, socket, usb, snmp, dnssd
+  ```
+
+* **Dizionari, Lingua e Tastiera:**
+  ```text
+  console-setup console-setup/charmap47 select UTF-8
+  keyboard-configuration keyboard-configuration/layoutcode string it
+  dictionaries-common dictionaries-common/default-ispell select italian (Italian)
+  dictionaries-common dictionaries-common/default-wordlist select italian (Italian)
+  ```
+
+* **Firewall UFW e Aggiornamenti Automatici:**
+  ```text
+  ufw ufw/enable select true
+  unattended-upgrades unattended-upgrades/enable_auto_updates boolean false
+  ```
+
+##### 💡 Come Estrarre le Risposte Debconf da un Sistema Esistente
+Per individuare facilmente le chiavi Debconf di un pacchetto installato da inserire nel file `packages.preseed`:
+
+```bash
+# Ispeziona le risposte correnti memorizzate nel database debconf
+debconf-show <nome-pacchetto>
+
+# Estrai le righe già formattate pronte da copiare in packages.preseed
+sudo debconf-get-selections | grep "^<nome-pacchetto>"
+```
 
 #### 4. Sequenza (`sequence`)
 * **`repositories`**:
@@ -346,7 +429,7 @@ display_manager_notice: true
   * `sources_list_d`: Comandi shell per aggiungere chiavi GPG e repository PPA o di terze parti.
   * `update`: Esegue l'aggiornamento degli indici dei repository (`apt-get update`).
   * `upgrade`: Esegue l'upgrade del sistema in modalità non interattiva sicura.
-* **`packages`**: Array di pacchetti standard installati con gestione a blocchi e ripristino automatico.
+* **`packages`**: Array di pacchetti standard installati direttamente con pre-validazione della cache e ripristino automatico in caso di errore.
 * **`packages_no_install_recommends`**: Pacchetti installati con `--no-install-recommends` per mantenere il sistema snello.
 * **`packages_interactive`**: Pacchetti che necessitano di interazione (accettazione licenze proprietarie EULA, configurazioni debconf). Vengono eseguiti preservando lo standard I/O reale del terminale.
 * **`accessories`**: Elenco di accessori da concatenare (globali come `base` o relativi come `./firmwares`).
@@ -369,8 +452,11 @@ flowchart TD
     C -- Incompatibile --> C1[Blocco Preventivo Sicuro]
     C -- Compatibile --> D[Kernel Headers Check per DKMS]
     D --> E[Configurazione Repository & Update]
-    E --> F[Installazione Pacchetti a Lotti di 20]
-    F -- Fallimento Lotto? --> G[Dpkg Healing + Fallback Pkg Singoli]
+    E --> PRE{packages.preseed presente?}
+    PRE -- Sì --> PRE1[debconf-set-selections]
+    PRE -- No --> F[Installazione Pacchetti Diretta & Validata]
+    PRE1 --> F
+    F -- Errore APT / Pacchetto Fallito? --> G[Dpkg Healing + Fallback Pkg Singoli]
     G --> H[Applicazione Accessori Concatenati]
     F -- Successo --> H
     H --> I[Sovrapposizione Sysroot Overlay]
@@ -380,10 +466,10 @@ flowchart TD
     L --> M[Avviso Pulizia Kernel & Fine]
 ```
 
-### 1. Installazione a lotti (Batching) e Fallback Atomico
-L'installazione di centinaia di pacchetti in un'unica invocazione `apt` può causare picchi di carico durante l'esecuzione dei trigger di `dpkg` (aggiornamento initramfs, compilazioni DKMS, cache icone/MIME). `tailor` suddivide l'elenco in lotti controllati di **20 pacchetti**:
-* Ogni lotto completato è memorizzato permanentemente su disco.
-* Se un lotto incontra un errore, `tailor` ripara lo stato (`dpkg --configure -a` e `apt-get install -f`) e ritenta l'installazione pacchetto per pacchetto. In questo modo un singolo pacchetto difettoso o mancante non compromette l'intera procedura.
+### 1. Installazione Diretta, Pre-validazione e Fallback Atomico
+`tailor` installa direttamente l'insieme dei pacchetti software richiesti, ottimizzando drasticamente la velocità di esecuzione ed eliminando l'overhead della vecchia suddivisione a lotti (*batching*):
+* **Pre-validazione APT Cache**: prima di invocare APT, `tailor` confronta l'elenco dei pacchetti richiesti con l'indice dei pacchetti disponibili nei repository, segnalando preventivamente quelli mancanti o non reperibili senza bloccare l'intero processo.
+* **Self-Healing e Ripristino Automatico**: qualora l'installazione globale incontri un errore (es. conflitti temporanei o dipendenze rotte), `tailor` ripara automaticamente lo stato di `dpkg` (`dpkg --configure -a` e `apt-get install -f`) e ritenta l'installazione pacchetto per pacchetto in modalità atomica. In questo modo un singolo pacchetto difettoso o mancante non interrompe l'allestimento del costume.
 
 ### 2. Protezione DKMS preventiva
 I pacchetti che utilizzano DKMS falliscono se gli header del kernel in esecuzione non sono presenti. `tailor` rileva il kernel corrente (`uname -r`) e installa preventivamente i pacchetti `linux-headers-$(uname -r)` e `linux-headers-<arch>`, evitando blocchi durante l'unpacking dei moduli kernel per schede video o di rete.
@@ -396,16 +482,26 @@ Ogni operazione viene registrata nel log di sistema `/var/log/tailor.log`. Al te
 * Pacchetti installati con successo.
 * Pacchetti che non è stato possibile installare o reperire.
 
+### 5. Preseeding Debconf a Zero Interazione
+Per ogni costume o accessorio applicato, `tailor` verifica preventivamente la presenza di `packages.preseed`. Le risposte debconf vengono caricate nel database di sistema prima che `apt-get` avvii l'installazione dei pacchetti, assicurando che nessun prompt interattivo (accettazione licenze, scelta del display manager, layout di tastiera) blocchi l'esecuzione o richieda l'intervento dell'utente.
+
 ---
 
-## 🌐 Supporto per Distribuzioni Non-Debian (`AIPrompt.txt`)
+## 🌐 Distribuzioni Supportate (Debian & Arch Linux)
 
-Sebbene l'ecosistema principale sia attualmente focalizzato e collaudato sulla famiglia Debian e derivate (Debian, Devuan, Ubuntu, Linux Mint, Quirinux, ecc.), `penguins-tailor` include il supporto per l'identificazione di distribuzioni **Arch Linux**, **Manjaro**, **Alpine**, **Fedora** e **openSUSE**.
+`penguins-tailor` include un filtro preventivo all'avvio basato su **`FamilyID`** (rilevato tramite `/etc/os-release` e le gerarchie di sistema):
 
-Qualora `tailor wear` venga eseguito su un sistema non basato su `apt-get`:
-1. Rileva la distribuzione e la famiglia di appartenenza via `/etc/os-release`.
-2. Esegue un'analisi automatica dell'hardware grafico (GPU e controller 3D via `lspci`) e delle sessioni desktop disponibili in `/usr/share/xsessions/`.
-3. Genera un file **`AIPrompt.txt`** nella cartella Home dell'utente con tutte le informazioni necessarie per richiedere a un assistente AI (come **Antigravity** o modelli LLM) la conversione immediata dell'elenco pacchetti per il gestore nativo (`pacman`, `apk`, `dnf`, `zypper`).
+* **Famiglia Debian (`familyId: "debian"`)**:
+  * Include: **Debian**, **Devuan**, **Ubuntu**, **Linux Mint**, **Quirinux**, e derivate.
+  * Pieno supporto nativo per l'installazione diretta via `apt-get`, risoluzione delle dipendenze, iniezione debconf (`packages.preseed`), DKMS headers e script di configurazione.
+* **Famiglia Arch Linux (`familyId: "archlinux"`)**:
+  * Include: **Arch Linux**, **Manjaro**, e derivate.
+  * Architettura predisposta con supporto alle ricette `arch.yaml` (già disponibili per diversi accessori come `educational`, `eggs-dev`, `office`, `waydroid`). La gestione nativa dei pacchetti via `pacman` è in fase di sviluppo e costituisce la base per le prossime estensioni modulari dell'ecosistema.
+* **Altre Distribuzioni**:
+  * Se invocato su sistemi non appartenenti alle famiglie `debian` o `archlinux`, `tailor` interrompe immediatamente l'esecuzione in totale sicurezza, proteggendo il sistema da modifiche incoerenti.
+
+> [!NOTE]
+> La precedente generazione di file `AIPrompt.txt` per la conversione esterna dei pacchetti è stata dismessa in favore di una gestione dichiarativa nativa e strutturata all'interno delle ricette `<distro>.yaml`.
 
 ---
 
@@ -493,6 +589,20 @@ finalize:
   cmds:
     - "../../scripts/config_lightdm.sh"
     - "scripts/setup_theme.sh"
+```
+
+### Passo 2b: Eliminare le interazioni con `packages.preseed` (Opzionale)
+Se il costume o l'accessorio include pacchetti che normalmente richiedono risposte interattive (come la scelta del Display Manager, l'accettazione di contratti EULA di font o firmware non-free), crea il file `packages.preseed` nella cartella del costume per automatizzare completamente la procedura:
+
+```bash
+cat << 'EOF' > ~/.wardrobe/v2/costumes/my-desktop/packages.preseed
+# Imposta automaticamente LightDM come Display Manager predefinito
+lightdm shared/default-x-display-manager select lightdm
+
+# Accetta le licenze dei driver proprietari senza bloccare l'installazione
+firmware-ipw2x00 firmware-ipw2x00/license/accepted boolean true
+firmware-ipw2x00 firmware-ipw2x00/license/type select accept
+EOF
 ```
 
 ### Passo 3: Aggiungere file e configurazioni in `sysroot`

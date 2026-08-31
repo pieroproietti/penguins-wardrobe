@@ -8,7 +8,8 @@ This directory contains the **v2 wardrobe definitions**: costumes, accessories, 
 ## 📁 Directory Layout
 
 - **`costumes/`**: Declarative desktop and system environment recipes (e.g. `colibri`, `eagle`, `duck`, `seagull`, `quirinux`).
-- **`accessories/`**: Modular components that can be installed alongside costumes or standalone (e.g. `eggs-dev`, `base`, `live-installer`).
+- **`accessories/`**: Modular components that can be installed alongside costumes or standalone (e.g. `eggs-dev`, `base`, `live-installer`, `firmwares`).
+- **`packages.preseed`**: Debconf automatic preseeding files (per costume/accessory) for 100% unattended installations without interactive prompts.
 - **`vendors/`**: Vendor-specific customizations and configurations.
 - **`scripts/`**: Utility and helper scripts executed during the wardrobe customization sequence.
 - **`DOCS/`**: Documentation and guides (see [Wardrobe Users' Guide](./DOCS/wardrobe-users-guide.md)).
