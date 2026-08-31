@@ -1,4 +1,5 @@
 packages:
+  # Diccionarios y manuales existentes
   - ifrench-gut
   - iitalian
   - ingerman
@@ -6,19 +7,27 @@ packages:
   - manpages-de
   - manpages-fr
   - manpages-it
+  - manpages-es
+  - hunspell-es
+  - ispanish
+  - wspanish
+  - wfrench
+  - witalian
+  - wngerman
+  - wportuguese
   - task-french
   - task-french-desktop
   - task-galician
   - task-galician-desktop
   - task-german
   - task-german-desktop
+  - task-hungarian
+  - task-hungarian-desktop
   - task-italian
   - task-italian-desktop
-  - task-laptop
   - task-portuguese
   - task-portuguese-desktop
-  - task-xfce-desktop
-  - wfrench
-  - witalian
-  - wngerman
-  - wportuguese
+  - task-russian
+  - task-russian-desktop
+  - task-spanish
+  - task-spanish-desktop
