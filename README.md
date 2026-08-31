@@ -52,5 +52,5 @@ tailor export log
 
 ## 📜 Copyright and License
 
-Copyright (c) 2017-2026 Piero Proietti. Dual licensed under the MIT or GPL Version 2 licenses.
+Copyright (c) 2026 Piero Proietti. Dual licensed under the MIT or GPL Version 2 licenses.
 
