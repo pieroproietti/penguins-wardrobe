@@ -74,22 +74,19 @@ sequence:
 finalize:
   customize: true
   cmds:
-  # 1. Limpieza y reparación de paquetes
-  - DEBIAN_FRONTEND=readline PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin" apt-get autoremove -y || true
-  - dpkg --configure -a || true
-  - apt-get remove -y broadcom-sta-dkms || true
+  # 1. Configuración y reparaciones
+  - DEBIAN_FRONTEND=readline PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin" dpkg --configure -a || true
   - apt-get install -y --allow-downgrades --fix-broken || true
+  
+  # 2. Instalaciones específicas
   - apt-get install -y quirinux-firmware quirinux-youdown quirinux-youtubedown || true
   
-  # 2. EVITAR PAQUETES NO DESEADOS (Recomendados)
+  # 3. Evitar paquetes no deseados (Recomendados)
   - echo 'APT::Install-Recommends "0";' > /etc/apt/apt.conf.d/99no-recommends
   - apt-get remove --purge -y kdeconnect 2>/dev/null || true
-  - apt-get autoremove -y 2>/dev/null || true
-
-  # 3. Generación de locales para los idiomas instalados
-  - locale-gen es_ES.UTF-8 pt_BR.UTF-8 pt_PT.UTF-8 hu_HU.UTF-8 gl_ES.UTF-8 de_DE.UTF-8 ru_RU.UTF-8 fr_FR.UTF-8 it_IT.UTF-8 || true
   
-  # 4. Configuración del Display Manager (LightDM)
+  # 4. Configuración de locales y display manager
+  - locale-gen es_ES.UTF-8 pt_BR.UTF-8 pt_PT.UTF-8 hu_HU.UTF-8 gl_ES.UTF-8 de_DE.UTF-8 ru_RU.UTF-8 fr_FR.UTF-8 it_IT.UTF-8 || true
   - echo "/usr/sbin/lightdm" > /etc/X11/default-display-manager
   - (command -v systemctl >/dev/null 2>&1 && systemctl disable slim.service 2>/dev/null && systemctl mask slim.service 2>/dev/null) || (insserv -r slim 2>/dev/null || update-rc.d slim disable 2>/dev/null) || true
   - for dm in slim gdm3 gdm sddm; do if command -v systemctl >/dev/null 2>&1; then systemctl disable "$dm.service" 2>/dev/null || true; systemctl mask "$dm.service" 2>/dev/null || true; else [ -f "/etc/init.d/$dm" ] && update-rc.d -f "$dm" remove 2>/dev/null || true; fi; done
@@ -104,4 +101,9 @@ finalize:
   - update-alternatives --remove pager /bin/cat || true
   - "../../scripts/config_lightdm.sh"
   - "../../scripts/hostname.sh"
+
+  # 6.Limpieza segura
+  - apt-get autoremove -y || true
+  - apt-get clean || true
+
 reboot: true
