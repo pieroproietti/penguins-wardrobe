@@ -1,0 +1,37 @@
+#!/bin/bash
+
+echo "🔍 Ispezione dell'ambiente in corso..."
+
+# 1. Rilevamento automatico del sistema operativo
+if [ -f /etc/os-release ]; then
+    source /etc/os-release
+else
+    echo "❌ Errore: File /etc/os-release non trovato. Impossibile rilevare il sistema."
+    exit 1
+fi
+
+# 2. Normalizzazione del nome forge
+if [[ "$ID" == *"opensuse"* ]] || [[ "$ID_LIKE" == *"suse"* ]]; then
+    FORGE="opensuse"
+else
+    FORGE=$ID
+fi
+
+echo "🛠️ Sistema rilevato: $PRETTY_NAME"
+echo "⚙️ Avvio autoconfigurazione fucina per: $FORGE..."
+
+# Trova la cartella dove si trova questo script principale
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+MODULE_FILE="${SCRIPT_DIR}/set_${FORGE}.sh"
+
+# 3. Caricamento dinamico del modulo
+if [ -f "$MODULE_FILE" ]; then
+    echo "-> Esecuzione modulo specifico: set_${FORGE}.sh"
+    source "$MODULE_FILE"
+else
+    echo "❌ Errore: Nessun modulo di configurazione trovato per '$FORGE'."
+    echo "Assicurati che il file '$MODULE_FILE' esista nella stessa directory."
+    exit 1
+fi
+
+echo "✅ Autoconfigurazione completata con successo! La fucina è pronta."

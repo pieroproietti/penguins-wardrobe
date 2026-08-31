@@ -39,15 +39,19 @@ sequence:
     - xfwm4
     - adwaita-icon-theme-full
     - adwaita-qt
-    - fonts-font-awesome
-    - fonts-noto-color-emoji
     - gnome-icon-theme
     - plymouth
     - plymouth-themes
     - libglib2.0-bin
     - gnome-disk-utility
+
+    # a bit of charm...
+    - fonts-inter 
+    - fonts-jetbrains-mono
+    - bibata-cursor-theme
+
     #- ruby-deb
-    - libarchive-tools
+    #- libarchive-tools
     #- firmware-atheros
     #- firmware-brcm80211
     #- firmware-iwlwifi
@@ -61,6 +65,8 @@ sequence:
     - base
     - eggs-dev
   cmds:
+    - "update-alternatives --set x-terminal-emulator /usr/bin/xfce4-terminal.wrapper"
+    - "update-alternatives --set x-cursor-theme /usr/share/icons/Bibata-Modern-Classic/cursor.theme"
     - "../../scripts/config_desktop_link.sh"
     - "../../scripts/config_lightdm.sh"
     - "../../scripts/config_g4.sh"

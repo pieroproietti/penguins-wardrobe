@@ -1,0 +1,55 @@
+#!/bin/bash
+# Uso standard: p4start debian [forge|furnace] [percorso_iso_opzionale]
+# Esempio: p4start debian
+# Esempio: p4start debian furnace
+# Esempio: p4start debian naked:iso/la-tua-uovo.iso
+
+CONFIG_FILE="$HOME/forge/bin/p4config"
+
+if [ ! -f "$CONFIG_FILE" ]; then 
+    echo "Errore: p4config non trovato in $CONFIG_FILE!"
+    exit 1
+fi
+source "$CONFIG_FILE"
+
+DISTRO=$1
+TYPE="forge"
+ISO_PATH=""
+
+if [ -z "$DISTRO" ]; then
+    echo "Uso: $0 [distro] [forge|furnace] [percorso_iso_opzionale]"
+    exit 1
+fi
+
+if [ "$2" == "furnace" ] || [ "$2" == "forge" ]; then
+    TYPE=$2
+    ISO_PATH=$3
+else
+    ISO_PATH=$2
+fi
+
+# Punta alla variabile compatta
+VAR_NAME="VTMN_${DISTRO^^}"
+STRING_VALUE=${!VAR_NAME}
+
+if [ -z "$STRING_VALUE" ]; then 
+    echo "❌ Errore: Distro '$DISTRO' non configurata in p4config (VTMN_ mancante)!"
+    exit 1
+fi
+
+# Estrazione dei dati
+IFS=',' read -r base_vmid template_id mac target_ip vm_name <<< "$STRING_VALUE"
+
+vmid=$base_vmid
+if [ "$TYPE" == "furnace" ]; then
+    vmid=$((base_vmid + 100))
+fi
+
+# Se è stata passata una ISO, la agganciamo prima del boot
+if [ -n "$ISO_PATH" ]; then
+    echo "💿 Aggancio la ISO $ISO_PATH al lettore CD della VM $vmid..."
+    ssh "$PVE_TARGET" "qm set $vmid --ide2 ${ISO_PATH},media=cdrom"
+fi
+
+echo "🚀 Accensione $TYPE $DISTRO (VMID: $vmid) sul nodo $PVE_NODE..."
+ssh "$PVE_TARGET" "qm start $vmid"

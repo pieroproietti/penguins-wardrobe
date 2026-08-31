@@ -1,0 +1,121 @@
+#!/bin/bash
+# Uso: p4push [debian|arch|manjaro|fedora|opensuse|alpine|all] [forge|furnace]
+# Esempio: p4push debian
+# Esempio: p4push debian furnace
+# Esempio: p4push all furnace
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+CONFIG_FILE="${SCRIPT_DIR}/p4config"
+if [ ! -f "$CONFIG_FILE" ]; then 
+    echo "❌ Errore: File p4config non trovato in $CONFIG_FILE"
+    exit 1
+fi
+source "$CONFIG_FILE"
+
+DISTRO=$1
+TYPE=${2:-forge}
+
+if [ -z "$DISTRO" ]; then
+    echo "Uso: $0 [distro|all] [forge|furnace]"
+    echo "Distro supportate: alpine, arch, debian, devuan, fedora, manjaro, opensuse, ubuntu"
+    exit 1
+fi
+
+if [ "$TYPE" != "forge" ] && [ "$TYPE" != "furnace" ]; then
+    echo "❌ Tipo non valido. Usa 'forge' o 'furnace' (default: forge)."
+    exit 1
+fi
+
+push_to_vm() {
+    # Forza subito la stringa in maiuscolo (es. debian -> DEBIAN)
+    local target_name=${1^^} 
+    local type=$2
+    
+    # Salvaguardia: evitiamo che la mother faccia un push su se stessa
+    if [ "$target_name" == "MOTHER" ]; then 
+        return
+    fi
+    
+    # Puntiamo alla nuova variabile compatta
+    local var_source="VTMN_${target_name}"
+    local string_value=${!var_source}
+
+    if [ -z "$string_value" ]; then 
+        echo "❌ Distro '$target_name' non configurata in p4config (VTMN_ mancante)!"
+        return
+    fi
+
+    # Estraiamo tutti i parametri, prendendo l'IP reale dalla stringa
+    IFS=',' read -r base_vmid template_id mac target_ip vm_name <<< "$string_value"
+
+    local vmid=$base_vmid
+    if [ "$type" == "furnace" ]; then
+        vmid=$((base_vmid + 100))
+        vm_name="furnace-${target_name,,}"
+        echo "🔍 Rilevamento IP per la fucina (furnace) VMID $vmid tramite QEMU Guest Agent..."
+        
+        # Prova a recuperare l'IP per un massimo di 10 tentativi
+        local detected_ip=""
+        for i in {1..10}; do
+            local JSON_DATA
+            JSON_DATA=$(ssh "$PVE_TARGET" "qm guest cmd $vmid network-get-interfaces 2>/dev/null")
+            if [ -n "$JSON_DATA" ]; then
+                detected_ip=$(echo "$JSON_DATA" | python3 -c "
+import sys, json
+try:
+    data = json.load(sys.stdin)
+    ips = []
+    for iface in data:
+        for addr in iface.get('ip-addresses', []):
+            ip = addr.get('ip-address')
+            if ip and addr.get('ip-address-type') == 'ipv4' and ip != '127.0.0.1':
+                ips.append(ip)
+    if ips:
+        print(ips[0])
+except Exception as e:
+    pass
+")
+            fi
+            if [ -n "$detected_ip" ] && [ "$detected_ip" != "null" ]; then
+                target_ip=$detected_ip
+                break
+            fi
+            echo "⏳ In attesa dell'IP (tentativo $i/10)..."
+            sleep 2
+        done
+
+        if [ -z "$detected_ip" ] || [ "$detected_ip" == "null" ]; then
+            echo "❌ Errore: Impossibile rilevare l'IP di $vm_name tramite QEMU Guest Agent."
+            return
+        fi
+    fi
+
+    echo "🚀 Sincronizzo oa-tools su $vm_name ($target_ip)..."
+    
+    # --- RICHIAMO LA LIBRERIA CONDIVISA ---
+    check_ssh_keys "$target_ip"
+    
+    # Trasferimento incrementale e speculare
+    rsync -avz --delete \
+        --exclude='oa/oa' \
+        --exclude='coa/coa' \
+        --exclude='*.o' \
+        --exclude='*.a' \
+        --exclude='alpine-build/' \
+        "$HOME/forge/penguins-eggs/" "artisan@${target_ip}:/home/artisan/penguins-eggs/"
+        
+    echo "✅ Sincronizzazione completata su $vm_name!"
+}
+
+# Magia nera aggiornata: cerchiamo le nuove variabili VTMN_
+if [ "$DISTRO" == "all" ]; then
+    # Estrae tutte le parole che seguono "VTMN_" nel file p4config
+    DISTROS=$(grep -oP '(?<=^VTMN_)[^=]+' "$CONFIG_FILE")
+    
+    for d in $DISTROS; do
+        push_to_vm "$d" "$TYPE"
+        echo "----------------------------------------"
+    done
+else
+    push_to_vm "$DISTRO" "$TYPE"
+fi

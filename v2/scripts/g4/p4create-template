@@ -1,0 +1,84 @@
+#!/bin/bash
+# Uso: p4create-template [distro|all]
+# Esempio: p4create-template debian
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+CONFIG_FILE="${SCRIPT_DIR}/p4config"
+
+if [ ! -f "$CONFIG_FILE" ]; then 
+    echo "❌ Errore: p4config non trovato in $CONFIG_FILE!"
+    exit 1
+fi
+source "$CONFIG_FILE"
+
+DISTRO=$1
+if [ -z "$DISTRO" ]; then
+    echo "Uso: $0 [distro|all]"
+    echo "Distro supportate: alpine, arch, debian, devuan, fedora, manjaro, opensuse, ubuntu"
+    exit 1
+fi
+
+create_template() {
+    local target=$1
+    local template_id
+
+    case "$target" in
+        alpine)   template_id=9001 ;;
+        arch)     template_id=9002 ;;
+        debian)   template_id=9003 ;;
+        devuan)   template_id=9004 ;;
+        fedora)   template_id=9005 ;;
+        manjaro)  template_id=9006 ;;
+        opensuse) template_id=9007 ;;
+        ubuntu)   template_id=9008 ;;
+        *)
+            echo "❌ Distro '$target' non supportata."
+            return
+            ;;
+    esac
+
+    echo "⚙️  Verifica presenza VM/Template $template_id (template-$target) su Proxmox..."
+    if ssh "$PVE_TARGET" "qm status $template_id" &>/dev/null; then
+        echo "⚠️  Avviso: Il VMID $template_id esiste già su Proxmox."
+        read -p "Vuoi distruggerlo e ricrearlo? (s/N): " -r CONFIRM
+        if [[ ! "$CONFIRM" =~ ^[Ss]$ ]]; then
+            echo "Salto creazione per $target."
+            return
+        fi
+        echo "🗑️  Rimozione VM/Template esistente $template_id..."
+        ssh "$PVE_TARGET" "qm destroy $template_id"
+    fi
+
+    echo "🏗️  Creazione VM shell $template_id per $target (Display SPICE, disco 16GB ZFS)..."
+    
+    # Crea la VM
+    ssh "$PVE_TARGET" "qm create $template_id \
+        --name template-$target \
+        --memory 2048 \
+        --cores 2 \
+        --cpu host \
+        --net0 virtio,bridge=vmbr0 \
+        --scsihw virtio-scsi-single \
+        --vga qxl \
+        --agent 1 \
+        --ide2 none,media=cdrom \
+        --scsi0 ${PVE_STORAGE}:16,discard=on \
+        --boot 'order=ide2;scsi0'"
+
+    echo "✅ VM $template_id (template-$target) creata con successo!"
+    echo "👉 Puoi collegare l'ISO di installazione e avviare la VM per l'installazione manuale."
+    echo "   Al termine dell'installazione, spegni la VM e convertila in template eseguendo:"
+    echo "   ssh $PVE_TARGET \"qm template $template_id\""
+}
+
+if [ "$DISTRO" == "all" ]; then
+    DISTROS=("alpine" "arch" "debian" "devuan" "fedora" "manjaro" "opensuse" "ubuntu")
+    for d in "${DISTROS[@]}"; do
+        echo "=========================================================================="
+        echo "🚀 Creazione VM di base per $d"
+        echo "=========================================================================="
+        create_template "$d"
+    done
+else
+    create_template "$DISTRO"
+fi

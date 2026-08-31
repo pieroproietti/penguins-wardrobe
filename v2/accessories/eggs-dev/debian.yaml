@@ -22,19 +22,16 @@ sequence:
           https://packages.microsoft.com/repos/code stable main" | tee
           /etc/apt/sources.list.d/vscode.list > /dev/null
 
-      - rm -f /usr/share/keyrings/nodesource.gpg
-      - >-
-          curl -fsSL https://deb.nodesource.com/gpgkey/nodesource.gpg.key | gpg
-          --dearmor -o /usr/share/keyrings/nodesource.gpg > /dev/null
-      - >-
-          . /etc/os-release && echo "deb [signed-by=/usr/share/keyrings/nodesource.gpg]
-          https://deb.nodesource.com/node_22.x ${VERSION_CODENAME} main" | tee
-          /etc/apt/sources.list.d/nodesource.list > /dev/null
     update: true
     upgrade: true
   packages:
     - code
     - nodejs
+    - build-essential 
+    - dpkg-dev 
+    - git 
+    - golang
+
     # python tools for pengui
     #- ccache
     #- libxcb-cursor0
@@ -48,9 +45,5 @@ sequence:
 finalize:
   cmds:
     - echo -e "\n# wardrobe\nfs.inotify.max_user_watches=524288" >> /etc/sysctl.conf
-    - npm i pnpm -g
-    - sudo -u ${SUDO_USER} pnpm completion bash > ~/completion-for-pnpm.bash
-    - sudo -u ${SUDO_USER} echo 'source ~/completion-for-pnpm.bash' >> ~/.bashrc
-    - gem install fpm
     - ../../scripts/tools-jq.sh
     - curl -fsSL https://antigravity.google/cli/install.sh | bash -s -- --dir /usr/local/bin

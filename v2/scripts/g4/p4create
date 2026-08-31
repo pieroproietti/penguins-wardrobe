@@ -1,0 +1,111 @@
+#!/bin/bash
+# Uso: p4create [distro|all] [forge|furnace]
+# Esempio: p4create debian forge
+# Esempio: p4create all furnace
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+CONFIG_FILE="${SCRIPT_DIR}/p4config"
+if [ ! -f "$CONFIG_FILE" ]; then 
+    echo "❌ Errore: p4config non trovato in $CONFIG_FILE!"
+    exit 1
+fi
+source "$CONFIG_FILE"
+
+DISTRO=$1
+if [ -z "$DISTRO" ]; then
+    echo "Uso: $0 [distro|all] [forge|furnace]"
+    echo "Distro supportate: alpine, arch, debian, devuan, fedora, manjaro, opensuse, ubuntu"
+    exit 1
+fi
+
+TYPE=${2:-forge}
+if [ "$TYPE" != "forge" ] && [ "$TYPE" != "furnace" ]; then
+    echo "❌ Tipo non valido. Usa 'forge' o 'furnace' (default: forge)."
+    exit 1
+fi
+
+create_vm() {
+    local target_name=${1^^} # Converte in maiuscolo (es. DEBIAN)
+    local type=$2
+    
+    # Punta alla variabile compatta VTMN_
+    local var_source="VTMN_${target_name}"
+    local string_value=${!var_source}
+
+    if [ -z "$string_value" ]; then 
+        echo "❌ Distro '$target_name' non configurata in p4config (variabile VTMN_ mancante)!"
+        return
+    fi
+
+    # Estrazione dei 5 parametri tramite la virgola
+    IFS=',' read -r base_vmid template_id mac ip name <<< "$string_value"
+
+    # Controllo di sicurezza sui dati estratti
+    if [ -z "$base_vmid" ] || [ -z "$template_id" ] || [ -z "$mac" ] || [ -z "$ip" ] || [ -z "$name" ]; then
+        echo "❌ Dati incompleti per '$target_name'. Formato richiesto: VMID,TEMPLATEID,MAC,IP,NAME"
+        return
+    fi
+
+    local vmid
+    local vm_name
+    local net_opts
+
+    if [ "$type" == "furnace" ]; then
+        vmid=$((base_vmid + 100))
+        vm_name="furnace-${target_name,,}"
+        net_opts="virtio,bridge=vmbr0,firewall=1"
+        echo "🏗️  Creazione fucine (furnace) - Nome: $vm_name, VMID: $vmid..."
+    else
+        vmid=$base_vmid
+        vm_name="forge-${target_name,,}"
+        net_opts="virtio,bridge=vmbr0,firewall=1,macaddr=${mac}"
+        echo "🏗️  Creazione forge - Nome: $vm_name, VMID: $vmid..."
+    fi
+
+    # Verifica se la VM esiste già su Proxmox
+    if ssh "$PVE_TARGET" "qm status $vmid" &>/dev/null; then
+        echo "⚠️  Avviso: Il VMID $vmid ($vm_name) esiste già su Proxmox."
+        read -p "Vuoi distruggerlo e ricrearlo? (s/N): " -r CONFIRM
+        if [[ ! "$CONFIRM" =~ ^[Ss]$ ]]; then
+            echo "Salto creazione per $target_name."
+            return
+        fi
+        echo "🗑️  Rimozione VM esistente $vmid..."
+        ssh "$PVE_TARGET" "qm destroy $vmid"
+    fi
+
+    # 1. Clona il template (Linked clone su ZFS)
+    echo "👥 Clonazione dal template $template_id..."
+    ssh "$PVE_TARGET" "qm clone $template_id $vmid --name $vm_name --full 0"
+
+    # 2. Configura l'hardware (Memoria, CPU, Rete e directory condivisa 9p)
+    echo "⚙️  Configurazione hardware della VM..."
+    ssh "$PVE_TARGET" "qm set $vmid \
+      --memory 2048 \
+      --sockets 2 --cores 2 \
+      --cpu host \
+      --net0 ${net_opts} \
+      --args '-virtfs local,path=/eggs/shared,mount_tag=eggs_shared,security_model=none,id=eggs_shared'"
+
+    if [ "$type" == "furnace" ]; then
+        echo "🏷️  Personalizzazione hostname della fucina a 'naked'..."
+        ssh "$PVE_TARGET" "virt-customize -a /dev/zvol/zfs/vm-${vmid}-disk-0 --hostname naked"
+    fi
+
+    echo "✅ VM $vmid ($vm_name) creata con successo!"
+    echo "👉 Avvia la VM con: ssh $PVE_TARGET 'qm start $vmid'"
+}
+
+# Ciclo di creazione (Massiva o Singola)
+if [ "$DISTRO" == "all" ]; then
+    DISTROS=("ALPINE" "ARCH" "DEBIAN" "DEVUAN" "FEDORA" "MANJARO" "OPENSUSE" "UBUNTU")
+    for d in "${DISTROS[@]}"; do
+        var_check="VTMN_${d}"
+        if [ -n "${!var_check}" ]; then
+            create_vm "$d" "$TYPE"
+            echo "----------------------------------------"
+        fi
+    done
+else
+    create_vm "$DISTRO" "$TYPE"
+fi

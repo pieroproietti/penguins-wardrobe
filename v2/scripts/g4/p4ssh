@@ -1,0 +1,99 @@
+#!/bin/bash
+# Uso: p4ssh [debian|arch|manjaro|fedora|opensuse|alpine|ubuntu] [forge|furnace]
+# Esempio: p4ssh debian
+# Esempio: p4ssh debian furnace
+
+# 1. Carica la configurazione globale
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+CONFIG_FILE="${SCRIPT_DIR}/p4config"
+
+# Fallback se lanciato da altre directory
+if [ ! -f "$CONFIG_FILE" ]; then 
+    CONFIG_FILE="$HOME/forge/bin/p4config"
+fi
+
+if [ ! -f "$CONFIG_FILE" ]; then 
+    echo "❌ Errore: File p4config non trovato in $CONFIG_FILE"
+    exit 1
+fi
+source "$CONFIG_FILE"
+
+DISTRO=$1
+TYPE=${2:-forge}
+
+if [ -z "$DISTRO" ]; then
+    echo "Uso: $0 [distro] [forge|furnace]"
+    # Mostriamo rapidamente quali distro sono disponibili pescando da VTMN_
+    echo "Disponibili: $(grep -oP '(?<=^VTMN_)[^=]+' "$CONFIG_FILE" | tr '\n' ' ')"
+    exit 1
+fi
+
+if [ "$TYPE" != "forge" ] && [ "$TYPE" != "furnace" ]; then
+    echo "❌ Tipo non valido. Usa 'forge' o 'furnace' (default: forge)."
+    exit 1
+fi
+
+# 2. Punta alla nuova stringa compatta
+VAR_NAME="VTMN_${DISTRO^^}"
+STRING_VALUE=${!VAR_NAME}
+
+if [ -z "$STRING_VALUE" ]; then 
+    echo "❌ Distro '$DISTRO' non configurata in p4config (VTMN_ mancante)!"
+    exit 1
+fi
+
+# 3. Estrazione dei dati (ci serve l'IP reale e il nome per i log)
+IFS=',' read -r base_vmid template_id mac target_ip vm_name <<< "$STRING_VALUE"
+
+vmid=$base_vmid
+if [ "$TYPE" == "furnace" ]; then
+    vmid=$((base_vmid + 100))
+    vm_name="furnace-${DISTRO,,}"
+    echo "🔍 Rilevamento IP per la fucina (furnace) VMID $vmid tramite QEMU Guest Agent..."
+    
+    # Prova a recuperare l'IP per un massimo di 10 tentativi
+    local detected_ip=""
+    for i in {1..10}; do
+        local JSON_DATA
+        JSON_DATA=$(ssh "$PVE_TARGET" "qm guest cmd $vmid network-get-interfaces 2>/dev/null")
+        if [ -n "$JSON_DATA" ]; then
+            detected_ip=$(echo "$JSON_DATA" | python3 -c "
+import sys, json
+try:
+    data = json.load(sys.stdin)
+    ips = []
+    for iface in data:
+        for addr in iface.get('ip-addresses', []):
+            ip = addr.get('ip-address')
+            if ip and addr.get('ip-address-type') == 'ipv4' and ip != '127.0.0.1':
+                ips.append(ip)
+    if ips:
+        print(ips[0])
+except Exception as e:
+    pass
+")
+        fi
+        if [ -n "$detected_ip" ] && [ "$detected_ip" != "null" ]; then
+            target_ip=$detected_ip
+            break
+        fi
+        echo "⏳ In attesa dell'IP (tentativo $i/10)..."
+        sleep 2
+    done
+
+    if [ -z "$detected_ip" ] || [ "$detected_ip" == "null" ]; then
+        echo "❌ Errore: Impossibile rilevare l'IP di $vm_name tramite QEMU Guest Agent."
+        exit 1
+    fi
+fi
+
+echo "🔌 Preparazione connessione a $vm_name ($target_ip)..."
+
+# 4. --- RICHIAMO LA LIBRERIA CONDIVISA ---
+check_ssh_keys "$target_ip"
+
+# 5. Connessione SSH interattiva
+echo "🚀 Connesso a $vm_name! [Digita 'exit' o premi CTRL+D per chiudere la sessione]"
+
+# Se i template usano ancora root come default, cambia 'artisan' con 'root' se necessario
+ssh "artisan@${target_ip}"

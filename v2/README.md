@@ -8,7 +8,8 @@ This directory contains the **v2 wardrobe definitions**: costumes, accessories, 
 ## 📁 Directory Layout
 
 - **`costumes/`**: Declarative desktop and system environment recipes (e.g. `colibri`, `eagle`, `duck`, `seagull`, `quirinux`).
-- **`accessories/`**: Modular components that can be installed alongside costumes or standalone (e.g. `eggs-dev`, `base`, `live-installer`).
+- **`accessories/`**: Modular components that can be installed alongside costumes or standalone (e.g. `eggs-dev`, `base`, `live-installer`, `firmwares`).
+- **`packages.preseed`**: Debconf automatic preseeding files (per costume/accessory) for 100% unattended installations without interactive prompts.
 - **`vendors/`**: Vendor-specific customizations and configurations.
 - **`scripts/`**: Utility and helper scripts executed during the wardrobe customization sequence.
 - **`DOCS/`**: Documentation and guides (see [Wardrobe Users' Guide](./DOCS/wardrobe-users-guide.md)).
@@ -16,23 +17,24 @@ This directory contains the **v2 wardrobe definitions**: costumes, accessories, 
 ---
 
 ## 🚀 Quick Usage
+You need to install the package [penguins-tailor](https://github.com/pieroproietti/penguins-tailor) and use it to interact with this or your custom wardrobe.
 
 ```bash
 # Clone or update the wardrobe repository
-wardrobe get
+tailor get
 
 # List available costumes
-wardrobe list
+tailor list
 
 # Show detailed information about a costume
-wardrobe show colibri
+tailor show colibri
 
 # Apply a costume to the current machine
-sudo wardrobe wear colibri
+sudo tailor wear colibri
 
 # Export built packages or execution logs to remote server
-wardrobe export pkg
-wardrobe export log
+tailor export pkg
+tailor export log
 ```
 
 ---
@@ -47,5 +49,5 @@ wardrobe export log
 
 ## 📜 Copyright and License
 
-Copyright (c) 2017-2026 Piero Proietti. Dual licensed under the MIT or GPL Version 2 licenses.
+Copyright (c) 2026 Piero Proietti. Dual licensed under the MIT or GPL Version 2 licenses.
 
