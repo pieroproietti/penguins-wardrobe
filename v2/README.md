@@ -16,23 +16,24 @@ This directory contains the **v2 wardrobe definitions**: costumes, accessories, 
 ---
 
 ## 🚀 Quick Usage
+You need to install the package [penguins-tailor](https://github.com/pieroproietti/penguins-tailor) and use it to interact with this or your custom wardrobe.
 
 ```bash
 # Clone or update the wardrobe repository
-wardrobe get
+tailor get
 
 # List available costumes
-wardrobe list
+tailor list
 
 # Show detailed information about a costume
-wardrobe show colibri
+tailor show colibri
 
 # Apply a costume to the current machine
-sudo wardrobe wear colibri
+sudo tailor wear colibri
 
 # Export built packages or execution logs to remote server
-wardrobe export pkg
-wardrobe export log
+tailor export pkg
+tailor export log
 ```
 
 ---

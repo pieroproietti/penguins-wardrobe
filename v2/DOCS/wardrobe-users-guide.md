@@ -1,5 +1,5 @@
 ---
-title: Guida per l'utente di Penguins' Wardrobe
+title: Guida per l'utente di Penguins' Wardrobe e Tailor
 authors: pieroproietti
 lang: it
 sidebar_position: 3
@@ -9,163 +9,214 @@ import Translactions from '@site/src/components/Translactions';
 
 <Translactions />
 
-# Penguins' Wardrobe - Guida Utente
+# Penguins' Wardrobe & Tailor - Guida Utente
 
-**Penguins' Wardrobe** è uno strumento autonomo, moderno e leggero scritto in **Go**, progettato per gestire e applicare configurazioni di sistema, ambienti desktop, temi e pacchetti software (denominati **"costumi"** e **"accessori"**) su distribuzioni Linux.
+L'ecosistema di personalizzazione e allestimento delle distribuzioni Linux basato su [Penguins' Eggs](https://penguins-eggs.net) adotta una chiara separazione delle responsabilità:
 
-Nato originariamente all'interno dell'ecosistema di rimasterizzazione [Penguins' Eggs](https://penguins-eggs.net), `penguins-wardrobe` è oggi un binario indipendente (`wardrobe`) che permette di trasformare una distribuzione minimale da riga di comando (definita *naked*) in un sistema desktop o server completo, rifinito e pronto all'uso o alla successiva rimasterizzazione in formato ISO.
+* **Penguins' Tailor (`tailor`)**: è il "sarto", uno strumento CLI autonomo, moderno e ultra-veloce scritto in **Go**. È il motore esecutivo incaricato di scaricare i repository, interpretare le ricette dichiarative, gestire i pacchetti software, applicare configurazioni di sistema e preparare l'ambiente utente.
+* **Penguins' Wardrobe (`penguins-wardrobe`)**: è il "guardaroba", il repository contenente le ricette e le definizioni dichiarative in formato YAML (organizzate sotto la struttura **`v2`**), suddivise in **costumi**, **accessori**, **temi vendor** e **script**.
+* **Penguins' Eggs (`eggs`)**: è lo strumento di rimasterizzazione e creazione di immagini ISO avviabili. Il precedente comando integrato `eggs wardrobe` è stato rimosso da Eggs per delegare interamente l'allestimento del sistema al nuovo binario dedicato `tailor`.
+
+Grazie a **Tailor** e **Wardrobe**, è possibile trasformare qualsiasi installazione Linux minimale da riga di comando (definita *naked*) in un sistema desktop o server completo, rifinito e pronto all'uso quotidiano o alla successiva rimasterizzazione in formato Live ISO.
 
 ---
 
-## 👔 La metafora del guardaroba
+## 👔 La metafora del sarto e del guardaroba
 
-Il concetto alla base di **Wardrobe** è quello di un vero e proprio guardaroba organizzato:
+L'architettura si basa sulla metafora di un vero e proprio atelier sartoriale:
 
 ```
 ~/.wardrobe/v2/
-├── costumes/       # I Costumi (ambienti completi)
-├── accessories/    # Gli Accessori (componenti modulari)
-├── vendors/        # I Temi/Vendor (branding Calamares, Plymouth, LiveCD)
-├── scripts/        # Script condivisi di sistema e configurazione
+├── costumes/       # I Costumi (ambienti desktop e configurazioni di sistema complete)
+├── accessories/    # Gli Accessori (componenti e pacchetti software modulari)
+├── vendors/        # I Temi/Vendor (branding per Calamares, Plymouth, LiveCD)
+├── scripts/        # Script bash riutilizzabili di sistema e configurazione
 └── DOCS/           # Documentazione e guide
 ```
 
-* **Costumes (`costumes`)**: sono gli "abiti completi". Rappresentano ricette esaustive per allestire un desktop environment (XFCE, Cinnamon, GNOME, Mate, ecc.) o un server tematico (es. `colibri`, `duck`, `eagle`, `quirinux`, `chicks`).
-* **Accessories (`accessories`)**: sono le "cinture, borse o scarpe". Componenti modulari che possono essere abbinati a un costume o installati da soli (es. `eggs-dev` per l'ambiente di sviluppo, `firmwares`, `flatpak`, `kvm`, `liquorix`, `office`, `multimedia`).
-* **Vendors (`vendors`)**: contengono le personalizzazioni visive del boot live (GRUB, Isolinux) e dell'installer grafico [Calamares](https://calamares.io) (branding, moduli, partizionamento, utenti).
-* **Scripts (`scripts`)**: script bash riutilizzabili per configurare display manager, collegamenti sul desktop, hostname e servizi di sistema.
-* **Sysroot Overlay (`sysroot` o `dirs`)**: una cartella presente all'interno di un costume o accessorio che riproduce la gerarchia del filesystem reale (es. `etc/skel/`, `usr/share/backgrounds/`). Durante l'applicazione viene sovrapposta a `/` preservando attributi e permessi.
+* **Il Sarto (`tailor`)**: l'eseguibile che "prende le misure" dell'hardware e della distribuzione in uso, scarica il guardaroba e applica i vestiti desiderati. Può lavorare con il guardaroba ufficiale (`penguins-wardrobe`) oppure con atelier/guardaroba personalizzati di terze parti.
+* **Costumes (`v2/costumes/`)**: sono gli "abiti completi". Rappresentano ricette complete per allestire un Desktop Environment (XFCE, Cinnamon, MATE, GNOME, ecc.) o una configurazione tematica (es. `colibri`, `duck`, `eagle`, `quirinux`, `chicks`, `gypaetus`, `seagull`).
+* **Accessories (`v2/accessories/`)**: sono gli "accessori" modulari (cinture, borse, scarpe). Possono essere inclusi all'interno di un costume o applicati singolarmente (es. `eggs-dev`, `firmwares`, `flatpak`, `graphics`, `kvm`, `liquorix`, `office`, `multimedia`, `waydroid`).
+* **Vendors (`v2/vendors/`)**: contengono le personalizzazioni grafiche e di branding per il boot live (GRUB, Isolinux) e per l'installer grafico [Calamares](https://calamares.io) (moduli, branding, partizionamento, utenti).
+* **Scripts (`v2/scripts/`)**: script bash riutilizzabili per configurare display manager (LightDM, GDM, SDDM), collegamenti sul desktop, hostname e servizi di sistema.
+* **Sysroot Overlay (`sysroot` o `dirs`)**: directory presente all'interno di ciascun costume o accessorio che riproduce la gerarchia del filesystem reale (es. `etc/skel/`, `usr/share/backgrounds/`). Durante l'applicazione viene sovrapposta a `/` preservando attributi e permessi.
 
 ---
 
-## 📦 Installazione e Compilazione
+## 📦 Installazione e Compilazione di Penguins' Tailor
 
-### 1. Compilazione da sorgenti
+Il comando `tailor` viene fornito dal pacchetto **`penguins-tailor`**.
 
-È possibile compilare e installare `penguins-wardrobe` su qualsiasi distribuzione Linux con Go installato:
+### 1. Compilazione da sorgenti (Go)
+
+È possibile compilare e installare `penguins-tailor` su qualsiasi distribuzione Linux dotata dell'ambiente di compilazione Go (versione 1.22 o superiore):
 
 ```bash
-git clone https://github.com/pieroproietti/penguins-wardrobe.git
-cd penguins-wardrobe
+git clone https://github.com/pieroproietti/penguins-tailor.git
+cd penguins-tailor
 make
 sudo make install
 ```
 
-Il binario `wardrobe` verrà installato in `/usr/local/bin/wardrobe`.
+Il binario `tailor` verrà installato in `/usr/local/bin/tailor`.
 
 ### 2. Creazione pacchetti nativi di distribuzione
 
-`wardrobe` integra un tool di packaging multipiattaforma (`wardrobe tools build`). Per generare il pacchetto nativo per la tua distribuzione (`.deb` per Debian/Ubuntu, `PKGBUILD`/`.pkg.tar.zst` per Arch Linux, `.rpm` per Fedora/openSUSE, `.apk` per Alpine):
+`tailor` integra un tool di packaging multipiattaforma (`tailor tools build`). Per generare il pacchetto nativo per la tua distribuzione (`.deb` per Debian/Ubuntu, `PKGBUILD`/`.pkg.tar.zst` per Arch Linux, `.rpm` per Fedora/openSUSE, `.apk` per Alpine):
 
 ```bash
-# Eseguire da utente normale (NON da root)
-wardrobe tools build
+# Eseguire da utente standard (NON come root)
+tailor tools build
+```
+
+### 3. Configurazione dei Repository Ufficiali
+
+È possibile configurare o rimuovere con facilità i repository ufficiali di `penguins-eggs.net` e le relative chiavi GPG per il gestore di pacchetti del sistema in uso (APT, Pacman, DNF, Zypper, APK):
+
+```bash
+# Aggiunge il repository ufficiale e le chiavi GPG
+sudo tailor tools repo add
+
+# Rimuove il repository e le chiavi GPG
+sudo tailor tools repo rm
 ```
 
 ---
 
-## 🚀 Guida ai Comandi CLI
+## 🚀 Guida ai Comandi CLI (`tailor`)
 
-Il comando principale è `wardrobe`. Di seguito l'elenco completo delle funzionalità:
+Il comando principale è **`tailor`**. Di seguito la guida dettagliata a tutte le funzionalità disponibili:
 
-### 1. `wardrobe get`
-Scarica o aggiorna il repository dei costumi nella cartella nascosta dell'utente `~/.wardrobe`.
+### 1. `tailor get [url] [-b branch]`
+Scarica o aggiorna il repository del guardaroba nella cartella `~/.wardrobe` dell'utente reale.
 
 ```bash
-wardrobe get
+# Clona o aggiorna il guardaroba ufficiale (default: pieroproietti/penguins-wardrobe)
+tailor get
+
+# Utilizza un guardaroba personalizzato o di terze parti
+tailor get https://github.com/charliemartinez/penguins-wardrobe
+
+# Specifica un branch alternativo
+tailor get https://github.com/charliemartinez/penguins-wardrobe -b develop
 ```
 
-Se `~/.wardrobe` non esiste, viene eseguito un `git clone`. Se esiste già, viene eseguito un `git pull` per aggiornare tutti i costumi, gli accessori e gli script alle ultime versioni disponibili.
+* Se `~/.wardrobe` non esiste, viene eseguito un `git clone`. Se esiste già, viene eseguito un `git pull` per aggiornare costumi, accessori e script all'ultima versione.
+* **Flag:**
+  * `-u, --url <url>`: URL del repository Git del guardaroba.
+  * `-b, --branch <branch>`: Branch Git da clonare o aggiornare.
 
 ---
 
-### 2. `wardrobe list`
-Elenca tutti i costumi disponibili nel guardaroba locale, indicandone il nome e la descrizione.
+### 2. `tailor list`
+Elenca tutti i costumi disponibili nel guardaroba locale (`~/.wardrobe/v2/costumes`), mostrandone il nome, la descrizione e l'atelier di origine.
 
 ```bash
-wardrobe list
+tailor list
 ```
 
 *Esempio di output:*
 ```text
-Available costumes in penguins-wardrobe:
-- albatros    : Desktop versatile per diverse architetture
-- chicks      : Configurazione leggera ed educativa per bambini e scuole
-- colibri     : Desktop XFCE4 leggero, ottimizzato per lo sviluppo
-- duck        : Desktop Cinnamon rifinito, ideale per chi proviene da Windows
-- eagle       : Ambiente completo con supporto multi-architettura
-- gypaetus    : Configurazione base minimale
-- quirinux    : Distribuzione multimediale e per animatori grafici (Devuan/Debian)
-- seagull     : Desktop essenziale e performante
+👗 AVAILABLE COSTUMES
+Costumes and recipes from atelier: https://github.com/pieroproietti/penguins-wardrobe
+
+  • albatros     : Desktop versatile per diverse architetture
+  • chicks       : Configurazione leggera ed educativa per bambini e scuole
+  • colibri      : Desktop XFCE4 leggero, ottimizzato per lo sviluppo
+  • duck         : Desktop Cinnamon rifinito, ideale per chi proviene da Windows
+  • eagle        : Ambiente completo con supporto multi-architettura
+  • gypaetus     : Configurazione base minimale per server o sistemi headless
+  • quirinux     : Distribuzione per produzione multimediale e animazione
+  • seagull      : Desktop essenziale e performante
 ```
 
 ---
 
-### 3. `wardrobe show <costume>`
-Mostra i dettagli e i metadati di uno specifico costume o accessorio: descrizione, distribuzioni supportate, pacchetti richiesti, accessori collegati e comandi di finalizzazione.
+### 3. `tailor show <costume>`
+Mostra i metadati dettagliati di uno specifico costume o accessorio: autore, versione, distribuzioni supportate, accessori inclusi, anteprima pacchetti e comandi di sequenza/finalizzazione.
 
 ```bash
-wardrobe show colibri
+tailor show colibri
 ```
 
-È possibile ispezionare anche un accessorio specifico:
+È possibile ispezionare direttamente anche un accessorio:
 ```bash
-wardrobe show accessories/eggs-dev
+tailor show eggs-dev
+# oppure indicando il percorso relativo
+tailor show accessories/eggs-dev
 ```
 
 ---
 
-### 4. `wardrobe wear <costume>`
-Avvia il processo di **"vestizione"** del sistema. Questo comando richiede privilegi di amministratore (`sudo` o utente root).
+### 4. `tailor wear <costume>`
+Avvia il processo di **"vestizione"** del sistema applicando il costume scelto. Questo comando richiede privilegi di amministratore (`sudo` o utente root).
 
 ```bash
-sudo wardrobe wear colibri
+sudo tailor wear colibri
 ```
 
-Durante la vestizione, `wardrobe wear` adotta automaticamente un layout a **schermo diviso orizzontale**:
-* **Pannello superiore**: Mostra in modo chiaro e fisso il banner del costume, gli accessori e lo stato di avanzamento delle fasi `[OK]`.
-* **Pannello inferiore (Console Interattiva)**: Mostra lo stream in tempo reale dei comandi (`apt-get`, `dpkg`) e mantiene la tastiera attiva (`stdin`) per rispondere a eventuali prompt o conferme debconf.
+Durante l'esecuzione, `tailor wear` adotta automaticamente un layout a **schermo diviso orizzontale (Split Screen TUI)**:
+* **Pannello superiore**: Mostra in tempo reale l'atelier di provenienza, il costume in lavorazione, il branch attivo, la fase corrente e l'elenco degli step completati con successo `[OK]`.
+* **Pannello inferiore (Console Interattiva)**: Mostra lo stream in tempo reale dei comandi (`apt-get`, `dpkg`, script di sistema) mantenendo lo standard input (`stdin`) attivo per consentire la risposta a prompt debconf o licenze interattive.
+
+```
+┌─ TAILOR WEAR ────────────────────────────────────────────────────────┐
+│ Atelier : https://github.com/pieroproietti/penguins-wardrobe        │
+│ Costume : Costume: colibri (v2.0.1)                                  │
+│ Branch  : main                                                       │
+│ Step    : [OK] Kernel headers verified                               │
+│           [OK] Sources list configured                               │
+│           [OK] Repositories updated                                  │
+│           --> [1/3] Accessory: base                                  │
+│           --> [2/3] Accessory: eggs-dev                              │
+└──────────────────────────────────────────────────────────────────────┘
+Reading package lists... Done
+Building dependency tree... Done
+```
 
 #### Opzioni disponibili (Flags):
+* `-b, --branch <branch>`: Seleziona o clona preventivamente un branch specifico del guardaroba prima di applicare il costume.
+* `-n, --dry-run` (alias `--simulate`): Esegue una simulazione completa dell'installazione senza apportare modifiche al sistema (non richiede privilegi di root).
 * `--no-acc`: Salta l'installazione di tutti gli accessori dichiarati nel costume.
 * `--no-firm`: Salta l'installazione degli accessori legati ai firmware hardware proprietari.
+* `--linear` (alias `--no-split`): Disabilita l'interfaccia a schermo diviso TUI e utilizza l'output lineare standard (utile in contesti di log automatizzati o CI/CD).
 
 ```bash
-# Esempio: applica il costume colibri senza firmware proprietari
-sudo wardrobe wear colibri --no-firm
-```
+# Esempio: simulazione senza modifiche
+tailor wear colibri --dry-run
 
-È anche possibile applicare direttamente un singolo accessorio:
-```bash
-sudo wardrobe wear eggs-dev
-# oppure
-sudo wardrobe wear accessories/multimedia
+# Esempio: applica il costume colibri escludendo i firmware proprietari
+sudo tailor wear colibri --no-firm
+
+# Esempio: applica direttamente un singolo accessorio modulare
+sudo tailor wear eggs-dev
+sudo tailor wear accessories/multimedia
 ```
 
 ---
 
-### 5. `wardrobe export` (Esportazione remota via SSH)
-La suite di comandi `export` consente di trasferire comodamente pacchetti e log su un server remoto configurato tramite connessioni SSH multiplexate veloci e sicure.
+### 5. `tailor export` (Esportazione remota via SSH)
+La suite `tailor export` permette di trasferire pacchetti compilati e file di log su un server remoto configurato tramite connessioni SSH multiplexate veloci e sicure.
 
-#### Esportare pacchetti di distribuzione (`wardrobe export pkg`):
+#### Esportare pacchetti di distribuzione (`tailor export pkg`):
 Invia i pacchetti compilati (`.deb`, `.rpm`, `.pkg.tar.zst`, `.apk`) al server di storage remoto (predefinito: `root@192.168.1.2:/eggs/`):
 
 ```bash
-wardrobe export pkg
+tailor export pkg
 
-# Con pulizia preventiva delle versioni precedenti sul server remoto:
-wardrobe export pkg --clean
+# Con pulizia preventiva dei vecchi pacchetti sul server remoto:
+tailor export pkg --clean
 ```
 
-#### Esportare log e report di esecuzione (`wardrobe export log`):
-Raccoglie il file di log principale (`/var/log/wardrobe.log`) e l'ultimo report dettagliato di wear (`/var/log/wardrobe/wardrobe-report-*.txt`) caricandoli sul server di destinazione:
+#### Esportare log e report di esecuzione (`tailor export log`):
+Raccoglie il log principale (`/var/log/tailor.log`) e l'ultimo report dettagliato di wear (`/var/log/tailor/tailor-report-*.txt`) caricandoli sul server di destinazione:
 
 ```bash
 # Esportazione con parametri predefiniti
-wardrobe export log
+tailor export log
 
-# Esportazione personalizzata
-wardrobe export log -u artisan -i 192.168.1.50 -d /home/artisan/logs
+# Esportazione verso host e percorso personalizzati
+tailor export log -u artisan -i 192.168.1.50 -d /home/artisan/logs
 ```
 
 * **`-u, --user`**: Utente SSH remoto (default: `artisan`).
@@ -174,22 +225,24 @@ wardrobe export log -u artisan -i 192.168.1.50 -d /home/artisan/logs
 
 ---
 
-### 6. `wardrobe version`
-Mostra la versione attuale del programma compilato.
+### 6. `tailor version`
+Mostra la versione del binario `tailor` in uso.
 
 ```bash
-wardrobe version
+tailor version
 ```
 
 ---
 
-## 🧬 Anatomia di un Costume (`index.yaml` o `<distro>.yaml`)
+## 🧬 Anatomia di un Costume v2 (`index.yaml` o `<distro>.yaml`)
 
-Ogni costume o accessorio risiede in una propria directory ed è governato da un file descrittivo in formato YAML. Il motore di Wardrobe cerca i file secondo il seguente ordine di priorità:
+Tutti i costumi risiedono in `~/.wardrobe/v2/costumes/<nome>/` e gli accessori in `~/.wardrobe/v2/accessories/<nome>/`. Ciascuno di essi è governato da un file descrittivo in formato YAML.
+
+Il motore di Tailor ricerca il file di configurazione secondo il seguente ordine di priorità:
 1. `index.yaml` / `index.yml`
-2. `<distro_id>.yaml` (es. `debian.yaml`, `ubuntu.yaml`, `arch.yaml`, `alpine.yaml`, `fedora.yaml`, `opensuse.yaml`)
+2. `<distro_id>.yaml` (es. `debian.yaml`, `ubuntu.yaml`, `devuan.yaml`, `arch.yaml`, `alpine.yaml`, `fedora.yaml`, `opensuse.yaml`)
 
-Ecco un esempio completo basato sul costume `colibri`:
+Ecco un esempio completo e reale basato sul costume `colibri`:
 
 ```yaml
 ---
@@ -198,15 +251,14 @@ description: "Desktop XFCE4 leggero con strumenti completi per lo sviluppo"
 author: artisan
 release: 2.0.1
 
-# Elenco delle distribuzioni / codename supportati
+# Elenco dei codename di distribuzioni supportate
 distributions:
   - bookworm
   - trixie
   - daedalus
   - excalibur
 
-
-# Sequenza atomica di preparazione e installazione
+# Sequenza atomica di preparazione e installazione pacchetti
 sequence:
   repositories:
     sources_list:
@@ -219,7 +271,7 @@ sequence:
     update: true
     upgrade: true
 
-  # Pacchetti standard installati via APT
+  # Pacchetti standard installati via gestore pacchetti
   packages:
     - firefox-esr
     - libxfce4ui-utils
@@ -234,12 +286,12 @@ sequence:
     - xfdesktop4
     - xfwm4
 
-  # Pacchetti minimi senza dipendenze raccomandate
+  # Pacchetti minimi installati con flag --no-install-recommends
   packages_no_install_recommends:
     - plymouth
     - plymouth-themes
 
-  # Pacchetti con prompt interattivi (debconf, licenze EULA)
+  # Pacchetti con prompt interattivi (licenze EULA, debconf)
   packages_interactive:
     - ttf-mscorefonts-installer
 
@@ -266,7 +318,7 @@ finalize:
 # Segnala se il costume richiede un riavvio al termine
 reboot: true
 
-# Mostra avviso multilingua sulla configurazione del display manager
+# Mostra avviso multilingua sulla configurazione del display manager LightDM
 display_manager_notice: true
 ```
 
@@ -275,119 +327,110 @@ display_manager_notice: true
 ### Dettaglio delle Sezioni YAML
 
 #### 1. Header e Compatibilità (`distributions`)
-* **`name`**: Nome identificativo del costume.
+* **`name`**: Nome identificativo del costume o accessorio.
 * **`description`**: Breve spiegazione delle funzionalità fornite.
 * **`author` / `release`**: Autore e versione della ricetta.
-* **`distributions`**: Elenco dei codename di distribuzioni supportate (es. `bookworm`, `trixie`, `daedalus`, `resolute`).
+* **`distributions`**: Elenco dei codename di distribuzioni supportate (es. `bookworm`, `trixie`, `daedalus`, `excalibur`).
   > [!IMPORTANT]
-  > **Controllo preventivo di compatibilità**: prima di toccare qualsiasi configurazione o pacchetto, `wardrobe` confronta il valore di `VERSION_CODENAME` in `/etc/os-release` con l'elenco `distributions`. Se il sistema non è supportato, l'esecuzione viene interrotta istantaneamente e in totale sicurezza.
+  > **Controllo preventivo di compatibilità**: prima di toccare qualsiasi configurazione o pacchetto, `tailor` confronta il valore di `VERSION_CODENAME` in `/etc/os-release` con l'elenco `distributions`. Se il sistema non è supportato, l'esecuzione viene interrotta istantaneamente e in totale sicurezza (con esecuzione opzionale dello script di controllo `tailor-check` se presente).
 
 #### 2. Auto-Discovery dei Pacchetti Esterni (`packages.yaml`)
-* **`packages.yaml` / `packages.yml`**: Se presente nella cartella del costume o dell'accessorio, `wardrobe` ne scopre e carica automaticamente i pacchetti fondendoli con la lista principale.
+* Se nella directory del costume o dell'accessorio è presente un file `packages.yaml` o `packages.yml`, `tailor` ne scopre e carica automaticamente i pacchetti fondendoli con la lista principale senza duplicati.
 
 #### 3. Preseed Debconf Automatico (`packages.preseed`)
-* **`packages.preseed`**: Se presente nella cartella del costume o dell'accessorio, `wardrobe` applica automaticamente le risposte debconf tramite `debconf-set-selections` prima dell'installazione dei pacchetti. Questo file deve essere usato con parsimonia ed essere mirato **esclusivamente** ai pacchetti forniti da quel costume o accessorio (es. impostare LightDM in `quirinux-desktop`, accettare licenze firmware in `firmwares/network-wifi` o `quirinux-firmware`), mantenendo le ricette YAML completamente pulite.
+* Se presente nella directory, `tailor` applica automaticamente le risposte debconf tramite `debconf-set-selections` prima dell'installazione dei pacchetti. Questo file deve essere mirato esclusivamente ai pacchetti forniti da quel costume/accessorio (es. impostare LightDM in `quirinux-desktop`, accettare licenze firmware in `firmwares`), mantenendo le ricette YAML pulite e dichiarative.
 
 #### 4. Sequenza (`sequence`)
 * **`repositories`**:
   * `sources_list`: Abilita i rami di componenti desiderati (`main`, `contrib`, `non-free`, `non-free-firmware`).
-  * `sources_list_d`: Comandi shell per inserire nuove repository PPA o di terze parti.
-  * `update`: Esegue `apt-get update`.
-  * `upgrade`: Esegue `apt-get upgrade` in modalità non interattiva sicura.
+  * `sources_list_d`: Comandi shell per aggiungere chiavi GPG e repository PPA o di terze parti.
+  * `update`: Esegue l'aggiornamento degli indici dei repository (`apt-get update`).
+  * `upgrade`: Esegue l'upgrade del sistema in modalità non interattiva sicura.
 * **`packages`**: Array di pacchetti standard installati con gestione a blocchi e ripristino automatico.
-* **`packages_no_install_recommends`**: Pacchetti installati con flag `--no-install-recommends` per mantenere il sistema snello.
-* **`packages_interactive`**: Pacchetti che necessitano di interazione (accettazione licenze proprietarie, domande debconf). Vengono eseguiti preservando lo standard I/O reale del terminale.
-* **`accessories`**: Elenco di accessori da concatenare (possono essere globali come `base` o locali con percorso relativo come `./firmwares`).
+* **`packages_no_install_recommends`**: Pacchetti installati con `--no-install-recommends` per mantenere il sistema snello.
+* **`packages_interactive`**: Pacchetti che necessitano di interazione (accettazione licenze proprietarie EULA, configurazioni debconf). Vengono eseguiti preservando lo standard I/O reale del terminale.
+* **`accessories`**: Elenco di accessori da concatenare (globali come `base` o relativi come `./firmwares`).
 
 #### 5. Finalizzazione (`finalize`)
-* **`customize: true`**: Copia ricorsivamente il contenuto della directory `sysroot/` (o `dirs/`) all'interno della root del sistema (`/`) usando `rsync -aAXv`.
-* **`cmds`**: Array di comandi e script eseguiti nell'ordine indicato. Se il primo parametro corrisponde a un file di script relativo (es. `../../scripts/config_lightdm.sh` o `scripts/myscript.sh`), viene risolto ed eseguito correttamente.
+* **`customize: true`**: Copia ricorsivamente il contenuto della directory `sysroot/` (o `dirs/`) all'interno della root del sistema (`/`) preservando attributi e permessi.
+* **`cmds`**: Array di comandi e script eseguiti nell'ordine indicato. I percorsi relativi (es. `../../scripts/config_lightdm.sh` o `scripts/myscript.sh`) vengono risolti ed eseguiti correttamente rispetto alla struttura `v2/`.
 
 ---
 
 ## 🛡️ Affidabilità, Resilienza e Self-Healing
 
-`penguins-wardrobe` implementa avanzati meccanismi di sicurezza per garantire che l'applicazione dei costumi sia robusta, riproducibile e a prova di errore:
+`penguins-tailor` implementa avanzati meccanismi di sicurezza per garantire che l'applicazione dei costumi sia robusta, riproducibile e a prova di errore:
 
 ```mermaid
 flowchart TD
-    A[Avvio: wardrobe wear] --> B{Controllo Root?}
-    B -- No --> B1[Errore: Richiede Root]
-    B -- Si --> C{Check Distribuzione}
+    A[Avvio: tailor wear costume] --> B{Controllo Root / Dry-Run?}
+    B -- Non Root & No DryRun --> B1[Errore: Richiede Root]
+    B -- Ok --> C{Check Distribuzione}
     C -- Incompatibile --> C1[Blocco Preventivo Sicuro]
     C -- Compatibile --> D[Kernel Headers Check per DKMS]
-    D --> E[Configurazione Repository]
-    E --> F[Installazione a Lotti di 20 Pkg]
+    D --> E[Configurazione Repository & Update]
+    E --> F[Installazione Pacchetti a Lotti di 20]
     F -- Fallimento Lotto? --> G[Dpkg Healing + Fallback Pkg Singoli]
-    G --> H[Purge Pacchetti Indesiderati]
+    G --> H[Applicazione Accessori Concatenati]
     F -- Successo --> H
     H --> I[Sovrapposizione Sysroot Overlay]
-    I --> J[Sync /etc/skel su Utente Reale]
-    J --> K[Esecuzione Script Finalize]
-    K --> L[Generazione Report /var/log/wardrobe/]
+    I --> J[Esecuzione Script Finalize]
+    J --> K[Sincronizzazione /etc/skel su Utente Reale]
+    K --> L[Generazione Report /var/log/tailor/]
     L --> M[Avviso Pulizia Kernel & Fine]
 ```
 
 ### 1. Installazione a lotti (Batching) e Fallback Atomico
-L'installazione di centinaia di pacchetti in un'unica invocazione `apt` può causare picchi di CPU e memoria durante l'esecuzione dei trigger di `dpkg` (aggiornamento initramfs, compilazioni DKMS, cache icone/MIME). `wardrobe` suddivide l'elenco in lotti controllati di **20 pacchetti**:
-* Ogni lotto completato è salvato permanentemente su disco.
-* Se un lotto incontra un errore, `wardrobe` ripara lo stato (`dpkg --configure -a` e `apt-get install -f`) e ritenta l'installazione pacchetto per pacchetto. In questo modo un singolo pacchetto difettoso o mancante non compromette l'intera installazione.
+L'installazione di centinaia di pacchetti in un'unica invocazione `apt` può causare picchi di carico durante l'esecuzione dei trigger di `dpkg` (aggiornamento initramfs, compilazioni DKMS, cache icone/MIME). `tailor` suddivide l'elenco in lotti controllati di **20 pacchetti**:
+* Ogni lotto completato è memorizzato permanentemente su disco.
+* Se un lotto incontra un errore, `tailor` ripara lo stato (`dpkg --configure -a` e `apt-get install -f`) e ritenta l'installazione pacchetto per pacchetto. In questo modo un singolo pacchetto difettoso o mancante non compromette l'intera procedura.
 
 ### 2. Protezione DKMS preventiva
-I pacchetti che usano DKMS falliscono se gli header del kernel in esecuzione non sono presenti. `wardrobe` rileva il kernel corrente (`uname -r`) e installa preventivamente i pacchetti `linux-headers-$(uname -r)` e `linux-headers-<arch>`, evitando blocchi durante l'unpacking dei driver video o di rete.
+I pacchetti che utilizzano DKMS falliscono se gli header del kernel in esecuzione non sono presenti. `tailor` rileva il kernel corrente (`uname -r`) e installa preventivamente i pacchetti `linux-headers-$(uname -r)` e `linux-headers-<arch>`, evitando blocchi durante l'unpacking dei moduli kernel per schede video o di rete.
 
-### 3. Rete di Sicurezza (`neverPurgeBase`)
-La rimozione dichiarativa dei pacchetti non potrà **mai** disinstallare componenti essenziali del sistema operativo. `wardrobe` protegge sempre:
-* Gestori di pacchetti: `dpkg`, `apt`, `ca-certificates`.
-* Sistema di base e Init: `systemd`, `sysvinit`, `libc6`, `coreutils`, `bash`, `util-linux`.
-* Kernel in esecuzione: il pacchetto `linux-image-$(uname -r)` attivo.
-* Bootloader: `grub-pc`, `grub-efi-amd64`, `initramfs-tools`.
-* Connettività: `openssh-server`, `network-manager`.
-* Strumenti di sistema: `penguins-wardrobe`, `wardrobe`, `penguins-eggs`.
+### 3. Sincronizzazione `/etc/skel` per l'utente reale
+Quando `customize: true` copia le configurazioni in `/etc/skel/`, `tailor` rileva l'utente non-root che ha invocato il comando (`SUDO_USER` o il primo utente reale con UID $\ge 1000$) e sincronizza la sua home directory con i permessi e la proprietà corretti (`chown`), evitando che file o cartelle rimangano di proprietà di `root`.
 
-### 4. Sincronizzazione `/etc/skel` per l'utente reale
-Quando `customize: true` copia le configurazioni in `/etc/skel/`, `wardrobe` rileva l'utente non-root che ha invocato il comando (`SUDO_USER` o il primo utente reale con UID $\ge 1000$) e sincronizza la sua home directory con i permessi e la proprietà corretti (`chown`), senza lasciare file appartenenti a `root`.
-
-### 5. Report Dettagliati e Logging
-Ogni operazione viene registrata in `/var/log/wardrobe.log`. Al termine del comando `wear`, viene generato un report strutturato con timestamp in `/var/log/wardrobe/wardrobe-report-YYYYMMDD-HHMMSS.txt` contenente:
+### 4. Report Dettagliati e Logging
+Ogni operazione viene registrata nel log di sistema `/var/log/tailor.log`. Al termine del comando `wear`, viene generato un report strutturato con timestamp in `/var/log/tailor/tailor-report-YYYYMMDD-HHMMSS.txt` contenente:
 * Pacchetti installati con successo.
-* Pacchetti rimossi dal sistema.
 * Pacchetti che non è stato possibile installare o reperire.
-* Pacchetti non rimovibili.
 
 ---
 
 ## 🌐 Supporto per Distribuzioni Non-Debian (`AIPrompt.txt`)
 
-Sebbene l'ecosistema principale sia focalizzato su distribuzioni basate su Debian e derivate (Devuan, Ubuntu, Linux Mint, Quirinux, ecc.), `penguins-wardrobe` include il supporto per l'identificazione di distribuzioni **Arch Linux**, **Manjaro**, **Alpine**, **Fedora** e **openSUSE**.
+Sebbene l'ecosistema principale sia attualmente focalizzato e collaudato sulla famiglia Debian e derivate (Debian, Devuan, Ubuntu, Linux Mint, Quirinux, ecc.), `penguins-tailor` include il supporto per l'identificazione di distribuzioni **Arch Linux**, **Manjaro**, **Alpine**, **Fedora** e **openSUSE**.
 
-Qualora `wardrobe wear` venga eseguito su un sistema privo di `apt-get`:
+Qualora `tailor wear` venga eseguito su un sistema non basato su `apt-get`:
 1. Rileva la distribuzione e la famiglia di appartenenza via `/etc/os-release`.
-2. Esegue un'analisi dell'hardware grafico (GPU e controller 3D) e delle sessioni desktop disponibili in `/usr/share/xsessions/`.
-3. Genera un file `AIPrompt.txt` nella cartella Home dell'utente con tutte le informazioni necessarie per richiedere a un assistente AI (come **Antigravity** o modelli LLM) la conversione immediata dei pacchetti per il gestore (`pacman`, `apk`, `dnf`, `zypper`).
+2. Esegue un'analisi automatica dell'hardware grafico (GPU e controller 3D via `lspci`) e delle sessioni desktop disponibili in `/usr/share/xsessions/`.
+3. Genera un file **`AIPrompt.txt`** nella cartella Home dell'utente con tutte le informazioni necessarie per richiedere a un assistente AI (come **Antigravity** o modelli LLM) la conversione immediata dell'elenco pacchetti per il gestore nativo (`pacman`, `apk`, `dnf`, `zypper`).
 
 ---
 
 ## 🎨 Catalogo Costumi ed Accessori
 
-### Costumi Principali
+### Costumi Principali (`v2/costumes/`)
 
 | Costume | Ambiente Desktop | Caratteristiche Principali |
 | :--- | :--- | :--- |
 | **`colibri`** | XFCE4 | Desktop snello e ultra-reattivo, ideale per workstation di sviluppo e macchine con risorse moderate. |
 | **`duck`** | Cinnamon | Interfaccia moderna e intuitiva in stile Windows/Mint, fornita con suite LibreOffice, GIMP e VLC. |
-| **`eagle`** | Multi-DE / Mate | Configurazione flessibile ed estesa, testata anche per architetture ARM64. |
-| **`chicks`** | Educativo / Leggero | Ambiente giocoso, colorato e sicuro con software per la didattica e la scuola. |
+| **`eagle`** | Multi-DE / MATE | Configurazione flessibile ed estesa, testata anche per architetture ARM64. |
+| **`chicks`** | Educativo / Leggero | Ambiente giocoso, colorato e sicuro con software per la didattica e la scuola primaria. |
 | **`quirinux`** | XFCE4 / Pro | Distribuzione specializzata per produzione multimediale, grafica 2D/3D e animazione (basata su Devuan/Debian). |
-| **`gypaetus`** | Base minimale | Configurazione essenziale per server e sistemi headless. |
+| **`gypaetus`** | Base minimale | Configurazione essenziale per server e sistemi headless senza interfaccia grafica. |
+| **`seagull`** | Essenziale | Desktop essenziale, moderno e performante. |
 | **`albatros`** | Personalizzato | Varianti ottimizzate per architetture e requisiti specifici. |
 
-### Accessori Modulari
+### Accessori Modulari (`v2/accessories/`)
 
 | Accessorio | Descrizione |
 | :--- | :--- |
-| **`base`** | Pacchetti essenziali di sistema, utilità di base e supporto per clipboard/guest agent `spice-vdagent`. |
-| **`eggs-dev`** | Strumenti completi per lo sviluppo di Penguins' Eggs e Wardrobe (Node.js, Go, VS Code, Git, build-essential). |
+| **`base`** | Pacchetti essenziali di sistema, utilità di base e supporto clipboard/guest agent `spice-vdagent`. |
+| **`educational`** | Suite di pacchetti didattici e per l'apprendimento scolastico. |
+| **`eggs-dev`** | Strumenti completi per lo sviluppo di Penguins' Eggs e Tailor (Node.js, Go, VS Code, Git, build-essential). |
 | **`firmwares`** | Pacchetto completo di firmware per schede di rete Wi-Fi, Ethernet, CPU AMD/Intel e schede grafiche. |
 | **`firmwares-light`** | Versione ridotta e mirata dei firmware più comuni. |
 | **`flatpak`** | Supporto Flatpak e integrazione con il repository Flathub. |
@@ -396,17 +439,18 @@ Qualora `wardrobe wear` venga eseguito su un sistema privo di `apt-get`:
 | **`liquorix`** | Installazione automatica del kernel Liquorix a bassa latenza, ideale per audio/video real-time. |
 | **`live-installer`** | Integrazione dell'installer di sistema grafico Calamares. |
 | **`multimedia`** | Codec audio/video, Audacity, OBS Studio, VLC media player. |
+| **`nextcloud`** | Client di sincronizzazione desktop per Nextcloud. |
 | **`office`** | Suite d'ufficio completa LibreOffice, font Microsoft e visualizzatori PDF. |
-| **`waydroid`** | Installazione e configurazione del container Android Waydroid. |
+| **`waydroid`** | Installazione e configurazione dell'ambiente container Android Waydroid. |
 
 ---
 
-## 🛠️ Guida Pratica: Creare un Nuovo Costume
+## 🛠️ Guida Pratica: Creare un Nuovo Costume v2
 
-Creare un costume personalizzato è semplice e richiede pochi passaggi:
+Creare un costume personalizzato nella nuova struttura `v2` richiede pochi semplici passaggi:
 
 ### Passo 1: Creare la struttura delle cartelle
-All'interno del proprio repository o in `~/.wardrobe/v2/costumes/` crea una nuova cartella:
+All'interno del proprio repository o in `~/.wardrobe/v2/costumes/` crea la nuova cartella:
 
 ```bash
 mkdir -p ~/.wardrobe/v2/costumes/my-desktop
@@ -455,23 +499,28 @@ finalize:
 Inserisci i file di configurazione del desktop (es. pannelli XFCE, icone, sfondi) dentro `sysroot/etc/skel/` e gli sfondi in `sysroot/usr/share/backgrounds/`.
 
 ### Passo 4: Testare il Costume
-Esegui la vestizione su un sistema di test o una macchina virtuale:
+Esegui la simulazione o l'applicazione del costume sul sistema:
 
 ```bash
-sudo wardrobe wear my-desktop
+# Test simulato
+tailor wear my-desktop --dry-run
+
+# Applicazione reale
+sudo tailor wear my-desktop
 ```
 
 ---
 
 ## 🔄 Il Flusso di Lavoro con Penguins' Eggs
 
-`penguins-wardrobe` e `penguins-eggs` si integrano perfettamente per creare distribuzioni Linux personalizzate e distribuibili in formato ISO:
+Con la rimozione del comando `wardrobe` da `penguins-eggs`, il ciclo di vita per la creazione di distribuzioni Linux personalizzate è ora perfettamente modulare:
 
 ```
 [ Installazione Base Naked (CLI) ]
                │
                ▼
-   sudo wardrobe wear <costume>
+   tailor get [url] [-b branch]
+   sudo tailor wear <costume>
                │
                ▼
 [ Test e Personalizzazione Locale ]
@@ -483,10 +532,14 @@ sudo wardrobe wear my-desktop
    [ Immagine ISO Live Pronta! ]
 ```
 
-1. **Installazione Base**: Installa Debian o Devuan in modalità minimale (solo console, senza desktop environment).
-2. **Vestizione con Wardrobe**: Esegui `wardrobe get` e successivamente `sudo wardrobe wear colibri` (o il tuo costume preferito).
-3. **Verifica**: Riavvia il computer per verificare l'avvio del desktop environment, del display manager e delle configurazioni dell'utente.
-4. **Rimasterizzazione**: Crea l'immagine ISO Live avviabile e installabile con Penguins' Eggs:
+1. **Installazione Base**: Installa Debian, Devuan o Ubuntu in modalità minimale (solo console, senza desktop environment).
+2. **Allestimento con Tailor**:
+   ```bash
+   tailor get
+   sudo tailor wear colibri
+   ```
+3. **Verifica e Test**: Riavvia il computer per verificare l'avvio del desktop environment, del display manager e delle configurazioni dell'utente. Al riavvio, rimuovi eventuali vecchi pacchetti kernel non più necessari.
+4. **Rimasterizzazione con Eggs**: Crea l'immagine ISO Live avviabile e installabile con Penguins' Eggs:
    ```bash
    sudo eggs produce --theme vendors/educaandos-plus
    ```
@@ -495,18 +548,20 @@ sudo wardrobe wear my-desktop
 
 ## 🤖 Creare Costumi con l'Intelligenza Artificiale
 
-La sintassi dichiarativa in YAML di `penguins-wardrobe` è perfetta per essere generata o modificata tramite assistenti AI come **Antigravity**.
+La sintassi dichiarativa in YAML di `penguins-wardrobe` e `penguins-tailor` è ideale per essere generata o modificata tramite assistenti AI come **Antigravity**.
 
 ### Esempio di Prompt per l'AI:
-> *"Crea una ricetta `index.yaml` per penguins-wardrobe destinata a Debian Bookworm/Trixie con desktop environment MATE, browser Chromium, suite LibreOffice, media player VLC, abilitazione dei componenti contrib e non-free-firmware, e inclusione degli accessori base e firmwares."*
+> *"Crea una ricetta `index.yaml` per penguins-wardrobe v2 destinata a Debian Bookworm/Trixie con desktop environment MATE, browser Chromium, suite LibreOffice, media player VLC, abilitazione dei componenti contrib e non-free-firmware, inclusione degli accessori base e firmwares, e script di finalizzazione per la configurazione di LightDM."*
 
-L'assistente AI sarà in grado di generare la configurazione completa, ottimizzare la lista dei pacchetti e preparare gli script di configurazione per `sysroot` e `finalize`.
+L'assistente AI genererà la configurazione completa, ottimizzerà la lista dei pacchetti e preparerà gli script di configurazione compatibili con la struttura `v2/`.
 
 ---
 
 ## 📜 Licenza e Crediti
 
 * **Autore**: Piero Proietti <piero.proietti@gmail.com>
+* **Collaborazioni & Ringraziamenti**: Un ringraziamento speciale a **[Charlie Martínez](https://github.com/charliemartinez)** ([Quirinux](https://quirinux.org)) per il prezioso supporto, il continuo testing e la stretta collaborazione nello sviluppo e sperimentazione di `penguins-tailor`.
 * **Sito Ufficiale**: [penguins-eggs.net](https://penguins-eggs.net)
-* **Codice Sorgente**: [github.com/pieroproietti/penguins-wardrobe](https://github.com/pieroproietti/penguins-wardrobe)
-* **Licenza**: MIT License / GPL v2.
+* **Codice Sorgente Tailor**: [github.com/pieroproietti/penguins-tailor](https://github.com/pieroproietti/penguins-tailor)
+* **Codice Sorgente Wardrobe**: [github.com/pieroproietti/penguins-wardrobe](https://github.com/pieroproietti/penguins-wardrobe)
+* **Licenza**: Dual licensed under MIT License / GPL v2.
