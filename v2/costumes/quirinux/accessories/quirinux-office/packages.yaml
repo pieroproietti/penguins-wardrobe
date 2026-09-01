@@ -7,6 +7,4 @@ packages:
   - gnome-system-tools
   - gparted
   - libqt5webkit5
-  - mint-common
-  - mintinstall
   - mint-translations
