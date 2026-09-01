@@ -4,7 +4,6 @@ packages:
   - catfish
   - conky
   - galculator
-  - gnome-software
   - gnome-system-tools
   - gparted
   - libqt5webkit5
