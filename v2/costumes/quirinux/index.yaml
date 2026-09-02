@@ -32,7 +32,7 @@ sequence:
   - ./accessories/quirinux-multimedia
   - ./accessories/quirinux-audio
   - ./accessories/quirinux-graphics
-  - ./accessories/quirinux-animation
+  #- ./accessories/quirinux-animation
   - ./accessories/quirinux-office
   - ./accessories/quirinux-development
   - ./accessories/quirinux-utils
