@@ -26,26 +26,27 @@ sequence:
     upgrade: true
 
   accessories:
+  # eliminare: animation, drivers,firmware, printing, i18n, utils
   - ./accessories/quirinux-base
   - ./accessories/quirinux-desktop
-  - ./accessories/quirinux-firmware
+  #- ./accessories/quirinux-firmware
   - ./accessories/quirinux-multimedia
   - ./accessories/quirinux-audio
   - ./accessories/quirinux-graphics
   #- ./accessories/quirinux-animation
   - ./accessories/quirinux-office
   - ./accessories/quirinux-development
-  - ./accessories/quirinux-utils
-  - ./accessories/quirinux-drivers
+  #- ./accessories/quirinux-utils
+  #- ./accessories/quirinux-drivers
   - ./accessories/quirinux-python
   - ./accessories/quirinux-devtools
   - ./accessories/quirinux-kde-libs
   - ./accessories/quirinux-gnome-libs
-  - ./accessories/quirinux-printing
+  #- ./accessories/quirinux-printing
   - ./accessories/quirinux-vpn
   - ./accessories/quirinux-filesystem
   - ./accessories/quirinux-native
-  - ./accessories/quirinux-i18n
+  #- ./accessories/quirinux-i18n
   - ./accessories/quirinux-themes
   - ./accessories/quirinux-xfce
   - ./accessories/quirinux-fonts
