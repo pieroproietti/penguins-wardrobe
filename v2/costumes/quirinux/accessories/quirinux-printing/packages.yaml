@@ -5,6 +5,9 @@ packages:
   - hplip
   - hplip-data
   - hplip-gui
+  - iscan
+  - iscan-data
+  - iscan-network-nt
   - libgutenprint-common
   - libgutenprint9
   - libgutenprintui2-2

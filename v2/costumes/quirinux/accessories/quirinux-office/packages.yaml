@@ -4,9 +4,7 @@ packages:
   - catfish
   - conky
   - galculator
-  - gnome-software
   - gnome-system-tools
   - gparted
-  - mint-common
-  - mintinstall
+  - libqt5webkit5
   - mint-translations
