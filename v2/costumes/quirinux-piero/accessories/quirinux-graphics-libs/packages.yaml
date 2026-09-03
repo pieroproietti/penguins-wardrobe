@@ -1,9 +1,0 @@
-packages:
-  - gdal-data
-  - gdal-plugins
-  - glx-alternative-mesa
-  - mesa-utils
-  - mesa-utils-bin
-  - opencv-data
-  - proj-data
-  - update-glx

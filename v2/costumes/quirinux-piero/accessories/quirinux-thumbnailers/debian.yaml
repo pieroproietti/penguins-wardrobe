@@ -1,5 +1,0 @@
-name: quirinux-thumbnailers
-description: Thumbnail generators
-release: 2.5
-
-packages_install_file: packages.yaml

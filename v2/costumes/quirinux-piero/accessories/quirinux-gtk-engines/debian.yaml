@@ -1,5 +1,0 @@
-name: quirinux-gtk-engines
-description: GTK theme engines
-release: 2.5
-
-packages_install_file: packages.yaml

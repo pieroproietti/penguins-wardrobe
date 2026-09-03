@@ -1,9 +1,0 @@
-packages:
-  - gnustep-back-common
-  - gnustep-back0.29
-  - gnustep-back0.29-cairo
-  - gnustep-base-common
-  - gnustep-base-runtime
-  - gnustep-common
-  - gnustep-gui-common
-  - gnustep-gui-runtime

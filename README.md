@@ -23,7 +23,7 @@ selects them, resolves their components, and dresses the target system.
 | --- | --- |
 | **Costumes** | Complete desktop and system profiles, from lightweight workstations to headless servers |
 | **Accessories** | Optional capabilities such as firmware, Flatpak, multimedia, office tools, KVM, and Waydroid |
-| **Vendors** | Distribution branding for live media, bootloaders, and Calamares |
+| **Branding** | Distribution identity for live media, bootloaders, and Calamares |
 | **Scripts** | Reusable finishing steps for display managers, hostnames, and desktop integration |
 
 All current definitions live in [`v2/`](v2/).

@@ -1,8 +1,0 @@
-packages:
-  - blt
-  - tcl
-  - tcl8.6
-  - tix
-  - tk
-  - tk8.6
-  - tk8.6-blt2.5

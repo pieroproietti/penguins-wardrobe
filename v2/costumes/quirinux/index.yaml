@@ -2,6 +2,7 @@ name: quirinux
 description: Quirinux Animation Distro (only for Devuan Daedalus and Debian Bookworm)
 author: charliemartinez
 release: 2.5
+branding: quirinux
 
 distributions:
   - daedalus

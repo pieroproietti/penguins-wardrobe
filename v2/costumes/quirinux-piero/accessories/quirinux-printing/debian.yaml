@@ -1,5 +1,0 @@
-name: quirinux-printing
-description: Printing and scanning tools
-release: 2.5
-
-packages_install_file: packages.yaml

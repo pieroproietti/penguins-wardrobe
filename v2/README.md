@@ -3,7 +3,7 @@
 
   # The Wardrobe · v2
 
-  **The working collection of costumes, accessories, vendor themes, and scripts.**
+  **The working collection of costumes, accessories, branding, and scripts.**
 
   [User guide](DOCS/wardrobe-users-guide.md) · [Tailor](https://github.com/pieroproietti/penguins-tailor) · [Project home](https://penguins-eggs.net)
 </div>
@@ -16,7 +16,7 @@
 v2/
 ├── costumes/       complete desktop and system recipes
 ├── accessories/    reusable, optional components
-├── vendors/        branding and distribution customizations
+├── branding/       visual identity and distribution customizations
 ├── scripts/        shared configuration helpers
 └── DOCS/           guides and reference material
 ```
@@ -25,12 +25,22 @@ v2/
 | --- | --- | --- |
 | [`costumes/`](costumes/) | `colibri`, `duck`, `eagle`, `seagull` | Ready-to-wear system profiles |
 | [`accessories/`](accessories/) | `firmwares`, `flatpak`, `kvm`, `office` | Modular features used alone or by a costume |
-| [`vendors/`](vendors/) | `nexa`, `spiral`, `ufficiozero` | Live media, bootloader, and installer branding |
+| [`branding/`](branding/) | `nexa`, `spiral`, `ufficiozero` | Live media, bootloader, and installer identity |
 | [`scripts/`](scripts/) | display manager and hostname helpers | Reusable finishing steps |
 
 Recipes may also include a `packages.preseed` file for unattended Debconf answers
 and a `sysroot/` or `dirs/` tree for files that must be overlaid onto the target
 system.
+
+A costume can select an optional visual identity with the top-level `branding`
+property. Its value is the name of a directory in [`branding/`](branding/):
+
+```yaml
+name: quirinux
+branding: quirinux
+```
+
+When the property is absent, no branding is applied.
 
 ## Try on a costume
 

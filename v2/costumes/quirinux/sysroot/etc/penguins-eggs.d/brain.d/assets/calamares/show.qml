@@ -1,4 +1,4 @@
-/* .wardrobe/vendors/quirinux/theme/calamares/branding/ */
+/* .wardrobe/v2/branding/quirinux/theme/calamares/branding/ */
 import QtQuick 2.0;
 import calamares.slideshow 1.0;
 
@@ -70,4 +70,3 @@ text: qsTr("<h1>Quirinux GNU/Linux Versión 2.2</h1>" +
         console.log("QML Component (default slideshow) deactivated");
     }
 }
-

@@ -1,8 +1,0 @@
-packages:
-  - ca-certificates-mono
-  - cli-common
-  - mono-4.0-gac
-  - mono-gac
-  - mono-runtime
-  - mono-runtime-common
-  - mono-runtime-sgen

@@ -1,2 +1,0 @@
-# Firewall configuration
-ufw ufw/enable select true

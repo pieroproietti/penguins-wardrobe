@@ -1,7 +1,0 @@
-packages:
-  - intel-opencl-icd
-  - mesa-opencl-icd
-  - opencl-c-headers
-  - opencl-clhpp-headers
-  - opencl-headers
-  - pocl-opencl-icd

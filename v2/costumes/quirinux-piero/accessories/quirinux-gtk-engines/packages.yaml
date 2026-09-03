@@ -1,9 +1,0 @@
-packages:
-  - gtk2-engines
-  - gtk2-engines-murrine
-  - gtk2-engines-pixbuf
-  - gtk3-nocsd
-  - gtk3-nooverlayscrollbar
-  - gtkam-gimp
-  - xdg-user-dirs-gtk
-  - zenity-common

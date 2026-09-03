@@ -1,5 +1,0 @@
-name: quirinux-tcl-tk
-description: Tcl/Tk runtime
-release: 2.5
-
-packages_install_file: packages.yaml

@@ -1,5 +1,0 @@
-name: quirinux-python
-description: Python modules and tools
-release: 2.5
-
-packages_install_file: packages.yaml

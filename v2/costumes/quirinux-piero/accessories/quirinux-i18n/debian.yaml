@@ -1,5 +1,0 @@
-name: quirinux-i18n
-description: Internationalization and language packs
-release: 2.5
-
-packages_install_file: packages.yaml

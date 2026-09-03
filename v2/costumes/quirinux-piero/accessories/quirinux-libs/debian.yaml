@@ -1,5 +1,0 @@
-name: quirinux-libs
-description: General shared libraries
-release: 2.5
-
-packages_install_file: packages.yaml

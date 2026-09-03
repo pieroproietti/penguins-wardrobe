@@ -1,5 +1,0 @@
-name: quirinux-flatpak
-description: Flatpak and packagekit management
-release: 2.5
-
-packages_install_file: packages.yaml

@@ -1,3 +1,0 @@
-# CUPS printing system
-cups cups/raw-print boolean true
-cups cups/backends multiselect lpd, socket, usb, snmp, dnssd

@@ -1,6 +1,0 @@
-packages:
-  - node-acorn
-  - node-busboy
-  - node-cjs-module-lexer
-  - node-undici
-  - node-xtend

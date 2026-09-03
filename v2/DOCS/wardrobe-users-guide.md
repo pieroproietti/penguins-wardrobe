@@ -14,7 +14,7 @@ import Translactions from '@site/src/components/Translactions';
 L'ecosistema di personalizzazione e allestimento delle distribuzioni Linux basato su [Penguins' Eggs](https://penguins-eggs.net) adotta una chiara separazione delle responsabilità:
 
 * **Penguins' Tailor (`tailor`)**: è il "sarto", uno strumento CLI autonomo, moderno e ultra-veloce scritto in **Go**. È il motore esecutivo incaricato di scaricare i repository, interpretare le ricette dichiarative, gestire i pacchetti software, applicare configurazioni di sistema e preparare l'ambiente utente.
-* **Penguins' Wardrobe (`penguins-wardrobe`)**: è il "guardaroba", il repository contenente le ricette e le definizioni dichiarative in formato YAML (organizzate sotto la struttura **`v2`**), suddivise in **costumi**, **accessori**, **temi vendor** e **script**.
+* **Penguins' Wardrobe (`penguins-wardrobe`)**: è il "guardaroba", il repository contenente le ricette e le definizioni dichiarative in formato YAML (organizzate sotto la struttura **`v2`**), suddivise in **costumi**, **accessori**, **branding** e **script**.
 * **Penguins' Eggs (`eggs`)**: è lo strumento di rimasterizzazione e creazione di immagini ISO avviabili. Il precedente comando integrato `eggs wardrobe` è stato rimosso da Eggs per delegare interamente l'allestimento del sistema al nuovo binario dedicato `tailor`.
 
 Grazie a **Tailor** e **Wardrobe**, è possibile trasformare qualsiasi installazione Linux minimale da riga di comando (definita *naked*) in un sistema desktop o server completo, rifinito e pronto all'uso quotidiano o alla successiva rimasterizzazione in formato Live ISO.
@@ -29,7 +29,7 @@ L'architettura si basa sulla metafora di un vero e proprio atelier sartoriale:
 ~/.wardrobe/v2/
 ├── costumes/       # I Costumi (ambienti desktop e configurazioni di sistema complete)
 ├── accessories/    # Gli Accessori (componenti e pacchetti software modulari)
-├── vendors/        # I Temi/Vendor (branding per Calamares, Plymouth, LiveCD)
+├── branding/       # Identità visiva per Calamares, Plymouth e LiveCD
 ├── scripts/        # Script bash riutilizzabili di sistema e configurazione
 └── DOCS/           # Documentazione e guide
 ```
@@ -39,7 +39,13 @@ L'architettura si basa sulla metafora di un vero e proprio atelier sartoriale:
 * **Accessories (`v2/accessories/`)**: sono gli "accessori" modulari (cinture, borse, scarpe). Possono essere inclusi all'interno di un costume o applicati singolarmente (es. `eggs-dev`, `firmwares`, `flatpak`, `graphics`, `kvm`, `liquorix`, `office`, `multimedia`, `waydroid`).
 * **Preseed Debconf (`packages.preseed`)**: file posizionabile all'interno di **ogni costume o accessorio** per preconfigurare in modo del tutto automatico le risposte Debconf (tramite `debconf-set-selections`), eliminando qualsiasi richiesta o finestra interattiva a video durante l'installazione dei pacchetti.
 * **Auto-discovery Pacchetti (`packages.yaml`)**: file opzionale per dichiarare elenchi estesi o modulari di pacchetti separati dalla ricetta YAML principale.
-* **Vendors (`v2/vendors/`)**: contengono le personalizzazioni grafiche e di branding per il boot live (GRUB, Isolinux) e per l'installer grafico [Calamares](https://calamares.io) (moduli, branding, partizionamento, utenti).
+* **Branding (`v2/branding/`)**: contiene le personalizzazioni grafiche per il boot live (GRUB, Isolinux) e per l'installer grafico [Calamares](https://calamares.io) (moduli, identità visiva, partizionamento, utenti).
+  Un costume può selezionare il branding da applicare dichiarandone il nome nella proprietà opzionale `branding` del proprio `index.yaml`:
+  ```yaml
+  name: quirinux
+  branding: quirinux
+  ```
+  Il valore identifica la directory `v2/branding/quirinux/`. Se la proprietà non è presente, Tailor non applica alcun branding.
 * **Scripts (`v2/scripts/`)**: script bash riutilizzabili per configurare display manager (LightDM, GDM, SDDM), collegamenti sul desktop, hostname e servizi di sistema.
 * **Sysroot Overlay (`sysroot` o `dirs`)**: directory presente all'interno di ciascun costume o accessorio che riproduce la gerarchia del filesystem reale (es. `etc/skel/`, `usr/share/backgrounds/`). Durante l'applicazione viene sovrapposta a `/` preservando attributi e permessi.
 
@@ -636,7 +642,7 @@ Con la rimozione del comando `wardrobe` da `penguins-eggs`, il ciclo di vita per
 [ Test e Personalizzazione Locale ]
                │
                ▼
-     sudo eggs produce --theme ...
+          sudo eggs produce
                │
                ▼
    [ Immagine ISO Live Pronta! ]
@@ -651,7 +657,7 @@ Con la rimozione del comando `wardrobe` da `penguins-eggs`, il ciclo di vita per
 3. **Verifica e Test**: Riavvia il computer per verificare l'avvio del desktop environment, del display manager e delle configurazioni dell'utente. Al riavvio, rimuovi eventuali vecchi pacchetti kernel non più necessari.
 4. **Rimasterizzazione con Eggs**: Crea l'immagine ISO Live avviabile e installabile con Penguins' Eggs:
    ```bash
-   sudo eggs produce --theme vendors/educaandos-plus
+   sudo eggs produce
    ```
 
 ---

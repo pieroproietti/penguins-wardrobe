@@ -1,5 +1,0 @@
-name: quirinux-firewall
-description: Firewall management (ufw, gufw)
-release: 2.5
-
-packages_install_file: packages.yaml

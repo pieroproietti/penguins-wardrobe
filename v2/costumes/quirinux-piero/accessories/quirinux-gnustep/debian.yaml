@@ -1,5 +1,0 @@
-name: quirinux-gnustep
-description: GNUstep Objective-C framework
-release: 2.5
-
-packages_install_file: packages.yaml
