@@ -38,7 +38,7 @@ evaluated from
 [krill-sequence.tsx](https://github.com/pieroproietti/penguins-eggs/blob/4f1b9c537a2e182b5a5b89c09f22821e0f6195d0/src/krill/krill-sequence.tsx#L630).
 
 You can find this modules inside the folder
-`./theme/calamares/calamares-modules` and will be copied under
+`./calamares/calamares-modules` and will be copied under
 `/usr/lib/x86_64-linux-gnu/calamares/modules/` building an ISO using the theme.
 
 Note: prefix `cfs-` is mandatory, they are usually named named from the action

@@ -1,4 +1,4 @@
-/* .wardrobe/v2/branding/quirinux/theme/calamares/branding/ */
+/* .wardrobe/v2/branding/quirinux/calamares/branding/ */
 import QtQuick 2.0;
 import calamares.slideshow 1.0;
 
