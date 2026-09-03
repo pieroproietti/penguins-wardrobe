@@ -1,0 +1,5 @@
+name: quirinux-devtools
+description: Development tools and compilers
+release: 2.5
+
+packages_install_file: packages.yaml

@@ -1,0 +1,3 @@
+# Dictionaries configuration
+dictionaries-common dictionaries-common/default-ispell select castellano8 (Spanish 8 bit)
+dictionaries-common dictionaries-common/default-wordlist select castellano (Spanish)

@@ -1,0 +1,13 @@
+packages:
+  - ardour
+  - audacity
+  - calf-plugins
+  - frei0r-plugins
+  - harvid
+  - liblo7
+  - quirinux-ardour
+  - quirinux-notify
+  - sox
+  - swh-plugins
+  - vamp-plugin-sdk
+  - xjadeo

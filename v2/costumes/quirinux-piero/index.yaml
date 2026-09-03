@@ -1,0 +1,110 @@
+name: quirinux
+description: Quirinux Animation Distro (compatible with Devuan Daedalus and Debian Bookworm)
+author: charliemartinez
+release: 2.5
+
+distributions:
+  - daedalus
+  - bookworm
+  - trixie
+
+sequence:
+  repositories:
+    sources_list:
+      - main
+      - contrib
+      - non-free
+      - non-free-firmware
+    sources_list_d:
+      - export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - apt-get install -y curl gnupg unzip
+      - update-alternatives --install /usr/bin/pager pager /bin/cat 200 || true
+      - rm -f /usr/share/keyrings/quirinux.gpg
+      - curl -fsSL https://repo.quirinux.org/gpg/quirinux.asc | gpg --dearmor -o /usr/share/keyrings/quirinux.gpg
+      - echo "deb [arch=amd64 signed-by=/usr/share/keyrings/quirinux.gpg] https://repo.quirinux.org/ quirinux main" | tee /etc/apt/sources.list.d/quirinux.list > /dev/null
+    update: true
+    upgrade: true
+
+  accessories:
+  # animation, drivers,firmware, printing, i18n, utils, native
+  - ./accessories/quirinux-base                 # 0:25
+  - ./accessories/quirinux-desktop              # 3:02
+  - ./accessories/quirinux-firmware             # 1:13
+  - ./accessories/quirinux-multimedia           # 1:30
+  - ./accessories/quirinux-audio                # 0:15
+  - ./accessories/quirinux-graphics             # 0:34
+  - ./accessories/quirinux-animation           # 11:41 
+  - ./accessories/quirinux-office               # 0:15
+  - ./accessories/quirinux-development          # 0:07
+  - ./accessories/quirinux-utils                # 1:46
+  - ./accessories/quirinux-drivers              # 7:51
+  - ./accessories/quirinux-python               # 0:18
+  - ./accessories/quirinux-devtools             # 0:36
+  - ./accessories/quirinux-kde-libs             # 0:07
+  - ./accessories/quirinux-gnome-libs           # 0:14
+  - ./accessories/quirinux-printing             # 0:08
+  - ./accessories/quirinux-vpn                  # 0:20
+  - ./accessories/quirinux-filesystem           # 0:55
+  - ./accessories/quirinux-native               # 6:17
+  - ./accessories/quirinux-i18n                 # 0:05
+  - ./accessories/quirinux-themes               # 0:06
+  - ./accessories/quirinux-xfce                 # 0:09
+  - ./accessories/quirinux-fonts                # 0:05
+  - ./accessories/quirinux-libs                 # 0:47
+  - ./accessories/quirinux-audio-data           # 0:44
+  - ./accessories/quirinux-multimedia-codecs    # 0:03
+  - ./accessories/quirinux-archive              # 0:22
+  - ./accessories/quirinux-power                # 0:09
+  - ./accessories/quirinux-gtk-engines          # 0:03
+  - ./accessories/quirinux-system-monitoring    # 0:08
+  - ./accessories/quirinux-firewall             # 0:07
+  - ./accessories/quirinux-network-tools        # 0:08
+  - ./accessories/quirinux-flatpak              # 0:05
+  - ./accessories/quirinux-tcl-tk               # 0:01
+  - ./accessories/quirinux-mono                 # 0:03
+  - ./accessories/quirinux-gnustep              # 0:05
+  - ./accessories/quirinux-gambas               # 0:03
+  - ./accessories/quirinux-nodejs               # 0:01
+  - ./accessories/quirinux-xorg-input           # 0:07
+  - ./accessories/quirinux-firefox-l10n         # 0:01
+  - ./accessories/quirinux-thumbnailers         # <0:01
+  - ./accessories/quirinux-opencl               # 0:01
+  - ./accessories/quirinux-graphics-libs        # 0:04
+  - ./accessories/quirinux-boot                 # 0:30
+
+finalize:
+  customize: true
+  cmds:
+  # 1. Configuración y reparaciones
+  - DEBIAN_FRONTEND=readline PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin" dpkg --configure -a || true
+  - apt-get install -y --allow-downgrades --fix-broken || true
+  
+  # 2. Instalaciones específicas
+  - apt-get install -y quirinux-firmware quirinux-youdown quirinux-youtubedown || true
+  
+  # 3. Evitar paquetes no deseados (Recomendados)
+  - echo 'APT::Install-Recommends "0";' > /etc/apt/apt.conf.d/99no-recommends
+  - apt-get remove --purge -y kdeconnect 2>/dev/null || true
+  
+  # 4. Configuración de locales y display manager
+  - locale-gen es_ES.UTF-8 pt_BR.UTF-8 pt_PT.UTF-8 hu_HU.UTF-8 gl_ES.UTF-8 de_DE.UTF-8 ru_RU.UTF-8 fr_FR.UTF-8 it_IT.UTF-8 || true
+  - echo "/usr/sbin/lightdm" > /etc/X11/default-display-manager
+  - (command -v systemctl >/dev/null 2>&1 && systemctl disable slim.service 2>/dev/null && systemctl mask slim.service 2>/dev/null) || (insserv -r slim 2>/dev/null || update-rc.d slim disable 2>/dev/null) || true
+  - for dm in slim gdm3 gdm sddm; do if command -v systemctl >/dev/null 2>&1; then systemctl disable "$dm.service" 2>/dev/null || true; systemctl mask "$dm.service" 2>/dev/null || true; else [ -f "/etc/init.d/$dm" ] && update-rc.d -f "$dm" remove 2>/dev/null || true; fi; done
+  - if command -v systemctl >/dev/null 2>&1; then systemctl set-default graphical.target 2>/dev/null || true; systemctl enable lightdm.service 2>/dev/null || true; [ -d /lib/systemd/system ] && [ -f /lib/systemd/system/lightdm.service ] && ln -sf /lib/systemd/system/lightdm.service /etc/systemd/system/display-manager.service; else update-rc.d lightdm defaults 2>/dev/null || insserv lightdm 2>/dev/null || true; update-rc.d lightdm enable 2>/dev/null || true; fi
+  
+  # 5. Configuración de Debconf y Scripts de Quirinux
+  - echo "debconf debconf/frontend select Dialog" | /usr/bin/debconf-set-selections
+  - echo "debconf debconf/priority select high" | /usr/bin/debconf-set-selections
+  - /usr/local/bin/quirinux-apply-skel || true
+  - /usr/local/bin/quirinux-firmware-notice || true
+  - /usr/local/bin/quirinux-kernel-notice || true
+  - update-alternatives --remove pager /bin/cat || true
+  - "../../scripts/config_lightdm.sh"
+  - "../../scripts/hostname.sh"
+
+  # 6.Limpieza segura
+  - apt-get autoremove -y || true
+  - apt-get clean || true
+
+reboot: true

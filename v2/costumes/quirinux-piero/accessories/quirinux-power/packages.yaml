@@ -1,0 +1,12 @@
+packages:
+  - acpi-support
+  - acpi-support-base
+  - acpid
+  - acpitool
+  - onboard
+  - onboard-common
+  - onboard-data
+  - pm-utils
+  - powermgmt-base
+  - powertop
+  - tlp

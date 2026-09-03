@@ -39,5 +39,7 @@ packages:
   - xfce4-terminal
   - xfce4-theme-switcher
   - xfce4-wavelan-plugin
+  - xfdesktop4
+  - xfwm4
   - xfce4-whiskermenu-plugin
   - xfdesktop4-data
