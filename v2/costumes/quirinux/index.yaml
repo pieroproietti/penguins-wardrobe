@@ -29,24 +29,24 @@ sequence:
   # animation, drivers,firmware, printing, i18n, utils, native
   - ./accessories/quirinux-base                 # 0:25
   - ./accessories/quirinux-desktop              # 3:02
-  #- ./accessories/quirinux-firmware             # 1:13
+  - ./accessories/quirinux-firmware             # 1:13
   - ./accessories/quirinux-multimedia           # 1:30
   - ./accessories/quirinux-audio                # 0:15
   - ./accessories/quirinux-graphics             # 0:34
-  #- ./accessories/quirinux-animation           # 11:41 
+  - ./accessories/quirinux-animation           # 11:41 
   - ./accessories/quirinux-office               # 0:15
   - ./accessories/quirinux-development          # 0:07
-  #- ./accessories/quirinux-utils                # 1:46
-  #- ./accessories/quirinux-drivers              # 7:51
+  - ./accessories/quirinux-utils                # 1:46
+  - ./accessories/quirinux-drivers              # 7:51
   - ./accessories/quirinux-python               # 0:18
   - ./accessories/quirinux-devtools             # 0:36
   - ./accessories/quirinux-kde-libs             # 0:07
   - ./accessories/quirinux-gnome-libs           # 0:14
-  #- ./accessories/quirinux-printing             # 0:08
+  - ./accessories/quirinux-printing             # 0:08
   - ./accessories/quirinux-vpn                  # 0:20
   - ./accessories/quirinux-filesystem           # 0:55
   - ./accessories/quirinux-native               # 6:17
-  #- ./accessories/quirinux-i18n                 # 0:05
+  - ./accessories/quirinux-i18n                 # 0:05
   - ./accessories/quirinux-themes               # 0:06
   - ./accessories/quirinux-xfce                 # 0:09
   - ./accessories/quirinux-fonts                # 0:05
