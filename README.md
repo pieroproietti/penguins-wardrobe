@@ -1,56 +1,63 @@
-![](./penguins-wardrobe.png)
-# penguins-wardrobe / v2
+<div align="center">
+  <img src="v2/penguins-wardrobe.png" alt="Penguins' Wardrobe" width="220">
 
-This directory contains the **v2 wardrobe definitions**: costumes, accessories, scripts, and vendor configurations used by `penguins-wardrobe` to customize and dress Linux systems.
+  # Penguins' Wardrobe
 
----
+  **A curated collection of Linux costumes, accessories, and finishing touches.**
 
-## 📁 Directory Layout
-- v2 (wardrobe v2 - actual root)
-- **`costumes/`**: Declarative desktop and system environment recipes (e.g. `colibri`, `eagle`, `duck`, `seagull`, `quirinux`).
-- **`accessories/`**: Modular components that can be installed alongside costumes or standalone (e.g. `eggs-dev`, `base`, `live-installer`, `firmwares`).
-- **`packages.preseed`**: Debconf automatic preseeding files (per costume/accessory) for 100% unattended installations without interactive prompts.
-- **`vendors/`**: Vendor-specific customizations and configurations.
-- **`scripts/`**: Utility and helper scripts executed during the wardrobe customization sequence.
-- **`DOCS/`**: Documentation and guides (see [Wardrobe Users' Guide](./DOCS/wardrobe-users-guide.md)).
+  Dress a minimal installation as a polished desktop or server with declarative,
+  reusable recipes for [Penguins' Tailor](https://github.com/pieroproietti/penguins-tailor).
+
+  [Explore the wardrobe](v2/) · [Read the guide](v2/DOCS/wardrobe-users-guide.md) · [Visit Penguins' Eggs](https://penguins-eggs.net)
+</div>
 
 ---
 
-## 🚀 Quick Usage
-You need to install the package [penguins-tailor](https://github.com/pieroproietti/penguins-tailor) and use it to interact with this or your wardrobe.
+## The atelier
+
+Penguins' Wardrobe keeps system customization separate from the tool that applies
+it. **Wardrobe** supplies the YAML recipes and filesystem overlays; **Tailor**
+selects them, resolves their components, and dresses the target system.
+
+| Collection | What you will find |
+| --- | --- |
+| **Costumes** | Complete desktop and system profiles, from lightweight workstations to headless servers |
+| **Accessories** | Optional capabilities such as firmware, Flatpak, multimedia, office tools, KVM, and Waydroid |
+| **Vendors** | Distribution branding for live media, bootloaders, and Calamares |
+| **Scripts** | Reusable finishing steps for display managers, hostnames, and desktop integration |
+
+All current definitions live in [`v2/`](v2/).
+
+## A quick fitting
+
+Install [Penguins' Tailor](https://github.com/pieroproietti/penguins-tailor), then:
 
 ```bash
-# Clone or update the wardrobe repository
+# Fetch or update the official wardrobe
 tailor get
 
-# List available costumes
+# Browse and inspect the available costumes
 tailor list
-
-# Show detailed information about a costume
 tailor show colibri
 
-# Apply a costume to the current machine
-sudo tailor wear colibri
+# Preview the fitting without changing the system
+tailor wear colibri --dry-run
 
-# Export built packages or execution logs to remote server
-tailor export pkg
-tailor export log
+# Wear the selected costume
+sudo tailor wear colibri
 ```
 
----
+> [!TIP]
+> Start with `--dry-run` to review the complete fitting before applying it.
 
-## ℹ️ More Information
+## Make it yours
 
-- **Package Repository**: [github.com/pieroproietti/penguins-tailor](https://github.com/pieroproietti/penguins-tailor)
-- **Sample basic wardrobe Repository**: [github.com/pieroproietti/penguins-wardrobe](https://github.com/pieroproietti/penguins-wardrobe)
-- **A more advanced wardrobe Repository**: [github.com/charliemartinez/atelier-quirinux](https://github.com/charliemartinez/atelier-quirinux)
+Wardrobes are ordinary Git repositories, so the same structure can host a private
+atelier, a company image, or a community distribution. Begin with the
+[Wardrobe users' guide](v2/DOCS/wardrobe-users-guide.md) for the recipe format,
+overlays, preseeding, and the complete Tailor workflow.
 
-- **Website & Documentation**: [penguins-eggs.net](https://penguins-eggs.net)
-- **Author**: Piero Proietti <piero.proietti@gmail.com>
+## License
 
----
-
-## 📜 Copyright and License
-
-Copyright (c) 2026 Piero Proietti. Dual licensed under the MIT or GPL Version 2 licenses.
-
+Copyright © 2026 Piero Proietti. Dual-licensed under the
+[MIT](LICENSE) or [GNU GPL v2](LICENSE) license.
