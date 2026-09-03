@@ -26,51 +26,51 @@ sequence:
     upgrade: true
 
   accessories:
-  # eliminare: animation, drivers,firmware, printing, i18n, utils
-  - ./accessories/quirinux-base
-  - ./accessories/quirinux-desktop
-  #- ./accessories/quirinux-firmware
-  - ./accessories/quirinux-multimedia
-  - ./accessories/quirinux-audio
-  - ./accessories/quirinux-graphics
-  #- ./accessories/quirinux-animation
-  - ./accessories/quirinux-office
-  - ./accessories/quirinux-development
-  #- ./accessories/quirinux-utils
-  #- ./accessories/quirinux-drivers
-  - ./accessories/quirinux-python
-  - ./accessories/quirinux-devtools
-  - ./accessories/quirinux-kde-libs
-  - ./accessories/quirinux-gnome-libs
-  #- ./accessories/quirinux-printing
-  - ./accessories/quirinux-vpn
-  - ./accessories/quirinux-filesystem
-  - ./accessories/quirinux-native
-  #- ./accessories/quirinux-i18n
-  - ./accessories/quirinux-themes
-  - ./accessories/quirinux-xfce
-  - ./accessories/quirinux-fonts
-  - ./accessories/quirinux-libs
-  - ./accessories/quirinux-audio-data
-  - ./accessories/quirinux-multimedia-codecs
-  - ./accessories/quirinux-archive
-  - ./accessories/quirinux-power
-  - ./accessories/quirinux-gtk-engines
-  - ./accessories/quirinux-system-monitoring
-  - ./accessories/quirinux-firewall
-  - ./accessories/quirinux-network-tools
-  - ./accessories/quirinux-flatpak
-  - ./accessories/quirinux-tcl-tk
-  - ./accessories/quirinux-mono
-  - ./accessories/quirinux-gnustep
-  - ./accessories/quirinux-gambas
-  - ./accessories/quirinux-nodejs
-  - ./accessories/quirinux-xorg-input
-  - ./accessories/quirinux-firefox-l10n
-  - ./accessories/quirinux-thumbnailers
-  - ./accessories/quirinux-opencl
-  - ./accessories/quirinux-graphics-libs
-  - ./accessories/quirinux-boot
+  # animation, drivers,firmware, printing, i18n, utils, native
+  - ./accessories/quirinux-base                 # 0:25
+  - ./accessories/quirinux-desktop              # 3:02
+  #- ./accessories/quirinux-firmware             # 1:13
+  - ./accessories/quirinux-multimedia           # 1:30
+  - ./accessories/quirinux-audio                # 0:15
+  - ./accessories/quirinux-graphics             # 0:34
+  #- ./accessories/quirinux-animation           # 11:41 
+  - ./accessories/quirinux-office               # 0:15
+  - ./accessories/quirinux-development          # 0:07
+  #- ./accessories/quirinux-utils                # 1:46
+  #- ./accessories/quirinux-drivers              # 7:51
+  - ./accessories/quirinux-python               # 0:18
+  - ./accessories/quirinux-devtools             # 0:36
+  - ./accessories/quirinux-kde-libs             # 0:07
+  - ./accessories/quirinux-gnome-libs           # 0:14
+  #- ./accessories/quirinux-printing             # 0:08
+  - ./accessories/quirinux-vpn                  # 0:20
+  - ./accessories/quirinux-filesystem           # 0:55
+  - ./accessories/quirinux-native               # 6:17
+  #- ./accessories/quirinux-i18n                 # 0:05
+  - ./accessories/quirinux-themes               # 0:06
+  - ./accessories/quirinux-xfce                 # 0:09
+  - ./accessories/quirinux-fonts                # 0:05
+  - ./accessories/quirinux-libs                 # 0:47
+  - ./accessories/quirinux-audio-data           # 0:44
+  - ./accessories/quirinux-multimedia-codecs    # 0:03
+  - ./accessories/quirinux-archive              # 0:22
+  - ./accessories/quirinux-power                # 0:09
+  - ./accessories/quirinux-gtk-engines          # 0:03
+  - ./accessories/quirinux-system-monitoring    # 0:08
+  - ./accessories/quirinux-firewall             # 0:07
+  - ./accessories/quirinux-network-tools        # 0:08
+  - ./accessories/quirinux-flatpak              # 0:05
+  - ./accessories/quirinux-tcl-tk               # 0:01
+  - ./accessories/quirinux-mono                 # 0:03
+  - ./accessories/quirinux-gnustep              # 0:05
+  - ./accessories/quirinux-gambas               # 0:03
+  - ./accessories/quirinux-nodejs               # 0:01
+  - ./accessories/quirinux-xorg-input           # 0:07
+  - ./accessories/quirinux-firefox-l10n         # 0:01
+  - ./accessories/quirinux-thumbnailers         # <0:01
+  - ./accessories/quirinux-opencl               # 0:01
+  - ./accessories/quirinux-graphics-libs        # 0:04
+  - ./accessories/quirinux-boot                 # 0:30
 
 finalize:
   customize: true
