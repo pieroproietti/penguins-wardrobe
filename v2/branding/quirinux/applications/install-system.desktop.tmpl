@@ -4,13 +4,13 @@ Version=1.0
 Name=Install Quirinux
 Comment=Install system on hard disk
 
-Exec=/sbin/install-system.sh
+Exec=pkexec eggs sysinstall
 Keywords=calamares;system;install
 Icon=install-system
-Terminal=false
+Terminal=@@TERMINAL@@
 Categories=Qt;System;
 StartupWMClass=calamares
-StartupNotify=True
+StartupNotify=true
 
 Name[en]=Install Quirinux
 Name[es]=Instalar Quirinux
@@ -22,7 +22,6 @@ Name[de]=Quirinux installieren
 Name[ru]=Установка Quirinux
 Name[hu]=Quirinux telepítése
 
-Comment=Install system on hard disk
 Comment[es]=Instalar sistema en el disco duro
 Comment[pt]=Instalar sistema no disco rígido
 Comment[gl]=Instalar sistema no disco duro
