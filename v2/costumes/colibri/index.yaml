@@ -45,6 +45,7 @@ sequence:
     - plymouth-themes
     - libglib2.0-bin
     - gnome-disk-utility
+    - pkexec
 
     # a bit of charm...
     - fonts-inter 
