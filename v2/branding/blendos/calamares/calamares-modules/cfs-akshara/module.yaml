@@ -1,7 +1,0 @@
-# bliss-dafa-img
----
-type: "job"
-name: "cfs-akshara"
-interface: "process"
-command: "/usr/sbin/cfs-akshara.sh"
-timeout: 600
