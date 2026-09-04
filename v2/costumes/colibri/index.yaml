@@ -1,7 +1,7 @@
 name: colibri
 description: "desktop xfce4 plus all that I need to develop oa, firmwares"
 release: 2.0.1
-branding: quirinux
+branding: neon
 distributions:
   - trixie
   - excalibur
