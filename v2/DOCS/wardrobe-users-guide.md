@@ -8,7 +8,7 @@ enableComments: true
 
 # Guida a Penguins' Wardrobe e Tailor
 
-Questa è la guida comune dell'atelier **penguins-wardrobe** e del programma **penguins-tailor**, creati da Piero Proietti. Descrive il comportamento verificato nei sorgenti del 5 settembre 2026.
+Con **penguins-wardrobe** e **penguins-tailor**, creati da Piero Proietti, puoi partire da un'installazione Linux minimale e vestirla con un desktop, i programmi e le configurazioni che desideri. Il sistema così preparato può essere usato direttamente oppure rimasterizzato con penguins-eggs.
 
 | Progetto | Ruolo |
 | --- | --- |
@@ -16,7 +16,26 @@ Questa è la guida comune dell'atelier **penguins-wardrobe** e del programma **p
 | Penguins' Tailor | Fornisce `tailor`: scarica l'atelier e applica le ricette al sistema |
 | Penguins' Eggs | Fornisce `eggs`: rimasterizza il sistema e avvia gli installer |
 
-Un costume prepara un desktop o un sistema completo. Un accessorio aggiunge una funzione riutilizzabile. Un branding raccoglie l'identità visiva della live e dell'installer. La [guida al branding](branding.md) approfondisce quest'ultima parte.
+## Il sarto, il guardaroba e i costumi
+
+**Tailor è il sarto**: legge la ricetta e veste il sistema. **Wardrobe è il guardaroba**, o atelier: raccoglie gli abiti e il materiale necessario a realizzarli.
+
+Un **costume** definisce un allestimento completo, per esempio un desktop XFCE con i suoi programmi, il suo sfondo e la disposizione dei pannelli. Un **accessorio** raccoglie una funzione che può servire a più costumi, come gli strumenti per la grafica o la suite da ufficio. Puoi includerlo in un costume oppure applicarlo da solo.
+
+```text
+~/.wardrobe/v2/
+├── costumes/       costumi completi
+├── accessories/    accessori riutilizzabili
+├── branding/       aspetto della live e dell'installer
+├── scripts/        script condivisi
+└── DOCS/           guide
+```
+
+Dentro ogni costume o accessorio trovi una ricetta YAML e, quando serve, una cartella **`sysroot/`**. La ricetta indica quali pacchetti installare e quali comandi eseguire; `sysroot/` contiene i file da portare nel sistema: **grafiche, sfondi, icone e configurazioni**.
+
+Durante la vestizione, **il contenuto di `sysroot/` viene copiato sulla radice `/` del sistema**, mantenendo la struttura delle directory. Per esempio, `sysroot/usr/share/backgrounds/mio-sfondo.png` diventa `/usr/share/backgrounds/mio-sfondo.png`. La sezione [Sysroot: dare al sistema il proprio aspetto](#sysroot-dare-al-sistema-il-proprio-aspetto) mostra come prepararla.
+
+Il **branding** raccoglie invece gli asset usati da eggs per il menu di avvio della live e per l'installer. Il costume lo sceglie con la proprietà `branding`. La [guida al branding](branding.md) spiega come prepararlo e come viene utilizzato da Calamares.
 
 ## Installare Tailor
 
@@ -139,7 +158,21 @@ La simulazione salta installazione dei pacchetti della ricetta, preseed, overlay
 
 ## Scrivere una ricetta
 
-La struttura comune a costumi e accessori è:
+Costruiamo un piccolo costume chiamato `my-desktop`: installerà XFCE e porterà nel sistema i nostri sfondi, le icone e la configurazione del desktop. Gli accessori seguono la stessa struttura, sotto `v2/accessories/`.
+
+### Passo 1: preparare le cartelle
+
+Nell'atelier locale crea la directory del costume:
+
+```bash
+mkdir -p ~/.wardrobe/v2/costumes/my-desktop
+cd ~/.wardrobe/v2/costumes/my-desktop
+mkdir -p sysroot/etc/skel/.config
+mkdir -p sysroot/usr/share/backgrounds/my-desktop
+mkdir -p sysroot/usr/share/icons/my-desktop
+```
+
+Il costume potrà contenere:
 
 ```text
 v2/costumes/my-desktop/
@@ -151,7 +184,9 @@ v2/costumes/my-desktop/
 └── scripts/               facoltativo
 ```
 
-Un esempio per Debian Trixie:
+### Passo 2: scegliere programmi e accessori
+
+Salva questo esempio in `index.yaml`. È una ricetta per Debian Trixie:
 
 ```yaml
 name: my-desktop
@@ -178,6 +213,81 @@ finalize:
 ```
 
 L'esempio omette `branding`: applicarlo rimuove l'eventuale branding attivo. Per selezionarne uno, aggiungere per esempio `branding: quirinux` al livello principale e assicurarsi che esista `v2/branding/quirinux/`.
+
+### Passo 3: aggiungere l'aspetto e le configurazioni
+
+Metti lo sfondo in `sysroot/usr/share/backgrounds/my-desktop/`, le icone in `sysroot/usr/share/icons/my-desktop/` e le configurazioni del desktop in `sysroot/etc/skel/.config/`. Prepara soltanto i file necessari al tuo costume, seguendo gli esempi della sezione successiva.
+
+### Passo 4: provare il costume
+
+```bash
+tailor show my-desktop
+sudo tailor wear my-desktop --dry-run --linear
+sudo tailor wear my-desktop
+```
+
+La simulazione conserva il comportamento descritto nella sezione dei comandi: aggiorna comunque gli indici APT iniziali. Dopo la vestizione, entra nella sessione desktop e verifica programmi, sfondo, icone e pannelli. Quando il risultato è quello desiderato, puoi creare la live con `sudo eggs remaster`.
+
+## Sysroot: dare al sistema il proprio aspetto
+
+La cartella `sysroot/` è una piccola riproduzione della struttura del sistema Linux. Durante `tailor wear`, Tailor ne copia **il contenuto su `/`**. La cartella `sysroot` stessa non viene creata nella destinazione: i percorsi al suo interno diventano percorsi reali del sistema.
+
+Per esempio:
+
+```text
+my-desktop/sysroot/
+├── etc/
+│   ├── skel/
+│   │   └── .config/
+│   │       └── xfce4/             configurazione di pannelli e desktop
+│   └── lightdm/
+│       └── lightdm-gtk-greeter.conf
+└── usr/
+    └── share/
+        ├── backgrounds/
+        │   └── my-desktop/
+        │       └── sfondo.png
+        └── icons/
+            └── my-desktop/
+                └── logo.png
+```
+
+La corrispondenza è diretta:
+
+| File o directory nel costume | Destinazione durante la vestizione |
+| --- | --- |
+| `sysroot/usr/share/backgrounds/my-desktop/sfondo.png` | `/usr/share/backgrounds/my-desktop/sfondo.png` |
+| `sysroot/usr/share/icons/my-desktop/logo.png` | `/usr/share/icons/my-desktop/logo.png` |
+| `sysroot/etc/lightdm/lightdm-gtk-greeter.conf` | `/etc/lightdm/lightdm-gtk-greeter.conf` |
+| `sysroot/etc/skel/.config/xfce4/` | `/etc/skel/.config/xfce4/` |
+
+In questo modo il costume può portare con sé l'aspetto che hai preparato: sfondi, loghi, temi, icone, impostazioni del gestore di accesso e configurazione del desktop. Copiare uno sfondo lo rende disponibile; per farlo apparire sul desktop devi includere anche la configurazione che lo seleziona. Lo stesso vale per un tema di icone.
+
+### Il ruolo di /etc/skel
+
+`/etc/skel` contiene le configurazioni iniziali destinate ai nuovi utenti. Nel costume puoi prepararle sotto `sysroot/etc/skel/`, includendo anche i file nascosti come `.config` e `.bashrc`.
+
+Al termine della vestizione Tailor sincronizza `/etc/skel` anche nella home dell'utente individuato, normalmente quello che ha invocato `sudo`. Per esempio, con l'utente `piero`:
+
+```text
+sysroot/etc/skel/.config/xfce4/
+    → /etc/skel/.config/xfce4/
+    → /home/piero/.config/xfce4/
+```
+
+Le impostazioni del costume arrivano così anche all'utente esistente. I file omonimi possono essere sovrascritti: scegli le configurazioni che vuoi effettivamente distribuire, senza copiare indiscriminatamente tutta la tua home.
+
+### Può contenere di tutto, ma senza esagerare
+
+`sysroot/` non è limitata alla grafica: può contenere file destinati a qualsiasi parte del filesystem. Proprio per questo conviene mantenerla piccola e comprensibile, con ciò che caratterizza il costume.
+
+Per i programmi usa le liste dei pacchetti; per le operazioni di configurazione usa gli script quando opportuno; in `sysroot/` metti i file che vuoi distribuire. Evita di trascinarci cache, file temporanei, credenziali personali o intere directory di sistema copiate dalla macchina di lavoro. Ogni file incluso deve avere uno scopo chiaro.
+
+Anche gli accessori possono avere una propria `sysroot/`. Tailor applica prima quelle degli accessori e poi quella del costume: quando due file hanno la stessa destinazione, quello del costume prevale. La copia aggiunge e sovrascrive i file forniti; non elimina dalla destinazione tutti gli altri file assenti dal costume.
+
+Nei costumi precedenti puoi trovare il nome `dirs/`: Tailor lo usa se `sysroot/` non esiste. Nei nuovi costumi usa `sysroot/`.
+
+## Riferimento della ricetta
 
 ### Campi della ricetta
 
@@ -224,9 +334,7 @@ lightdm shared/default-x-display-manager select lightdm
 
 Tailor carica le risposte con `debconf-set-selections` prima dei pacchetti della ricetta. Questo meccanismo riguarda Debconf; i pacchetti inseriti in `packages_interactive` mantengono le proprie richieste interattive.
 
-### Overlay, script e ordine di applicazione
-
-`sysroot/` riproduce il filesystem di destinazione: `sysroot/etc/skel/` alimenta `/etc/skel`, `sysroot/usr/share/backgrounds/` alimenta gli sfondi. Se `sysroot/` manca, Tailor cerca il nome precedente `dirs/`. La copia usa rsync con conservazione di attributi, ACL e attributi estesi.
+### Script e ordine di applicazione
 
 Il flusso principale di un costume è:
 
@@ -238,7 +346,7 @@ Il flusso principale di un costume è:
 6. Sostituzione o rimozione del branding attivo.
 7. Sincronizzazione di `/etc/skel` nella home dell'utente individuato, riepilogo e report.
 
-Gli overlay del costume possono quindi sovrascrivere file depositati dagli accessori. La sincronizzazione della home può sovrascrivere configurazioni personali omonime. Applicare un altro costume non disinstalla automaticamente tutti i pacchetti del precedente.
+Applicare un altro costume non disinstalla automaticamente tutti i pacchetti del precedente.
 
 Gli accessori si indicano con il nome, con `accessories/<nome>` oppure con un percorso relativo alla ricetta (`./` o `../`). Per un accessorio applicato direttamente, usare la forma esplicita `tailor wear accessories/<nome>`.
 
