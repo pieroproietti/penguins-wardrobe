@@ -1,4 +1,3 @@
-/* .wardrobe/vendors/quirinux/theme/calamares/branding/ */
 import QtQuick 2.0;
 import calamares.slideshow 1.0;
 
@@ -41,15 +40,16 @@ text: qsTr("<h1>Quirinux GNU/Linux Versión 2.2</h1>" +
 
 "<h3>https://www.quirinux.org/</h3><br/>" +
 
-"<b>Versión:</b> 2.2 Rev. 2 - 04-09-2026 <br/><br/>" +
+"<b>Versión:</b> 2.2 ESTABLE 01-01-2026 <br/><br/>" +
 
 "<b>Autor:</b> Charlie Martínez.<br/><br/>" +
 
 "<b>Logotipo Quirinux:</b> Thomas Gaya.<br/>"+
 "<b>Sistema de Creación ISO:</b> Penguins' Eggs, de Piero Proietti.<br/>"+
-"<b>Capacitación y auditoria de Seguridad:</b> Javier Obregón.<br/>"+
+"<b>Capacitación y Auditoria de Seguridad:</b> Javier Obregón.<br/>"+
 "<b>Pruebas de compatibilidad en Mac:</b> Sela González. <br/><br/>"+
-"<b>Colaboradora en mejoras UX y de accesibilidad:</b> Noelia Gerbaudo.<br/><br/>"+
+"Agradecimiento a toda la comunidad que colaboró<br/>"+ 
+"como beta-tester y en la difusión del proyecto.<br/><br/>" +
 
 "<b>Hecho en:</b> Stgo. de Compostela (Galicia, España), Misiones (Argentina) y Roma (Italia).<br/>"+
 "<b>Quirinux</b> es Marca Registrada.<b> Distribuidor oficial:</b> CREALIB TECNOLOGÍA SOSTENIBLE.<br/>"+
