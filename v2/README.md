@@ -1,75 +1,56 @@
-<div align="center">
-  <img src="penguins-wardrobe.png" alt="Penguins' Wardrobe" width="180">
+# Wardrobe v2
 
-  # The Wardrobe · v2
-
-  **The working collection of costumes, accessories, branding, and scripts.**
-
-  [User guide](DOCS/wardrobe-users-guide.md) · [Tailor](https://github.com/pieroproietti/penguins-tailor) · [Project home](https://penguins-eggs.net)
-</div>
-
----
-
-## Find your way around
+This directory is the collection consumed by `tailor`. For installation and commands, read the shared [Wardrobe and Tailor user guide](DOCS/wardrobe-users-guide.md). For live media and installer artwork, read the [branding guide](DOCS/branding.md).
 
 ```text
 v2/
-├── costumes/       complete desktop and system recipes
-├── accessories/    reusable, optional components
-├── branding/       visual identity and distribution customizations
-├── scripts/        shared configuration helpers
-└── DOCS/           guides and reference material
+├── costumes/<name>/       complete recipes
+├── accessories/<name>/    reusable recipes
+├── branding/<name>/       visual identity bundles
+├── scripts/               shared commands
+└── DOCS/                  Wardrobe and Tailor documentation
 ```
 
-| Collection | Examples | Purpose |
-| --- | --- | --- |
-| [`costumes/`](costumes/) | `colibri`, `duck`, `eagle`, `seagull` | Ready-to-wear system profiles |
-| [`accessories/`](accessories/) | `firmwares`, `flatpak`, `kvm`, `office` | Modular features used alone or by a costume |
-| [`branding/`](branding/) | `nexa`, `spiral`, `ufficiozero` | Live media, bootloader, and installer identity |
-| [`scripts/`](scripts/) | display manager and hostname helpers | Reusable finishing steps |
+## Recipes
 
-Recipes may also include a `packages.preseed` file for unattended Debconf answers
-and a `sysroot/` or `dirs/` tree for files that must be overlaid onto the target
-system.
+A costume or accessory typically contains:
 
-A costume can select an optional visual identity with the top-level `branding`
-property. Its value is the name of a directory in [`branding/`](branding/):
-
-```yaml
-name: quirinux
-branding: quirinux
+```text
+index.yaml                recipe and metadata
+packages.yaml             optional additional packages
+packages.preseed          optional Debian Debconf answers
+sysroot/                  optional files copied onto /
+scripts/                  optional recipe scripts
 ```
 
-When the property is absent, no branding is applied.
-
-## Try on a costume
-
-With [Penguins' Tailor](https://github.com/pieroproietti/penguins-tailor) installed:
+Tailor prefers `index.yaml`, then `index.yml`. When neither exists, it searches distribution-specific filenames. It selects one recipe; it does not merge `index.yaml` with `debian.yaml` or `arch.yaml`. See the [recipe reference](DOCS/wardrobe-users-guide.md#scrivere-una-ricetta).
 
 ```bash
-tailor get                       # clone or refresh the wardrobe
-tailor list                      # browse available costumes
-tailor show colibri              # inspect one recipe
-tailor wear colibri --dry-run    # preview without making changes
-sudo tailor wear colibri         # apply it
-```
-
-Accessories can be fitted directly too:
-
-```bash
+tailor get
+tailor list
+tailor show colibri
+tailor show accessories/multimedia
+sudo tailor wear colibri
 sudo tailor wear accessories/multimedia
 ```
 
-For custom repositories, recipe anatomy, command flags, exports, and debugging,
-continue with the **[Wardrobe users' guide](DOCS/wardrobe-users-guide.md)**.
+The current `wear` package backend supports Debian and derivatives through APT. Check the recipe's `distributions` and package names for the target system.
 
-## Related ateliers
+## Branding
 
-- [Penguins' Tailor](https://github.com/pieroproietti/penguins-tailor) — the CLI that applies these recipes
-- [Atelier Quirinux](https://github.com/charliemartinez/atelier-quirinux) — an advanced custom wardrobe
-- [Penguins' Eggs](https://penguins-eggs.net) — the wider remastering ecosystem
+Select a bundle in a costume's `index.yaml`:
 
-## License
+```yaml
+name: my-desktop
+branding: quirinux
+```
 
-Copyright © 2026 Piero Proietti. Dual-licensed under the
-[MIT](LICENSE) or [GNU GPL v2](LICENSE) license.
+Tailor copies the contents of `branding/quirinux/` directly into `/etc/penguins-eggs.d/branding/`, replacing the previous selection. A costume without `branding` removes the active bundle; directly wearing an accessory preserves it.
+
+For Calamares, omit `branding.desc` when the generated distro identity is suitable. If you supply that file, it must be complete and use `componentName: eggs`. Empty files and comment-only stubs overwrite the generated descriptor and break the configuration. The [branding guide](DOCS/branding.md) explains the full layout and precedence.
+
+## Working on an atelier
+
+Tailor normally reads the real user's `~/.wardrobe/v2`, or `~/.wardrobe` for a collection without a `v2` wrapper. Local `./v2` is only a fallback when that installed wardrobe is absent. Running Tailor from a development checkout does not automatically select that checkout.
+
+Use a separate Git branch for recipe work. Review `tailor show`, the selected YAML, and the files under `sysroot/` before applying changes. The [user guide](DOCS/wardrobe-users-guide.md) covers previews and log locations.

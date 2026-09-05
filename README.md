@@ -1,63 +1,61 @@
-<div align="center">
-  <img src="v2/penguins-wardrobe.png" alt="Penguins' Wardrobe" width="220">
+# Penguins' Wardrobe
 
-  # Penguins' Wardrobe
+![Penguins' Wardrobe](v2/penguins-wardrobe.png)
 
-  **A curated collection of Linux costumes, accessories, and finishing touches.**
+Penguins' Wardrobe is Piero Proietti's atelier of Linux system recipes. It contains costumes, accessories, branding bundles, and shared scripts. [Penguins' Tailor](https://github.com/pieroproietti/penguins-tailor) provides the `tailor` command that applies them; [Penguins' Eggs](https://github.com/pieroproietti/penguins-eggs) remasters the configured system into a bootable live ISO.
 
-  Dress a minimal installation as a polished desktop or server with declarative,
-  reusable recipes for [Penguins' Tailor](https://github.com/pieroproietti/penguins-tailor).
+This repository hosts the shared Wardrobe and Tailor user documentation.
 
-  [Explore the wardrobe](v2/) · [Read the guide](v2/DOCS/wardrobe-users-guide.md) · [Visit Penguins' Eggs](https://penguins-eggs.net)
-</div>
+## Documentation
 
----
+- [Wardrobe and Tailor user guide — Italiano](v2/DOCS/wardrobe-users-guide.md): installation, commands, recipes, package handling, overlays, and troubleshooting.
+- [Branding guide — Italiano](v2/DOCS/branding.md): selecting a bundle, live boot artwork, installer launchers, and Calamares configuration.
+- [Collection layout](v2/README.md): where recipes and assets belong.
 
-## The atelier
+## Start with Tailor
 
-Penguins' Wardrobe keeps system customization separate from the tool that applies
-it. **Wardrobe** supplies the YAML recipes and filesystem overlays; **Tailor**
-selects them, resolves their components, and dresses the target system.
-
-| Collection | What you will find |
-| --- | --- |
-| **Costumes** | Complete desktop and system profiles, from lightweight workstations to headless servers |
-| **Accessories** | Optional capabilities such as firmware, Flatpak, multimedia, office tools, KVM, and Waydroid |
-| **Branding** | Distribution identity for live media, bootloaders, and Calamares |
-| **Scripts** | Reusable finishing steps for display managers, hostnames, and desktop integration |
-
-All current definitions live in [`v2/`](v2/).
-
-## A quick fitting
-
-Install [Penguins' Tailor](https://github.com/pieroproietti/penguins-tailor), then:
+Install Tailor using the [user guide](v2/DOCS/wardrobe-users-guide.md#installare-tailor), then fetch and inspect a costume:
 
 ```bash
-# Fetch or update the official wardrobe
 tailor get
-
-# Browse and inspect the available costumes
 tailor list
 tailor show colibri
+```
 
-# Preview the fitting without changing the system
-tailor wear colibri --dry-run
+Apply a costume on a compatible Debian-family system:
 
-# Wear the selected costume
+```bash
 sudo tailor wear colibri
 ```
 
-> [!TIP]
-> Start with `--dry-run` to review the complete fitting before applying it.
+`wear` installs packages, runs recipe commands, copies system configuration, and synchronizes `/etc/skel` into the target user's home. Compatibility and package choices depend on the selected recipe. The current package backend is APT; Arch recipe files do not yet imply a working Arch `wear` backend.
 
-## Make it yours
+For a preview, use `sudo tailor wear colibri --dry-run --linear`. This skips recipe application, but the current implementation still runs the initial APT index refresh and may fetch the atelier and write logs or reports.
 
-Wardrobes are ordinary Git repositories, so the same structure can host a private
-atelier, a company image, or a community distribution. Begin with the
-[Wardrobe users' guide](v2/DOCS/wardrobe-users-guide.md) for the recipe format,
-overlays, preseeding, and the complete Tailor workflow.
+After checking the configured desktop, use the C/Go Penguins' Eggs CLI to remaster it:
 
-## License
+```bash
+sudo eggs remaster
+```
 
-Copyright © 2026 Piero Proietti. Dual-licensed under the
-[MIT](LICENSE) or [GNU GPL v2](LICENSE) license.
+## What the atelier contains
+
+| Directory | Purpose |
+| --- | --- |
+| [Costumes](v2/costumes/) | Complete system and desktop recipes |
+| [Accessories](v2/accessories/) | Package groups and configuration that costumes can share |
+| [Branding](v2/branding/) | Live boot artwork and installer identity |
+| [Scripts](v2/scripts/) | Shared recipe commands |
+
+A costume's `branding` property selects a bundle from `v2/branding/`. Tailor replaces `/etc/penguins-eggs.d/branding` with that bundle's contents. Wearing a costume without this property removes the previous active branding. See the [branding guide](v2/DOCS/branding.md) before supplying a custom `branding.desc`.
+
+## Related projects
+
+- [Penguins' Tailor](https://github.com/pieroproietti/penguins-tailor) — the Go CLI that applies recipes.
+- [Penguins' Eggs](https://github.com/pieroproietti/penguins-eggs) — the C/Go remastering engine and installers.
+- [Quirinux atelier](https://github.com/charliemartinez/penguins-wardrobe) — Charlie Martínez's costume collection.
+- [Project website](https://penguins-eggs.net).
+
+## Credits and licenses
+
+Created and maintained by Piero Proietti. See [LICENSE](LICENSE) for the repository license. Bundled artwork, themes, and scripts may carry their own copyright and license notices; retain those when reusing them.
