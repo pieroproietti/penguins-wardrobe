@@ -39,7 +39,29 @@ Il **branding** raccoglie invece gli asset usati da eggs per il menu di avvio de
 
 ## Installare Tailor
 
-Il pacchetto si chiama `penguins-tailor`, il comando è `tailor`. I sorgenti e i pacchetti pubblicati appartengono alla [repository penguins-tailor](https://github.com/pieroproietti/penguins-tailor).
+### Installazione dal repository di eggs
+
+Per usare Tailor, installa il pacchetto **`penguins-tailor`**, già disponibile nel repository di eggs. Su Debian e derivate, se hai già configurato quel repository, basta:
+
+```bash
+sudo apt update
+sudo apt install penguins-tailor
+tailor version
+```
+
+Il comando da usare dopo l'installazione è `tailor`. Puoi proseguire direttamente con [Dal costume alla live](#dal-costume-alla-live).
+
+Se hai già il comando `eggs` ma non hai ancora configurato il suo repository, aggiungilo prima dell'installazione:
+
+```bash
+sudo eggs tools repo add
+sudo apt update
+sudo apt install penguins-tailor
+```
+
+### Compilazione dai sorgenti
+
+Se vuoi sviluppare Tailor o compilare una tua versione, i sorgenti si trovano nella [repository penguins-tailor](https://github.com/pieroproietti/penguins-tailor).
 
 Per compilare dai sorgenti servono Git, Make e Go 1.25 o successivo, secondo il `go.mod` attuale:
 
