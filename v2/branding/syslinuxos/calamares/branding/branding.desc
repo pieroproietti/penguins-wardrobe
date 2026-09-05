@@ -1,4 +1,4 @@
-componentName: syslinuxos
+componentName: eggs
 welcomeStyleCalamares: true
 strings:
   productName: SYSLINUXOS_12
