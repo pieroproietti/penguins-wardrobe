@@ -8,6 +8,8 @@ desktop: xfce
 display_manager: lightdm
 session_type: x11
 init: auto
+autologin: true
+login_background: /usr/share/backgrounds/eagle/38064032662_83c2250d7f_h.jpg
 description: desktop xfce4 plus proxmox-ve
 author: artisan
 release: 2.0.1
@@ -44,6 +46,7 @@ sequence:
     - firefox-esr
     - libxfce4ui-utils
     - lightdm
+    - lightdm-gtk-greeter
     - spice-vdagent
     - tango-icon-theme
     - thunar
@@ -75,7 +78,6 @@ finalize:
   customize: true
   cmds:
     - ../../scripts/config_desktop_link.sh
-    - ../../scripts/config_lightdm.sh
 
     # typical Proxmox VE
     - systemctl enable pveproxy

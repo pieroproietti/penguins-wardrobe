@@ -9,6 +9,8 @@ desktop: cinnamon
 display_manager: lightdm
 session_type: x11
 init: auto
+autologin: true
+login_background: /usr/share/backgrounds/duck/6819323284_e1ee501d4e_b.jpg
 description: desktop cinnamon plus all that we need to enjoy at home and office
 author: artisan
 release: 2.0.1
@@ -30,6 +32,7 @@ sequence:
     - cinnamon-desktop-environment
     - firefox-esr
     - lightdm
+    - lightdm-gtk-greeter
     - spice-vdagent
   accessories:
     - base
@@ -42,6 +45,5 @@ finalize:
   customize: true
   cmds:
     - ../../scripts/config_desktop_link.sh
-    - ../../scripts/config_lightdm.sh
     - ../../scripts/hostname.sh
 reboot: true

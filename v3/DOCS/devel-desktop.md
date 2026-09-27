@@ -10,6 +10,8 @@ desktop: xfce
 display_manager: lightdm
 session_type: x11
 init: auto
+autologin: true
+login_background: /usr/share/backgrounds/colibri/3794764350_2839ca0b26_b.jpg
 ```
 
 Sysroot rimane la directory `sysroot/` del costume, con fallback legacy a
@@ -48,14 +50,33 @@ precede tutti gli overlay.
 
 La configurazione dichiarativa del login avviene dopo sysroot e, nel percorso
 completo, dopo gli script finali. La nuova abilitazione del servizio non
-riavvia la sessione corrente e non modifica il target di boot systemd.
+riavvia la sessione corrente e imposta graphical.target per il prossimo avvio systemd.
 Gli script legacy e gli script dei pacchetti possono invece gestire servizi
 e target: rimangono parte delle ricette esistenti.
 
-Gli script `config_lightdm.sh` sono mantenuti perché configurano anche
-autologin e sfondo. Queste funzioni non sono ancora trasferite nel backend
-Go e gli script non vengono eseguiti nel percorso non-Debian. La nuova
-configurazione non promette quindi un risultato identico tra distribuzioni.
+La configurazione di LightDM è ora gestita da Tailor: le sei ricette non
+richiamano più lo script shell. Anche i comandi duplicati di attivazione del
+display manager nella ricetta Quirinux sono stati rimossi.
+
+`autologin: true` seleziona l'utente non-root che invoca Tailor tramite sudo o
+doas (SUDO_USER, poi DOAS_USER, poi l'account corrente). Un'esecuzione diretta
+come root non sceglie automaticamente un utente. `false` disabilita autologin
+utente e guest nel seat predefinito; omesso mantiene la configurazione esistente.
+La sessione autologin segue quella dichiarata e il timeout è zero. Le regole
+PAM e le impostazioni specifiche per seat restano applicabili.
+
+`login_background` indica il percorso assoluto dell'immagine installata da
+sysroot. Richiede lightdm-gtk-greeter, seleziona questo greeter e ne aggiorna
+lo sfondo dopo gli overlay. Uno sfondo personale può prevalere sul default.
+Chicks usa la directory `chick/`; Quirinux non dichiara un'immagine e conserva
+lo sfondo installato. Un'immagine dichiarata ma assente produce un errore prima
+della scrittura della configurazione login.
+
+Su systemd Tailor disabilita i display manager concorrenti abilitati, senza
+fermarli o mascherarli, abilita LightDM e seleziona graphical.target.
+La configurazione si applica anche nel percorso senza installazione pacchetti.
+Le liste curate di pacchetti/accessori e gli altri script delle ricette restano;
+Duck ed Eagle dichiarano esplicitamente lightdm-gtk-greeter.
 
 ## Sessione e prove
 

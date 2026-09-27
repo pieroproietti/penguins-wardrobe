@@ -8,6 +8,8 @@ desktop: xfce
 display_manager: lightdm
 session_type: x11
 init: auto
+autologin: true
+login_background: /usr/share/backgrounds/gypaetus/gipeto-casses-blanches.jpg
 description: >-
   desktop xfce4 plus all for crytpo
 author: artisan
@@ -84,7 +86,6 @@ finalize:
     - echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main" | sudo tee /etc/apt/sources.list.d/brave-browser.list
     - apt update && sudo apt install brave-browser -y    
     - ../../scripts/config_desktop_link.sh
-    - ../../scripts/config_lightdm.sh
     - ../../scripts/config_g4.sh
     - ../../scripts/hostname.sh
     - plymouth-set-default-theme bgrt

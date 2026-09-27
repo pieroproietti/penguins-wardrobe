@@ -57,7 +57,6 @@ finalize:
   cmds:
   # standard
   - ../../scripts/config_desktop_link.sh
-  #- ../../scripts/config_lightdm.sh
   - ../../scripts/hostname.sh
   
 reboot: true

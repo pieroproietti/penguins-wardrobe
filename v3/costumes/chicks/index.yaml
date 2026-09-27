@@ -9,6 +9,8 @@ desktop: xfce
 display_manager: lightdm
 session_type: x11
 init: auto
+autologin: true
+login_background: /usr/share/backgrounds/chick/emperor-penguin-chicks-at-sea-world.jpg
 description: >-
   desktop xfce4 per la scuola
 author: artisan
@@ -62,7 +64,6 @@ finalize:
   cmds:
   - adduser ${SUDO_USER} epoptes
   - ../../scripts/config_desktop_link.sh
-  - ../../scripts/config_lightdm.sh
   - ../../scripts/hostname.sh
 
 reboot: true

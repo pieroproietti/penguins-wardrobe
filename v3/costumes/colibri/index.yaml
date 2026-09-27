@@ -5,6 +5,8 @@ desktop: xfce
 display_manager: lightdm
 session_type: x11
 init: auto
+autologin: true
+login_background: /usr/share/backgrounds/colibri/3794764350_2839ca0b26_b.jpg
 description: "desktop xfce4 plus all that I need to develop oa, firmwares"
 release: 2.0.1
 # branding: 
@@ -76,7 +78,6 @@ sequence:
     - "update-alternatives --set x-terminal-emulator /usr/bin/xfce4-terminal.wrapper"
     - "update-alternatives --set x-cursor-theme /usr/share/icons/Bibata-Modern-Classic/cursor.theme"
     - "../../scripts/config_desktop_link.sh"
-    - "../../scripts/config_lightdm.sh"
     - "../../scripts/config_g4.sh"
     - "../../scripts/hostname.sh"
     - "plymouth-set-default-theme bgrt"
