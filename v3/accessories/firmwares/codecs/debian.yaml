@@ -1,0 +1,17 @@
+# codecs
+---
+name: codecs
+description: install codecs
+author: artisan
+release: 2.0.1
+distributions:
+  - trixie
+  - daedalus
+  - excalibur
+  - resolute
+
+sequence:
+  packages:
+    - unace-nonfree # (utils): extract, test and view .ace archives (non-free version) [non-free]
+    - firmware-samsung # (kernel): Binary firmware for Samsung MFC video codecs [non-free]
+

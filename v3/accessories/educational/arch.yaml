@@ -1,0 +1,21 @@
+# wardrobe: .
+# accessory: educational
+---
+name: educational
+description: >-
+  educational
+author: artisan
+release: 0.0.1
+distributions:
+  - rolling
+sequence:
+  packages:
+    - klavaro
+    - solfege 
+    # gcompris
+    # gelemental
+    # granule # Leitner system flashcard utiltiy (text only)
+    # littlewizard # development environment for children
+    # stellarium
+    # tuxtype # TypingTutor - touch typing plugin for gedit
+    # wordplay #  anagrams

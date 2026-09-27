@@ -1,0 +1,9 @@
+packages:
+  - flatpak
+  - flatpakconfig
+  - package-update-indicator
+  - packagekit
+  - packagekit-tools
+  - qapt-deb-installer
+  - software-properties-common
+  - software-properties-gtk

@@ -1,0 +1,21 @@
+[Desktop Entry]
+Version=1.0
+Name[es]=Shotwell
+Name=Shotwell
+GenericName[es]=Gestor de fotos
+GenericName=Photo Manager
+Comment[es]=Organiza tus fotos
+Comment=Organize your photos
+Keywords[es]=álbum;cámara;cámaras;recortar;editar;mejorar;exportar;galería;imagen;imágenes;importar;organizar;foto;fotográfos;fotos;fotografía;imprimir;publicar;rotar;compartir;etiquetas;vídeo;facebook;flickr;picasa;youtube;piwigo;
+Keywords=album;camera;cameras;crop;edit;enhance;export;gallery;image;images;import;organize;photo;photographs;photos;picture;pictures;photography;print;publish;rotate;share;tags;video;facebook;flickr;picasa;youtube;piwigo;
+Exec=shotwell %U
+Icon[es]=shotwell
+Icon=shotwell
+Terminal=false
+Type=Application
+MimeType=x-content/image-dcf;
+Categories=Graphics;Photography;GNOME;GTK;
+X-GIO-NoFuse=true
+X-GNOME-Gettext-Domain=shotwell
+X-GNOME-FullName=Shotwell Photo Manager
+X-XFCE-Source=file:///usr/share/applications/shotwell.desktop

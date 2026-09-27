@@ -1,0 +1,16 @@
+# liquorix
+---
+name: liquorix
+description: install liquorix kernel Debian/Devuan/Ubuntu
+author: artisan
+release: 2.0.1
+distributions:
+  - trixie
+  - daedalus
+  - excalibur
+  - resolute
+sequence:
+  accessories:
+    - ./debian
+    - ./devuan
+    - ./ubuntu

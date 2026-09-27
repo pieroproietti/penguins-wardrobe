@@ -1,0 +1,17 @@
+---
+name: flatpak
+description: flatpack 
+author: artisan
+release: 2.0.1
+distributions:
+  - trixie
+  - daedalus
+  - excalibur
+  - resolute
+sequence:
+  packages:
+    - flatpak
+    - gnome-software-plugin-flatpak 
+finalize:
+  cmds:
+    - flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo

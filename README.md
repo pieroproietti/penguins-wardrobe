@@ -8,6 +8,8 @@ This repository hosts the shared Wardrobe and Tailor user documentation.
 
 ## Documentation
 
+- [Experimental desktop/init configuration (`devel`)](v3/DOCS/devel-desktop.md).
+
 - [Wardrobe and Tailor user guide — Italiano](v2/DOCS/wardrobe-users-guide.md): installation, commands, recipes, package handling, overlays, and troubleshooting.
 - [Branding guide — Italiano](v2/DOCS/branding.md): selecting a bundle, live boot artwork, installer launchers, and Calamares configuration.
 - [Collection layout](v2/README.md): where recipes and assets belong.
@@ -59,3 +61,15 @@ A costume's `branding` property selects a bundle from `v2/branding/`. Tailor rep
 ## Credits and licenses
 
 Created and maintained by Piero Proietti. See [LICENSE](LICENSE) for the repository license. Bundled artwork, themes, and scripts may carry their own copyright and license notices; retain those when reusing them.
+
+## Collection versions
+
+- `v2/` preserves the recipes for existing Tailor releases.
+- `v3/` contains the new declarative desktop/init recipes for Tailor `devel`,
+  along with their accessories, branding and scripts.
+
+Tailor `devel` prefers `v3/` when available and falls back to `v2/`.
+`tailor get` downloads both collections from the selected remote branch.
+New local recipes become downloadable only after they are committed and pushed.
+If published on the wardrobe's `devel` branch, select it with
+`tailor get --branch devel`.

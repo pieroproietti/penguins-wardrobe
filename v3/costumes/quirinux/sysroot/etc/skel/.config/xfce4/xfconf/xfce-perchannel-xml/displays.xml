@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<channel name="displays" version="1.0">
+  <property name="ActiveProfile" type="string" value="Default"/>
+  <property name="Default" type="empty">
+    <property name="Virtual1" type="string" value="Virtual1">
+      <property name="Active" type="bool" value="true"/>
+      <property name="EDID" type="string" value=""/>
+      <property name="Resolution" type="string" value="1360x768"/>
+      <property name="RefreshRate" type="double" value="60.015161725067387"/>
+      <property name="Rotation" type="int" value="0"/>
+      <property name="Reflection" type="string" value="0"/>
+      <property name="Primary" type="bool" value="true"/>
+      <property name="Scale" type="empty">
+        <property name="X" type="double" value="1"/>
+        <property name="Y" type="double" value="1"/>
+      </property>
+      <property name="Position" type="empty">
+        <property name="X" type="int" value="0"/>
+        <property name="Y" type="int" value="0"/>
+      </property>
+    </property>
+    <property name="LVDS-1" type="string" value="Portátil">
+      <property name="Active" type="bool" value="true"/>
+      <property name="EDID" type="string" value="331136df153cfc1f5fd7afe8423fd16c60bd83b1"/>
+      <property name="Resolution" type="string" value="1366x768"/>
+      <property name="RefreshRate" type="double" value="59.841812260351993"/>
+      <property name="Rotation" type="int" value="0"/>
+      <property name="Reflection" type="string" value="0"/>
+      <property name="Primary" type="bool" value="false"/>
+      <property name="Scale" type="empty">
+        <property name="X" type="double" value="1"/>
+        <property name="Y" type="double" value="1"/>
+      </property>
+      <property name="Position" type="empty">
+        <property name="X" type="int" value="1280"/>
+        <property name="Y" type="int" value="0"/>
+      </property>
+    </property>
+    <property name="VGA-1" type="string" value="Hyundai 17&quot;">
+      <property name="Active" type="bool" value="true"/>
+      <property name="EDID" type="string" value="44aaec580eaead21dbc1cd51e5e1865c3acff722"/>
+      <property name="Resolution" type="string" value="1280x1024"/>
+      <property name="RefreshRate" type="double" value="75.024674781928283"/>
+      <property name="Rotation" type="int" value="0"/>
+      <property name="Reflection" type="string" value="0"/>
+      <property name="Primary" type="bool" value="false"/>
+      <property name="Scale" type="empty">
+        <property name="X" type="double" value="1"/>
+        <property name="Y" type="double" value="1"/>
+      </property>
+      <property name="Position" type="empty">
+        <property name="X" type="int" value="0"/>
+        <property name="Y" type="int" value="0"/>
+      </property>
+    </property>
+  </property>
+  <property name="Fallback" type="empty">
+    <property name="Virtual1" type="string" value="Virtual1">
+      <property name="Active" type="bool" value="true"/>
+      <property name="EDID" type="string" value=""/>
+      <property name="Resolution" type="string" value="1360x768"/>
+      <property name="RefreshRate" type="double" value="60.015161725067387"/>
+      <property name="Rotation" type="int" value="0"/>
+      <property name="Reflection" type="string" value="0"/>
+      <property name="Primary" type="bool" value="true"/>
+      <property name="Scale" type="empty">
+        <property name="X" type="double" value="1"/>
+        <property name="Y" type="double" value="1"/>
+      </property>
+      <property name="Position" type="empty">
+        <property name="X" type="int" value="0"/>
+        <property name="Y" type="int" value="0"/>
+      </property>
+    </property>
+    <property name="LVDS-1" type="string" value="Portátil">
+      <property name="Active" type="bool" value="true"/>
+      <property name="EDID" type="string" value="331136df153cfc1f5fd7afe8423fd16c60bd83b1"/>
+      <property name="Resolution" type="string" value="1366x768"/>
+      <property name="RefreshRate" type="double" value="59.841812260351993"/>
+      <property name="Rotation" type="int" value="0"/>
+      <property name="Reflection" type="string" value="0"/>
+      <property name="Primary" type="bool" value="false"/>
+      <property name="Scale" type="empty">
+        <property name="X" type="double" value="1"/>
+        <property name="Y" type="double" value="1"/>
+      </property>
+      <property name="Position" type="empty">
+        <property name="X" type="int" value="1280"/>
+        <property name="Y" type="int" value="0"/>
+      </property>
+    </property>
+    <property name="VGA-1" type="string" value="Hyundai 17&quot;">
+      <property name="Active" type="bool" value="true"/>
+      <property name="EDID" type="string" value="44aaec580eaead21dbc1cd51e5e1865c3acff722"/>
+      <property name="Resolution" type="string" value="1280x1024"/>
+      <property name="RefreshRate" type="double" value="75.024674781928283"/>
+      <property name="Rotation" type="int" value="0"/>
+      <property name="Reflection" type="string" value="0"/>
+      <property name="Primary" type="bool" value="false"/>
+      <property name="Scale" type="empty">
+        <property name="X" type="double" value="1"/>
+        <property name="Y" type="double" value="1"/>
+      </property>
+      <property name="Position" type="empty">
+        <property name="X" type="int" value="0"/>
+        <property name="Y" type="int" value="0"/>
+      </property>
+    </property>
+  </property>
+  <property name="Notify" type="int" value="1"/>
+</channel>

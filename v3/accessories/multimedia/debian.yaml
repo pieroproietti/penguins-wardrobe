@@ -1,0 +1,22 @@
+# multimedia
+---
+name: multimedia
+description: a selection of usefull multimedia packages
+author: artisan
+release: 2.0.1
+distributions:
+  - trixie
+  - daedalus
+  - excalibur
+  - resolute
+sequence:
+  packages:
+    - audacity
+    - brasero
+    - exfalso
+    - kazam
+    - kdenlive
+    - mediainfo
+    - quodlibet
+    - vlc
+    - xfburn

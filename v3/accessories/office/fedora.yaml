@@ -1,0 +1,12 @@
+# office
+---
+name: office
+description: install libreoffice, gimp, vlc
+author: artisan
+distributions:
+  - fedora
+sequence:
+  packages:
+    - gimp
+    - libreoffice
+    - vlc

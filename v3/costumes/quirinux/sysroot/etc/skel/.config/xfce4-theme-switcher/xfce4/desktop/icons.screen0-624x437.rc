@@ -1,0 +1,15 @@
+[xfdesktop-version-4.10.3+-rcfile_format]
+4.10.3+=true
+
+[Papelera]
+row=1
+col=0
+
+[/]
+row=2
+col=0
+
+[/home/quirinux]
+row=3
+col=0
+

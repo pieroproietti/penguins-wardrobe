@@ -1,0 +1,14 @@
+packages:
+  - autoconf
+  - automake
+  - autopoint
+  - autotools-dev
+  - binutils
+  - build-essential
+  - debhelper
+  - dpkg-dev
+  - fakeroot
+  - g++
+  - gcc
+  - make
+  - nodejs

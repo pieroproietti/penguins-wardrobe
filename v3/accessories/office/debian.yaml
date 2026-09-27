@@ -1,0 +1,16 @@
+# office
+---
+name: office
+description: install libreoffice, gimp, vlc
+author: artisan
+release: 2.0.1
+distributions:
+  - trixie
+  - daedalus
+  - excalibur
+  - resolute
+sequence:
+  packages:
+    - gimp
+    - libreoffice
+    - vlc

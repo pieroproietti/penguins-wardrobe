@@ -1,0 +1,12 @@
+# liquorix
+---
+name: liquorix
+description: install liquorix kernel Devuan
+author: artisan
+distributions:
+  - chimaera
+  - daedalus
+sequence:
+  accessories:
+    - ./chimaera
+    - ./daedalus

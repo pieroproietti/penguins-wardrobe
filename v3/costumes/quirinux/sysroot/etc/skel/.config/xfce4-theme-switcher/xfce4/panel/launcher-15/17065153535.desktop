@@ -1,0 +1,38 @@
+[Desktop Entry]
+Name=Record Desktop
+Name[es]=Grabar escritorio
+Comment=Record video and audio of the desktop
+Comment[es]=Grabar video y audio del escritorio
+Keywords=screenshot;screencast;videorecord;desktop recording;
+Keywords[es]=captura;screencast;videograbar;grabación de escritorio;
+Categories=GNOME;AudioVideo;
+Exec=kazam
+Icon=camera-video
+Terminal=false
+Type=Application
+Actions=SSF;SSA;SSW;Prefs;
+X-XFCE-Source=file:///usr/share/applications/kazam.desktop
+
+[Desktop Action SSF]
+Name=Take a screenshot of entire workspace
+Name[es]=Tomar una captura de toda el área de trabajo
+Exec=kazam -f
+OnlyShowIn=Unity
+
+[Desktop Action SSA]
+Name=Select an area to screenshot
+Name[es]=Seleccionar un área a capturar
+Exec=kazam -a
+OnlyShowIn=Unity
+
+[Desktop Action SSW]
+Name=Select a window to screenshot
+Name[es]=Seleccionar una ventana a capturar
+Exec=kazam -s
+OnlyShowIn=Unity
+
+[Desktop Action Prefs]
+Name=Preferences
+Name[es]=Preferencias
+Exec=kazam -p
+OnlyShowIn=Unity

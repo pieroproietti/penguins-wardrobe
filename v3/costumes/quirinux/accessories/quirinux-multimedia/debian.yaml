@@ -1,0 +1,12 @@
+name: quirinux-multimedia
+description: Quirinux multimedia packages
+release: 2.4
+
+repositories:
+  sources_list:
+    - main
+    - contrib
+    - non-free
+    - non-free-firmware
+
+packages_install_file: packages.yaml

@@ -1,0 +1,13 @@
+[Desktop Entry]
+Name=Software center
+Name[es]=Centro de software
+Comment=Install more programs
+Comment[es]=Instalar más programas
+Exec=abrir-mintinstall
+Icon=software-properties
+Terminal=false
+Type=Application
+Encoding=UTF-8
+Categories=Application;System;Settings;XFCE;X-XFCE-SettingsDialog;X-XFCE-SystemSettings;
+NotShowIn=KDE;
+X-XFCE-Source=file:///usr/share/applications/mintinstall.desktop

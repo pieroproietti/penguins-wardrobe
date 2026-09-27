@@ -1,0 +1,29 @@
+# grafica
+---
+name: graphics
+description: graphics packages
+author: artisan
+release: 2.0.1
+distributions:
+  - trixie
+  - daedalus
+  - excalibur
+  - resolute
+sequence:
+  sources_list_d:
+    - rm -f /etc/apt/sources.list.d/quirinux.list
+    - wget -O - https://repo.quirinux.org/gpg/quirinux.asc | apt-key add -
+    - >-
+      echo "deb https://repo.quirinux.org quirinux main" | tee
+      /etc/apt/sources.list.d/quirinux.list > /dev/null
+
+  packages:
+    - converseen
+    - dia
+    - gimp
+    - imagemagick
+    - kde-config-tablet
+    - okular
+    - pinta
+    - ristretto
+    - shotwell

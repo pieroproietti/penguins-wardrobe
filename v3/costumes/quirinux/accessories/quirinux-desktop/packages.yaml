@@ -1,0 +1,19 @@
+packages:
+  - exo-utils
+  - gnome-themes-extra
+  - lightdm
+  - lightdm-gtk-greeter
+  - notification-daemon
+  - pavucontrol
+  - pulseaudio
+  - tango-icon-theme
+  - thunar
+  - tumbler
+  - xfburn
+  - xfconf
+  - xfdesktop4
+  - xfwm4
+  - xterm
+  - zenity
+  - mint-common
+  - mintinstall

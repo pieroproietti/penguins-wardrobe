@@ -1,0 +1,17 @@
+#!/usr/bin/python3
+import datetime
+import subprocess
+
+
+try:
+    # Log current datetime
+    now = str(datetime.datetime.now())
+    with open("/var/log/debian-system-adjustments-start.log", "w") as f:
+        f.write(now)
+
+    # Adjust Grub title
+    subprocess.call(["/usr/share/debian-system-adjustments/systemd/adjust-grub-title"])
+
+except:
+    pass
+

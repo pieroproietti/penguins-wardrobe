@@ -1,0 +1,21 @@
+# nextcloud
+---
+name: mariadb
+description: 'mariadb nextcloud'
+author: artisan
+release: 2.0.1
+distributions:
+  - trixie
+  - daedalus
+  - excalibur
+  - resolute
+sequence:
+  packages:
+  - mariadb-server
+  - mariadb-client
+finalize:
+  cmds:
+    - mysql_secure_installation
+    - mysql -u root -p < create-database.nextcloud.sql
+    
+     

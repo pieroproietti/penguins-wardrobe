@@ -1,0 +1,83 @@
+name: colibri
+
+# Declarative desktop configuration (requires penguins-tailor devel).
+desktop: xfce
+display_manager: lightdm
+session_type: x11
+init: auto
+description: "desktop xfce4 plus all that I need to develop oa, firmwares"
+release: 2.0.1
+# branding: 
+distribution:
+  - trixie
+  - excalibur
+  - resolute
+
+sequence:
+  repositories:
+    update: true
+
+  packages:
+    - firefox-esr
+    - libxfce4ui-utils
+    - lightdm
+    - lightdm-gtk-greeter
+    - network-manager-gnome
+    - pipewire-pulse
+    - policykit-1-gnome
+    - qt5ct
+    - spice-vdagent
+    - tango-icon-theme
+    - thunar
+    - thunar-archive-plugin
+    - xarchiver
+    - xfce4-appfinder
+    - xfce4-notifyd
+    - xfce4-panel
+    - xfce4-power-manager
+    - xfce4-pulseaudio-plugin
+    - xfce4-screenshooter
+    - xfce4-session
+    - xfce4-settings
+    - xfce4-terminal
+    - xfce4-whiskermenu-plugin
+    - xfconf
+    - xfdesktop4
+    - xfwm4
+    - adwaita-icon-theme-full
+    - adwaita-qt
+    - gnome-icon-theme
+    - plymouth
+    - plymouth-themes
+    - libglib2.0-bin
+    - gnome-disk-utility
+    - pkexec
+
+    # a bit of charm...
+    - fonts-inter 
+    - fonts-jetbrains-mono
+    - bibata-cursor-theme
+
+    #- ruby-deb
+    #- libarchive-tools
+    #- firmware-atheros
+    #- firmware-brcm80211
+    #- firmware-iwlwifi
+    #- firmware-libertas
+    #- firmware-misc-nonfree
+    #- firmware-realtek
+    #- wireless-tools
+    #- wpasupplicant
+
+  accessories:
+    - base
+    - eggs-dev
+  cmds:
+    - "update-alternatives --set x-terminal-emulator /usr/bin/xfce4-terminal.wrapper"
+    - "update-alternatives --set x-cursor-theme /usr/share/icons/Bibata-Modern-Classic/cursor.theme"
+    - "../../scripts/config_desktop_link.sh"
+    - "../../scripts/config_lightdm.sh"
+    - "../../scripts/config_g4.sh"
+    - "../../scripts/hostname.sh"
+    - "plymouth-set-default-theme bgrt"
+    - "update-initramfs -u"
