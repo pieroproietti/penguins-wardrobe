@@ -2,8 +2,8 @@
 componentName: eggs
 
 welcomeExpandingLogo: false
-windowExpanding: normal
-windowSize: 1100px,580px
+windowExpanding: noexpand
+windowSize: 800px,520px
 windowPlacement: center
 navigation: widget
 
