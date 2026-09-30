@@ -23,20 +23,16 @@ Presentation
         Image {
             id: slide1
             source: "slide1.png"
-            anchors.centerIn: parent
-            anchors.top: background.bottom
-            // Tamaño máximo razonable, preservando aspect ratio
-            maximumWidth: 1200
-            maximumHeight: 800
-            width: Math.min(slide1.sourceSize.width, maximumWidth)
-            height: Math.min(slide1.sourceSize.height, maximumHeight)
+            anchors.fill: parent
             fillMode: Image.PreserveAspectFit
         }
          Text {
             font.family: "Ubuntu"
-            font.pixelSize : 12
+            font.pixelSize: 13
             color: "#6d526b"
-            anchors.horizontalCenter: slide1.horizontalCenter
+            anchors.right: parent.right
+            anchors.rightMargin: 20
+            anchors.verticalCenter: parent.verticalCenter
 
 text: qsTr("<h1>Quirinux GNU/Linux Versión 2.2</h1>" + 
 
@@ -59,7 +55,7 @@ text: qsTr("<h1>Quirinux GNU/Linux Versión 2.2</h1>" +
 
 "<b>Dedicado a Emilio Gorini (qepd).</b>")
             wrapMode: Text.WordWrap
-            width: kde.width
+            width: parent.width * 0.55
             horizontalAlignment: Text.Center
         }
     }
