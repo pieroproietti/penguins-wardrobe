@@ -33,3 +33,6 @@ style:
   sidebarTextCurrent:       "#292F34"
 
 welcomeStyleCalamares: true
+
+# No escalar welcome.png por encima de su tamaño real
+welcomeExpandingLogo: false

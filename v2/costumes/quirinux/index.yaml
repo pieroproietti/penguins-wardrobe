@@ -22,7 +22,7 @@ sequence:
       - rm -f /usr/share/keyrings/quirinux.gpg
       - curl -fsSL https://repo.quirinux.org/gpg/quirinux.asc | gpg --dearmor -o /usr/share/keyrings/quirinux.gpg
       - echo "deb [arch=amd64 signed-by=/usr/share/keyrings/quirinux.gpg] https://repo.quirinux.org/ quirinux2 main" | tee /etc/apt/sources.list.d/quirinux.list > /dev/null
-      - curl -fsSL https://repo.quirinux.org/gpg/quirinux.asc | gpg --dearmor -o /etc/apt/trusted.gpg.d/quirinux.gpg    
+      - curl -fsSL https://repo.quirinux.org/gpg/quirinux.asc | gpg --dearmor -o /etc/apt/trusted.gpg.d/quirinux.gpg
     update: true
     upgrade: true
 
@@ -78,37 +78,48 @@ finalize:
   # 1. Configuración y reparaciones
   - DEBIAN_FRONTEND=readline PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin" dpkg --configure -a || true
   - apt-get install -y --allow-downgrades --fix-broken || true
-  
+
   # 2. Instalaciones específicas
   - apt-get install -y quirinux-firmware quirinux-youdown quirinux-youtubedown || true
-  
+
   # 3. Evitar paquetes no deseados (Recomendados)
   - echo 'APT::Install-Recommends "0";' > /etc/apt/apt.conf.d/99no-recommends
   - apt-get remove --purge -y kdeconnect 2>/dev/null || true
-  
+
   # 4. Configuración de locales y display manager
-  - locale-gen es_ES.UTF-8 pt_BR.UTF-8 pt_PT.UTF-8 hu_HU.UTF-8 gl_ES.UTF-8 de_DE.UTF-8 ru_RU.UTF-8 fr_FR.UTF-8 it_IT.UTF-8 || true
+  - grep -q "^en_US.UTF-8" /etc/locale.gen || echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
+  - locale-gen es_ES.UTF-8 pt_BR.UTF-8 pt_PT.UTF-8 hu_HU.UTF-8 gl_ES.UTF-8 de_DE.UTF-8 ru_RU.UTF-8 fr_FR.UTF-8 it_IT.UTF-8 en_US.UTF-8 || true
+  - echo "LANG=es_ES.UTF-8" > /etc/default/locale
+  - update-locale LANG=es_ES.UTF-8 LC_ALL=es_ES.UTF-8 || true
   - echo "/usr/sbin/lightdm" > /etc/X11/default-display-manager
   - (command -v systemctl >/dev/null 2>&1 && systemctl disable slim.service 2>/dev/null && systemctl mask slim.service 2>/dev/null) || (insserv -r slim 2>/dev/null || update-rc.d slim disable 2>/dev/null) || true
   - for dm in slim gdm3 gdm sddm; do if command -v systemctl >/dev/null 2>&1; then systemctl disable "$dm.service" 2>/dev/null || true; systemctl mask "$dm.service" 2>/dev/null || true; else [ -f "/etc/init.d/$dm" ] && update-rc.d -f "$dm" remove 2>/dev/null || true; fi; done
   - if command -v systemctl >/dev/null 2>&1; then systemctl set-default graphical.target 2>/dev/null || true; systemctl enable lightdm.service 2>/dev/null || true; [ -d /lib/systemd/system ] && [ -f /lib/systemd/system/lightdm.service ] && ln -sf /lib/systemd/system/lightdm.service /etc/systemd/system/display-manager.service; else update-rc.d lightdm defaults 2>/dev/null || insserv lightdm 2>/dev/null || true; update-rc.d lightdm enable 2>/dev/null || true; fi
-  
+
   # 5. Configuración de Debconf y Scripts de Quirinux
   - echo "debconf debconf/frontend select Dialog" | /usr/bin/debconf-set-selections
   - echo "debconf debconf/priority select high" | /usr/bin/debconf-set-selections
   - /usr/local/bin/quirinux-apply-skel || true
+  - cp /etc/penguins-eggs.d/branding/quirinux/artwork/install-system.png /usr/share/pixmaps/ 2>/dev/null || true
   - /usr/local/bin/quirinux-firmware-notice || true
   - /usr/local/bin/quirinux-kernel-notice || true
   - update-alternatives --remove pager /bin/cat || true
   - "./scripts/config_lightdm.sh"
   - "../../scripts/hostname.sh"
 
-  # 6. Limpieza segura
+   # 6. Proteger xinit y componentes críticos de XFCE antes del autoremove
+  - apt-mark manual xinit xfconf dbus-x11 xfce4-session 2>/dev/null || true
+
+  # 7. Limpieza segura
   - apt-get autoremove -y || true
   - apt-get clean || true
 
-  # 7. Garantía de paquetes esenciales de Quirinux
+  # 8. Garantía de paquetes esenciales de Quirinux
   - apt-get install -y --reinstall mintinstall mint-common || true
   - apt-mark manual mintinstall mint-common || true
+
+  # 9. Icono del instalador bajo el nombre que usa el desktop de coa
+  - cp /usr/share/pixmaps/install-system.png /usr/share/pixmaps/penguins-eggs.png || true
+  - mkdir -p /usr/share/icons/hicolor/48x48/apps && cp /usr/share/pixmaps/install-system.png /usr/share/icons/hicolor/48x48/apps/penguins-eggs.png || true
 
 reboot: true

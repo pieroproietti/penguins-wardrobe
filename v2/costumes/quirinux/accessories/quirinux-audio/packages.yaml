@@ -1,6 +1,6 @@
 packages:
-  - ardour
-  - audacity
+  - ardour-quirinux
+  - audacity-quirinux
   - calf-plugins
   - frei0r-plugins
   - harvid

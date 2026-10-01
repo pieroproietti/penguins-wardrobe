@@ -23,17 +23,16 @@ Presentation
         Image {
             id: slide1
             source: "slide1.png"
-            anchors.centerIn: parent
-            anchors.top: background.bottom
-            width: 810
-            height: 485
+            anchors.fill: parent
             fillMode: Image.PreserveAspectFit
         }
          Text {
             font.family: "Ubuntu"
-            font.pixelSize : 12
+            font.pixelSize: 13
             color: "#6d526b"
-            anchors.horizontalCenter: slide1.horizontalCenter
+            anchors.right: parent.right
+            anchors.rightMargin: 20
+            anchors.verticalCenter: parent.verticalCenter
 
 text: qsTr("<h1>Quirinux GNU/Linux Versión 2.2</h1>" + 
 
@@ -56,7 +55,7 @@ text: qsTr("<h1>Quirinux GNU/Linux Versión 2.2</h1>" +
 
 "<b>Dedicado a Emilio Gorini (qepd).</b>")
             wrapMode: Text.WordWrap
-            width: kde.width
+            width: parent.width * 0.55
             horizontalAlignment: Text.Center
         }
     }
@@ -70,4 +69,3 @@ text: qsTr("<h1>Quirinux GNU/Linux Versión 2.2</h1>" +
         console.log("QML Component (default slideshow) deactivated");
     }
 }
-

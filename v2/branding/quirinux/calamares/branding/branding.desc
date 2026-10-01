@@ -1,0 +1,41 @@
+---
+componentName: eggs
+
+welcomeExpandingLogo: false
+windowExpanding: noexpand
+windowSize: 800px,520px
+windowPlacement: center
+navigation: widget
+
+images:
+    productIcon:         "logo.png"
+    productLogo:         "logo.png"
+    productWelcome:      "welcome.png"
+
+slideshow:               "show.qml"
+slideshowAPI: 1
+
+strings:
+    productName:         Quirinux
+    shortProductName:    Quirinux
+    version:             "2.5"
+    shortVersion:        "2.5"
+    versionedName:       Quirinux
+    shortVersionedName:  Quirinux
+    bootloaderEntryName: Quirinux
+    productUrl:          https://quirinux.com
+    supportUrl:          https://quirinux.com/soporte
+    knownIssuesUrl:      https://quirinux.com/soporte
+    releaseNotesUrl:     https://quirinux.com/notas
+
+style:
+    SidebarBackground:        "#2d2d2d"
+    sidebarBackground:        "#2d2d2d"
+    SidebarBackgroundCurrent: "#0068C8"
+    sidebarBackgroundCurrent: "#0068C8"
+    SidebarText:              "#FFFFFF"
+    sidebarText:              "#FFFFFF"
+    SidebarTextCurrent:       "#2d2d2d"
+    sidebarTextCurrent:       "#2d2d2d"
+
+welcomeStyleCalamares: true

@@ -1,4 +1,5 @@
 packages:
+  - quirinux2-repo
   - apt-config-icons
   - aptdaemon
   - aptdaemon-data

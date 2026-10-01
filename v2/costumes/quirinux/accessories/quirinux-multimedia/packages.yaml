@@ -3,13 +3,14 @@ packages:
   - ffmpegthumbnailer
   - guvcview
   - kazam
-  - kdenlive
+  - kdenlive-quirinux
   - mediainfo
   - melt
   - mencoder
   - mplayer
   - shotwell
-  - vlc
+  - vlc-quirinux
   - x264
   - x265
   - yt-dlp
+  - brasero-quirinux

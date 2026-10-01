@@ -26,7 +26,7 @@
     - aptdaemon-data
     - apt-listchanges
     - apt-utils
-    - ardour
+    - ardour-quirinux
     - ardour-data
     - ardour-lv2-plugins
     - ardour-video-timeline
@@ -38,7 +38,7 @@
     - atril-common
     - at-spi2-common
     - at-spi2-core
-    - audacity
+    - audacity-quirinux
     - audacity-data
     - autoconf
     - automake
@@ -62,7 +62,7 @@
     - binutils-common
     - binutils-x86-64-linux-gnu
     - bleachbit
-    - blender
+    - blender-quirinux
     - blender-data
     - blt
     - blueman
@@ -105,7 +105,7 @@
     - colord-data
     - color-picker
     - compresorpdf
-    - conky
+    - conky-quirinux
     - conky-std
     - console-setup
     - console-setup-linux
@@ -303,7 +303,7 @@
     - gettext
     - gettext-base
     - ghostscript
-    - gimp
+    - gimp-quirinux
     - gimp-data
     - gimp-data-extras
     - gimp-gap
@@ -312,7 +312,6 @@
     - gimp-gutenprint
     - gimp-lensfun
     - gimp-plugin-registry
-    - gimp-quirinux
     - gir1.2-appindicator3-0.1
     - gir1.2-appstream-1.0
     - gir1.2-appstreamglib-1.0
@@ -509,7 +508,7 @@
     - kcharselect
     - kde-config-tablet
     - kded5
-    - kdenlive
+    - kdenlive-quirinux
     - kdenlive-data
     - kde-style-breeze
     - keyboard-configuration
@@ -2027,7 +2026,7 @@
     - mtools
     - mtp-tools
     - mugshot
-    - mypaint
+    - mypaint-quirinux
     - mypaint-brushes
     - mypaint-data
     - mypaint-data-extras
@@ -2072,7 +2071,7 @@
     - ntp
     - ntpsec
     - ocl-icd-libopencl1
-    - onboard
+    - onboard-quirinux
     - onboard-common
     - onboard-data
     - openbsd-inetd
@@ -2099,23 +2098,6 @@
     - packagekit-tools
     - package-update-indicator
     - paprefs
-    - parche-ardour
-    - parche-blender-flatpak
-    - parche-bluetooth
-    - parche-boot
-    - parche-displays
-    - parche-flatpak
-    - parche-gimp
-    - parche-libreoffice
-    - parche-mintstick
-    - parche-nvidia-persistenced
-    - parche-permisos
-    - parche-repos
-    - parche-screenfetch
-    - parche-tahoma2d
-    - parche-update
-    - parche-vlc
-    - parche-wifi
     - parted
     - passwd
     - patch
@@ -2335,10 +2317,8 @@
     - quirinux-keyring
     - quirinux-notify
     - quirinux-nvidia-config
-    - quirinux-opencl-support
     - quirinux-parches
     - quirinux-recomendados
-    - quirinux-repo
     - quirinux-splash-animacion
     - quirinux-temas
     - quirinux-update
@@ -2506,7 +2486,7 @@
     - vbetool
     - vdpau-driver-all
     - vim-tiny
-    - vlc
+    - vlc-quirinux
     - vlc-bin
     - vlc-data
     - vlc-plugin-base
@@ -2559,7 +2539,6 @@
     - xdg-user-dirs
     - xdg-user-dirs-gtk
     - xdg-utils
-    - xfburn
     - xfce4
     - xfce4-appfinder
     - xfce4-battery-plugin
