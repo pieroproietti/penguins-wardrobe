@@ -101,7 +101,6 @@ finalize:
   - echo "debconf debconf/priority select high" | /usr/bin/debconf-set-selections
   - /usr/local/bin/quirinux-apply-skel || true
   - cp /etc/penguins-eggs.d/branding/quirinux/artwork/install-system.png /usr/share/pixmaps/ 2>/dev/null || true
-  - /usr/local/bin/quirinux-firmware-notice || true
   - /usr/local/bin/quirinux-kernel-notice || true
   - update-alternatives --remove pager /bin/cat || true
   - "../../scripts/config_lightdm.sh"
