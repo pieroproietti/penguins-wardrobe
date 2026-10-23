@@ -1,16 +1,16 @@
 packages:
   - animationtimer
   - azpainter
-  - blender
+  - blender-quirinux
   - boats-animator
   - darktable
   - displaycal
   - entangle
   - friction
-  - gimp
+  - gimp-quirinux
   - inkscape
   - krita
-  - mypaint
+  - mypaint-quirinux
   - pencil2d
   - pikopixel.app
   - quirinux-animationtimer

@@ -9,7 +9,7 @@ packages:
   - mencoder
   - mplayer
   - shotwell
-  - vlc
+  - vlc-quirinux
   - x264
   - x265
   - yt-dlp

@@ -1,7 +1,8 @@
-# Firmware non-free license acceptance
+debconf debconf/priority select critical
 firmware-ipw2x00 firmware-ipw2x00/license/accepted boolean true
-firmware-ipw2x00 firmware-ipw2x00/license/type select accept
 firmware-ivtv firmware-ivtv/license/accepted boolean true
-firmware-b43-installer firmware-b43-installer/license/accepted boolean true
-firmware-b43legacy-installer firmware-b43legacy-installer/license/accepted boolean true
-b43-fwcutter b43-fwcutter/install_non_free boolean true
+mok mok/generate boolean false
+mok mok/import boolean false
+mok mok/reboot boolean false
+tzdata tzdata/Areas select Europe
+tzdata tzdata/Zones/Europe select Madrid

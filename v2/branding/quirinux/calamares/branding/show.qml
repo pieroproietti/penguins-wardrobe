@@ -20,20 +20,37 @@ Presentation
     }
 
     Slide {
-        Image {
-            id: slide1
-            source: "slide1.png"
-            anchors.centerIn: parent
-            anchors.top: background.bottom
-            width: 810
-            height: 485
-            fillMode: Image.PreserveAspectFit
+        // Fondo: la imagen cubre TODA la presentación manteniendo su
+        // proporción (recorta lo que sobre). El ancla vertical al 80% conserva
+        // la caja del producto, que está en la parte baja de slide1.png (1200x800).
+        //
+        // OJO: el Slide de Calamares no ocupa toda la presentación, sino el
+        // centro (x 5%, y 20%, ancho 90%, alto 70%). Por eso este contenedor
+        // se desplaza en negativo y toma el tamaño de la presentación
+        // (masterWidth/masterHeight) y no el del Slide.
+        Item {
+            x: -parent.x
+            y: -parent.y
+            width: parent.masterWidth
+            height: parent.masterHeight
+            clip: true
+
+            Image {
+                id: slide1
+                source: "slide1.png"
+                property real cover: Math.max(parent.width / 1200, parent.height / 800)
+                width: 1200 * cover
+                height: 800 * cover
+                x: (parent.width - width) / 2
+                y: (parent.height - height) * 0.8
+            }
         }
-         Text {
+        Text {
             font.family: "Ubuntu"
-            font.pixelSize : 12
+            font.pixelSize: 13
             color: "#6d526b"
-            anchors.horizontalCenter: slide1.horizontalCenter
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.verticalCenter: parent.verticalCenter
 
 text: qsTr("<h1>Quirinux GNU/Linux Versión 2.2</h1>" + 
 
@@ -56,8 +73,10 @@ text: qsTr("<h1>Quirinux GNU/Linux Versión 2.2</h1>" +
 
 "<b>Dedicado a Emilio Gorini (qepd).</b>")
             wrapMode: Text.WordWrap
-            width: kde.width
-            horizontalAlignment: Text.Center
+            width: parent.width * 0.9
+            // Si el bloque no cabe en vertical (ventana pequeña), se reduce en bloque
+            scale: Math.min(1, (parent.height - 16) / height)
+            horizontalAlignment: Text.AlignHCenter
         }
     }
 
@@ -70,4 +89,3 @@ text: qsTr("<h1>Quirinux GNU/Linux Versión 2.2</h1>" +
         console.log("QML Component (default slideshow) deactivated");
     }
 }
-
