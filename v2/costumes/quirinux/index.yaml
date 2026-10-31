@@ -27,9 +27,11 @@ sequence:
     upgrade: true
 
   # Kernel 6.12 (backports) + v4l2loopback 0.13 antes de los accesorios con
-  # modulos DKMS, para que se compilen contra el kernel nuevo.
+  # modulos DKMS, para que se compilen contra el kernel nuevo. Despues,
+  # instalacion tolerante de los DKMS que pueden no compilar en 6.12.
   cmds:
   - "../../scripts/config_kernel_backports.sh"
+  - "../../scripts/config_dkms_safe.sh"
 
   accessories:
   - ./accessories/quirinux-base

@@ -5,7 +5,6 @@ packages:
   - bluez-firmware
   - bluez-obexd
   - broadcom-sta-common
-  - broadcom-sta-dkms
   - broadcom-sta-source
   - dkms
   - firmware-amd-graphics

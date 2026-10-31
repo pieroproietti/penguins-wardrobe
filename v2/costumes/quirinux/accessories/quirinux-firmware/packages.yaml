@@ -3,8 +3,6 @@ packages:
   - apple-firmware
   - atmel-firmware
   - b43-fwcutter
-  - broadcom-sta-dkms
-  - digimend-dkms
   - firm-phoenix-ware
   - intel-microcode
   - iucode-tool
