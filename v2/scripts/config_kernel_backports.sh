@@ -77,7 +77,23 @@ if ! apt-cache madison linux-image-amd64 | grep -q "${SUITE}"; then
 fi
 
 # ----------------------------------------------------------------------
-# 4. Instalar kernel, cabeceras y v4l2loopback desde backports
+# 4. Retirar r8125-dkms y r8168-dkms si ya estan instalados
+#    No compilan con el kernel 6.12 y hacen fallar el postinst del kernel
+#    (deja dpkg a medias y el kernel sin initramfs). El driver r8169 del
+#    propio kernel cubre esos chips Realtek.
+# ----------------------------------------------------------------------
+
+for pkg in r8125-dkms r8168-dkms; do
+    st=$(dpkg-query -W -f='${db:Status-Abbrev}' "$pkg" 2>/dev/null)
+    case "$st" in
+        ""|un*|rc*) continue ;;
+    esac
+    echo "[config_kernel_backports] Eliminando ${pkg}: no compila en 6.12 (lo sustituye r8169)."
+    apt-get purge -y "$pkg" || dpkg --purge --force-remove-reinstreq "$pkg" || true
+done
+
+# ----------------------------------------------------------------------
+# 5. Instalar kernel, cabeceras y v4l2loopback desde backports
 # ----------------------------------------------------------------------
 
 echo "[config_kernel_backports] Instalando kernel y v4l2loopback desde ${SUITE}."

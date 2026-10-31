@@ -17,6 +17,11 @@
 #   - sigue con el resto.
 # Los modulos que compilan se instalan con normalidad.
 #
+# Ademas bloquea (pin -1 en /etc/apt/preferences.d/quirinux-dkms-blocked) los
+# paquetes que no compilan, para que quirinux-firmware, que los lista en
+# Recommends, no los vuelva a traer y rompa dpkg. Para permitirlos de nuevo,
+# borrar ese fichero.
+#
 # Informe: /var/log/tailor/quirinux-dkms-report.txt
 # Ignora el argumento que tailor le pasa (nombre del costume).
 # ----------------------------------------------------------------------
@@ -25,7 +30,14 @@ export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 export DEBIAN_FRONTEND=noninteractive
 
 # Modulos DKMS con compatibilidad dudosa en kernels nuevos
-DKMS_PACKAGES="broadcom-sta-dkms digimend-dkms"
+DKMS_PACKAGES="broadcom-sta-dkms bcmwl-kernel-source digimend-dkms"
+
+# Paquetes que se sabe que no compilan con kernel >= 6.12 (los cubre r8169)
+BLOCKED=""
+NEWEST_KERNEL=$(dpkg -l | awk '/^ii[[:space:]]+linux-image-[0-9]/ { sub("linux-image-", "", $2); print $2 }' | sort -V | tail -n1)
+if [ -n "$NEWEST_KERNEL" ] && dpkg --compare-versions "$NEWEST_KERNEL" ge 6.12; then
+    BLOCKED="r8125-dkms r8168-dkms"
+fi
 
 REPORT_DIR="/var/log/tailor"
 REPORT="${REPORT_DIR}/quirinux-dkms-report.txt"
@@ -63,6 +75,11 @@ for pkg in $DKMS_PACKAGES; do
         continue
     fi
 
+    if ! apt-cache show "$pkg" > /dev/null 2>&1; then
+        echo "[config_dkms_safe] ${pkg} no esta disponible en los repositorios; se omite."
+        continue
+    fi
+
     echo "[config_dkms_safe] Instalando ${pkg}."
     if apt-get install -y "$pkg"; then
         echo "[config_dkms_safe] ${pkg}: OK."
@@ -77,7 +94,23 @@ for pkg in $DKMS_PACKAGES; do
     dpkg --configure -a || true
     apt-get install -y --fix-broken || true
     SKIPPED="${SKIPPED} ${pkg}"
+    BLOCKED="${BLOCKED} ${pkg}"
 done
+
+# Bloquear los paquetes que no compilan para que Recommends de otros
+# paquetes (quirinux-firmware) no los vuelvan a instalar
+BLOCKED=$(echo $BLOCKED)
+if [ -n "$BLOCKED" ]; then
+    {
+        echo "# Generado por config_dkms_safe.sh: modulos DKMS que no compilan con el"
+        echo "# kernel instalado. Borrar este fichero para permitirlos de nuevo."
+        echo "Package: ${BLOCKED}"
+        echo "Pin: version *"
+        echo "Pin-Priority: -1"
+    } > /etc/apt/preferences.d/quirinux-dkms-blocked
+    echo "Paquetes bloqueados en apt (pin -1): ${BLOCKED}" >> "$REPORT"
+    apt-get update > /dev/null 2>&1 || true
+fi
 
 {
     echo "---- Estado final de DKMS ----"
