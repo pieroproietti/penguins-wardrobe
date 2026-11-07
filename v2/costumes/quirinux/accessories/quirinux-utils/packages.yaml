@@ -36,7 +36,6 @@ packages:
   - keyutils
   - lightdm-gtk-greeter-settings
   - lm-sensors
-  - luit
   - mariadb-common
   - menu
   - mugshot
