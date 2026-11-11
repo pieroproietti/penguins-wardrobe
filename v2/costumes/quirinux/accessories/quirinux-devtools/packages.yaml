@@ -18,8 +18,6 @@ packages:
   - libdc1394-dev
   - libdeflate-dev
   - libdrm-dev
-  - libdw-dev
-  - libelf-dev
   - libexif-dev
   - libffi-dev
   - libgbm-dev
@@ -29,7 +27,6 @@ packages:
   - libglib2.0-dev
   - libglx-dev
   - libgphoto2-dev
-  - libgstreamer1.0-dev
   - libgudev-1.0-dev
   - libimath-dev
   - libjbig-dev
