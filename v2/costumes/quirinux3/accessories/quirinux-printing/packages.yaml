@@ -1,0 +1,25 @@
+packages:
+  - brscan4
+  - epsonscan
+  - gutenprint-locales
+  - hplip
+  - hplip-data
+  - hplip-gui
+  - libgutenprint-common
+  - libgutenprint9
+  - libgutenprintui2-2
+  - libhpmud0
+  - libsane
+  - libsane-hpaio
+  - printer-driver-cups-pdf
+  - printer-driver-foo2zjs
+  - printer-driver-foo2zjs-common
+  - printer-driver-hpcups
+  - printer-driver-postscript-hp
+  - sane
+  - scanbd
+  - simple-scan
+  - skanlite
+  - system-config-printer
+  - xsane
+  - xsane-common

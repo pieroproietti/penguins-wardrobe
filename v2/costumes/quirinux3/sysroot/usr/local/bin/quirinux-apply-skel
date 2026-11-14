@@ -1,0 +1,9 @@
+#!/bin/bash
+# Quirinux GNU/Linux - Copy /etc/skel to all existing human users
+# This ensures new styles apply to current users, not just new ones.
+getent passwd | awk -F: '$3>=1000 && $3<60000 && $7 !~ /nologin|false/ {print $1":"$6}' | while IFS=: read u h; do
+    if [ -d "$h" ]; then
+        rsync -a --no-o --no-g --chown="$u:$u" /etc/skel/ "$h/"
+        echo "Skel synced to $h"
+    fi
+done

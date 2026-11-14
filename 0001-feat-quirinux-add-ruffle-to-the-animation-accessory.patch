@@ -1,0 +1,27 @@
+From 2c52b9ed933d8845c29cdca9a3cbc8279bae7816 Mon Sep 17 00:00:00 2001
+From: charliemartinez <cmartinez@quirinux.org>
+Date: Sun, 8 Nov 2026 19:28:18 +0000
+Subject: [PATCH] feat(quirinux): add ruffle to the animation accessory
+
+Ruffle (Flash Player emulator) is needed to open legacy .swf animations
+from the Quirinux animation tools. Added to quirinux-animation, in
+alphabetical order.
+---
+ .../quirinux/accessories/quirinux-animation/packages.yaml        | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/v2/costumes/quirinux/accessories/quirinux-animation/packages.yaml b/v2/costumes/quirinux/accessories/quirinux-animation/packages.yaml
+index 1bd2100..b18e1b7 100644
+--- a/v2/costumes/quirinux/accessories/quirinux-animation/packages.yaml
++++ b/v2/costumes/quirinux/accessories/quirinux-animation/packages.yaml
+@@ -19,6 +19,7 @@ packages:
+   - quirinux-splash-animacion
+   - rawtherapee
+   - renpy-quirinux
++  - ruffle
+   - storyarchitect
+   - storyboarder
+   - tahoma2d
+-- 
+2.43.0
+

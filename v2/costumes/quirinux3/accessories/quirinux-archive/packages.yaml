@@ -1,0 +1,18 @@
+packages:
+  - 7zip
+  - arj
+  - cabextract
+  - engrampa
+  - engrampa-common
+  - lunzip
+  - lzip
+  - mbuffer
+  - mscompress
+  - rar
+  - unace
+  - unar
+  - unrar
+  - unrar-free
+  - zarchive-tools
+  - zip
+  - zst

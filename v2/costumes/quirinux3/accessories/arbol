@@ -1,0 +1,142 @@
+.
+├── arbol
+├── quirinux-animation
+│   ├── debian.yaml
+│   └── packages.yaml
+├── quirinux-archive
+│   ├── debian.yaml
+│   └── packages.yaml
+├── quirinux-audio
+│   ├── debian.yaml
+│   └── packages.yaml
+├── quirinux-audio-data
+│   ├── debian.yaml
+│   └── packages.yaml
+├── quirinux-base
+│   ├── debian.yaml
+│   └── packages.yaml
+├── quirinux-boot
+│   ├── debian.yaml
+│   └── packages.yaml
+├── quirinux-desktop
+│   ├── debian.yaml
+│   └── packages.yaml
+├── quirinux-development
+│   ├── debian.yaml
+│   └── packages.yaml
+├── quirinux-devtools
+│   ├── debian.yaml
+│   └── packages.yaml
+├── quirinux-drivers
+│   ├── debian.yaml
+│   ├── packages.preseed
+│   └── packages.yaml
+├── quirinux-filesystem
+│   ├── debian.yaml
+│   └── packages.yaml
+├── quirinux-firefox-l10n
+│   ├── debian.yaml
+│   └── packages.yaml
+├── quirinux-firewall
+│   ├── debian.yaml
+│   ├── packages.preseed
+│   └── packages.yaml
+├── quirinux-firmware
+│   ├── debian.yaml
+│   ├── packages.preseed
+│   └── packages.yaml
+├── quirinux-flatpak
+│   ├── debian.yaml
+│   └── packages.yaml
+├── quirinux-fonts
+│   ├── debian.yaml
+│   └── packages.yaml
+├── quirinux-gambas
+│   ├── debian.yaml
+│   └── packages.yaml
+├── quirinux-gnome-libs
+│   ├── debian.yaml
+│   └── packages.yaml
+├── quirinux-gnustep
+│   ├── debian.yaml
+│   └── packages.yaml
+├── quirinux-graphics
+│   ├── debian.yaml
+│   └── packages.yaml
+├── quirinux-graphics-libs
+│   ├── debian.yaml
+│   └── packages.yaml
+├── quirinux-gtk-engines
+│   ├── debian.yaml
+│   └── packages.yaml
+├── quirinux-i18n
+│   ├── debian.yaml
+│   ├── packages.preseed
+│   └── packages.yaml
+├── quirinux-kde-libs
+│   ├── debian.yaml
+│   └── packages.yaml
+├── quirinux-libs
+│   ├── debian.yaml
+│   └── packages.yaml
+├── quirinux-mono
+│   ├── debian.yaml
+│   └── packages.yaml
+├── quirinux-multimedia
+│   ├── debian.yaml
+│   └── packages.yaml
+├── quirinux-multimedia-codecs
+│   ├── debian.yaml
+│   └── packages.yaml
+├── quirinux-native
+│   ├── debian.yaml
+│   └── packages.yaml
+├── quirinux-network-tools
+│   ├── debian.yaml
+│   └── packages.yaml
+├── quirinux-nodejs
+│   ├── debian.yaml
+│   └── packages.yaml
+├── quirinux-office
+│   ├── debian.yaml
+│   └── packages.yaml
+├── quirinux-opencl
+│   ├── debian.yaml
+│   └── packages.yaml
+├── quirinux-power
+│   ├── debian.yaml
+│   └── packages.yaml
+├── quirinux-printing
+│   ├── debian.yaml
+│   ├── packages.preseed
+│   └── packages.yaml
+├── quirinux-python
+│   ├── debian.yaml
+│   └── packages.yaml
+├── quirinux-system-monitoring
+│   ├── debian.yaml
+│   └── packages.yaml
+├── quirinux-tcl-tk
+│   ├── debian.yaml
+│   └── packages.yaml
+├── quirinux-themes
+│   ├── debian.yaml
+│   └── packages.yaml
+├── quirinux-thumbnailers
+│   ├── debian.yaml
+│   └── packages.yaml
+├── quirinux-utils
+│   ├── debian.yaml
+│   ├── packages.preseed
+│   └── packages.yaml
+├── quirinux-vpn
+│   ├── debian.yaml
+│   └── packages.yaml
+├── quirinux-xfce
+│   ├── debian.yaml
+│   └── packages.yaml
+└── quirinux-xorg-input
+    ├── debian.yaml
+    └── packages.yaml
+
+45 directories, 95 files

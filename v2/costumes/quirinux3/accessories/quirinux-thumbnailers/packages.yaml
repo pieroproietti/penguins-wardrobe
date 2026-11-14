@@ -1,0 +1,8 @@
+packages:
+  - mmolch-thumbnailers
+  - xapp-appimage-thumbnailer
+  - xapp-epub-thumbnailer
+  - xapp-mp3-thumbnailer
+  - xapp-raw-thumbnailer
+  - xapp-thumbnailers-common
+  - xapp-vorbiscomment-thumbnailer
