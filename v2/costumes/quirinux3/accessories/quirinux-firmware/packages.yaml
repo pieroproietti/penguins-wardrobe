@@ -1,0 +1,9 @@
+packages:
+  - amd64-microcode
+  - apple-firmware
+  - atmel-firmware
+  - b43-fwcutter
+  - firm-phoenix-ware
+  - intel-microcode
+  - iucode-tool
+  - v4l2loopback-dkms
