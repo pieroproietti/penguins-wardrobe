@@ -335,8 +335,6 @@ packages:
   - libpython3.10-minimal
   - libpython3.10-stdlib
   - libpython3.11-testsuite
-  - libqapt3
-  - libqapt3-runtime
   - libqhull-r8.0
   - libqm-dsp0
   - libqmobipocket2

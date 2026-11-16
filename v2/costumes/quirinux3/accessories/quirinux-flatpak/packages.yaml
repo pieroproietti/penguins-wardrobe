@@ -1,5 +1,5 @@
 packages:
   - flatpak
   - flatpakconfig
-  - qapt-deb-installer
+  - quirinux-debinstall
   - software-properties-common
