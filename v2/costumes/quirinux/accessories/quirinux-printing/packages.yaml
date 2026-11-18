@@ -19,7 +19,6 @@ packages:
   - sane
   - scanbd
   - simple-scan
-  - skanlite
   - system-config-printer
   - xsane
   - xsane-common
