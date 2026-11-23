@@ -1,0 +1,138 @@
+#!/bin/bash
+# Quirinux GNU/Linux - Post-wardrobe kernel cleanup notice
+LANG_CODE=$(echo "${LANG:-en}" | cut -d_ -f1 | cut -d. -f1)
+
+KERNELS=$(dpkg -l | grep "^ii" | grep "linux-image-[0-9]" | awk '{print $2}' | sort -V)
+KERNEL_COUNT=$(echo "$KERNELS" | wc -l)
+
+if [ "$KERNEL_COUNT" -le 1 ]; then
+    exit 0
+fi
+
+LATEST=$(echo "$KERNELS" | tail -1)
+OTHERS=$(echo "$KERNELS" | head -n -1 | tr '\n' ' ')
+
+case "$LANG_CODE" in
+  es) MSG="
+┌─────────────────────────────────────────────────────────────────┐
+│                    QUIRINUX GNU/LINUX                           │
+└─────────────────────────────────────────────────────────────────┘
+  Se detectaron ${KERNEL_COUNT} versiones del kernel instaladas.              
+  Para reducir el tamaño de la ISO, se recomienda eliminar       
+  los kernels anteriores antes de ejecutar coa remaster.         
+                                                                 
+  Kernel más reciente (conservar): ${LATEST}
+  Kernels a eliminar: ${OTHERS}
+                                                                 
+  Comando sugerido (ejecutar después de reiniciar):                                              
+    apt-get remove --purge ${OTHERS}
+    apt-get autoremove                                           
+                                                                 " ;;
+  gl) MSG="
+┌─────────────────────────────────────────────────────────────────┐
+│                    QUIRINUX GNU/LINUX                           │
+└─────────────────────────────────────────────────────────────────┘
+  Detectáronse ${KERNEL_COUNT} versións do kernel instaladas.                
+  Para reducir o tamaño da ISO, recoméndase eliminar             
+  os kernels anteriores antes de executar coa remaster.          
+                                                                 
+  Kernel máis recente (conservar): ${LATEST}
+  Kernels a eliminar: ${OTHERS}
+                                                                 
+  Comando suxerido (executar despois de reiniciar):                                             
+    apt-get remove --purge ${OTHERS}
+    apt-get autoremove                                           
+                                                                 " ;;
+  it) MSG="
+┌─────────────────────────────────────────────────────────────────┐
+│                    QUIRINUX GNU/LINUX                           │
+└─────────────────────────────────────────────────────────────────┘
+  Sono state rilevate ${KERNEL_COUNT} versioni del kernel installate.        
+  Per ridurre le dimensioni della ISO, si consiglia di           
+  rimuovere i kernel precedenti prima di eseguire coa remaster.  
+                                                                 
+  Kernel più recente (conservare): ${LATEST}
+  Kernel da rimuovere: ${OTHERS}
+                                                                 
+  Comando suggerito (eseguire dopo il riavvio):                                             
+    apt-get remove --purge ${OTHERS}
+    apt-get autoremove                                           
+                                                                 " ;;
+  fr) MSG="
+┌─────────────────────────────────────────────────────────────────┐
+│                    QUIRINUX GNU/LINUX                           │
+└─────────────────────────────────────────────────────────────────┘
+  ${KERNEL_COUNT} versions du noyau ont été détectées.                      
+  Pour réduire la taille de l'ISO, il est recommandé de          
+  supprimer les anciens noyaux avant d'exécuter coa remaster.   
+                                                                 
+  Noyau le plus récent (conserver): ${LATEST}
+  Noyaux à supprimer: ${OTHERS}
+                                                                 
+  Commande suggérée (exécuter après le redémarrage) :                                             
+    apt-get remove --purge ${OTHERS}
+    apt-get autoremove                                           
+                                                                 " ;;
+  de) MSG="
+┌─────────────────────────────────────────────────────────────────┐
+│                    QUIRINUX GNU/LINUX                           │
+└─────────────────────────────────────────────────────────────────┘
+  Es wurden ${KERNEL_COUNT} installierte Kernel-Versionen erkannt.          
+  Um die ISO-Größe zu reduzieren, wird empfohlen, ältere         
+  Kernel vor der Ausführung von coa remaster zu entfernen.       
+                                                                 
+  Neuester Kernel (behalten): ${LATEST}
+  Zu entfernende Kernel: ${OTHERS}
+                                                                 
+  Vorgeschlagener Befehl (nach dem Neustart ausführen):                                       
+    apt-get remove --purge ${OTHERS}
+    apt-get autoremove                                           
+                                                                 " ;;
+  hu) MSG="
+┌─────────────────────────────────────────────────────────────────┐
+│                    QUIRINUX GNU/LINUX                           │
+└─────────────────────────────────────────────────────────────────┘
+  ${KERNEL_COUNT} telepített kernel-verzió észlelve.                        
+  Az ISO méretének csökkentéséhez ajánlott eltávolítani          
+  a régebbi kerneleket a coa remaster futtatása előtt.           
+                                                                 
+  Legújabb kernel (megtartandó): ${LATEST}
+  Eltávolítandó kernelek: ${OTHERS}
+                                                                 
+  Javasolt parancs (újraindítás után futtassa):                                             
+    apt-get remove --purge ${OTHERS}
+    apt-get autoremove                                           
+                                                                 " ;;
+  pt) MSG="
+┌─────────────────────────────────────────────────────────────────┐
+│                    QUIRINUX GNU/LINUX                           │
+└─────────────────────────────────────────────────────────────────┘
+  Foram detectadas ${KERNEL_COUNT} versões do kernel instaladas.             
+  Para reduzir o tamanho da ISO, recomenda-se remover            
+  os kernels anteriores antes de executar coa remaster.          
+                                                                 
+  Kernel mais recente (manter): ${LATEST}
+  Kernels a remover: ${OTHERS}
+                                                                 
+  Comando sugerido (executar após reiniciar)                                             
+    apt-get remove --purge ${OTHERS}
+    apt-get autoremove                                           
+                                                                 " ;;
+  *) MSG="
+┌─────────────────────────────────────────────────────────────────┐
+│                    QUIRINUX GNU/LINUX                           │
+└─────────────────────────────────────────────────────────────────┘
+  ${KERNEL_COUNT} installed kernel versions detected.                       
+  To reduce ISO size, it is recommended to remove older          
+  kernels before running coa remaster.                           
+                                                                 
+  Latest kernel (keep): ${LATEST}
+  Kernels to remove: ${OTHERS}
+                                                                 
+  Suggested command (run after reboot):                                             
+    apt-get remove --purge ${OTHERS}
+    apt-get autoremove                                           
+                                                                 " ;;
+esac
+
+echo "$MSG"

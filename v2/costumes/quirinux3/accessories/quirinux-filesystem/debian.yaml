@@ -1,0 +1,5 @@
+name: quirinux-filesystem
+description: Filesystem utilities and LVM tools
+release: 2.5
+
+packages_install_file: packages.yaml

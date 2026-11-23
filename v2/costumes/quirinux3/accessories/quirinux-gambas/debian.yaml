@@ -1,0 +1,5 @@
+name: quirinux-gambas
+description: Gambas IDE
+release: 2.5
+
+packages_install_file: packages.yaml

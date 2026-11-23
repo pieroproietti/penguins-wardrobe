@@ -1,0 +1,5 @@
+name: quirinux-network-tools
+description: Network utilities
+release: 2.5
+
+packages_install_file: packages.yaml

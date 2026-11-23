@@ -767,7 +767,6 @@
     - libdvdnav4
     - libdvdread8
     - libdw1
-    - libdw-dev
     - libebml5
     - libebur128-1
     - libedit2
@@ -776,7 +775,6 @@
     - libegl1
     - libegl-mesa0
     - libelf1
-    - libelf-dev
     - libelogind0
     - libelogind-compat
     - libembree3-3
@@ -947,7 +945,6 @@
     - libgssapi-krb5-2
     - libgssdp-1.6-0
     - libgstreamer1.0-0
-    - libgstreamer1.0-dev
     - libgstreamer-gl1.0-0
     - libgstreamer-plugins-bad1.0-0
     - libgstreamer-plugins-base1.0-0

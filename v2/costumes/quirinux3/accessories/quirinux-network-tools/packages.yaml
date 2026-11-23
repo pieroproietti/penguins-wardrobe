@@ -1,0 +1,12 @@
+packages:
+  - avahi-autoipd
+  - avahi-utils
+  - ethtool
+  - ifuse
+  - mtp-tools
+  - opensc
+  - opensc-pkcs11
+  - pcscd
+  - sshfs
+  - sshpass
+  - usbutils

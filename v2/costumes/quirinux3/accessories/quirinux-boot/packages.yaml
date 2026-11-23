@@ -1,0 +1,9 @@
+packages:
+  - grub-efi-amd64
+  - ipxe
+  - isolinux
+  - live-config
+  - live-task-non-free-firmware-pc
+  - pxelinux
+  - syslinux
+  - syslinux-common
